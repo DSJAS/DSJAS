@@ -1,0 +1,19 @@
+# Ignore user configuration
+public/Config.ini
+public/Version.json
+
+public/admin/site/UI/config.ini
+public/admin/site/modules/config.ini
+public/admin/site/extensions/config.ini
+
+# Ignore admin data
+public/admin/data/AdminNotices.json
+
+# Ignore the private directory
+private/*
+
+# Ignore developer use, test files
+public/Debug.php
+
+# Ignore the dist directory
+dist/*
