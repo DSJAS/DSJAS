@@ -6,6 +6,7 @@ import os
 import sys
 
 from time import sleep
+from pathlib import *
 
 requiredFiles = ["Config.ini", "admin/site/UI/config.ini",
                  "admin/site/modules/config.ini", "Version.json",
@@ -86,6 +87,12 @@ def loadDefaultContent():
 
 
 def createRequiredFile(filepath, content):
+    realpath = Path(filepath)
+    dirpath = Path(realpath.parent)
+
+    if not os.path.isfile(realpath.parent):
+        dirpath.mkdir(parents=True, exist_ok=True)
+
     file = open(filepath, "w+")
     file.write(content)
     file.close()
