@@ -38,8 +38,8 @@ if (installRequired($configuration)) {
         <p class="lead">D.S Johnson & Son has been fully set up and should be ready to go. Thanks for installing!</p>
         <hr class="my-4 bg-dark">
         <a class="btn btn-primary" href="/">Go to homepage</a>
-        <a class="btn btn-secondary" href="/admin/settings.php">More configuration actions</a>
-        <a class="btn btn-warning" href="/admin/SignIn.php?post_install">Admin dashboard</a>
+        <a class="btn btn-secondary" href="/admin/settings/">More configuration actions</a>
+        <a class="btn btn-warning" href="/admin/user/SignIn.php?post_install">Admin dashboard</a>
 
     </div>
 
