@@ -1,0 +1,11 @@
+.form-verification {
+  max-width: 700px;
+  padding: 25px;
+  margin: auto;
+  text-align: center;
+  transform-style: linear;
+}
+
+.form-button-fill {
+    width: 100%
+}
