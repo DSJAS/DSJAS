@@ -60,8 +60,8 @@ if ($newAccount) {
 
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Statistics</button>
-                <button class="btn btn-sm btn-outline-secondary">Settings</button>
+                <a href="/admin/information/" class="btn btn-sm btn-outline-secondary">Information</a>
+                <a href="/admin/settings/" class="btn btn-sm btn-outline-secondary">Settings</a>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@ if ($newAccount) {
 
                 if (isset($_GET["purgeNotifications"])) { ?>
                     <div class="alert alert-success">
-                        <p><strong>Notifications cleared:</strong> Notifications were cleared. This message will be removed automatically.</p>
+                        <p><strong>Notifications cleared:</strong> Notifications were cleared. <i>(This message will be removed automatically)</i></p>
                     </div>
                 <?php }
 

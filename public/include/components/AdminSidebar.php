@@ -126,6 +126,9 @@ Please, waste these people's time as much as possible. It's fun and it does good
                     <li>
                         <a href="/admin/settings/mod.php">Modules</a>
                     </li>
+                    <li>
+                        <a href="/admin/settings/advanced.php">Advanced</a>
+                    </li>
                 </ul>
             </li>
             <li>
