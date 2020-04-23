@@ -1,0 +1,10 @@
+{
+    "version": {
+        "major": "1",
+        "minor": "0",
+        "patch": "0"
+    },
+    "version-name": "Latest stable",
+    "version-description": "Initial version",
+    "version-release-band": "alpha"
+}
