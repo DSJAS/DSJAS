@@ -75,9 +75,41 @@ function getSemanticVersion()
     return $ver;
 }
 
+function getVersionString()
+{
+    $info = loadVersionInfo();
+
+    $major = $info["version"]["major"];
+    $minor = $info["version"]["minor"];
+    $patch = $info["version"]["patch"];
+
+    $ver = "$major.$minor.$patch";
+
+    return $ver;
+}
+
+function getLatestAvailableVersion($band)
+{
+    return "1.0.0"; // Hard code this value until update services are available
+}
+
 function isUpdateAvailable()
 {
-    return false;
+    $currentVersion = getVersionString();
+    $latest = getLatestAvailableVersion(getUpdateBand());
+
+    return $currentVersion != $latest;
+}
+
+function isInsiderBand()
+{
+    $band = getUpdateBand();
+
+    if ($band == "stable" || $band == "") {
+        return false;
+    }
+
+    return true;
 }
 
 
