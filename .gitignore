@@ -9,6 +9,9 @@ public/admin/site/extensions/config.ini
 # Ignore admin data
 public/admin/data/AdminNotices.json
 
+# Ignore verification token, if present
+setuptoken.txt
+
 # Ignore the private directory
 private/*
 
