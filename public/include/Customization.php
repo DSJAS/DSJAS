@@ -96,6 +96,7 @@ class Configuration
             $new_content .= "[$section]\n$section_content\n";
         }
         file_put_contents($this->fileNames[$configFile], $new_content);
+        $this->parsedIniData[$configFile] = $this->parseFile($configFile);
     }
 
 
