@@ -139,3 +139,37 @@ function disableDatabaseSettings() {
 /* Update settings pane */
 
 /* Accounts settings pane */
+
+/* Advanced settings pane */
+
+function advancedSaveSettings() {
+    var progress = document.getElementById("saveProgress");
+    progress.style.display = "inline-block";
+
+    let csrf = $("#csrfToken").text();
+
+    var postHeaders = "doSave=1&csrf=" + csrf;
+
+    postHeaders = postHeaders.concat("&global=" + $("#global").val());
+    postHeaders = postHeaders.concat("&theme=" + $("#theme").val());
+    postHeaders = postHeaders.concat("&module=" + $("#module").val());
+    postHeaders = postHeaders.concat("&extension=" + $("#extension").val());
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText.indexOf("ERROR") != -1 | this.responseText.indexOf("CSRF detected!") != -1) {
+                document.write("Settings failed to save! Reloading...");
+                location.assign(location.pathname.concat("?error"));
+            }
+            else {
+                document.write("Settings saved, reloading...");
+                location.assign(location.pathname.concat("?success"));
+            }
+        }
+    };
+
+    request.open("POST", "/admin/settings/Advanced.php", true);
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send(postHeaders);
+}
