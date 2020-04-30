@@ -79,7 +79,7 @@ if ($newAccount) {
 
                 if (isset($_GET["purgeNotifications"])) { ?>
                     <div class="alert alert-success">
-                        <p><strong>Notifications cleared:</strong> Notifications were cleared. <i>(This message will be removed automatically)</i></p>
+                        <p><strong>Notifications cleared</strong> <i>(This message will be removed automatically)</i></p>
                     </div>
                 <?php }
 
