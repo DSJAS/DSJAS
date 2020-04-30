@@ -78,3 +78,25 @@ function handleAdminNotices($notices)
         echo ("</div>");
     }
 }
+
+function factoryReset(Configuration $config)
+{
+    $config->setKey(ID_GLOBAL_CONFIG, "database", "running_without_database", "0");
+    $config->setKey(ID_GLOBAL_CONFIG, "database", "server_hostname", "localhost");
+    $config->setKey(ID_GLOBAL_CONFIG, "database", "database_name", "DSJAS");
+    $config->setKey(ID_GLOBAL_CONFIG, "database", "username", "DSJAS");
+    $config->setKey(ID_GLOBAL_CONFIG, "database", "password", "");
+
+    $config->setKey(ID_GLOBAL_CONFIG, "customization", "bank_name", "DSJAS");
+    $config->setKey(ID_GLOBAL_CONFIG, "customization", "bank_domain", "https://djohnson.financial");
+
+    $config->setKey(ID_GLOBAL_CONFIG, "settings", "allow_access_to_admin", "1");
+}
+
+function installReset(Configuration $config)
+{
+    $config->setKey(ID_GLOBAL_CONFIG, "setup", "install_finalized", "0");
+    $config->setKey(ID_GLOBAL_CONFIG, "setup", "installed", "0");
+    $config->setKey(ID_GLOBAL_CONFIG, "setup", "owner_verified", "0");
+    $config->setKey(ID_GLOBAL_CONFIG, "setup", "database_installed", "0");
+}
