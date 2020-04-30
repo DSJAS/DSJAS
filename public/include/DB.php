@@ -104,6 +104,9 @@ class DB
     private $password;
     private $port;
 
+    private $config;
+    private $dbEnabled = true;
+
     private $autocommit = true;
     private $uncommittedChanges = false;
 
@@ -119,6 +122,9 @@ class DB
         $this->password = $password;
 
         $this->sql = new mysqli($hostname, $username, $password, $dbname, $port);
+
+        $this->config = parse_ini_file(ABSPATH . "/Config.ini", true);
+        $this->dbEnabled = $this->config["database"]["running_without_database"];
     }
 
     function __destruct()
