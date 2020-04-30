@@ -34,6 +34,18 @@ function createDatabaseTable($tableName, $cols)
 
 function setupDefaultAccounts()
 {
+    $configuration = parse_ini_file("../../Config.ini");
+
+    $hostname = $configuration["server_hostname"];
+    $dbname = $configuration["database_name"];
+    $uname = $configuration["username"];
+    $pw = $configuration["password"];
+
+    $sql = new mysqli($hostname, $uname, $pw, $dbname);
+
+    $passHash = password_hash("hunter2", PASSWORD_DEFAULT);
+
+    $sql->query("INSERT INTO `users` (`username`, `real_name`, `password_hash`, `password_hint`, `email`) VALUES ('edna', 'Edna Gooseberry', '$passHash', 'Hunter2', 'edna.g@aol.com')");
 }
 
 function connectToDatabase()
