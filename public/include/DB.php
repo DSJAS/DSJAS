@@ -20,7 +20,7 @@ class SimpleStatement
 {
     private $queryString;
 
-    public $result;
+    public $result = array();
     public $affectedRows;
 
     function __construct($statement)
@@ -193,7 +193,10 @@ class DB
         $result = $this->sql->query($statement);
 
         if ($result != false) {
-            $queryObject->result = $result->fetch_assoc();
+            while ($row = $result->fetch_assoc()) {
+                array_push($queryObject->result, $row);
+            }
+
             $queryObject->affectedRows = $this->sql->affected_rows;
         } else {
             $queryObject->result = $result;
