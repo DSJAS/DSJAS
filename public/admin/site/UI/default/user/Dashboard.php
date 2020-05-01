@@ -36,19 +36,124 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 require(ABSPATH . INC . "api/theme/General.php");
 require(ABSPATH . INC . "api/theme/Accounts.php");
+require(ABSPATH . INC . "api/theme/Dashboard.php");
 
 // Theme entry point
 function getTheme()
-{
-?>
-    <h1>User dashboard</h1>
+{ ?>
 
-    <?php if (shouldAppearLoggedIn()) { ?>
-        <p><strong>Current username is:</strong> <?php echo (getCurrentUsername()); ?></p>
-        <p><strong>Current user ID is:</strong> <?php echo (getCurrentUserId()); ?></p>
-        <p><strong>Your password hint is: </strong> <?php echo (getInfoFromUserID(getCurrentUserId(), "password_hint")); ?></p>
-        <p><strong>Your IP address: </strong> <?php echo ($_SERVER["REMOTE_ADDR"]); ?></p>
-    <?php } else { ?>
-        <p><strong>Not signed in!</strong></p>
+    <body>
+        <?php require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php"); ?>
+
+        <div class="container">
+            <br>
+
+            <h3>My Accounts</h3>
+
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Account number</th>
+                        <th scope="col">Available balance</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach (getAccountsArray() as $account) { ?>
+                        <tr>
+                            <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
+                            <td><?php echo (censorAccountNumber($account["account_identifier"])); ?></td>
+                            <?php if (isPricePositive($account["account_balance"])) { ?>
+                                <td class="text-success">$<?php echo ($account["account_balance"]); ?></td>
+                            <?php } else { ?>
+                                <td class="text-danger">$<?php echo ($account["account_balance"]); ?></td>
+                            <?php } ?>
+                            <td><a href="/user/Transfer.php">Transfer</a></td>
+                        </tr>
+                    <?php }
+                    ?>
+                </tbody>
+            </table>
+
+            <?php
+            if (count(getAccountsArray()) == 0) { ?>
+                <p class="text-small text-muted">You don't appear to have any accounts</p>
+                <a href="/user/Apply.php">Apply now</a>
+            <?php } ?>
+
+            <br>
+            <hr>
+            <br>
+
+            <h3>Recent transactions</h3>
+
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Account</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach (getRecentTransactionsArray(5) as $transaction) {
+                        foreach ($transaction as $info) ?>
+                        <tr>
+                            <td><?php echo ($info["transaction_date"]); ?></td>
+                            <td><?php echo (censorAccountNumber(censorAccountNumber($info["origin_account_id"]))); ?></td>
+                            <td><?php echo ($info["transaction_description"]); ?></th>
+                            <td><?php echo ($info["transaction_type"]); ?></th>
+                                <?php if (isPricePositive($info["transaction_amount"])) { ?>
+                            <td class="text-success">$<?php echo ($info["transaction_amount"]); ?></td>
+                        <?php } else { ?>
+                            <td class="text-danger">$<?php echo ($info["transaction_amount"]); ?></td>
+                        <?php } ?>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <?php
+            if (count(getRecentTransactionsArray(5)) == 0) { ?>
+                <p class="text-small text-muted">No recent transaction history</p>
+                <a href="/user/Transfer.php">Make one now</a>
+                <hr>
+            <?php }
+            ?>
+
+            <div class="row card-deck">
+                <div class="card col dashboard-adverts" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Be scam smart</h5>
+                        <p class="card-text">Fraud is everywhere. Get good now at spotting them so that you aren't a victim later. You could be speaking to a scammer right now...</p>
+                        <a href="https://www.actionfraud.police.uk/">More information</a>
+                    </div>
+                </div>
+                <div class="card col dashboard-adverts" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Join CP Rewards</h5>
+                        <p class="card-text">With community-public rewards scheme, you can get cash for everyday purchases at high street stores. Give those small stores a go and get rewarded.</p>
+                        <a href="/CPRewards">Get started</a>
+                    </div>
+                </div>
+                <div class="card col dashboard-adverts" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Record low interest rates</h5>
+                        <p class="card-text">You're already approved! It only takes several hours to open an account and you're set for life.
+                            Of course, set meaning set up with an account. The riches come later.
+                        </p>
+                        <a href="/user/Apply.php">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-footer bg-secondary">
+            <p>&copy 2018 Black Mesa Inc. All rights reserved</p>
+        </div>
+    </body>
 <?php }
-}
