@@ -42,7 +42,7 @@ function verifyCSRFToken($givenToken)
 
 function getCSRFFormElement()
 { ?>
-    <input type="hidden" name="<?php echo (CSRF_FORM_NAME); ?>" value="<?php echo (getCSRFToken()); ?>">
+    <input id="csrf" type="text" style="visibility: hidden; position: absolute" name="<?php echo (CSRF_FORM_NAME); ?>" value="<?php echo (getCSRFToken()); ?>">
 <?php }
 
 function getCSRFSubmission($method = "post")
