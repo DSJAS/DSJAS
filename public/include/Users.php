@@ -93,6 +93,13 @@ function isLoggedIn($siteuser = false)
 
 function handleLogin($username, $password, $siteuser = false)
 {
+    $id = getUserIDFromName($username, $siteuser, true);
+
+    $enabled = getInfoFromUserID($id, "account_enabled", true);
+    if (!$enabled) {
+        return array(false, -3);
+    }
+
     $result = verifyLoginDetails($username, $password, $siteuser);
 
     if ($result[0]) {
