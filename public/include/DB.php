@@ -192,7 +192,7 @@ class DB
 
         $result = $this->sql->query($statement);
 
-        if ($result != false) {
+        if (!is_bool($result)) {
             while ($row = $result->fetch_assoc()) {
                 array_push($queryObject->result, $row);
             }
@@ -200,7 +200,7 @@ class DB
             $queryObject->affectedRows = $this->sql->affected_rows;
         } else {
             $queryObject->result = $result;
-            $queryObject->affectedRows = -1;
+            $queryObject->affectedRows = 0;
         }
     }
 
