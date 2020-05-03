@@ -101,8 +101,8 @@ function getTheme()
                 </thead>
                 <tbody>
                     <?php
-                    foreach (getRecentTransactionsArray(5) as $transaction) {
-                        foreach ($transaction as $info) ?>
+                    $iteration = 0;
+                    foreach (getRecentTransactionsArray(5) as $info) { ?>
                         <tr>
                             <td><?php echo ($info["transaction_date"]); ?></td>
                             <td><?php echo (censorAccountNumber(censorAccountNumber($info["origin_account_id"]))); ?></td>

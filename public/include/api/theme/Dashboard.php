@@ -76,21 +76,22 @@ function getRecentTransactionsArray($loadAmount)
         $config["password"]
     );
 
-    $results = array();
+    $whereText = "";
 
-    $count = 0;
+    $iteration = 0;
     foreach ($accountsArray as $account) {
-        $query = new SimpleStatement("SELECT * FROM `transactions` WHERE `origin_account_id` = " . $accountsArray[$count]);
-        $database->unsafeQuery($query);
+        $whereText .= $account;
 
-        if (count($query->result) != 0) {
-            array_push($results, $query->result);
-        }
-
-        $count++;
+        $iteration++;
+        if ($iteration < count($accountsArray)) {
+            $whereText .= " OR ";
+        };
     }
 
-    return $results;
+    $query = new SimpleStatement("SELECT * FROM `transactions` WHERE `origin_account_id` = " . $whereText);
+    $database->unsafeQuery($query);
+
+    return $query->result;
 }
 
 function censorAccountNumber($number, $stripChars = 5, $censorChar = "*", $pad = true)
@@ -122,6 +123,26 @@ function isPricePositive($priceString, $regionalCurrencySymbol = "$")
     } else {
         return $priceString[0] != "-";
     }
+}
+
+function getDisplayBalance($accountID)
+{
+    $config = dashboardLoadDatabaseInformation();
+
+    $database = new DB(
+        $config["server_hostname"],
+        $config["database_name"],
+        $config["username"],
+        $config["password"]
+    );
+
+    $query = new PreparedStatement("SELECT `account_balance` FROM `accounts` WHERE `account_identifier` = ?", [$accountID], "i");
+    $database->prepareQuery($query);
+    $database->query();
+
+    $balanceValue = $query->result[0]["account_balance"];
+
+    return "$" . $balanceValue;
 }
 
 
