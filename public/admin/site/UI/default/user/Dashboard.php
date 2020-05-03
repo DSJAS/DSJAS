@@ -150,10 +150,9 @@ function getTheme()
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="dashboard-footer bg-secondary">
-            <p>&copy 2018 Black Mesa Inc. All rights reserved</p>
+            <a href="/support/contact" class="btn btn-warning dashboard-footer-buttons">Contact support</a>
+            <hr>
         </div>
     </body>
 <?php }

@@ -145,3 +145,7 @@ div.dashboard-footer {
   background-color: rgba(0,0,0,0.0);
   z-index: 2;
 }
+
+.dashboard-footer-buttons {
+  margin-top: 40px
+}
