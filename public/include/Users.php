@@ -207,7 +207,7 @@ function getUserIDFromName($username, $siteuser = false)
     return $query->result[0]["user_id"];
 }
 
-function getInfoFromUserID($id, $colName)
+function getInfoFromUserID($id, $colName, $siteuser = false)
 {
     $configuration = loadDatabaseInformation();
 
@@ -218,7 +218,13 @@ function getInfoFromUserID($id, $colName)
         $configuration["password"]
     );
 
-    $query = new PreparedStatement("SELECT `" . $colName . "` FROM `users` WHERE `user_id` = ?", [$id], "i");
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    $query = new PreparedStatement("SELECT `" . $colName . "` FROM " . $tableName . " WHERE `user_id` = ?", [$id], "i");
 
     $database->prepareQuery($query);
     $database->query();
