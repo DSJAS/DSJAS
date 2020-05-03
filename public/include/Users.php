@@ -187,6 +187,31 @@ function makeCurrentUserUsed($siteuser = false)
     }
 }
 
+function getUsersArray($siteuser = false)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $table = "siteusers";
+    } else {
+        $table = "users";
+    }
+
+    $query = new SimpleStatement("SELECT * FROM `" . $table . "`");
+    $database->unsafeQuery($query);
+
+    $database->disconnect();
+
+    return $query->result;
+}
+
 function getUserIDFromName($username, $siteuser = false)
 {
     $configuration = loadDatabaseInformation();
@@ -272,6 +297,164 @@ function verifyLoginDetails($username, $pass, $siteuser = false)
 
 function userExists($username = null, $email = null, $realname = null, $siteuser = false)
 {
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    if ($username != null) {
+        $query = new PreparedStatement("SELECT `user_id` FROM " . $tableName . " WHERE `username` = ?", [$username], "s");
+
+        $database->prepareQuery($query);
+        $database->query();
+    } elseif ($email != null) {
+        $query = new PreparedStatement("SELECT `user_id` FROM " . $tableName . " WHERE `email` = ?", [$email], "s");
+
+        $database->prepareQuery($query);
+        $database->query();
+    } elseif ($realname != null) {
+        $query = new PreparedStatement("SELECT `user_id` FROM " . $tableName . " WHERE `email` = ?", [$email], "s");
+
+        $database->prepareQuery($query);
+        $database->query();
+    }
+
+    var_dump($query->affectedRows);
+    var_dump($query->result);
+
+    return $query->affectedRows > 0;
+}
+
+function changeUserPassword($userID, $newPassword, $siteuser = false)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    $newHash = password_hash($newPassword, PASSWORD_DEFAULT);
+
+    $query = new PreparedStatement("UPDATE " . $tableName . " SET `password_hash` = ?, `password_hint` = 'Your password was reset' WHERE `user_id` = ?", [$newHash, $userID], "si");
+
+    $database->prepareQuery($query);
+    $database->query();
+}
+
+function createUser($username, $email, $password, $passwordHint, $enabled, $siteuser = false)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = new PreparedStatement(
+        "INSERT INTO " . $tableName . " (`username`, `email`, `password_hash`, `password_hint`, `account_enabled`, `new_account`) VALUES (?, ?, ?, ?, ?, 1)",
+        [$username, $email, $passwordHash, $passwordHint, $enabled],
+        "ssssi"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    var_dump($query->result);
+}
+
+function eraseUser($userID, $siteuser = false)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    $query = new SimpleStatement("DELETE FROM " . $tableName . " WHERE `user_id` = $userID");
+
+    $database->unsafeQuery($query);
+}
+
+function disableUser($userID, $siteuser = false)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    $query = new SimpleStatement("UPDATE " . $tableName . "SET `account_enabled` = 0 WHERE `user_id` = $userID");
+
+    $database->unsafeQuery($query);
+}
+
+function enableUser($userID, $siteuser = false)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    $query = new SimpleStatement("UPDATE " . $tableName . "SET `account_enabled` = 1 WHERE `user_id` = $userID");
+
+    $database->unsafeQuery($query);
 }
 
 function getNumberOfUsers($siteuser = false)
