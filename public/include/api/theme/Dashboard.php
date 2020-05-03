@@ -88,7 +88,7 @@ function getRecentTransactionsArray($loadAmount)
         };
     }
 
-    $query = new SimpleStatement("SELECT * FROM `transactions` WHERE `origin_account_id` = " . $whereText);
+    $query = new SimpleStatement("SELECT * FROM `transactions` WHERE `origin_account_id` = " . $whereText . " ORDER BY `transaction_id` DESC LIMIT $loadAmount");
     $database->unsafeQuery($query);
 
     return $query->result;
