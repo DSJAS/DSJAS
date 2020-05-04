@@ -89,7 +89,7 @@ function getTheme()
                         <div class="card-text">
                             <p>Many banks put their own gain at the center of your account. Not here. Our philosophy is that your gain is ours, and stick to that. Put your money where you want it and not where you think you need it.</p>
                         </div>
-                        <a class="btn btn-primary" href="/user/SignUp">Get started</a>
+                        <a class="btn btn-primary" href="/user/Apply">Get started</a>
                     </div>
                 </div>
                 <div class="col card text-light bg-dark" style="padding-top: 30px">
@@ -100,7 +100,7 @@ function getTheme()
                         <div class="card-text">
                             <p>Think of us as a piggy bank, just a lot larger. And safer. And less pink. We're committed to keeping your money just as safe as if it was back there, in your little piggy bank.</p>
                         </div>
-                        <a class="btn btn-primary" href="/user/SignUp">Get started</a>
+                        <a class="btn btn-primary" href="/user/Apply">Get started</a>
                     </div>
                 </div>
                 <div class="col card text-light bg-dark">
@@ -111,7 +111,7 @@ function getTheme()
                         <div class="card-text">
                             <p>With decades of lending experience, we're here to get you through that difficult repair bill or emergency breakdown until payday.</p>
                         </div>
-                        <a class="btn btn-primary" href="/user/SignUp">Get started</a>
+                        <a class="btn btn-primary" href="/user/Apply">Get started</a>
                     </div>
                 </div>
             </div>
