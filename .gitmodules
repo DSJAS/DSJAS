@@ -1,0 +1,3 @@
+[submodule "public/include/vendor/hooks"]
+	path = public/include/vendor/hooks
+	url = https://github.com/gburtini/PHP-Hooks-System.git
