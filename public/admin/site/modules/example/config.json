@@ -1,0 +1,25 @@
+{
+    "name": "Example module",
+    "description": "This is an example module which is shipped with the development version of DSJAS. It adds a label to any menubar and footer exposed by the theme",
+    "version": "1.0.0",
+    "hooks": {
+        "bar": {
+            "triggerEvent": "nav_bar",
+            "loadCSS": false,
+            "loadJS": false,
+            "loadHTML": true
+        },
+        "footer": {
+            "triggerEvent": "footer",
+            "loadCSS": false,
+            "loadJS": false,
+            "loadHTML": true
+        },
+        "all": {
+            "triggerEvent": "all",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": false
+        }
+    }
+}

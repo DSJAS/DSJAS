@@ -1,0 +1,1 @@
+console.log("This was added by the default module. Have fun!");
