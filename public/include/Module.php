@@ -30,6 +30,8 @@ define("MODULE_CONFIG_FILE_NAME", "config.json");
 
 class ModuleManager
 {
+    private $currentFile;
+
     private $loadedModules = [];
     private $loadedModuleInfo = [];
 
@@ -38,8 +40,10 @@ class ModuleManager
 
     private $configuration;
 
-    function __construct()
+    function __construct($file = "index")
     {
+        $this->currentFile = $file;
+
         $this->configuration = new Configuration(true, false, false, true);
 
         $modules = scandir(ABSPATH . MODULE_PATH);
@@ -55,94 +59,71 @@ class ModuleManager
 
     function getModules()
     {
-        echo ("<!-- BEGIN CLIENT MODULES -->");
-
         foreach ($this->loadedModules as $module) {
-            foreach ($this->loadedModuleRoutes[$module] as $route) {
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadCSS"]) {
-                    echo ("<style>\n");
-
-                    echo ($this->loadedModuleText[$module][$route]["style"]);
-
-                    echo ("\n</style>");
-                }
-
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadJS"]) {
-                    echo ("<script>\n");
-
-                    echo ($this->loadedModuleText[$module][$route]["JS"]);
-
-                    echo ("\n</script>");
-                }
-
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadHTML"]) {
-                    echo ($this->loadedModuleText[$module][$route]["HTML"]);
-                }
-            }
+            $this->getModule($module);
         }
-
-        echo ("<!-- END CLIENT MODULES -->");
     }
 
     function getModule($moduleName)
     {
-        echo ("<!-- BEGIN CLIENT MODULE:" . $moduleName . "-->");
+        foreach ($this->loadedModuleRoutes[$moduleName] as $route) {
+            if (!$this->shouldLoadModule($moduleName))
+                continue;
 
-        foreach ($this->loadedModules as $module) {
-            foreach ($this->loadedModuleRoutes[$module] as $route) {
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadCSS"]) {
-                    echo ("<style>\n");
+            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadCSS"]) {
+                echo ("<style>\n");
 
-                    echo ($this->loadedModuleText[$module][$route]["style"]);
+                echo ($this->loadedModuleText[$moduleName][$route]["style"]);
 
-                    echo ("\n</style>");
-                }
+                echo ("\n</style>");
+            }
 
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadJS"]) {
-                    echo ("<script>\n");
+            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadJS"]) {
+                echo ("<script>\n");
 
-                    echo ($this->loadedModuleText[$module][$route]["JS"]);
+                echo ($this->loadedModuleText[$moduleName][$route]["JS"]);
 
-                    echo ("\n</script>");
-                }
+                echo ("\n</script>");
+            }
 
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadHTML"]) {
-                    echo ($this->loadedModuleText[$module][$route]["HTML"]);
-                }
+            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadHTML"]) {
+                echo ($this->loadedModuleText[$moduleName][$route]["HTML"]);
             }
         }
+    }
 
-        echo ("<!-- END CLIENT MODULE:" . $moduleName . "-->");
+    function getModuleRoute($moduleName, $route)
+    {
+        if (!$this->shouldLoadModule($moduleName))
+            return;
+
+        if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadCSS"]) {
+            echo ("<style>\n");
+
+            echo ($this->loadedModuleText[$moduleName][$route]["style"]);
+
+            echo ("\n</style>");
+        }
+
+        if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadJS"]) {
+            echo ("<script>\n");
+
+            echo ($this->loadedModuleText[$moduleName][$route]["JS"]);
+
+            echo ("\n</script>");
+        }
+
+        if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadHTML"]) {
+            echo ($this->loadedModuleText[$moduleName][$route]["HTML"]);
+        }
     }
 
     function getAllByCallback($callbackName)
     {
         foreach ($this->loadedModules as $module) {
             foreach ($this->loadedModuleRoutes[$module] as $route) {
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadCSS"]) {
-                    if ($this->loadedModuleInfo[$module]["hooks"][$route]["triggerEvent"] == $callbackName) {
-                        echo ("<style>\n");
-
-                        echo ($this->loadedModuleText[$module][$route]["style"]);
-
-                        echo ("\n</style>");
-                    }
-                }
-
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadJS"]) {
-                    if ($this->loadedModuleInfo[$module]["hooks"][$route]["triggerEvent"] == $callbackName) {
-                        echo ("<script>\n");
-
-                        echo ($this->loadedModuleText[$module][$route]["JS"]);
-
-                        echo ("\n</script>");
-                    }
-                }
-
-                if ($this->loadedModuleInfo[$module]["hooks"][$route]["loadHTML"]) {
-                    if ($this->loadedModuleInfo[$module]["hooks"][$route]["triggerEvent"] == $callbackName) {
-                        echo ($this->loadedModuleText[$module][$route]["HTML"]);
-                    }
+                if ($this->loadedModuleInfo[$module]["hooks"][$route]["triggerEvent"] == $callbackName) {
+                    $this->getModuleRoute($module, $route);
                 }
             }
         }
@@ -228,5 +209,18 @@ class ModuleManager
         }
 
         return $result;
+    }
+
+    private function shouldLoadModule($moduleName)
+    {
+        if (isset($this->loadedModuleInfo[$moduleName]["fileFilter"])) {
+            $wantedFiles = $this->loadedModuleInfo[$moduleName]["fileFilter"];
+
+            if (!in_array($this->currentFile, $wantedFiles)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
