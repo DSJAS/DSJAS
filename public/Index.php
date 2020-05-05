@@ -18,8 +18,23 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 require("include/Bootstrap.php");
 
+require(ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php");
+
 require(ABSPATH . INC . "Customization.php");
 require(ABSPATH . INC . "Theme.php");
+require(ABSPATH . INC . "Module.php");
+
+
+$moduleManager = new ModuleManager();
+
+$moduleCallbackFunction = function (string $callbackName) {
+    global $moduleManager;
+    $moduleManager->getAllByCallback($callbackName);
+};
+
+$moduleManager->processModules($moduleCallbackFunction);
+
+\gburtini\Hooks\Hooks::run("all", ["all"]);
 
 
 $url = $_SERVER["REQUEST_URI"];

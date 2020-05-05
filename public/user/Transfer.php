@@ -28,6 +28,21 @@ require_once(ABSPATH . INC . "Util.php");
 
 require(ABSPATH . INC . "csrf.php");
 
+require(ABSPATH . INC . "Module.php");
+
+
+$moduleManager = new ModuleManager();
+
+$moduleCallbackFunction = function (string $callbackName) {
+    global $moduleManager;
+    $moduleManager->getAllByCallback($callbackName);
+};
+
+$moduleManager->processModules($moduleCallbackFunction);
+
+\gburtini\Hooks\Hooks::run("all", ["all"]);
+\gburtini\Hooks\Hooks::run("user", ["user"]);
+
 
 if (isset($_GET["performTransfer"])) {
     $csrf = verifyCSRFToken(getCSRFSubmission($method = "get"));

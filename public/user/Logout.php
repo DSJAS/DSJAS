@@ -24,6 +24,21 @@ require(ABSPATH . INC . "Users.php");
 require(ABSPATH . INC . "Util.php");
 
 require(ABSPATH . INC . "Theme.php");
+require(ABSPATH . INC . "Module.php");
+
+
+$moduleManager = new ModuleManager();
+
+$moduleCallbackFunction = function (string $callbackName) {
+    global $moduleManager;
+    $moduleManager->getAllByCallback($callbackName);
+};
+
+$moduleManager->processModules($moduleCallbackFunction);
+
+\gburtini\Hooks\Hooks::run("all", ["all"]);
+\gburtini\Hooks\Hooks::run("user", ["user"]);
+
 
 if (!shouldAttemptLogout()) {
     if (!isset($_GET["success"])) {
