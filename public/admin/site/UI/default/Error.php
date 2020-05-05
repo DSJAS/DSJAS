@@ -34,6 +34,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
+require(ABSPATH . INC . "api/theme/General.php");
 require(ABSPATH . INC . "api/theme/Error.php");
 
 
@@ -42,14 +43,20 @@ function getTheme()
 
     <body class="bg-secondary" style="text-align: center; padding: 50px">
 
+        <?php addModuleDescriptor("alert_area");  ?>
+
         <img src="/assets/warning-grey.png" style="height: 150; width: 150">
         <h1>Code <?php echo (getErrorCode()); ?></h1>
         <h3 class="text-dark">That's an error</h3>
         <br>
         <p>There was a problem while attempting to navigate to that page. Please try again and make sure you got the URL correct</p>
 
+        <?php addModuleDescriptor("error_content");  ?>
+
         <span>
             <a class="btn btn-primary" href="/">Go to the Homepage</a>
         </span>
+
+        <?php addModuleDescriptor("error_footer");  ?>
     </body>
 <?php }

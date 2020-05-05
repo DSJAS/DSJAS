@@ -47,6 +47,8 @@ function getTheme()
         <?php require("components/Nav.php"); ?>
 
         <?php
+        addModuleDescriptor("nav_bar");
+
         if (shouldAppearLoggedIn()) { ?>
             <div class="justify-right form-inline">
                 <a class="btn btn-outline-primary" href="/user/dashboard.php" style="margin-right: 25px">Go to my dashboard</a>
@@ -62,6 +64,8 @@ function getTheme()
 
 
         <div class="container-fluid main-page-teaser">
+
+            <?php addModuleDescriptor("alert_area");  ?>
 
             <div class="main-page-teaser-overlay rounded">
                 <br>
@@ -184,6 +188,7 @@ function getTheme()
         <div class="container-fluid row bg-secondary">
             <div class="col footer-text">
                 <pre class="lead small">&copy 2018 Black Mesa Inc. All rights reserved</pre>
+                <?php addModuleDescriptor("footer");  ?>
             </div>
 
             <div class="col footer-links">

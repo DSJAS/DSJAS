@@ -34,6 +34,8 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
+require(ABSPATH . INC . "api/theme/General.php");
+
 // Theme entry point
 function getTheme()
 { ?>
@@ -46,15 +48,21 @@ function getTheme()
             <div class="jumbotron">
                 <h1>You have been logged out</h1>
                 <p>You have been successfully logged out of your account, you can now return home or sign in again.</p>
+
+                <?php addModuleDescriptor("logged_out_header");  ?>
             </div>
 
             <span>
                 <a class="btn btn-primary" href="/">Go to the Homepage</a>
                 <a class="btn btn-secondary" href="/user/Login">Sign in again</a>
+                <?php addModuleDescriptor("logged_out_actions");  ?>
             </span>
 
             <p>
                 <p class="text-sm text-secondary">To make absolutely sure you are signed out, you may wish to close all browser windows</p>
+
+                <?php addModuleDescriptor("logged_out_footer");  ?>
+
             <?php
             die();
         } ?>

@@ -43,7 +43,9 @@ function getTheme()
 { ?>
 
     <body>
-        <?php require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php"); ?>
+        <?php require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php");
+
+        addModuleDescriptor("alert_area");  ?>
 
         <div class="container">
             <br>
@@ -149,9 +151,12 @@ function getTheme()
                         <a href="/user/Apply.php">Learn more</a>
                     </div>
                 </div>
+
+                <?php addModuleDescriptor("dashboard_notices");  ?>
             </div>
 
             <a href="/support/contact" class="btn btn-warning dashboard-footer-buttons">Contact support</a>
+            <?php addModuleDescriptor("dashboard_footer");  ?>
             <hr>
         </div>
     </body>

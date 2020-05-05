@@ -32,6 +32,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
+require(ABSPATH . INC . "api/theme/General.php");
 require_once(ABSPATH . INC . "api/theme/Appearance.php");
 require(ABSPATH . INC . "api/theme/Accounts.php");
 
@@ -55,10 +56,12 @@ function getTheme()
                 </div>
             <?php }
 
-            ?>
+            addModuleDescriptor("alert_area");  ?>
 
             <img class="mb-4" src="/assets/logo.png" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Welcome back!</h1>
+
+            <?php addModuleDescriptor("login_box_content");  ?>
 
             <label for="inputEmail" class="sr-only">Username</label>
             <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
@@ -69,8 +72,12 @@ function getTheme()
             <p class="mb-3 text-muted">Not yet a member? <a href="/user/Apply">Apply now</a></p>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <a href="#" onclick="">Show password</a>
+
+            <?php addModuleDescriptor("login_box_post_content");  ?>
+
             <p class="mt-5 mb-3 text-muted">Be secure: Never give out your login details <strong>to anybody</strong></p>
+
+            <?php addModuleDescriptor("login_footer");  ?>
         </form>
 
     </body>

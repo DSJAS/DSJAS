@@ -58,15 +58,22 @@ function getTheme()
                 <p><strong>Transfer succeeded</strong> The transfer has been processed and has completed successfully, transferring <?php echo ("$" . htmlentities($_GET["amount"])); ?>.
                     Your new account balance is <strong><?php echo (getDisplayBalance($_GET["originAccount"])); ?></strong>
             </div>
-        <?php } ?>
+        <?php }
+
+        addModuleDescriptor("alert_area"); ?>
 
         <div class="jumbotron">
 
             <h1 class="display-4">Make a transfer</h1>
             <p class="lead">Fill in the form below to transfer money between your accounts</p>
+
+            <?php addModuleDescriptor("transfer_info");  ?>
+
             <hr class="my-4">
 
             <form style="margin-top: 15px" action="/user/transfer.php" method="GET">
+                <?php addModuleDescriptor("transfer_content");  ?>
+
                 <?php getCSRFForm(); ?>
 
                 <input type="text" style="visibility: hidden; position: absolute" name="performTransfer">
@@ -120,6 +127,8 @@ function getTheme()
                     <textarea type="text" class="form-control" name="description" id="description"></textarea>
                 </div>
 
+                <?php addModuleDescriptor("transfer_post_content");  ?>
+
 
                 <div class="form-group row">
                     <div class="col-sm-10">
@@ -127,6 +136,8 @@ function getTheme()
                         <p class="spacer"></p>
                         <small class="text-danger text-small"><strong>Warning:</strong> Transfers are not reversible and can only be disputed within an hour of processing.
                             Please be sure before you transfer.</small>
+
+                        <?php addModuleDescriptor("transfer_footer");  ?>
                     </div>
                 </div>
             </form>

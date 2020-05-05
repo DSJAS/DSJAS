@@ -33,6 +33,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
 */
 
 require_once($_SERVER["DOCUMENT_ROOT"] . "/include/Customization.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/include/vendor/hooks/src/gburtini/Hooks/Hooks.php");
 
 
 function getCurrentThemeName()
@@ -57,4 +58,9 @@ function getBankURL()
 {
     $config = new Configuration(true, false, false, false);
     return $config->getKey(ID_GLOBAL_CONFIG, "customization", "bank_domain");
+}
+
+function addModuleDescriptor($descriptorName)
+{
+    \gburtini\Hooks\Hooks::run("module_hook_event", [$descriptorName]);
 }
