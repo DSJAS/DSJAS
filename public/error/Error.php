@@ -25,7 +25,7 @@ require(ABSPATH . INC . "Theme.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager();
+$moduleManager = new ModuleManager("error");
 
 $moduleCallbackFunction = function (string $callbackName) {
     global $moduleManager;

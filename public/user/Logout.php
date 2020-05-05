@@ -27,7 +27,7 @@ require(ABSPATH . INC . "Theme.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager();
+$moduleManager = new ModuleManager("logout");
 
 $moduleCallbackFunction = function (string $callbackName) {
     global $moduleManager;

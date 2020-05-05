@@ -27,7 +27,7 @@ require(ABSPATH . INC . "Util.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager();
+$moduleManager = new ModuleManager("about");
 
 $moduleCallbackFunction = function (string $callbackName) {
     global $moduleManager;

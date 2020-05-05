@@ -31,7 +31,7 @@ require(ABSPATH . INC . "csrf.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager();
+$moduleManager = new ModuleManager("transfer");
 
 $moduleCallbackFunction = function (string $callbackName) {
     global $moduleManager;
