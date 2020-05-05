@@ -22,7 +22,7 @@ require(ABSPATH . INC . "Customization.php");
 require(ABSPATH . INC . "Theme.php");
 
 require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Util.php");
+require_once(ABSPATH . INC . "Util.php");
 
 require(ABSPATH . INC . "Module.php");
 
