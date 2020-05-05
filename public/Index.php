@@ -34,7 +34,7 @@ $moduleCallbackFunction = function (string $callbackName) {
 
 $moduleManager->processModules($moduleCallbackFunction);
 
-\gburtini\Hooks\Hooks::run("all", ["all"]);
+\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
 
 
 $url = $_SERVER["REQUEST_URI"];

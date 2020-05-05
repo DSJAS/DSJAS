@@ -150,13 +150,8 @@ class ModuleManager
 
     function processModules(callable $callback)
     {
-        foreach ($this->loadedModules as $module) {
-            foreach ($this->loadedModuleRoutes[$module] as $route) {
-                $displayEvent = $this->loadedModuleInfo[$module]["hooks"][$route]["triggerEvent"];
-
-                \gburtini\Hooks\Hooks::bind($displayEvent, $callback);
-            }
-        }
+        $displayEvent = "module_hook_event";
+        \gburtini\Hooks\Hooks::bind($displayEvent, $callback);
     }
 
     function getLoadedModules()

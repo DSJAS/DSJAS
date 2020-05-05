@@ -36,8 +36,8 @@ $moduleCallbackFunction = function (string $callbackName) {
 
 $moduleManager->processModules($moduleCallbackFunction);
 
-\gburtini\Hooks\Hooks::run("all", ["all"]);
-\gburtini\Hooks\Hooks::run("user", ["user"]);
+\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
+\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
 
 
 if (!shouldAttemptLogout()) {
