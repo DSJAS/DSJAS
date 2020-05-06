@@ -121,10 +121,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
                         <a href="/admin/settings/accounts.php">Accounts</a>
                     </li>
                     <li>
-                        <a href="/admin/settings/ext.php">Themes & Plugins</a>
+                        <a href="/admin/settings/mod.php">Modules & Themes</a>
                     </li>
                     <li>
-                        <a href="/admin/settings/mod.php">Modules</a>
+                        <a href="/admin/settings/ext.php">Extensions</a>
                     </li>
                     <li>
                         <a href="/admin/settings/advanced.php">Advanced</a>

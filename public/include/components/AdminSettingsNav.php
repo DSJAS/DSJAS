@@ -36,10 +36,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
                 <a class="nav-link" href="/admin/settings/accounts.php">Accounts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/settings/ext.php">Themes and Plugins</a>
+                <a class="nav-link" href="/admin/settings/mod.php">Modules & Themes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/settings/mod.php">Modules</a>
+                <a class="nav-link" href="/admin/settings/ext.php">Extensions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-warning" href="/admin/settings/advanced.php">Advanced</a>
