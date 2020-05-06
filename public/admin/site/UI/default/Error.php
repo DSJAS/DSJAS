@@ -41,22 +41,28 @@ require(ABSPATH . INC . "api/theme/Error.php");
 function getTheme()
 { ?>
 
-    <body class="bg-secondary" style="text-align: center; padding: 50px">
+    <body>
 
-        <?php addModuleDescriptor("alert_area");  ?>
+        <?php require("components/Nav.php"); ?>
 
-        <img src="/assets/warning-grey.png" style="height: 150; width: 150">
-        <h1>Code <?php echo (getErrorCode()); ?></h1>
-        <h3 class="text-dark">That's an error</h3>
-        <br>
-        <p>There was a problem while attempting to navigate to that page. Please try again and make sure you got the URL correct</p>
+        </nav>
 
-        <?php addModuleDescriptor("error_content");  ?>
+        <div class="container-fluid text-center">
+            <?php addModuleDescriptor("alert_area");  ?>
 
-        <span>
-            <a class="btn btn-primary" href="/">Go to the Homepage</a>
-        </span>
+            <img src="/assets/warning.png" style="height: 170; width: 200">
+            <h1>Code <?php echo (getErrorCode()); ?></h1>
+            <h3 class="text-dark">That's an error</h3>
+            <br>
+            <p>There was a problem while attempting to navigate to that page. Please try again and make sure you got the URL correct</p>
 
-        <?php addModuleDescriptor("error_footer");  ?>
+            <?php addModuleDescriptor("error_content");  ?>
+
+            <span>
+                <a class="btn btn-primary" href="/">Go to the Homepage</a>
+            </span>
+
+            <?php addModuleDescriptor("error_footer");  ?>
+        </div>
     </body>
 <?php }
