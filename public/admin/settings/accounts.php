@@ -76,6 +76,10 @@ if (isset($_POST["resetPassword"])) {
 
     <?php require(ABSPATH . INC . "components/AdminSettingsNav.php"); ?>
 
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="admin-header col col-offset-6">DSJAS User Settings</h1>
+    </div>
+
     <?php if (isset($_GET["resetFailed"])) { ?>
         <div class="alert alert-danger">
             <strong>Failed to reset password</strong> An error occurred while attempting to reset that user's password.
