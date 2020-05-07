@@ -38,11 +38,13 @@ require(ABSPATH . INC . "api/theme/General.php");
 require(ABSPATH . INC . "api/theme/Accounts.php");
 require_once(ABSPATH . INC . "api/theme/Appearance.php");
 
+setTitle("Welcome to " . getBankName());
+
 // Theme entry point
 function getTheme()
 { ?>
 
-    <body class="bg-secondary">
+    <body>
 
         <?php require("components/Nav.php"); ?>
 
@@ -78,15 +80,15 @@ function getTheme()
                 <p>For a limited time only, we're giving families loans at 0% APR and completely free shared accounts. Apply today and don't miss out. Go on, you deserve it mum and dad!</p>
 
                 <br>
-                <a href="/user/SignUp" class="btn btn-primary">Apply today</a>
+                <a href="/user/Apply" class="btn btn-primary">Apply today</a>
                 <pre class="lead small" style="margin-top: 10; color: white">Terms and conditions apply. While event lasts</pre>
             </div>
         </div>
 
-        <div class="container-fluid">
-            <div class="row services-panels">
-                <div class="col card text-light bg-dark">
-                    <img class="card-img-top mx-auto d-block" src="/assets/account-icon.png" style="height: 155; width: 30%;">
+        <div class="container-fluid mt-2">
+            <div class="card-deck services-panels">
+                <div class="card text-light bg-dark">
+                    <img class="card-img-top mx-auto d-block" src="/assets/account-icon.jpg">
                     <h5 class="card-header text-center">Current accounts</h5>
                     <div class="card-body">
                         <p class="card-title"><strong>Award winning current accounts with you at the center of our interests</strong></p>
@@ -96,8 +98,8 @@ function getTheme()
                         <a class="btn btn-primary" href="/user/Apply">Get started</a>
                     </div>
                 </div>
-                <div class="col card text-light bg-dark" style="padding-top: 30px">
-                    <img class="card-img-top mx-auto d-block" src="/assets/savings-icon.png" style="height: 127; width: 30%;">
+                <div class="card text-light bg-dark">
+                    <img class="card-img-top mx-auto d-block" src="/assets/savings-icon.jpg">
                     <h5 class="card-header text-center">Savings Accounts</h5>
                     <div class="card-body">
                         <p class="card-title"><strong>Savings accounts that won't let you down, with our savings guarantee</strong></p>
@@ -107,8 +109,8 @@ function getTheme()
                         <a class="btn btn-primary" href="/user/Apply">Get started</a>
                     </div>
                 </div>
-                <div class="col card text-light bg-dark">
-                    <img class="card-img-top mx-auto d-block" src="/assets/loan-icon.png" style="height: 155; width: 30%">
+                <div class="card text-light bg-dark">
+                    <img class="card-img-top mx-auto d-block" src="/assets/loan-icon.jpg">
                     <h5 class="card-header text-center">Loans and Leases</h5>
                     <div class="card-body">
                         <p class="card-title"><strong>Sometimes, everyone needs a bail-out, pick-me-up or something to support them. We're here to provide for you</strong></p>
@@ -121,22 +123,26 @@ function getTheme()
             </div>
         </div>
 
-        <div class="container-fluid text-center bg-primary text-light">
+        <hr>
+
+        <div class="jumbotron-fluid text-center m-3">
             <div class="row">
-                <div class="col">
-                    <h1><strong>98%</strong></h1>
-                    <p>of customers recommend our services</p>
+                <div class="col border-left p-3">
+                    <h1><span class="badge badge-primary">98%</span></h1>
+                    <h3><span class="badge badge-secondary">of customers recommend our services</span></h3>
                 </div>
-                <div class="col">
-                    <h1><strong>$10 billion</strong></h1>
-                    <p>of funds in our care</p>
+                <div class="col border-left p-3">
+                    <h1><span class="badge badge-primary">$10 billion</strong></h1>
+                    <h3><span class="badge badge-secondary">of funds in our care</span></h3>
                 </div>
-                <div class="col">
-                    <h1><strong>100+</strong></h1>
-                    <p>branches worldwide</p>
+                <div class="col border-left p-3">
+                    <h1><span class="badge badge-primary">100+</span></h1>
+                    <h3><span class="badge badge-secondary">branches worldwide</span></h3>
                 </div>
             </div>
         </div>
+
+        <hr>
 
         <div class="container-fluid bg-dark">
             <div class="row">
@@ -194,9 +200,7 @@ function getTheme()
             <div class="col footer-links">
                 <a href="/" class="btn btn-primary">Home</a>
                 <a href="/support/Support" class="btn btn-primary">Help</a>
-                <a href="/support/Contact" class="btn btn-primary">Contact support</a>
-                <a href="/user/Login" class="btn btn-dark">Log in</a>
-                <a href="/user/Apply" class="btn btn-dark">Apply now</a>
+                <a href="/support/Contact" class="btn btn-warning">Contact support</a>
             </div>
         </div>
 
