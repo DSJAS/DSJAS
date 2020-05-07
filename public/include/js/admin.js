@@ -140,6 +140,44 @@ function disableDatabaseSettings() {
 
 /* Accounts settings pane */
 
+/* Modules and themes pane */
+
+$(document).ready(function () {
+    bsCustomFileInput.init() // Init file upload plugin
+})
+
+var currentPane = 1;
+
+function switchToThemes() {
+    if (currentPane != 1) {
+        currentPane = 1;
+
+        $("#themeTabBar").addClass("active");
+        $("#themeTabBar").addClass("text-primary");
+
+        $("#moduleTabBar").removeClass("active");
+        $("#moduleTabBar").removeClass("text-primary");
+
+        $("#themePanel").css("display", "block");
+        $("#modulePanel").css("display", "none");
+    }
+}
+
+function switchToModules() {
+    if (currentPane != 2) {
+        currentPane = 2;
+
+        $("#themeTabBar").removeClass("active");
+        $("#themeTabBar").removeClass("text-primary");
+
+        $("#moduleTabBar").addClass("active");
+        $("#moduleTabBar").addClass("text-primary");
+
+        $("#modulePanel").css("display", "block");
+        $("#themePanel").css("display", "none");
+    }
+}
+
 /* Advanced settings pane */
 
 function advancedSaveSettings() {
