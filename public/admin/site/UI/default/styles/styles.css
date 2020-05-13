@@ -80,6 +80,24 @@ div.main-page-teaser-overlay{
   padding: 5;
 }
 
+div.support-page-teaser{
+  max-width:100%;
+  min-height:75vh;
+
+  background-image: url("/assets/elderly-support.jpg");
+
+  display: inline-block;
+
+  padding: 50;
+
+  color: white;
+}
+
+div.support-page-teaser-overlay{
+  background-color: #2f2f2f70;
+  padding: 5;
+}
+
 div.footer{
   color: white;
   width: 100%;
