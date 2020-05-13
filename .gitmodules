@@ -1,3 +1,6 @@
 [submodule "public/include/vendor/hooks"]
 	path = public/include/vendor/hooks
 	url = https://github.com/gburtini/PHP-Hooks-System.git
+[submodule "public/include/vendor/requests"]
+	path = public/include/vendor/requests
+	url = https://github.com/rmccue/Requests
