@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build [package]",
+            "label": "Build",
             "type": "shell",
             "command": "${workspaceRoot}/scripts/Package.py",
             "problemMatcher": [],
@@ -12,6 +12,11 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Install",
+            "type": "shell",
+            "command": "${workspaceRoot}/scripts/Install.py",
         }
     ]
 }
