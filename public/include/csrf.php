@@ -57,6 +57,6 @@ function getCSRFSubmission($method = "post")
 function getCSRFFailedError()
 { ?>
     <div class="alert alert-danger">
-        <p><strong>Security alert:</strong> CSRF detected! Your session may have expired or a link you clicked may have attempted to exploit the site. The action requested was cancelled.</p>
+        <p><strong>Security error:</strong> We had some trouble making sure that the action you're trying to perform was initiated by you. If you clicked a link, you should close this page. If you were trying to perform an action on the site, please refresh the page or submit the form again. <i>The operation was cancelled</i></p>
     </div>
 <?php }
