@@ -64,7 +64,7 @@ function getTheme()
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Online Banking</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Online banking doesn't have to be hard with <?php echo (getBankName()); ?> Get help with your online banking and more with us</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Online banking doesn't have to be hard with <?php echo (getBankName()); ?>. Get help with your online banking and more with us</h6>
                     <p class="card-text">We know that online banking can be confusing. Those damn millennials made it so! So, it's our job to stop the confusion and make online banking great again!</p>
                     <a href="/support/Online" class="card-link">Get help</a>
                     <a href="/support/Contact" class="card-link">Speak to support</a>
@@ -142,7 +142,7 @@ function getTheme()
         </li>
     </ul>
 
-    <div class="container-fluid row bg-secondary">
+    <div class="container-fluid row bg-secondary mt-4">
         <div class="col footer-text">
             <pre class="lead small">&copy 2018 Black Mesa Inc. All rights reserved</pre>
             <?php addModuleDescriptor("footer");  ?>
