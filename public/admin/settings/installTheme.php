@@ -95,6 +95,11 @@ if (isset($_POST["installTheme"])) {
     </div>
     <?php
 } elseif (isset($_GET["doUninstallTheme"])) {
+    $csrf = verifyCSRFToken(getCSRFSubmission("GET"));
+    if (!$csrf) {
+        die(getCSRFFailedError());
+    }
+
     if ($_GET["doUninstallTheme"] == "default") { ?>
         <div class="alert alert-danger">
             <p><strong>Protected theme</strong> You are attempting to uninstall the default theme. This is not possible and the operation was cancelled</p>
