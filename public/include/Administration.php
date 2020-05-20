@@ -19,6 +19,8 @@ Please, waste these people's time as much as possible. It's fun and it does good
 require_once("Customization.php");
 require_once("Util.php");
 
+require_once("vendor/requests/library/Requests.php");
+
 
 function getAdministrationNotices()
 {
@@ -210,6 +212,38 @@ function unpackDirExists()
 {
     return is_dir(ABSPATH . "/uploads/themeUploads/");
 }
+
+function downloadThemeFromURL($url)
+{
+    Requests::register_autoloader();
+
+    try {
+        $downloadRequest = Requests::get($url);
+        $fileContent = $downloadRequest->body;
+    } catch (Requests_Exception $e) {
+        return false;
+    }
+
+    if (!$downloadRequest->success) {
+        return false;
+    }
+
+    if (!unpackDirExists()) {
+        mkdir(ABSPATH . "/uploads/themeUploads", 0777, true);
+        chmod(ABSPATH . "/uploads/themeUploads", 0777);
+    }
+
+    $fileName = ABSPATH . "/uploads/themeUploads/" . sha1($fileContent) . ".zip";
+
+    file_put_contents($fileName, $fileContent);
+
+    if (!isUploadArchive($fileName)) {
+        return false;
+    }
+
+    return $fileName;
+}
+
 
 function unpackAndInstallTheme($themeFile, $uploadedFile = true)
 {

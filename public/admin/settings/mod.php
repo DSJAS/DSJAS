@@ -115,6 +115,12 @@ regenerateCSRF();
         <div class="alert alert-warning">
             <p><strong>Uninstalled theme</strong> The specified theme has been deleted. Your theme has been reset to the default until another is specified.</p>
         </div>
+    <?php }
+
+    if (isset($_GET["themeDownloadFailed"])) { ?>
+        <div class="alert alert-danger">
+            <p><strong>Failed to download theme</strong> There was an error while attempting to download your theme from that URL. Please check the URL is correct and that your server is able to reach the location.</p>
+        </div>
     <?php } ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -224,7 +230,7 @@ regenerateCSRF();
                             </div>
 
                             <div class="input-group-append">
-                                <button class="btn btn-warning" type="submit" id="submit" onsubmit="showThemeInstalling()">Install</button>
+                                <button class="btn btn-warning" type="submit" id="submitUpload">Install</button>
                             </div>
                         </div>
                     </div>
@@ -240,8 +246,34 @@ regenerateCSRF();
                 <hr>
                 <h4 class="card-title">Method 2: Provide an install URL</h4>
                 <p class="text-secondary">DSJAS will download a theme package form this URL and install it using the developer's instructions.
-                    You won't have to wait for the download to complete on your computer then upload the file (which can take some time).
+                    This will save a significant amount of time - due to the fact that you don't have to download the theme and upload it again (which can take some time).
                 </p>
+
+                <form action="/admin/settings/installTheme.php" method="POST">
+                    <?php getCSRFFormElement(); ?>
+                    <input id="actionName" type="text" style="visibility: hidden; position: absolute" name="installThemeURL" value="1">
+
+                    <div class="input-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="urlInputLabel">
+                                    <svg class="bi bi-link" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086 0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z" />
+                                        <path d="M6.764 6.5H7c.364 0 .706.097 1 .268A1.99 1.99 0 019 6.5h.236A3.004 3.004 0 008 5.67a3 3 0 00-1.236.83z" />
+                                        <path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02 0 01-.82 1H12a3 3 0 100-6H9z" />
+                                        <path d="M8 11.33a3.01 3.01 0 001.236-.83H9a1.99 1.99 0 01-1-.268 1.99 1.99 0 01-1 .268h-.236c.332.371.756.66 1.236.83z" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <input type="text" class="form-control" id="urlInput" name="themeURL" placeholder="URL">
+
+                            <div class="input-group-append">
+                                <button class="btn btn-warning" type="submit" id="submitURL">Download and install</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
                 <hr>
                 <small class="text-small text-danger"><strong>Warning:</strong> Themes have full control over your webserver after they are installed.

@@ -66,6 +66,36 @@ if (isset($_POST["installTheme"])) {
     }
 
     header("Location: /admin/settings/mod.php?themeInstalled");
+} elseif (isset($_POST["installThemeURL"])) {
+    $csrf = verifyCSRFToken(getCSRFSubmission());
+    if (!$csrf) {
+        die(getCSRFFailedError());
+    }
+
+    echo ("Downloading file...\n");
+    ob_flush();
+
+    $fileName = downloadThemeFromURL($_POST["themeURL"]);
+
+    if ($fileName === false) {
+        header("Location: /admin/settings/mod.php?themeDownloadFailed");
+        die();
+    }
+
+    echo ("Your theme has been downloaded successfully! Unpacking now...\n");
+    ob_flush();
+
+    $status = unpackAndInstallTheme($fileName, false);
+
+    echo ("Theme unpacked!\n");
+    ob_flush();
+
+    if (!$status[0]) {
+        header("Location: " . getThemeUploadErrorPage($status[1]));
+        die();
+    }
+
+    header("Location: /admin/settings/mod.php?themeInstalled");
 } elseif (isset($_GET["enableTheme"])) {
     $csrf = verifyCSRFToken(getCSRFSubmission("GET"));
     if (!$csrf) {
