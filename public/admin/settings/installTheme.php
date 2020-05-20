@@ -100,6 +100,15 @@ if (isset($_POST["installTheme"])) {
         die(getCSRFFailedError());
     }
 
+    if (!themeExists($_GET["doUninstallTheme"])) { ?>
+        <div class="alert alert-danger">
+            <p><strong>Error</strong> You are attempting to uninstall a theme which does not exist. It may already have been uninstalled or another administrator may have uninstalled it.</p>
+            <a href="/admin/settings/mod.php">Go back to themes settings</a>
+        </div>
+    <?php
+        die();
+    }
+
     if ($_GET["doUninstallTheme"] == "default") { ?>
         <div class="alert alert-danger">
             <p><strong>Protected theme</strong> You are attempting to uninstall the default theme. This is not possible and the operation was cancelled</p>

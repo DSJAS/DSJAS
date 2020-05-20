@@ -290,6 +290,11 @@ function enableDefaultTheme()
     $configuration->setKey(ID_THEME_CONFIG, "extensions", "current_UI_extension", "");
 }
 
+function themeExists($themeName)
+{
+    return is_dir(ABSPATH . "/admin/site/UI/" . $themeName);
+}
+
 function uninstallTheme($themeName)
 {
     enableDefaultTheme();
