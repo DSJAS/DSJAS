@@ -46,7 +46,7 @@ if (isset($_POST["installTheme"])) {
     echo ("Unpacking your theme... (this part my take a while)\n");
     ob_flush();
 
-    $newThemeName = unpackAndInstallTheme();
+    $newThemeName = unpackAndInstallTheme($_FILES['themeFile']['tmp_name']);
 
     if ($newThemeName[0] === false) {
         header("Location: " . getThemeUploadErrorPage($newThemeName[1]));

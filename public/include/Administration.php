@@ -211,21 +211,25 @@ function unpackDirExists()
     return is_dir(ABSPATH . "/uploads/themeUploads/");
 }
 
-function unpackAndInstallTheme()
+function unpackAndInstallTheme($themeFile, $uploadedFile = true)
 {
     if (!unpackDirExists()) {
         mkdir(ABSPATH . "/uploads/themeUploads", 0777, true);
         chmod(ABSPATH . "/uploads/themeUploads", 0777);
     }
 
-    $fileHash = sha1_file($_FILES['themeFile']['tmp_name']);
+    $fileHash = sha1_file($themeFile);
     $fileName = ABSPATH . "/uploads/themeUploads/" . $fileHash . ".zip";
 
-    if (!move_uploaded_file(
-        $_FILES['themeFile']['tmp_name'],
-        $fileName
-    )) {
-        return [false, 1];
+    if ($uploadedFile) {
+        if (!move_uploaded_file(
+            $themeFile,
+            $fileName
+        )) {
+            return [false, 1];
+        }
+    } else {
+        rename($themeFile, $fileName);
     }
 
     mkdir(ABSPATH . "/uploads/themeUploads/" . $fileHash . "-unpack", 0777, true);
