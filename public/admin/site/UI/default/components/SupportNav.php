@@ -19,12 +19,25 @@ Support navbar component file
                 <a class="nav-link" href="<?php echo (getBankURL() . "/support/Support"); ?>">Support home</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo (getBankURL() . "/support/Contact"); ?>">Contact</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="getHelpDropdown" data-toggle="dropdown">
+                    Get help
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/support/Online">Online banking</a>
+                    <a class="dropdown-item" href="/support/Fraud">Fraud</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/support/Finances">Finances</a>
+                    <a class="dropdown-item" href="/support/Transfer">Transfers</a>
+                </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo (getBankURL() . "/support/Online"); ?>">Online support</a>
+                <a class="nav-link" href="/support/Contact">Contact</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/support/Fraud">Fraud prevention</a>
             </li>
         </ul>
     </div>
