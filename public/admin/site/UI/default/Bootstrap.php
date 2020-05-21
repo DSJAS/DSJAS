@@ -40,5 +40,5 @@ require_once(ABSPATH . INC . "api/theme/Appearance.php");
 
 function getBootstrap()
 { ?>
-    <link rel="stylesheet" href=<?php echo (getThemeCSS("Styles.css", "styles/")) ?>>
+    <link rel="stylesheet" href=<?php echo (getThemeContent("Styles.css", "styles/")) ?>>
 <?php }

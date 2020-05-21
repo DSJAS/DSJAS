@@ -43,7 +43,7 @@ function setMeta($metaTag, $content)
     echo ($metaText);
 }
 
-function getThemeCSS($scriptName, $themeRelativeLocation = "/")
+function getThemeContent($scriptName, $themeRelativeLocation = "/")
 {
     $config = new Configuration(false, true, false, false);
     $useDefault = $config->getKey(ID_THEME_CONFIG, "config", "use_default");
