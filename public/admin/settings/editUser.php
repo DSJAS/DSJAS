@@ -109,6 +109,8 @@ if (isset($_POST["doEditUser"])) {
         <p><strong>Warning:</strong> The admin dashboard is not designed for smaller screens, and some functionality may be missing or limited.</p>
     </div>
 
+    <script src="/include/js/editUser.js"></script>
+
     <?php require(ABSPATH . INC . "components/AdminSettingsNav.php");
 
     if (isset($_GET["deleteUser"])) { ?>
@@ -161,6 +163,23 @@ if (isset($_POST["doEditUser"])) {
 
     if (isset($_GET["editUser"])) { ?>
 
+        <?php if (!getInfoFromUserID($_GET["editUser"], "account_enabled", true)) { ?>
+            <div class="alert alert-warning">
+                <p><strong>This account is disabled</strong> You're editing an account which is currently disabled. Regardless of changes, this user will not be able to access their account or profile.</p>
+                <a href="/admin/settings/editUser.php?toggleEnabledUser=<?php echo ($_GET["editUser"]); ?>">Enable this account</a>
+            </div>
+        <?php } ?>
+
+        <?php if ($_GET["editUser"] == getCurrentUserId(true)) { ?>
+            <div class="alert alert-info">
+                <p><strong>This is you!</strong> You're editing your own account information. Any changes made will immediately be reflected on your profile.</p>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-warning">
+                <p><strong>Take care: This isn't your account!</strong> You're editing your another person's account information. Please take care and avoid making unwanted changes.</p>
+            </div>
+        <?php } ?>
+
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="admin-header col col-offset-6">Now editing user "<?php echo (getInfoFromUserID($_GET["editUser"], "username", true)); ?>"</h1>
         </div>
@@ -188,7 +207,7 @@ if (isset($_POST["doEditUser"])) {
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="username">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" value="xxxxxxxxxxxx">
+                    <input type="password" class="form-control" id="password" name="password" onmouseover="onPasswordHover()" onmouseout="onPasswordHoverEnd()" value="xxxxxxxxxxxx" data-toggle="popover" title="Attention! Dummy data" data-content="For security reasons, your password (once stored) is not retrievable. This password box contains dummy data - not your password. If you forgot your password, please reset it on the accounts menu.">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">Password hint</label>
