@@ -26,11 +26,23 @@ require(ABSPATH . INC . "csrf.php");
 
 
 if (isset($_GET["doDeleteUser"])) {
+    $csrf = getCSRFSubmission("GET");
+    if (!verifyCSRFToken($csrf)) {
+        getCSRFFailedError();
+        die();
+    }
+
     eraseUser($_GET["doDeleteUser"], true);
     header("Location: /admin/settings/accounts.php");
 }
 
 if (isset($_GET["doToggleEnabledUser"])) {
+    $csrf = getCSRFSubmission("GET");
+    if (!verifyCSRFToken($csrf)) {
+        getCSRFFailedError();
+        die();
+    }
+
     if (getCurrentUserId(true) == $_GET["doToggleEnabledUser"]) { ?>
         <div class="alert alert-danger">
             <p><strong>Cannot disable account</strong> You appear to be attempting to disable your own account. You cannot disable the account you are logged in to.
@@ -53,6 +65,12 @@ if (isset($_GET["doToggleEnabledUser"])) {
 }
 
 if (isset($_POST["doEditUser"])) {
+    $csrf = getCSRFSubmission();
+    if (!verifyCSRFToken($csrf)) {
+        getCSRFFailedError();
+        die();
+    }
+
     $config = parse_ini_file(ABSPATH . "/Config.ini");
     $userID = $_POST["doEditUser"];
 
@@ -166,7 +184,7 @@ if (isset($_POST["doEditUser"])) {
         <?php if (!getInfoFromUserID($_GET["editUser"], "account_enabled", true)) { ?>
             <div class="alert alert-warning">
                 <p><strong>This account is disabled</strong> You're editing an account which is currently disabled. Regardless of changes, this user will not be able to access their account or profile.</p>
-                <a href="/admin/settings/editUser.php?toggleEnabledUser=<?php echo ($_GET["editUser"]); ?>">Enable this account</a>
+                <a href="/admin/settings/editUser.php?toggleEnabledUser=<?php echo ($_GET["editUser"]); ?>&csrf=<?php echo (getCSRFToken()); ?>">Enable this account</a>
             </div>
         <?php } ?>
 
