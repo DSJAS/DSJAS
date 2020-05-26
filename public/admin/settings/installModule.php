@@ -46,4 +46,48 @@ if (isset($_POST["changeModuleStates"])) {
 
         $moduleConfiguration->setKey(ID_MODULE_CONFIG, "active_modules", $module, $_POST[$module]);
     }
+} elseif (isset($_POST["installModule"])) {
+    $csrf = verifyCSRFToken(getCSRFSubmission());
+    if (!$csrf) {
+        die(getCSRFFailedError());
+    }
+
+    var_dump($_FILES["moduleFile"]);
+
+    echo ("Received your file! Validating now...\n");
+    ob_flush();
+
+    $validateUpload = validateModuleUpload();
+
+    if ($validateUpload[0] === false) {
+        header("Location: " . getModuleUploadErrorPage($validateUpload[1]));
+        die();
+    }
+
+    echo ("Module validated! Your archive looks OK\n");
+    echo ("Unpacking your module... (this part my take a while)\n");
+    ob_flush();
+
+    $newModName = unpackAndInstallModule($_FILES['moduleFile']['tmp_name']);
+
+    if ($newModName[0] === false) {
+        header("Location: " . getModuleUploadErrorPage($newModName[1]));
+        die();
+    }
+
+    echo ("Module handled and installed to the required location. Your module is now installed!\n");
+    echo ("Success: Your module has been installed! Performing final clean-up and redirecting...");
+    ob_flush();
+
+    $configuration = new Configuration(false, false, false, true);
+    $configuration->setKey(ID_MODULE_CONFIG, "active_modules", $newModName[1], "0");
+
+    if (isset($_POST["enabled"])) {
+        enableModule($newModName[1]);
+
+        header("Location: /admin/settings/mod.php?moduleInstalledEnabled");
+        die();
+    }
+
+    header("Location: /admin/settings/mod.php?moduleInstalled");
 }

@@ -3,3 +3,9 @@
 php_value upload_max_filesize 50M
 php_value post_max_size 42M
 </Files>
+
+# Allow larger uploads when installing modules
+<Files ~ "\installTheme.php$">
+php_value upload_max_filesize 50M
+php_value post_max_size 42M
+</Files>

@@ -159,6 +159,87 @@ function getThemeUploadErrorPage($error)
     }
 }
 
+function getModuleUploadErrorPage($error)
+{
+    switch ($error) {
+        case -1:
+            return "/admin/settings/mod.php?moduleNotArchive";
+
+        case -2:
+            return "/admin/settings/mod.php?miscThemeError";
+
+        case 1:
+            return "/admin/settings/mod.php?malformedThemeRequest";
+
+        case 2:
+            return "/admin/settings/mod.php?noThemeFile";
+
+        case 3:
+            return "/admin/settings/mod.php?miscThemeError";
+
+        case 4:
+            return "/admin/settings/mod.php?themeSizeError";
+
+        case 5:
+            return "/admin/settings/mod.php?missingManifest";
+
+        case 6:
+            return "/admin/settings/mod.php?malformedManifest";
+
+        case 7:
+            return "/admin/settings/mod.php?themeExists";
+
+        case 8:
+            return "/admin/settings/mod.php?notATheme";
+
+        default:
+            return "/admin/settings/mod.php?unknownThemeError";
+    }
+}
+
+function validateModuleUpload()
+{
+    $submission = $_FILES["moduleFile"];
+
+    $validation = doModuleUploadValidation();
+    if (!$validation[0]) {
+        return $validation;
+    }
+
+    if (!isUploadArchive($submission["tmp_name"])) {
+        return [false, -1];
+    }
+}
+
+function doModuleUploadValidation()
+{
+    if (
+        !isset($_FILES['moduleFile']['error']) ||
+        is_array($_FILES['moduleFile']['error'])
+    ) {
+        return [false, 1];
+    }
+
+    switch ($_FILES['moduleFile']['error']) {
+        case UPLOAD_ERR_OK:
+            break;
+        case UPLOAD_ERR_NO_FILE:
+            return [false, 2];
+        case UPLOAD_ERR_INI_SIZE:
+            return [false, 3];
+        case UPLOAD_ERR_FORM_SIZE:
+            return [false, 4];
+        default:
+            return [false, -2];
+    }
+
+    if ($_FILES['moduleFile']['size'] > 50000000) {
+        return [false, 4];
+    }
+
+    return [true, 0];
+}
+
 function doThemeUploadValidation()
 {
     if (
@@ -211,6 +292,11 @@ function isUploadArchive($uploadPath)
 function unpackDirExists()
 {
     return is_dir(ABSPATH . "/uploads/themeUploads/");
+}
+
+function moduleUnpackDirExists()
+{
+    return is_dir(ABSPATH . "/uploads/moduleUploads/");
 }
 
 function downloadThemeFromURL($url)
@@ -307,6 +393,68 @@ function unpackAndInstallTheme($themeFile, $uploadedFile = true)
     return [true, $requestedName];
 }
 
+function unpackAndInstallModule($themeFile, $uploadedFile = true)
+{
+    if (!moduleUnpackDirExists()) {
+        mkdir(ABSPATH . "/uploads/moduleUploads", 0777, true);
+        chmod(ABSPATH . "/uploads/moduleUploads", 0777);
+    }
+
+    $fileHash = sha1_file($themeFile);
+    $fileName = ABSPATH . "/uploads/moduleUploads/" . $fileHash . ".zip";
+
+    if ($uploadedFile) {
+        if (!move_uploaded_file(
+            $themeFile,
+            $fileName
+        )) {
+            return [false, 1];
+        }
+    } else {
+        rename($themeFile, $fileName);
+    }
+
+    mkdir(ABSPATH . "/uploads/moduleUploads/" . $fileHash . "-unpack", 0777, true);
+    chmod(ABSPATH . "/uploads/moduleUploads/" . $fileHash . "-unpack", 0777);
+
+    $archive = new ZipArchive();
+    $archive->open($fileName);
+    $archive->extractTo(ABSPATH . "/uploads/moduleUploads/" . $fileHash . "-unpack");
+    $archive->close();
+
+    $configExists = is_file(ABSPATH . "/uploads/moduleUploads/" . $fileHash . "-unpack/" . ".dsjasManifest");
+
+    if (!$configExists) {
+        return [false, 5];
+    }
+
+    $configData = file_get_contents(ABSPATH . "/uploads/moduleUploads/" . $fileHash . "-unpack/" . ".dsjasManifest");
+    $parsedConfigData = json_decode($configData, true);
+
+    if ($parsedConfigData === null) {
+        return [false, 6];
+    }
+
+    $requestedName = $parsedConfigData["name"];
+    $extensionType = $parsedConfigData["extension-type"];
+
+    unlink(ABSPATH . "/uploads/moduleUploads/" . $fileHash . "-unpack/.dsjasManifest");
+    unlink($fileName);
+
+    if ($extensionType != "module") {
+        return [false, 8];
+    }
+
+    $installedModules = scandir(ABSPATH . "/admin/site/modules/");
+    if (in_array($requestedName, $installedModules)) {
+        return [false, 7];
+    }
+
+    rename(ABSPATH . "/uploads/moduleUploads/" . $fileHash . "-unpack/", ABSPATH . "/admin/site/modules/" . $requestedName);
+
+    return [true, $requestedName];
+}
+
 function resetValidatorState()
 {
     $configuration = new Configuration(false, true, false, false);
@@ -328,9 +476,20 @@ function enableDefaultTheme()
     $configuration->setKey(ID_THEME_CONFIG, "extensions", "current_UI_extension", "");
 }
 
+function enableModule($moduleName)
+{
+    $configuration = new Configuration(false, true, false, false);
+    $configuration->setKey(ID_MODULE_CONFIG, "active_modules", $moduleName, "1");
+}
+
 function themeExists($themeName)
 {
     return is_dir(ABSPATH . "/admin/site/UI/" . $themeName);
+}
+
+function moduleExists($moduleName)
+{
+    return is_dir(ABSPATH . "/admin/site/modules/" . $moduleName);
 }
 
 function uninstallTheme($themeName)
