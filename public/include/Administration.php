@@ -121,26 +121,26 @@ function validateThemeUpload()
     }
 }
 
-function getThemeUploadErrorPage($error)
+function getInstallErrorPage($error)
 {
     switch ($error) {
         case -1:
-            return "/admin/settings/mod.php?themeNotArchive";
+            return "/admin/settings/mod.php?notArchive";
 
         case -2:
-            return "/admin/settings/mod.php?miscThemeError";
+            return "/admin/settings/mod.php?unknownError";
 
         case 1:
-            return "/admin/settings/mod.php?malformedThemeRequest";
+            return "/admin/settings/mod.php?malformedRequest";
 
         case 2:
-            return "/admin/settings/mod.php?noThemeFile";
+            return "/admin/settings/mod.php?noFile";
 
         case 3:
-            return "/admin/settings/mod.php?miscThemeError";
+            return "/admin/settings/mod.php?unknownError";
 
         case 4:
-            return "/admin/settings/mod.php?themeSizeError";
+            return "/admin/settings/mod.php?sizeError";
 
         case 5:
             return "/admin/settings/mod.php?missingManifest";
@@ -149,51 +149,13 @@ function getThemeUploadErrorPage($error)
             return "/admin/settings/mod.php?malformedManifest";
 
         case 7:
-            return "/admin/settings/mod.php?themeExists";
+            return "/admin/settings/mod.php?alreadyExists";
 
         case 8:
-            return "/admin/settings/mod.php?notATheme";
+            return "/admin/settings/mod.php?wrongType";
 
         default:
-            return "/admin/settings/mod.php?unknownThemeError";
-    }
-}
-
-function getModuleUploadErrorPage($error)
-{
-    switch ($error) {
-        case -1:
-            return "/admin/settings/mod.php?moduleNotArchive";
-
-        case -2:
-            return "/admin/settings/mod.php?miscThemeError";
-
-        case 1:
-            return "/admin/settings/mod.php?malformedThemeRequest";
-
-        case 2:
-            return "/admin/settings/mod.php?noThemeFile";
-
-        case 3:
-            return "/admin/settings/mod.php?miscThemeError";
-
-        case 4:
-            return "/admin/settings/mod.php?themeSizeError";
-
-        case 5:
-            return "/admin/settings/mod.php?missingManifest";
-
-        case 6:
-            return "/admin/settings/mod.php?malformedManifest";
-
-        case 7:
-            return "/admin/settings/mod.php?themeExists";
-
-        case 8:
-            return "/admin/settings/mod.php?notATheme";
-
-        default:
-            return "/admin/settings/mod.php?unknownThemeError";
+            return "/admin/settings/mod.php?unknownError";
     }
 }
 
@@ -226,7 +188,7 @@ function doModuleUploadValidation()
         case UPLOAD_ERR_NO_FILE:
             return [false, 2];
         case UPLOAD_ERR_INI_SIZE:
-            return [false, 3];
+            return [false, 4];
         case UPLOAD_ERR_FORM_SIZE:
             return [false, 4];
         default:
@@ -255,7 +217,7 @@ function doThemeUploadValidation()
         case UPLOAD_ERR_NO_FILE:
             return [false, 2];
         case UPLOAD_ERR_INI_SIZE:
-            return [false, 3];
+            return [false, 4];
         case UPLOAD_ERR_FORM_SIZE:
             return [false, 4];
         default:
@@ -346,7 +308,7 @@ function unpackAndInstallTheme($themeFile, $uploadedFile = true)
             $themeFile,
             $fileName
         )) {
-            return [false, 1];
+            return [false, -2];
         }
     } else {
         rename($themeFile, $fileName);
@@ -380,7 +342,7 @@ function unpackAndInstallTheme($themeFile, $uploadedFile = true)
     unlink($fileName);
 
     if ($extensionType != "theme") {
-        return [false, 7];
+        return [false, 8];
     }
 
     $installedThemes = scandir(ABSPATH . "/admin/site/UI/");

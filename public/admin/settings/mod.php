@@ -51,41 +51,63 @@ regenerateCSRF();
 
     <?php require(ABSPATH . INC . "components/AdminSettingsNav.php");
 
-    if (isset($_GET["themeNotArchive"])) { ?>
+    if (isset($_GET["notArchive"])) { ?>
         <div class="alert alert-danger">
-            <p><strong>Theme failed to install</strong> The file you just attempted to upload as a theme is not a valid archive.
-                Your theme should be delivered in a zip archive.
-                If you have downloaded a theme which is not a zip archive, please contact the theme developer; their theme is broken.</p>
+            <p><strong>Theme or module failed to install</strong> The file you just attempted to upload as a theme or module is not a valid archive.
+                Your theme/module should be delivered in a zip archive.
+                If you have downloaded a one of the above which is not a zip archive, please contact the developer; their extension is broken.</p>
         </div>
     <?php }
 
-    if (isset($_GET["unknownThemeError"])) { ?>
+    if (isset($_GET["wrongType"])) { ?>
         <div class="alert alert-danger">
-            <p><strong>Theme failed to install</strong> There was an unknown error while attempting to install that theme.
-                Please try again or report to the theme developers. Perhaps try downloading the theme package again?</p>
+            <p><strong>You're trying to install this extension in the wrong place</strong> You tried to install the wrong type extension in this place.
+                Please make sure that you are uploading the correct package and that you are on the right page.</p>
+        </div>
+    <?php }
+
+    if (isset($_GET["unknownError"])) { ?>
+        <div class="alert alert-danger">
+            <p><strong>Theme or module failed to install</strong> There was an unknown error while attempting to install that theme/module.
+                Please try again or report to the developers. Perhaps try downloading the package again?</p>
+        </div>
+    <?php }
+
+    if (isset($_GET["noFile"])) { ?>
+        <div class="alert alert-danger">
+            <p><strong>Theme or module failed to install</strong> No upload package was provided.</p>
+        </div>
+    <?php }
+
+    if (isset($_GET["sizeError"])) { ?>
+        <div class="alert alert-danger">
+            <p><strong>Theme or module failed to install</strong> This plugin is too large. DSJAS themes and modules have a maximum file size due to technical constraints.
+                Please contact the plugin developer</p>
         </div>
     <?php }
 
     if (isset($_GET["missingManifest"])) { ?>
         <div class="alert alert-danger">
-            <p><strong>Malformed or invalid theme</strong> The uploaded archive is not a valid DSJAS theme package.
-                Please make sure that the archive you uploaded is a theme package and that the archive has not been damaged.</p>
+            <p><strong>Malformed or invalid package</strong> The uploaded archive is not a valid DSJAS package.
+                Please make sure that the archive you uploaded is a package and that the archive has not been damaged.</p>
         </div>
     <?php }
 
     if (isset($_GET["malformedManifest"])) { ?>
         <div class="alert alert-danger">
-            <p><strong>Theme failed to install</strong> The uploaded archive is a theme, but the contained configuration is invalid.
-                This means that DSJAS was unable to read the instructions the theme developer has provided on how to perform the install.</p>
+            <p><strong>Theme failed to install</strong> The uploaded archive is a package, but the contained configuration is invalid.
+                This means that DSJAS was unable to read the instructions the developer has provided on how to perform the install.</p>
             </p>
         </div>
     <?php }
 
-    if (isset($_GET["themeExists"])) { ?>
+    if (isset($_GET["alreadyExists"])) { ?>
         <div class="alert alert-danger">
-            <p><strong>Theme already installed</strong> You've tried to upload a theme that's already installed!
-                Before a theme is applied, it needs to be enabled by the site administrator (that's you).
-                To do this, use the "Installed themes" panel and click on "Activate" next to the theme you wish to apply.
+            <p><strong>Theme or module already installed</strong> You've tried to upload a theme or module which has already been installed - either by you or another administrator.
+                You are not able to install the same theme or module twice. If the extension you are uploading is not already installed, the name may be already in use.
+                <br>
+                <strong>Before you can use an extension, you need to enable it!</strong> Before DSJAS will load any modules or themes, they need to be enabled.
+                You can do this through the settings panel.
             </p>
             </p>
         </div>

@@ -60,7 +60,7 @@ if (isset($_POST["changeModuleStates"])) {
     $validateUpload = validateModuleUpload();
 
     if ($validateUpload[0] === false) {
-        header("Location: " . getModuleUploadErrorPage($validateUpload[1]));
+        header("Location: " . getInstallErrorPage($validateUpload[1]));
         die();
     }
 
@@ -71,7 +71,7 @@ if (isset($_POST["changeModuleStates"])) {
     $newModName = unpackAndInstallModule($_FILES['moduleFile']['tmp_name']);
 
     if ($newModName[0] === false) {
-        header("Location: " . getModuleUploadErrorPage($newModName[1]));
+        header("Location: " . getInstallErrorPage($newModName[1]));
         die();
     }
 

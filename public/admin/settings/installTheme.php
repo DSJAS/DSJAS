@@ -38,7 +38,7 @@ if (isset($_POST["installTheme"])) {
     $validateUpload = validateThemeUpload();
 
     if ($validateUpload[0] === false) {
-        header("Location: " . getThemeUploadErrorPage($validateUpload[1]));
+        header("Location: " . getInstallErrorPage($validateUpload[1]));
         die();
     }
 
@@ -49,7 +49,7 @@ if (isset($_POST["installTheme"])) {
     $newThemeName = unpackAndInstallTheme($_FILES['themeFile']['tmp_name']);
 
     if ($newThemeName[0] === false) {
-        header("Location: " . getThemeUploadErrorPage($newThemeName[1]));
+        header("Location: " . getInstallErrorPage($newThemeName[1]));
         die();
     }
 
@@ -91,7 +91,7 @@ if (isset($_POST["installTheme"])) {
     ob_flush();
 
     if (!$status[0]) {
-        header("Location: " . getThemeUploadErrorPage($status[1]));
+        header("Location: " . getInstallErrorPage($status[1]));
         die();
     }
 
