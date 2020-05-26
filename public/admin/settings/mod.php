@@ -34,6 +34,8 @@ if ($conf->getKey(ID_THEME_CONFIG, "config", "use_default")) {
     $activeTheme = $conf->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
 }
 
+$installedModules = scandir(ABSPATH . "/admin/site/modules");
+
 
 regenerateCSRF();
 
@@ -120,6 +122,12 @@ regenerateCSRF();
     if (isset($_GET["themeDownloadFailed"])) { ?>
         <div class="alert alert-danger">
             <p><strong>Failed to download theme</strong> There was an error while attempting to download your theme from that URL. Please check the URL is correct and that your server is able to reach the location.</p>
+        </div>
+    <?php }
+
+    if (isset($_GET["moduleSaved"])) { ?>
+        <div class="alert alert-success">
+            <p><strong>Settings saved</strong> Your module settings saved successfully. Any disabled or enabled modules have had their status updated</p>
         </div>
     <?php } ?>
 
@@ -333,6 +341,115 @@ regenerateCSRF();
     </div>
 
     <div id="modulePanel" style="display: none" class="mt-3">
+
+        <div class="card bg-light admin-panel">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Information</h3>
+            </div>
+
+            <div class="card-body">
+                <h4 class="card-title">Add features and change existing ones with fun, community-made modules</h4>
+                <hr>
+
+                <p><strong>DSJAS modules change the interface (buttons, text fields etc) or add new interfaces to change site behaviour.</strong>
+                    DSJAS modules allow you to add elements to the user interface in the browser. For example, a module may add a reset password button
+                    to the login page. This allows for some really fun and interesting ways of playing with scammers. The best part is that they work with
+                    any theme, meaning that you can swap in modules to add features with a click!
+                    <br>
+                    <br>
+                    DSJAS ships with some interesting modules to try out. Maybe give them a try and see what kind of things you can do!
+                </p>
+            </div>
+        </div>
+
+        <div class="card bg-light admin-panel">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Installed modules</h3>
+                <button class="btn btn-primary" onclick="saveModuleSettings()">Save changes</button>
+            </div>
+
+            <div class="card-body">
+                <div class="container mt-4">
+                    <div class="row" id="modulesContainer">
+                        <?php
+                        $count = 0;
+                        foreach ($installedModules as $module) {
+                            if (is_file(ABSPATH . "/admin/site/modules/" . $module) || $module == "." || $module == "..") {
+                                continue;
+                            }
+
+                            $configText = file_get_contents(ABSPATH . "/admin/site/modules/" . $module . "/config.json");
+                            $config = json_decode($configText, true);
+
+                            $enabled = $conf->getKey(ID_MODULE_CONFIG, "active_modules", $module)
+                        ?>
+                            <div class="col-auto mb-3">
+                                <input id="moduleName<?php echo ($count); ?>" type="text" style="visibility: hidden; position: absolute" name="moduleName" value="<?php echo ($module); ?>">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?php echo ($config["name"]); ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo ($config["version"]); ?></h6>
+                                        <p class="card-text"><?php echo ($config["description"]); ?></p>
+                                        <div class="custom-control custom-switch" data-toggle="tooltip" data-placement="top" title="Enable/disable module">
+                                            <input type="checkbox" class="custom-control-input" id="moduleEnableSwitch<?php echo ($count); ?>" <?php if ($enabled) {
+                                                                                                                                                    echo ("checked");
+                                                                                                                                                } ?>>
+                                            <label class="custom-control-label" for="moduleEnableSwitch<?php echo ($count); ?>"></label>
+                                        </div>
+                                        <a href="#" class="card-link">More details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                            $count++;
+                        } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-light admin-panel">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Install a module</h3>
+            </div>
+
+            <div class="card-body">
+                <form action="/admin/settings/installModule.php" method="POST" enctype="multipart/form-data">
+                    <?php getCSRFFormElement(); ?>
+                    <input id="moduleActionName" type="text" style="visibility: hidden; position: absolute" name="installModule" value="1">
+
+                    <div class="input-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="fileInputLabel">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="44040192">
+                                <input type="file" class="custom-file-input" id="moduleFileInput" name="moduleFile" accept="application/zip" required>
+                                <label class="custom-file-label" for="fileInput">Choose file</label>
+                            </div>
+
+                            <div class="input-group-append">
+                                <button class="btn btn-warning" type="submit" id="submitModuleUpload">Install</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-check mt-1">
+                        <input class="form-check-input" type="checkbox" id="enableModule" name="enabled">
+                        <label class="form-check-label" for="enableModule">
+                            Enable this module after installation
+                        </label>
+                    </div>
+                </form>
+
+                <hr>
+                <small class="text-small text-danger"><strong>Important:</strong> Modules don't have the same level of access to the server that themes or extensions do.
+                    <strong>However</strong> they can still run code in the browser and make requests, read the contents of cookies and edit the layout of the site.
+                    Please apply the same level of scrutiny to modules as for themes.
+                </small>
+            </div>
+        </div>
 
         <div class="card bg-light admin-panel">
             <div class="card-header d-flex justify-content-between">

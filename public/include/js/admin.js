@@ -146,6 +146,10 @@ $(document).ready(function () {
     bsCustomFileInput.init() // Init file upload plugin
 })
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
 var currentPane = 1;
 
 function switchToThemes() {
@@ -176,6 +180,41 @@ function switchToModules() {
         $("#modulePanel").css("display", "block");
         $("#themePanel").css("display", "none");
     }
+}
+
+function saveModuleSettings() {
+    var moduleObjects = $("#modulesContainer").children();
+    let modules = [];
+
+    for (let i = 0; i < moduleObjects.length; i++) {
+        modules.push($("#moduleName" + i).val());
+    }
+
+    let csrf = $("#csrf").val();
+
+    var requestHeaders = "changeModuleStates=1&csrf=" + csrf;
+
+    for (let j = 0; j < modules.length; j++) {
+        const element = modules[j];
+
+        let enabled = $("#moduleEnableSwitch" + j).prop("checked") ? "1" : "0";
+
+        requestHeaders += "&" + element + "=" + enabled;
+    }
+
+    req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+        response = req.responseText;
+
+        if (this.readyState == 4 && this.status == 200) {
+            document.write("Settings saved! Reloading...");
+            location.assign(location.pathname.concat("?moduleSaved"));
+        }
+    };
+
+    req.open("POST", "/admin/settings/installModule.php", true);
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.send(requestHeaders);
 }
 
 /* Advanced settings pane */
