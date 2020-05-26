@@ -112,7 +112,7 @@ function validateThemeUpload()
     $submission = $_FILES["themeFile"];
 
     $validation = doThemeUploadValidation();
-    if ($validation[0]) {
+    if (!$validation[0]) {
         return $validation;
     }
 
