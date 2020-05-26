@@ -498,3 +498,11 @@ function uninstallTheme($themeName)
 
     recursiveDeleteDirectory(ABSPATH . "/admin/site/UI/" . $themeName);
 }
+
+function uninstallModule($moduleName)
+{
+    $configuration = new Configuration(false, true, false, false);
+    $configuration->setKey(ID_MODULE_CONFIG, "active_modules", $moduleName, "0");
+
+    recursiveDeleteDirectory(ABSPATH . "/admin/site/modules/" . $moduleName);
+}

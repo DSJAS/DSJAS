@@ -129,6 +129,12 @@ regenerateCSRF();
         <div class="alert alert-success">
             <p><strong>Settings saved</strong> Your module settings saved successfully. Any disabled or enabled modules have had their status updated</p>
         </div>
+    <?php }
+
+    if (isset($_GET["moduleUninstalled"])) { ?>
+        <div class="alert alert-warning">
+            <p><strong>Module uninstalled</strong> The selected module was uninstalled. If you ever choose to re-install the module, your configuration will be preserved.</p>
+        </div>
     <?php } ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -397,6 +403,7 @@ regenerateCSRF();
                                             <label class="custom-control-label" for="moduleEnableSwitch<?php echo ($count); ?>"></label>
                                         </div>
                                         <a href="#" class="card-link">More details</a>
+                                        <a class="text-danger ml-1" href="/admin/settings/installModule.php?uninstallModule=<?php echo ($module) ?>&csrf=<?php echo (getCSRFToken()); ?>">Uninstall</a>
                                     </div>
                                 </div>
                             </div>

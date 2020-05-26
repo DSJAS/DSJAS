@@ -90,4 +90,15 @@ if (isset($_POST["changeModuleStates"])) {
     }
 
     header("Location: /admin/settings/mod.php?moduleInstalled");
+} elseif (isset($_GET["uninstallModule"])) {
+    $csrf = getCSRFSubmission("GET");
+
+    if (!verifyCSRFToken($csrf)) {
+        getCSRFFailedError();
+        die();
+    }
+
+    uninstallModule($_GET["uninstallModule"]);
+
+    header("Location: /admin/settings/mod.php?moduleUninstalled");
 }
