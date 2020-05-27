@@ -42,7 +42,7 @@ function getTheme()
 
     <body class="body-signin bg-img-login">
 
-        <form class="form-signin rounded" method="post" , action="/user/Login.php">
+        <form class="form-signin rounded" id="loginForm" method="post" action="/user/Login.php">
 
             <?php
             if (shouldProvideLoginFeedback()) { ?>
