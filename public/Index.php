@@ -25,18 +25,6 @@ require(ABSPATH . INC . "Theme.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager();
-
-$moduleCallbackFunction = function (string $callbackName) {
-    global $moduleManager;
-    $moduleManager->getAllByCallback($callbackName);
-};
-
-$moduleManager->processModules($moduleCallbackFunction);
-
-\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
-
-
 $url = $_SERVER["REQUEST_URI"];
 
 if (shouldRedirectToReal($url)) {
@@ -57,10 +45,23 @@ if (shouldProcessPermalink()) {
 
     $page = $info[0];
     $dir = $info[1];
+
+    $moduleManager = new ModuleManager(strtolower(pathinfo($info[0], PATHINFO_FILENAME)));
 } else {
     $dir = "/";
     $page = __FILE__;
+
+    $moduleManager = new ModuleManager();
 }
+
+$moduleCallbackFunction = function (string $callbackName) {
+    global $moduleManager;
+    $moduleManager->getAllByCallback($callbackName);
+};
+
+$moduleManager->processModules($moduleCallbackFunction);
+
+\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
 
 
 $config = new Configuration(true, true, false, false);
