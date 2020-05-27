@@ -1,0 +1,5 @@
+Some material in this module was taken or inspired by the following locations:
+
+    - https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations
+    - https://wikimedia.org/api/rest_v1/media/math/render/svg/e61ca3ba503b1cbee749633b181faeaba727b61c"
+    - https://www.mathsisfun.com/calculus/differential-equations.html

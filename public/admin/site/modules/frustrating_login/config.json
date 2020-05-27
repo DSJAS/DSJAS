@@ -1,0 +1,28 @@
+{
+    "name": "An Especially Frustrating Login Process",
+    "description": "The login process is nice and simple, isn't it? Well, not any longer! This module adds lots and lots of steps to the login process to make scammers' lives hell!",
+    "version": "1.0.0",
+    "hooks": {
+        "global": {
+            "triggerEvent": "all",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": false
+        },
+        "notice": {
+            "triggerEvent": "login_footer",
+            "loadCSS": false,
+            "loadJS": false,
+            "loadHTML": true
+        },
+        "protection": {
+            "triggerEvent": "all",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": true
+        }
+    },
+    "fileFilter": [
+        "login"
+    ]
+}
