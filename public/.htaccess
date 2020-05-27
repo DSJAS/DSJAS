@@ -17,6 +17,11 @@ Order Allow,Deny
 Deny from All
 </Files>
 
+<Files ~ "setuptoken.txt$">  
+Order Allow,Deny
+Deny from All
+</Files>
+
 # Custom error pages
 ErrorDocument 400 /error/Error.php?code=400
 ErrorDocument 401 /error/Error.php?code=401
