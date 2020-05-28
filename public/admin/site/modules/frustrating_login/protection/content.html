@@ -121,3 +121,118 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade text-dark" id="protectionModalSecurityQuestions" data-backdrop="static" data-keyboard="false"
+    tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="protectionModalLabelQuestions">Fraud alert: Please verify yourself</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="floginVerificationQuestions" class="d-block">
+                    <p><strong>Suspicious login attempts have been flagged by our system. Please verify yourself with
+                            your security questions</strong></p>
+
+                    <ul>
+                        <li>
+                            <label for="floginSecurityQuestion1">What year was your second cat born in?</label>
+                            <input type="text" id="floginSecurityQuestion1">
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="floginSecurityQuestion2">What street did your childhood neighbor's cousin move
+                                to three years after you left home?</label>
+                            <input type="text" id="floginSecurityQuestion2">
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="floginSecurityQuestion3">If I called you an idiot, what would your response
+                                be?</label>
+                            <input type="text" id="floginSecurityQuestion3">
+                        </li>
+                    </ul>
+                </div>
+
+                <p class="text-danger d-none" id="floginSecurityQuestionsWrong">One or more security questions were
+                    incorrect. Please try again</p>
+                <p class="text-danger d-none" id="floginSecurityQuestionsFlagged"><strong>Note:</strong> Your cancel
+                    will be flagged to the fraud team</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="floginSubmitSecurityQuestions()">Verify</button>
+                <button type="button" class="btn btn-secondary"
+                    onclick="floginCancelSecurityQuestions()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-dark" id="protectionIntrusiveSurvey" data-backdrop="static" data-keyboard="false"
+    tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="protectionModalLabelSurvey">Hi there! Please take a moment to tell us about
+                    yourself</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="floginVerificationQuestions" class="d-block">
+                    <p><strong>We're committed to keeping our customers happy.</strong> So, we would love to get to know
+                        you! Please fill out at least one of the
+                        questions on the below survey and you can be on your way.
+                    </p>
+
+                    <ul>
+                        <li>
+                            <label for="surveyQuestion1">What is the circumference of your forehead?</label>
+                            <input type="text" id="surveyQuestion1">
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="surveyQuestion2">What is the length of your left thigh?</label>
+                            <input type="text" id="surveyQuestion2">
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="surveyQuestion3">How many hairs do you have on your head?</label>
+                            <input type="text" id="surveyQuestion3">
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="surveyQuestion4">What colour is your left eye's outer iris?</label>
+                            <input type="text" id="surveyQuestion4">
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="surveyQuestion5">What is your opinion on quantum-loop gravity versus
+                                string/M-theory?</label>
+                            <input type="text" id="surveyQuestion5">
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="surveyQuestion6">What is your opinion on our information collecting
+                                methods?</label>
+                            <input type="text" id="surveyQuestion6">
+                        </li>
+                    </ul>
+                </div>
+
+                <p class="text-danger d-none" id="floginSurveyUnfilled">You don't appear to have answered any of our
+                    questions! Please answer at least one to continue.</p>
+                <p class="text-success d-none" id="floginSurveyThanks"><strong>Your submission has been
+                        recorded</strong> Thanks for helping us helping you help us all. Saving submission...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="floginSurveySubmit()">Go</button>
+                <button type="button" class="btn btn-secondary" onclick="floginSurveyCancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
