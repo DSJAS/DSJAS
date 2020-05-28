@@ -42,6 +42,7 @@ $moduleManager->processModules($moduleCallbackFunction);
 
 if (isLoggedIn()) {
     redirectToLoggedIn();
+    die();
 }
 
 if (shouldAttemptLogin()) {
