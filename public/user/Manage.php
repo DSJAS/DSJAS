@@ -26,6 +26,11 @@ require_once(ABSPATH . INC . "Util.php");
 require(ABSPATH . INC . "Module.php");
 
 
+if (!isLoggedIn()) {
+    redirect("/user/Login.php");
+    die();
+}
+
 $moduleManager = new ModuleManager("dashboard");
 
 $moduleCallbackFunction = function (string $callbackName) {
@@ -37,12 +42,6 @@ $moduleManager->processModules($moduleCallbackFunction);
 
 \gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
 \gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
-
-
-if (!isLoggedIn()) {
-    redirect("/user/Login.php");
-    die();
-}
 
 $config = new Configuration(false, true, false, false);
 

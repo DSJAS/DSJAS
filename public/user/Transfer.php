@@ -31,19 +31,6 @@ require(ABSPATH . INC . "csrf.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager("transfer");
-
-$moduleCallbackFunction = function (string $callbackName) {
-    global $moduleManager;
-    $moduleManager->getAllByCallback($callbackName);
-};
-
-$moduleManager->processModules($moduleCallbackFunction);
-
-\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
-\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
-
-
 if (isset($_GET["performTransfer"])) {
     $csrf = verifyCSRFToken(getCSRFSubmission($method = "get"));
     if (!$csrf) {
@@ -88,6 +75,18 @@ if (!isLoggedIn()) {
     redirect("/user/Login.php");
     die();
 }
+
+$moduleManager = new ModuleManager("transfer");
+
+$moduleCallbackFunction = function (string $callbackName) {
+    global $moduleManager;
+    $moduleManager->getAllByCallback($callbackName);
+};
+
+$moduleManager->processModules($moduleCallbackFunction);
+
+\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
+\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
 
 $config = new Configuration(false, true, false, false);
 

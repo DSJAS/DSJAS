@@ -27,19 +27,6 @@ require_once(ABSPATH . INC . "Util.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager("apply");
-
-$moduleCallbackFunction = function (string $callbackName) {
-    global $moduleManager;
-    $moduleManager->getAllByCallback($callbackName);
-};
-
-$moduleManager->processModules($moduleCallbackFunction);
-
-\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
-\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
-
-
 if (isLoggedIn()) {
     redirectToLoggedIn();
     die();
@@ -54,6 +41,18 @@ if (shouldAttemptLogin()) {
     }
     die();
 }
+
+$moduleManager = new ModuleManager("apply");
+
+$moduleCallbackFunction = function (string $callbackName) {
+    global $moduleManager;
+    $moduleManager->getAllByCallback($callbackName);
+};
+
+$moduleManager->processModules($moduleCallbackFunction);
+
+\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
+\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
 
 $config = new Configuration(false, true, false, false);
 

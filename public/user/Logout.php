@@ -27,19 +27,6 @@ require(ABSPATH . INC . "Theme.php");
 require(ABSPATH . INC . "Module.php");
 
 
-$moduleManager = new ModuleManager("logout");
-
-$moduleCallbackFunction = function (string $callbackName) {
-    global $moduleManager;
-    $moduleManager->getAllByCallback($callbackName);
-};
-
-$moduleManager->processModules($moduleCallbackFunction);
-
-\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
-\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
-
-
 if (!shouldAttemptLogout()) {
     if (!isset($_GET["success"])) {
         redirect("/user/Login.php?signout_fail=1");
@@ -53,6 +40,18 @@ if (isset($_GET["logout"]) && $_GET["logout"] == true) {
     redirect("/user/Logout.php?success=true");
     die();
 }
+
+$moduleManager = new ModuleManager("logout");
+
+$moduleCallbackFunction = function (string $callbackName) {
+    global $moduleManager;
+    $moduleManager->getAllByCallback($callbackName);
+};
+
+$moduleManager->processModules($moduleCallbackFunction);
+
+\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
+\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
 
 $config = new Configuration(false, true, false, false);
 
