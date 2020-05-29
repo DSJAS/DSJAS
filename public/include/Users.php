@@ -482,6 +482,29 @@ function getNumberOfUsers($siteuser = false)
     return $query->affectedRows;
 }
 
+function getAllUsers($siteuser = false)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($siteuser) {
+        $tableName = "`siteusers`";
+    } else {
+        $tableName = "`users`";
+    }
+
+    $query = new SimpleStatement("SELECT * FROM $tableName");
+
+    $database->unsafeQuery($query);
+
+    return $query->result;
+}
 
 function loadDatabaseInformation()
 {

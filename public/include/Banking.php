@@ -88,3 +88,39 @@ function userOwnsAccount($accountID, $userID)
 
     return ($query->result[0]["associated_online_account_id"] == $userID);
 }
+
+function getNumberOfAccounts()
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new SimpleStatement("SELECT * FROM `accounts`");
+
+    $database->unsafeQuery($query);
+
+    return $query->affectedRows;
+}
+
+function getAllAccounts()
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new SimpleStatement("SELECT * FROM `accounts`");
+
+    $database->unsafeQuery($query);
+
+    return $query->result;
+}
