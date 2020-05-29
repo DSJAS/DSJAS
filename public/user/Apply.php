@@ -26,22 +26,6 @@ require_once(ABSPATH . INC . "Util.php");
 
 require(ABSPATH . INC . "Module.php");
 
-
-if (isLoggedIn()) {
-    redirectToLoggedIn();
-    die();
-}
-
-if (shouldAttemptLogin()) {
-    $success = handleLogin($_POST["email"], $_POST["password"]);
-    if ($success) {
-        redirect("/user/dashboard");
-    } else {
-        redirect("/user/Login?error");
-    }
-    die();
-}
-
 $moduleManager = new ModuleManager("apply");
 
 $moduleCallbackFunction = function (string $callbackName) {
