@@ -38,4 +38,24 @@ Please, waste these people's time as much as possible. It's fun and it does good
 function getTheme()
 { ?>
 
+    <body>
+        <?php require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php"); ?>
+
+        <div class="container">
+            <h1>Technical fault: Online applications unavailable</h1>
+
+            <div class="alert alert-danger">
+                <p><strong>Due to an ongoing issue, online applications have been disabled</strong>
+                    We're sorry, but due to a technical fault, online applications have been temporarily disabled.
+                    If you really need to apply, please contact us on our helpline or support.
+
+                    You can still apply in a branch! Please do that if you need an account.
+
+                    <i>Service should be restored within two business days</i>
+                </p>
+            </div>
+
+            <a href="/">Return home</a>
+        </div>
+    </body>
 <?php }
