@@ -160,9 +160,9 @@ if ($newAccount) {
             </div>
 
             <div class="btn-group" role="group">
-                <a class="btn btn-primary admin-quick-action-btn" href="/admin/settings/ext.php">Install a theme</a>
+                <a class="btn btn-primary admin-quick-action-btn" href="/admin/settings/mod.php">Install a theme</a>
                 <a class="btn btn-secondary admin-quick-action-btn" href="/admin/settings/ext.php">Install a plugin</a>
-                <a class="btn btn-secondary admin-quick-action-btn" href="">Configure modules</a>
+                <a class="btn btn-secondary admin-quick-action-btn" href="/admin/settings/mod.php">Configure modules</a>
             </div>
 
             <a href="/admin/settings/ext.php?validate_theme" class="btn btn-success admin-quick-action-btn">Validate theme</a>
