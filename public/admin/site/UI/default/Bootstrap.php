@@ -37,8 +37,11 @@ Please, waste these people's time as much as possible. It's fun and it does good
 // BOOTSTRAPPING FILE: Used to load custom CSS, among other things
 
 require_once(ABSPATH . INC . "api/theme/Appearance.php");
+require_once(ABSPATH . INC . "api/theme/General.php");
 
 function getBootstrap()
-{ ?>
+{
+    setTitle(getBankName());
+?>
     <link rel="stylesheet" href=<?php echo (getThemeContent("Styles.css", "styles/")) ?>>
 <?php }

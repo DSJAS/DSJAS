@@ -34,7 +34,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require(ABSPATH . INC . "api/theme/General.php");
+require_once(ABSPATH . INC . "api/theme/General.php");
 
 // Theme entry point
 function getTheme()
