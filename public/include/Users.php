@@ -361,7 +361,7 @@ function changeUserPassword($userID, $newPassword, $siteuser = false)
     $database->query();
 }
 
-function createUser($username, $email, $password, $passwordHint, $enabled, $siteuser = false)
+function createUser($username, $email, $password, $passwordHint, $enabled = true, $siteuser = false)
 {
     $configuration = loadDatabaseInformation();
 
@@ -380,16 +380,24 @@ function createUser($username, $email, $password, $passwordHint, $enabled, $site
 
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    $query = new PreparedStatement(
-        "INSERT INTO " . $tableName . " (`username`, `email`, `password_hash`, `password_hint`, `account_enabled`, `new_account`) VALUES (?, ?, ?, ?, ?, 1)",
-        [$username, $email, $passwordHash, $passwordHint, $enabled],
-        "ssssi"
-    );
+    if ($siteuser) {
+        $query = new PreparedStatement(
+            "INSERT INTO " . $tableName . " (`username`, `email`, `password_hash`, `password_hint`, `account_enabled`, `new_account`) VALUES (?, ?, ?, ?, ?, 1)",
+            [$username, $email, $passwordHash, $passwordHint, $enabled],
+            "ssssii"
+        );
+    } else {
+        $query = new PreparedStatement(
+            "INSERT INTO " . $tableName . " (`username`, `email`, `password_hash`, `password_hint`) VALUES (?, ?, ?, ?)",
+            [$username, $email, $passwordHash, $passwordHint],
+            "ssss"
+        );
+    }
+
+
 
     $database->prepareQuery($query);
     $database->query();
-
-    var_dump($query->result);
 }
 
 function eraseUser($userID, $siteuser = false, $closeBanks = true)
