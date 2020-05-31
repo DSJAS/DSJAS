@@ -34,12 +34,20 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
+require(ABSPATH . INC . "/api/theme/Accounts.php");
+
 // Theme entry point
 function getTheme()
 { ?>
 
     <body>
-        <?php require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php"); ?>
+        <?php
+        if (shouldAppearLoggedIn()) {
+            require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php");
+        } else {
+            require(ABSPATH . "/admin/site/UI/default/components/Nav.php"); ?> </nav>
+        <?php } ?>
+
 
         <div class="container">
             <h1>Technical fault: Online applications unavailable</h1>
