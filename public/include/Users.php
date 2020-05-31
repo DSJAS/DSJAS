@@ -392,7 +392,7 @@ function createUser($username, $email, $password, $passwordHint, $enabled, $site
     var_dump($query->result);
 }
 
-function eraseUser($userID, $siteuser = false)
+function eraseUser($userID, $siteuser = false, $closeBanks = true)
 {
     $configuration = loadDatabaseInformation();
 
@@ -403,6 +403,14 @@ function eraseUser($userID, $siteuser = false)
         $configuration["password"]
     );
 
+    // Delete associated bank accounts (bank users only)
+    if (!$siteuser && $closeBanks) {
+        $query = new SimpleStatement("DELETE FROM `accounts` WHERE `associated_online_account_id` = $userID");
+
+        $database->unsafeQuery($query);
+    }
+
+    // Delete actual user account
     if ($siteuser) {
         $tableName = "`siteusers`";
     } else {
