@@ -19,6 +19,9 @@ Please, waste these people's time as much as possible. It's fun and it does good
 require_once(ABSPATH . INC . "Users.php");
 require_once(ABSPATH . INC . "DB.php");
 
+define("RANDOM_ACCOUNT_NAMES", ["Checking account", "Savings account", "Free basic account", "War bond", "Credit plus"]);
+define("ACCOUNT_TYPES", ["current", "savings", "shared", "misc"]);
+
 
 function performTransaction($sourceAccount, $destAccount, $amount, $description = "Account transfer")
 {
@@ -121,6 +124,76 @@ function getAllAccounts()
     $query = new SimpleStatement("SELECT * FROM `accounts`");
 
     $database->unsafeQuery($query);
+
+    return $query->result;
+}
+
+function createAccount($accountName, $associatedID, $type, $holderName = "John Doe", $disabled = false, $initialBalance = 125.50)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "INSERT INTO `accounts` (`account_name`, `account_type`, `account_balance`, `holder_name`, `associated_online_account_id`, `account_disabled`) VALUES (?, ?, ?, ?, ?, ?)",
+        [$accountName, $type, $initialBalance, $holderName, $associatedID, $disabled],
+        "ssdsii"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    return $query->result;
+}
+
+function genRandomBankAccounts($userID, $amount = 3)
+{
+    for ($i = 0; $i < $amount; $i++) {
+        $randomAccountName = RANDOM_ACCOUNT_NAMES[array_rand(RANDOM_ACCOUNT_NAMES)];
+
+        $randomBalanceWhole = rand(-50, 2000);
+        $randomBalanceDec = rand(0, 99);
+        $randomBalance = $randomBalanceWhole + ($randomBalanceDec / 100);
+
+        $randomType = ACCOUNT_TYPES[array_rand(ACCOUNT_TYPES)];
+
+        createAccount($randomAccountName, $userID, $randomType, getInfoFromUserID($userID, "username"), true, $randomBalance);
+    }
+}
+
+function associateAccountWithUser($userID, $accountID)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "UPDATE `accounts` SET `associated_online_account_id` = ? WHERE `accounts`.`account_identifier` = ?",
+        [$userID, $accountID],
+        "ii"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    $query = new PreparedStatement(
+        "UPDATE `users` SET `associated_accounts` = ISNULL(field1, '') + ',' + ? WHERE `` = ?",
+        [$accountID, $userID],
+        "ii"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
 
     return $query->result;
 }
