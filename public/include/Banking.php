@@ -151,16 +151,30 @@ function createAccount($accountName, $associatedID, $type, $holderName = "John D
     return $query->result;
 }
 
+function getRandomAccountName()
+{
+    return RANDOM_ACCOUNT_NAMES[array_rand(RANDOM_ACCOUNT_NAMES)];
+}
+
+function getRandomBalance()
+{
+    $randomBalanceWhole = rand(-50, 2000);
+    $randomBalanceDec = rand(0, 99);
+
+    return $randomBalanceWhole + ($randomBalanceDec / 100);
+}
+
+function getRandomAccountType()
+{
+    return ACCOUNT_TYPES[array_rand(ACCOUNT_TYPES)];
+}
+
 function genRandomBankAccounts($userID, $amount = 3)
 {
     for ($i = 0; $i < $amount; $i++) {
-        $randomAccountName = RANDOM_ACCOUNT_NAMES[array_rand(RANDOM_ACCOUNT_NAMES)];
-
-        $randomBalanceWhole = rand(-50, 2000);
-        $randomBalanceDec = rand(0, 99);
-        $randomBalance = $randomBalanceWhole + ($randomBalanceDec / 100);
-
-        $randomType = ACCOUNT_TYPES[array_rand(ACCOUNT_TYPES)];
+        $randomAccountName = getRandomAccountName();
+        $randomBalance = getRandomBalance();
+        $randomType = getRandomAccountType();
 
         createAccount($randomAccountName, $userID, $randomType, getInfoFromUserID($userID, "username"), true, $randomBalance);
     }
