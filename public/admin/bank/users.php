@@ -33,7 +33,7 @@ regenerateCSRF();
 <html>
 <?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
 
-<div class="content container-fluid" id="content">
+<div class="container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">
         <p><strong>Warning:</strong> The admin dashboard is not designed for smaller screens, and some functionality may be missing or limited.</p>
     </div>
