@@ -424,7 +424,9 @@ regenerateCSRF();
                                                                                                                                                 } ?>>
                                             <label class="custom-control-label" for="moduleEnableSwitch<?php echo ($count); ?>"></label>
                                         </div>
-                                        <a href="#" class="card-link">More details</a>
+                                        <?php if (isset($config["information-link"]) && $config["information-link"] != "") { ?>
+                                            <a href="<?php echo ($config["information-link"]); ?>" class="card-link">More details</a>
+                                        <?php } ?>
                                         <a class="text-danger ml-1" href="/admin/settings/installModule.php?uninstallModule=<?php echo ($module) ?>&csrf=<?php echo (getCSRFToken()); ?>">Uninstall</a>
                                     </div>
                                 </div>
