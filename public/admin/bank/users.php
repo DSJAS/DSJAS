@@ -94,7 +94,7 @@ regenerateCSRF();
                             <td><?php echo ($account["associated_accounts"]); ?></td>
                             <td class="btn-group">
                                 <a href="/admin/bank/editUser.php?editUser=<?php echo ($account["user_id"]); ?>&csrf=<?php echo (getCSRFToken()); ?>" class="btn btn-primary">Edit user</a>
-                                <a href="/admin/bank/createAccount.php?user=<?php echo ($account["user_id"]); ?>&csrf=<?php echo (getCSRFToken()); ?>" class="btn btn-success">Create bank account</a>
+                                <a href="/admin/bank/createAccount.php?user=<?php echo ($account["user_id"]); ?>" class="btn btn-success">Create bank account</a>
                                 <a href="/admin/bank/editUser.php?deleteUser=<?php echo ($account["user_id"]); ?>&csrf=<?php echo (getCSRFToken()); ?>" class="btn btn-danger">Delete user</a>
                             </td>
                         </tr>
