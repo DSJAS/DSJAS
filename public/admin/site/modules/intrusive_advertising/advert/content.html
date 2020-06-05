@@ -1,0 +1,53 @@
+<div class="modal fade" id="advertModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="advertModalLabel">And now for a word from our sponsors...</h5>
+                <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ads">
+                <p id="loadingAdvert">Please wait, loading you ad...</p>
+                <div id="raidShadowLegends" class="d-none">
+                    <p>We thank Raid Shadow Legends for sponsoring this site. Please check them out
+                        by <a href="https://raidshadowlegends.com/">clicking here</a></p>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" id="yt-embed-raid" width="560" height="315"
+                            src="https://www.youtube-nocookie.com/embed/9pcW8nesY-o?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                    </div>
+                </div>
+
+                <div id="mafiaCity" class="d-none">
+                    <p>Massive thanks to Mafia City for sponsoring this site. Please check them out
+                        by <a href="https://mafiah5.yottagames.com/">clicking here</a></p>
+                    <div class="embed-responsive embed-responsive-16by9" id="yt-embed-mafia" width="560" height="315">
+                        <iframe width="560" height="315" class="embed-responsive-item"
+                            src="https://www.youtube-nocookie.com/embed/Yke9BhP1uks?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div id="squareSpace" class="d-none">
+                    <p>We thank SquareSpace for sponsoring this site. Please check them out
+                        by <a href="https://www.squarespace.com/">clicking here</a></p>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" id="yt-embed-square" width="560" height="315"
+                            src="https://www.youtube-nocookie.com/embed/XG3fb8rVjpk?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-left" id="skipCountdown">You can skip this ad in <span
+                        id="advertisementCountdownValue">30</span> seconds
+                </p>
+
+                <button type="button" id="skipAd" class="btn btn-secondary d-none" onclick="closeAdvert()">Skip
+                    ad</button>
+            </div>
+        </div>
+    </div>
+</div>
