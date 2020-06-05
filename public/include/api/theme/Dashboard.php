@@ -66,9 +66,6 @@ function getRecentTransactionsArray($loadAmount)
     $config = dashboardLoadDatabaseInformation();
     $userId = getCurrentUserId();
 
-    $accounts = getInfoFromUserID($userId, "associated_accounts");
-    $accountsArray = explode(",", $accounts);
-
     $database = new DB(
         $config["server_hostname"],
         $config["database_name"],
@@ -76,14 +73,17 @@ function getRecentTransactionsArray($loadAmount)
         $config["password"]
     );
 
+    $accountsQuery = new SimpleStatement("SELECT * FROM `accounts` WHERE `associated_online_account_id` = " . getCurrentUserId());
+    $database->unsafeQuery($accountsQuery);
+
     $whereText = "";
 
     $iteration = 0;
-    foreach ($accountsArray as $account) {
-        $whereText .= $account;
+    foreach ($accountsQuery->result as $account) {
+        $whereText .= $account["account_identifier"];
 
         $iteration++;
-        if ($iteration < count($accountsArray)) {
+        if ($iteration < count($accountsQuery->result)) {
             $whereText .= " OR ";
         };
     }
