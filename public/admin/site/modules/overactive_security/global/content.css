@@ -1,0 +1,38 @@
+.inactivity-timeout-initial {
+    margin: 0;
+
+    color: white;
+    background-color: hsla(0, 0%, 0%, 0.75);
+    backdrop-filter: blur(5px);
+
+    position: fixed;
+    height: 100%;
+    width: 100%;
+
+    display: none;
+
+    z-index: 2;
+}   
+
+.inactivity-timeout {
+    margin: 0;
+
+    color: white;
+    background-color: hsla(0, 0%, 0%, 0.75);
+    backdrop-filter: blur(5px);
+
+    text-align: center;
+    line-height: 100%;
+
+    position: fixed;
+    height: 100%;
+    width: 100%;
+
+    display: block;
+
+    z-index: 2;
+}
+
+.inactivity-content {
+    padding: 10%
+}

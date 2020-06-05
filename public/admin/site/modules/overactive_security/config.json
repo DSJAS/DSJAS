@@ -1,0 +1,19 @@
+{
+    "name": "A rather overactive security mechanism",
+    "description": "In order to protect your security and privacy (and to make it annoying for fraudsters to get into your account), DSJAS may end your session every 2-5 minutes if you are inactive.",
+    "version": "1.0.0",
+    "hooks": {
+        "global": {
+            "triggerEvent": "user",
+            "loadCSS": true,
+            "loadJS": true,
+            "loadHTML": true
+        },
+        "mainloop": {
+            "triggerEvent": "user",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": false
+        }
+    }
+}
