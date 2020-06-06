@@ -1,0 +1,199 @@
+html,
+body {
+  height: 100%;
+}
+
+body.body-signin {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+body.bg-img-login {
+  background-image: url("/assets/building.jpg");
+  background-color: #ffffff;
+  color: #ffffff
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  text-align: center;
+  background-color: #2f2f2f;
+  fill-opacity: 50%;
+  transform-style: linear;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+nav.main-navbar{
+  display: block;
+  width: 100%;
+}
+
+.clip-to-bounds{
+  overflow: hidden;
+}
+
+div.main-page-teaser{
+  background-image: url("/assets/happy-family.jpg");
+  background-size: cover;
+
+  padding: 50;
+
+  color: white;
+}
+
+div.main-page-teaser-overlay{
+  background-color: #2f2f2f70;
+  padding: 5;
+}
+
+div.support-page-teaser{
+  max-width:100%;
+  min-height:75vh;
+
+  background-image: url("/assets/elderly-support.jpg");
+
+  display: inline-block;
+
+  padding: 50;
+
+  color: white;
+}
+
+div.support-page-teaser-overlay{
+  background-color: #2f2f2f70;
+  padding: 5;
+}
+
+div.about-page-teaser{
+  max-width:100%;
+  min-height:25vh;
+
+  background-image: url("/assets/loan-icon.jpg");
+
+  display: inline-block;
+
+  padding: 50;
+
+  color: white;
+}
+
+div.about-page-teaser-overlay{
+  background-color: #2f2f2fbb;
+  padding: 5;
+}
+
+div.mission-page-teaser{
+  max-width:100%;
+  min-height:25vh;
+
+  background-image: url("/assets/togetherness.jpg");
+  background-position: center;
+
+  display: inline-block;
+
+  padding: 50;
+
+  color: white;
+}
+
+div.mission-page-teaser-overlay{
+  background-color: #2f2f2f70;
+  padding: 5;
+}
+
+div.footer{
+  color: white;
+  width: 100%;
+  height: 64;
+}
+
+div.footer-text{
+  padding-top: 20;
+}
+
+div.footer-links{
+  text-align: right;
+  padding-top: 10;
+}
+
+div.int-investment
+{
+  background-image: url("/assets/singapore.jpg");
+  background-size: cover;
+
+  padding: 30px;
+}
+
+div.online-banking
+{
+  background-image: url("/assets/online-banking.jpg");
+  background-size: cover;
+
+  padding: 30px;
+}
+
+div.corporation
+{
+  background-image: url("/assets/skyscraper.jpg");
+  background-size: cover;
+
+  padding: 30px;
+}
+
+div.dashboard-adverts {
+  margin-top: 30px;
+}
+
+div.dashboard-footer {
+  margin-top: 100px;
+  width: 100%;
+  height: 60px;
+
+  min-height: 50px;
+
+  padding: 20px;
+}
+
+.dashboard-footer-buttons {
+  margin-top: 40px
+}
+
+.action-buttons {
+  width: 100%;
+
+  margin-top: 5px;
+}
