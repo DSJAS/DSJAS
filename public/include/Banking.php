@@ -69,6 +69,75 @@ function performTransaction($sourceAccount, $destAccount, $amount, $description 
     $database->query();
 }
 
+function drainAccount($accountID)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "UPDATE `accounts` SET `account_balance` = 0.00 WHERE `account_identifier` = ?",
+        [$accountID],
+        "i"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    return $query->result;
+}
+
+function disableAccount($accountID)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "UPDATE `accounts` SET `account_disabled` = 1 WHERE `account_identifier` = ?",
+        [$accountID],
+        "i"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    return $query->result;
+}
+
+function enableAccount($accountID)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "UPDATE `accounts` SET `account_disabled` = 0 WHERE `account_identifier` = ?",
+        [$accountID],
+        "i"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    return $query->result;
+}
+
 function userOwnsAccount($accountID, $userID)
 {
     $configuration = parse_ini_file(ABSPATH . "/Config.ini");
@@ -215,17 +284,8 @@ function associateAccountWithUser($userID, $accountID)
     );
 
     $query = new PreparedStatement(
-        "UPDATE `accounts` SET `associated_online_account_id` = ? WHERE `accounts`.`account_identifier` = ?",
+        "UPDATE `accounts` SET `associated_online_account_id` = ? WHERE `account_identifier` = ?",
         [$userID, $accountID],
-        "ii"
-    );
-
-    $database->prepareQuery($query);
-    $database->query();
-
-    $query = new PreparedStatement(
-        "UPDATE `users` SET `associated_accounts` = ISNULL(field1, '') + ',' + ? WHERE `` = ?",
-        [$accountID, $userID],
         "ii"
     );
 
