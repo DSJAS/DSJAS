@@ -63,3 +63,23 @@ function getThemeContent($scriptName, $themeRelativeLocation = "/")
 
     return $path;
 }
+
+function getRawThemeContent($scriptName, $themeRelativeLocation = "/")
+{
+    $config = new Configuration(false, true, false, false);
+    $useDefault = $config->getKey(ID_THEME_CONFIG, "config", "use_default");
+
+    if ($useDefault) {
+        $themeName = "default";
+    } else {
+        $themeName = $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
+    }
+
+    $path = "/admin/site/UI/";
+    $path .= $themeName;
+    $path .= "/";
+    $path .= $themeRelativeLocation;
+    $path .= $scriptName;
+
+    return $path;
+}
