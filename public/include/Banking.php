@@ -128,6 +128,29 @@ function getAllAccounts()
     return $query->result;
 }
 
+function getAllAccountsForUser($userID)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "SELECT * FROM `accounts` WHERE `associated_online_account_id` = ?",
+        [$userID],
+        "i"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    return $query->result;
+}
+
 function createAccount($accountName, $associatedID, $type, $holderName = "John Doe", $disabled = false, $initialBalance = 125.50)
 {
     $configuration = parse_ini_file(ABSPATH . "/Config.ini");
