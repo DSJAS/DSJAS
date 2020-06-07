@@ -73,13 +73,14 @@ function getRecentTransactionsArray($loadAmount)
         $config["password"]
     );
 
-    $accountsQuery = new SimpleStatement("SELECT * FROM `accounts` WHERE `associated_online_account_id` = " . getCurrentUserId());
+    $accountsQuery = new SimpleStatement("SELECT * FROM `accounts` WHERE `associated_online_account_id` = $userId");
     $database->unsafeQuery($accountsQuery);
 
     $whereText = "";
 
     $iteration = 0;
     foreach ($accountsQuery->result as $account) {
+        $whereText .= "`origin_account_id` = ";
         $whereText .= $account["account_identifier"];
 
         $iteration++;
@@ -88,7 +89,7 @@ function getRecentTransactionsArray($loadAmount)
         };
     }
 
-    $query = new SimpleStatement("SELECT * FROM `transactions` WHERE `origin_account_id` = " . $whereText . " ORDER BY `transaction_id` DESC LIMIT $loadAmount");
+    $query = new SimpleStatement("SELECT * FROM `transactions` WHERE $whereText ORDER BY `transaction_id` DESC LIMIT $loadAmount");
     $database->unsafeQuery($query);
 
     if ($query->result === false) {

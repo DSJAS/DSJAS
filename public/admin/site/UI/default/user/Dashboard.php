@@ -103,11 +103,10 @@ function getTheme()
                 </thead>
                 <tbody>
                     <?php
-                    $iteration = 0;
                     foreach (getRecentTransactionsArray(5) as $info) { ?>
                         <tr>
                             <td><?php echo ($info["transaction_date"]); ?></td>
-                            <td><?php echo (censorAccountNumber(censorAccountNumber($info["origin_account_id"]))); ?></td>
+                            <td><?php echo (censorAccountNumber($info["origin_account_id"])); ?></td>
                             <td><?php echo ($info["transaction_description"]); ?></th>
                             <td><?php echo ($info["transaction_type"]); ?></th>
                                 <?php if (isPricePositive($info["transaction_amount"])) { ?>
