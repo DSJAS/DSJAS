@@ -27,7 +27,7 @@ require(ABSPATH . INC . "csrf.php");
 <html>
 <?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
 
-<div class="container" id="content">
+<div id="content">
 
     <?php
 
