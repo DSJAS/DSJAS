@@ -101,9 +101,6 @@ Please, waste these people's time as much as possible. It's fun and it does good
                     <li>
                         <a href="/admin/bank/transactions.php">Transactions</a>
                     </li>
-                    <li>
-                        <a href="/admin/bank/support.php">Support requests</a>
-                    </li>
                 </ul>
             </li>
             <li>
