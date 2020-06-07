@@ -22,8 +22,10 @@ require_once(ABSPATH . INC . "DB.php");
 define("RANDOM_ACCOUNT_NAMES", ["Checking account", "Savings account", "Free basic account", "War bond", "Credit plus"]);
 define("ACCOUNT_TYPES", ["current", "savings", "shared", "misc"]);
 
+define("TRANSACTION_TYPES", ["transfer", "withdrawal", "purchase", "misc"]);
 
-function performTransaction($sourceAccount, $destAccount, $amount, $description = "Account transfer")
+
+function performTransaction($sourceAccount, $destAccount, $amount, $description = "Account transfer", $type = "transfer")
 {
     // Insert transaction into the transactions table
     $configuration = parse_ini_file(ABSPATH . "/Config.ini");
@@ -36,9 +38,9 @@ function performTransaction($sourceAccount, $destAccount, $amount, $description 
     $database = new DB($db_hostname, $db_dbname, $db_username, $db_password);
 
     $query = new PreparedStatement(
-        "INSERT INTO `transactions` (`origin_account_id`, `dest_account_id`, `transaction_amount`, `transaction_description`, `transaction_type`) VALUES (?, ?, ?, ?, 'transfer')",
-        [$sourceAccount, $destAccount, $amount, $description],
-        "iids"
+        "INSERT INTO `transactions` (`origin_account_id`, `dest_account_id`, `transaction_amount`, `transaction_description`, `transaction_type`) VALUES (?, ?, ?, ?, ?)",
+        [$sourceAccount, $destAccount, $amount, $description, $type],
+        "iidss"
     );
 
     $database->prepareQuery($query);
@@ -293,4 +295,25 @@ function associateAccountWithUser($userID, $accountID)
     $database->query();
 
     return $query->result;
+}
+
+function closeAccount($accountID)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "DELETE FROM `accounts` WHERE `account_identifier` = $accountID",
+        [$accountID],
+        "i"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
 }
