@@ -1,0 +1,14 @@
+{
+    "name": "Inspect element prevention",
+    "description": "Many scammers will attempt to use the inspect element tool in your browser to edit information and trick you. This module intercepts the mouse click event, making this very difficult to do.",
+    "information-link": "https://github.com/OverEngineeredCode/DSJAS/blob/master/docs/builtins/modules/Inspect%20element%20prevention.md",
+    "version": "1.0.0",
+    "hooks": {
+        "global": {
+            "triggerEvent": "all",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": false
+        }
+    }
+}
