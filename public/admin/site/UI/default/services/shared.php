@@ -34,8 +34,55 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
+require_once(ABSPATH . INC . "api/theme/General.php");
+require_once(ABSPATH . INC . "api/theme/Accounts.php");
+require_once(ABSPATH . INC . "api/theme/Appearance.php");
+
 // Theme entry point
 function getTheme()
-{
-    return "<h1>Coming soon</h1>";
-}
+{ ?>
+    <?php require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+
+    <?php require(ABSPATH . getRawThemeContent("ServicesHeader.html", "components/")); ?>
+
+    <div class="container">
+        <h2>The award winning shared account</h2>
+
+        <p>
+            Do you have a partner, spouse or other person you share money with? Yeah, me neither - wait what; you do?!?!?! Well, I guess you'll be
+            interested in sharing an account between the two of you.
+
+            Or wait, are there more than two. Hmmm, this is getting complicated.
+
+            Well, luckily, our accounts support up to five people in a shared account.
+        </p>
+
+        <h3>Why us?</h3>
+
+        <p>
+            In this day and age, standard services are what you should expect. So we have delivered the most bog-standard service you could ever expect.
+            Bog standard sharing, online banking and money collaboration.
+
+            Our service is the most standard one you can find, you'll love it.
+        </p>
+
+        <h3>Financial protection</h3>
+
+        <p>
+            Our multi-award-winning security systems (award pending) are using industry grade PHP default encryption. You can be assured that your data
+            is safe with a basic SSL certificate on our site and our security by obscurity being very well used.
+
+            You can rest assured that your data is protected by our perfectly secure basic encryption technology.
+        </p>
+
+        <h3>Over the top support</h3>
+
+        <p>
+            Not to blow our own trumpet, but we have professional, legally outsourced support representatives working around the clock (for two hours a day)
+            to help you out with whatever problems you come up with. You don't need help from anybody else or any other location and you cannot get help
+            from anybody except us there is no help for you. Nobody can help you (apart from us).
+        </p>
+
+        <a href="/user/Apply.php" class="btn btn-primary mb-2">Apply today</a>
+    </div>
+<?php }

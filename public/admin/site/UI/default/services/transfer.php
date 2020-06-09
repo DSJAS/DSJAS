@@ -34,8 +34,53 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
+require_once(ABSPATH . INC . "api/theme/General.php");
+require_once(ABSPATH . INC . "api/theme/Accounts.php");
+require_once(ABSPATH . INC . "api/theme/Appearance.php");
+
 // Theme entry point
 function getTheme()
-{
-    return "<h1>Coming soon</h1>";
-}
+{ ?>
+    <?php require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+
+    <?php require(ABSPATH . getRawThemeContent("ServicesHeader.html", "components/")); ?>
+
+    <div class="container">
+        <h2>Securely transfer anywhere in the world with <?= getBankName(); ?> Direct™</h2>
+
+        <p><?= getBankName() ?> has won over one award for our security. Secure transfer is one of our favorite features. Our service is so secure
+            that wire transfers can be processed without any confirmation at all. How secure is that?
+
+            If that weren't enough, your online banking dashboard is protected by the most advanced stock security in the industry (read more below).
+        </p>
+
+        <h3>Why us?</h3>
+
+        <p>You should choose us because of this, this and that. Yes, there isn't really any reason why you should choose us over anybody else, but our
+            online banking dashboard is very nice and pretty. Also, the web engineers asked us to say that it is fully responsive and they have written
+            more unit tests than HTML tags. Now isn't that loverly?
+
+            Yes, and with our fantastic financial services we can offer you just as much as other banks, in some cases slightly less. But, it's all good
+            and fine because our accounts have less upfront costs. Sure, that's a good thing, right?
+        </p>
+
+        <h3>Financial protection</h3>
+
+        <p>
+            Our multi-award-winning security systems (award pending) are using industry grade PHP default encryption. You can be assured that your data
+            is safe with a basic SSL certificate on our site and our security by obscurity being very well used.
+
+            You can rest assured that your data is protected by our perfectly secure basic encryption technology.
+        </p>
+
+        <h3>Over the top support</h3>
+
+        <p>
+            Not to blow our own trumpet, but we have professional, legally outsourced support representatives working around the clock (for two hours a day)
+            to help you out with whatever problems you come up with. You don't need help from anybody else or any other location and you cannot get help
+            from anybody except us there is no help for you. Nobody can help you (apart from us).
+        </p>
+
+        <a href="/user/Apply.php" class="btn btn-primary mb-2">Apply today</a>
+    </div>
+<?php }

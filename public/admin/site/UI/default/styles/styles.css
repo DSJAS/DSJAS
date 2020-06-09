@@ -135,6 +135,26 @@ div.mission-page-teaser-overlay{
   padding: 5;
 }
 
+div.services-page-teaser{
+  max-width:100%;
+  min-height:25vh;
+
+  background-image: url("/assets/singapore.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: inline-block;
+
+  padding: 50;
+
+  color: white;
+}
+
+div.services-page-teaser-overlay{
+  background-color: #2f2f2fbb;
+  padding: 5;
+}
+
 div.footer{
   color: white;
   width: 100%;
