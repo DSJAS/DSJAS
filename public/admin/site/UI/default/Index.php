@@ -149,13 +149,13 @@ function getTheme()
                 <div class="col text-light int-investment">
                     <h3>International investment opportunities <span class="badge badge-primary">New</span></h3>
                     <p class="lead">Invest now and get in on markets never seen before to the regular investor with our new international investment plan</p>
-                    <a class="btn btn-primary" href="/services/international">Get started</a>
+                    <a class="btn btn-primary" href="/services/transfer">Get started</a>
                     <pre class="lead small" style="margin-top: 20px; color: white">Terms and conditions apply. External markets not guaranteed to be profitable</pre>
                 </div>
                 <div class="col text-light online-banking">
                     <h3>Industry leading online banking services <span class="badge badge-primary">New</span></h3>
                     <p class="lead">Productivity at its max with industry leading online banking services. Try them out and see why other banks are getting left behind</p>
-                    <a class="btn btn-primary" href="/services/online">Get started</a>
+                    <a class="btn btn-primary" href="/services/current">Get started</a>
                     <pre class="lead small" style="margin-top: 20px; color: white">Terms and conditions apply. Selected accounts only</pre>
                 </div>
             </div>
@@ -166,7 +166,7 @@ function getTheme()
                 <div class="col text-light">
                     <h3>Banking for corporations <span class="badge badge-success">Exclusive</span></h3>
                     <p class="lead">Special perks, such as dedicated account managers and special offers on products, can be obtained with our exclusive business account for corporations. Switch to us today for a free stock-market trading advisory</p>
-                    <a class="btn btn-success" href="/services/other">Tell me more</a>
+                    <a class="btn btn-success" href="/services/shared">Tell me more</a>
                 </div>
             </div>
             <hr class="bg-dark">
@@ -174,7 +174,7 @@ function getTheme()
                 <div class="col text-light">
                     <h3>Banking for small businesses</h3>
                     <p class="lead">It's a hard world for small businesses: getting picked on by the big guy, getting ripped off by big banks. No more, join us and get 50% off most financial products and a dedicated account manager</p>
-                    <a class="btn btn-success" href="/services/other">Tell me more</a>
+                    <a class="btn btn-success" href="/services/shared">Tell me more</a>
                 </div>
             </div>
             <hr class="bg-dark">
@@ -182,7 +182,7 @@ function getTheme()
                 <div class="col text-light">
                     <h3>Banking for start-ups</h3>
                     <p class="lead">When we work together, everyone succeeds. Get exclusive benefits for start-ups and self-employed businesses. We're helping the next generation of businesses one step at a time.</p>
-                    <a class="btn btn-success" href="/services/other">Tell me more</a>
+                    <a class="btn btn-success" href="/CPRewards">Tell me more</a>
                 </div>
             </div>
 
