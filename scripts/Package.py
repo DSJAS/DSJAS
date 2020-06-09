@@ -79,6 +79,10 @@ def cleanSourceTree(distName):
     removeIfExists("admin/data/AdminNotices.json")
 
     removeIfDirExists("uploads")
+    # The example modules should not be shipped with a release
+    removeIfDirExists("admin/site/modules/example")
+    # The test theme should not be snipped with a release
+    removeIfDirExists("admin/site/UI/test_theme")
 
     os.chdir("../../..")
     if not isInRoot():

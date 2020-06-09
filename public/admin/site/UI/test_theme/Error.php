@@ -37,6 +37,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
 // Theme entry point
 function getTheme()
 { ?>
+    <div class="alert alert-danger">
+        <strong>An error occurred, apparently</strong> An error has ocurred, either because you went to a page that doesn't exist or this theme just doesn't implement it. As I said, this theme is less than functional.
+    </div>
+
     <div class="jumbotron">
         <h1 class="display-4">Welcome to the development version of DSJAS!</h1>
         <p class="lead">This theme is only shipped with the development version of DSJAS. So, because you have it, you must have a development version!</p>
