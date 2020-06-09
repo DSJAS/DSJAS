@@ -222,6 +222,62 @@ function getAllAccountsForUser($userID)
     return $query->result;
 }
 
+function getAllTransactions()
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new SimpleStatement("SELECT * FROM `transactions`");
+
+    $database->unsafeQuery($query);
+
+    return $query->result;
+}
+
+function getAllTransactionsForUser($userID)
+{
+    $config = dashboardLoadDatabaseInformation();
+    $userId = getCurrentUserId();
+
+    $database = new DB(
+        $config["server_hostname"],
+        $config["database_name"],
+        $config["username"],
+        $config["password"]
+    );
+
+    $accountsQuery = new SimpleStatement("SELECT * FROM `accounts` WHERE `associated_online_account_id` = $userID");
+    $database->unsafeQuery($accountsQuery);
+
+    $whereText = "";
+
+    $iteration = 0;
+    foreach ($accountsQuery->result as $account) {
+        $whereText .= "`origin_account_id` = ";
+        $whereText .= $account["account_identifier"];
+
+        $iteration++;
+        if ($iteration < count($accountsQuery->result)) {
+            $whereText .= " OR ";
+        };
+    }
+
+    $query = new SimpleStatement("SELECT * FROM `transactions` WHERE $whereText ORDER BY `transaction_id`");
+    $database->unsafeQuery($query);
+
+    if ($query->result === false) {
+        return [];
+    }
+
+    return $query->result;
+}
+
 function createAccount($accountName, $associatedID, $type, $holderName = "John Doe", $disabled = false, $initialBalance = 125.50)
 {
     $configuration = parse_ini_file(ABSPATH . "/Config.ini");
@@ -311,6 +367,48 @@ function closeAccount($accountID)
     $query = new PreparedStatement(
         "DELETE FROM `accounts` WHERE `account_identifier` = $accountID",
         [$accountID],
+        "i"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+}
+
+function reverseTransaction($id, $refund = true)
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    if ($refund) {
+        $query = new PreparedStatement(
+            "SELECT * FROM `transactions` WHERE `transaction_id` = ?",
+            [$id],
+            "i"
+        );
+
+        $database->prepareQuery($query);
+        $database->query();
+
+        $refunded = $query->result[0]["origin_account_id"];
+        $deducted = $query->result[0]["dest_account_id"];
+        $amount = $query->result[0]["transaction_amount"];
+
+        $refund = new SimpleStatement("UPDATE `accounts` SET `account_balance` = (`account_balance` + $amount) WHERE `account_identifier` = $refunded");
+        $database->query($refund);
+
+        $deduction = new SimpleStatement("UPDATE `accounts` SET `account_balance` = (`account_balance` - $amount) WHERE `account_identifier` = $deducted");
+        $database->query($deduction);
+    }
+
+    $query = new PreparedStatement(
+        "DELETE FROM `transactions` WHERE `transaction_id` = ?",
+        [$id],
         "i"
     );
 
