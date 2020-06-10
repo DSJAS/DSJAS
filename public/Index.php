@@ -18,11 +18,13 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 require("include/Bootstrap.php");
 
-require(ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php");
+require(ABSPATH . INC . "DSJAS.php");
 
-require(ABSPATH . INC . "Customization.php");
-require(ABSPATH . INC . "Theme.php");
-require(ABSPATH . INC . "Module.php");
+require_once(ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php");
+
+require_once(ABSPATH . INC . "Customization.php");
+require_once(ABSPATH . INC . "Theme.php");
+require_once(ABSPATH . INC . "Module.php");
 
 
 $url = $_SERVER["REQUEST_URI"];
@@ -45,33 +47,12 @@ if (shouldProcessPermalink()) {
 
     $page = $info[0];
     $dir = $info[1];
-
-    $moduleManager = new ModuleManager(strtolower(pathinfo($info[0], PATHINFO_FILENAME)));
 } else {
     $dir = "/";
     $page = __FILE__;
-
-    $moduleManager = new ModuleManager();
 }
 
-$moduleCallbackFunction = function (string $callbackName) {
-    global $moduleManager;
+// Jump to main DSJAS load code
+dsjas($page, $dir, function (string $callbackName, ModuleManager $moduleManager) {
     $moduleManager->getAllByCallback($callbackName);
-};
-
-$moduleManager->processModules($moduleCallbackFunction);
-
-\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
-
-
-$config = new Configuration(true, true, false, false);
-if ($config->getKey(ID_THEME_CONFIG, "config", "use_default")) {
-    $useTheme = DEFAULT_THEME;
-} else {
-    $useTheme = $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
-}
-
-
-$theme = new Theme($page, $dir, $useTheme);
-$theme->loadTheme();
-$theme->displayTheme();
+});
