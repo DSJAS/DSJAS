@@ -70,49 +70,18 @@ function getTheme()
 
             </div>
 
-            <div class="header mb-4">
+            <div class="header mb-4 text-center">
+                <svg class="bi bi-check-circle-fill" width="10em" height="10em" viewBox="0 0 16 16" fill="green" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+
                 <h1 class="display-4">
-                    Contact <?= getBankName() ?>
+                    Message submitted
                 </h1>
 
-                <p class="lead">We're always standing by for communications. Please fill in the details below, along with your message, and we'll get back to you as soon as possible</p>
-            </div>
+                <h3 class="text-success">Thanks for contacting us!</h3>
 
-            <div class="row">
-                <div class="col-md-18">
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Full Name:</label>
-                                <input type="text" class="form-control" id="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Phone Number:</label>
-                                <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
-                            </div>
-                        </div>
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Email Address:</label>
-                                <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email address.">
-                            </div>
-                        </div>
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Message:</label>
-                                <textarea rows="10" cols="100" class="form-control" id="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
-                            </div>
-                        </div>
-                        <div id="success"></div>
-                        <a href="/support/ContactReceived" type="button" class="btn btn-success">Submit message</a>
-
-                        <br>
-                        <small class="text-muted">Your data is completely safe and secure. We will only share limited data with Facebook, Google, Amazon, Western Union and Twitter as outlined in <a href="/Mission">our policies</a></small>
-                    </form>
-                </div>
+                <p class="lead">Our support representatives will be with you shortly. We'll send an email to the provided email with a ticket number. We can then call you or email you again for further messages</p>
             </div>
         </div>
     </body>

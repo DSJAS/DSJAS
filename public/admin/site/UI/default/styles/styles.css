@@ -211,3 +211,7 @@ div.dashboard-footer {
 .dashboard-footer-buttons {
   margin-top: 40px
 }
+
+.support-side {
+  min-width: 100px;
+}
