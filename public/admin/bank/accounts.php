@@ -23,7 +23,7 @@ require(ABSPATH . INC . "Administration.php");
 require(ABSPATH . INC . "Banking.php");
 require(ABSPATH . INC . "csrf.php");
 
-require(ABSPATH . INC . "/api/theme/General.php");
+require_once(ABSPATH . INC . "Customization.php");
 
 if (isset($_GET["doCloseAccount"])) {
     $csrf = getCSRFSubmission("GET");
