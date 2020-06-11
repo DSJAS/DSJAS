@@ -1,0 +1,110 @@
+.darker {
+  background-color: #eee;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: rgb(173, 146, 252);
+  background: linear-gradient(
+      51deg,
+      rgba(173, 146, 252, 1) 0%,
+      rgba(75, 101, 230, 1) 44%,
+      rgba(86, 46, 180, 1) 85%
+    )
+    fixed;
+}
+
+footer {
+  position: bottom;
+  color: white;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.index {
+  position: fixed;
+}
+
+.app {
+  position: fixed;
+  width: 500px;
+  height: 300px;
+  margin: 50px;
+}
+
+.boxcol {
+  background-color: white;
+  opacity: 0.9;
+}
+
+.navbar-nav > li {
+  padding-left: 100px;
+  padding-right: 100px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#new-problem,
+#loading {
+  display: none;
+}
+
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+@keyframes blink {
+  50% {
+    color: transparent;
+  }
+}
+.loader__dot {
+  animation: 1s blink infinite;
+}
+.loader__dot:nth-child(2) {
+  animation-delay: 250ms;
+}
+.loader__dot:nth-child(3) {
+  animation-delay: 500ms;
+}
+
+.slide-up {
+  bottom: 0px !important;
+}
+
+.slide-down {
+  bottom: -475px !important;
+}
+
+#generate-problem {
+  display: block;
+  font-size: 10px;
+  text-align: right;
+}
+
+#new-problem {
+  position: relative;
+  color: rgb(0, 0, 0);
+  animation-name: fadeprob;
+  animation-duration: 700ms;
+}
+
+@keyframes fadeprob {
+  from {
+    color: rgba(0, 0, 0, 0);
+    top: 100px;
+  }
+  to {
+    color: rgb(0, 0, 0);
+    top: 0px;
+  }
+}
