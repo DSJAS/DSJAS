@@ -74,8 +74,8 @@ if ($information->affectedRows < 1) { ?>
         <h3>Basic information</h3>
 
         <div class="form-group">
-            <label for="desc">Transaction ID:</label>
-            <input class="form-control" type="text" value="<?= $info["transaction_id"] ?>" id="desc" readonly>
+            <label for="id">Transaction ID:</label>
+            <input class="form-control" type="text" value="<?= $info["transaction_id"] ?>" id="id" readonly>
             <small class="form-text text-muted">This is used internally by DSJAS and is never displayed to the user</small>
         </div>
 
@@ -130,8 +130,8 @@ if ($information->affectedRows < 1) { ?>
         </div>
 
         <div class="form-group">
-            <label for="amount">Transaction type:</label>
-            <input class="form-control" type="text" value="<?= $info["transaction_type"] ?>" id="amount" readonly>
+            <label for="type">Transaction type:</label>
+            <input class="form-control" type="text" value="<?= $info["transaction_type"] ?>" id="type" readonly>
             <small class="form-text text-muted">The transaction type has no impact on financial workings and is purely visual. Some themes may use this for extra information to be displayed</small>
         </div>
     </form>
