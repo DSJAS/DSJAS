@@ -20,7 +20,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
     DEFAULT THEME - DSJAS
     =====================
 
-    This is the themeing files included in the default installation of DSJAS.
+    This is the theming files included in the default installation of DSJAS.
     It contains HTML and PHP files required to load and display the default theme.
 
     This file should never be accessed directly, and instead should only be
