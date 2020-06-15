@@ -154,9 +154,9 @@ if ($newAccount) {
 
         <div class="card-body">
             <div class="btn-group" role="group">
-                <a class="btn btn-primary admin-quick-action-btn" href="/admin/settings/accounts.php?new_account">New site user</a>
-                <a class="btn btn-secondary admin-quick-action-btn" href="/user/Apply.php">New user</a>
-                <a class="btn btn-secondary admin-quick-action-btn" href="/admin/settings/accounts.php?new_bank_account">New bank account</a>
+                <a class="btn btn-primary admin-quick-action-btn" href="/admin/settings/accounts.php">New site user</a>
+                <a class="btn btn-secondary admin-quick-action-btn" href="/admin/bank/users.php">New user</a>
+                <a class="btn btn-secondary admin-quick-action-btn" href="/admin/bank/accounts.php">New bank account</a>
             </div>
 
             <div class="btn-group" role="group">
@@ -165,11 +165,11 @@ if ($newAccount) {
                 <a class="btn btn-secondary admin-quick-action-btn" href="/admin/settings/mod.php">Configure modules</a>
             </div>
 
-            <a href="/admin/settings/ext.php?validate_theme" class="btn btn-success admin-quick-action-btn">Validate theme</a>
+            <a href="/admin/settings/mod.php#validatorResults" class="btn btn-success admin-quick-action-btn">Validate theme</a>
 
             <div class="btn-group" role="group">
                 <a href="/admin/user/Logout" class="btn btn-danger admin-quick-action-btn">Logout</a>
-                <a href="/admin/user/Logout" class="btn btn-secondary admin-quick-action-btn">Logout from bank</a>
+                <a href="/user/Logout" class="btn btn-secondary admin-quick-action-btn">Logout from bank</a>
             </div>
 
         </div>
