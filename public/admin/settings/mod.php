@@ -340,7 +340,7 @@ regenerateCSRF();
                 <?php if ($lastValidation == "never_run") { ?>
                     <small class="text-small text-secondary">Last validation ran: <strong class="text-danger">You have never ran the validator for this theme</strong></small>
                 <?php } else { ?>
-                    <small class="text-small text-secondary">Last validation ran: <?php echo ($lastValidationTimestamp); ?></small>
+                    <small class="text-small text-secondary">Last validation ran: <?= date("jS F Y [h:i A]", $lastValidationTimestamp) ?></small>
                 <?php } ?>
             </div>
         </div>
