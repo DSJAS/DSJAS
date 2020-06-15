@@ -92,9 +92,11 @@ function handleAdminNotices($notices)
 
             case 5:
                 $style = "alert alert-success";
+                break;
 
             default:
                 $style = "alert alert-info";
+                break;
         }
 
         echo ("<div class=\"$style\" role=\"alert\">");
