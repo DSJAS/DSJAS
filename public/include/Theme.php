@@ -162,13 +162,19 @@ class Theme
     {
         if ($this->providesBootstrapFile()) {
             require($this->bootstrapPath);
-            $this->bootstrapText = getBootstrap();
+
+            if (function_exists("getBootstrap")) {
+                $this->bootstrapText = getBootstrap();
+            }
         }
 
         if (!$this->themeLoaded) {
             require($this->themePath);
-            $this->themeText = getTheme();
-            $this->themeLoaded = true;
+
+            if (function_exists("getTheme")) {
+                $this->themeText = getTheme();
+                $this->themeLoaded = true;
+            }
         }
     }
 
@@ -185,9 +191,14 @@ class Theme
         if ($this->themeLoaded) {
             echo ($this->bootstrapText);
             echo ($this->themeText);
-        } else {
-            echo ("<strong>Error: </strong> Theme not loaded");
-        }
+        } else { ?>
+            <div class="alert alert-danger">
+                <strong>Error while loading theme</strong> The currently enabled theme is invalid and the site could not be loaded.
+                To recover from this error, disable/uninstall this theme. The admin dashboard is still functional.
+
+                Please report this error to the theme developer as their theme is broken.
+            </div>
+<?php }
     }
 
 
