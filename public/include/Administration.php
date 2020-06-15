@@ -438,6 +438,20 @@ function unpackAndInstallModule($themeFile, $uploadedFile = true)
     return [true, $requestedName];
 }
 
+function updateValidatorTimestamp($timeStamp = 0)
+{
+    $useTimestamp = ($timeStamp === 0) ? time() : $timeStamp;
+
+    $configuration = new Configuration(false, true, false, false);
+    $configuration->setKey(ID_THEME_CONFIG, "validation", "last_validation_timestamp", $useTimestamp);
+}
+
+function updateValidatorState($result)
+{
+    $configuration = new Configuration(false, true, false, false);
+    $configuration->setKey(ID_THEME_CONFIG, "validation", "last_validation", $result);
+}
+
 function resetValidatorState()
 {
     $configuration = new Configuration(false, true, false, false);
