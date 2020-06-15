@@ -30,6 +30,27 @@ function getAdministrationNotices()
     return $json;
 }
 
+function addAdministrationNotice($noticeName, $noticeTitle, $noticeBody, $actionLink = "", $actionLinkLabel = "More info", $style = 0)
+{
+    $existingNotices = json_decode(file_get_contents(ABSPATH . "/admin/data/AdminNotices.json"), true);
+
+    $existingNotices[$noticeName]["title"] = $noticeTitle;
+    $existingNotices[$noticeName]["body"] = $noticeBody;
+    $existingNotices[$noticeName]["action-link"] = $actionLink;
+    $existingNotices[$noticeName]["action-link-text"] = $actionLinkLabel;
+    $existingNotices[$noticeName]["style"] = $style;
+
+    $finalJson = json_encode($existingNotices);
+
+    $file = fopen(ABSPATH . "/admin/data/AdminNotices.json", "w+");
+
+    if ($file !== false) {
+        ftruncate($file, 0);
+        fwrite($file, $finalJson);
+        fclose($file);
+    }
+}
+
 function purgeAdministrationNotices()
 {
     $file = fopen(ABSPATH . "/admin/data/AdminNotices.json", "w+");
