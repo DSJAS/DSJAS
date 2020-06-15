@@ -318,7 +318,7 @@ regenerateCSRF();
             </div>
         </div>
 
-        <div class="card bg-light admin-panel">
+        <div class="card bg-light admin-panel" id="validatorResults">
             <div class="card-header d-flex justify-content-between">
                 <h3>Theme validation</h3>
             </div>
@@ -334,7 +334,7 @@ regenerateCSRF();
 
                 <div class="d-flex justify-content-between">
                     <p>Run the validator now:</p>
-                    <a class="btn btn-success" href="/admin/settings/mod.php?validateTheme&csrf=<?php echo (getCSRFToken()); ?>">Run</a>
+                    <a class="btn btn-success" href="/admin/settings/validateTheme.php?validateTheme&csrf=<?php echo (getCSRFToken()); ?>">Run</a>
                 </div>
 
                 <?php if ($lastValidation == "never_run") { ?>
