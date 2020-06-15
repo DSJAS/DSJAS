@@ -23,7 +23,7 @@ require(ABSPATH . INC . "Update.php");
 require(ABSPATH . INC . "Administration.php");
 require(ABSPATH . INC . "Banking.php");
 
-require(ABSPATH . INC . "/api/theme/General.php");
+require_once(ABSPATH . INC . "Customization.php");
 
 ?>
 
@@ -53,11 +53,11 @@ require(ABSPATH . INC . "/api/theme/General.php");
                 <tbody>
                     <tr>
                         <td>Your bank is currently functioning as</td>
-                        <td><?php echo (getBankName()); ?></td>
+                        <td><?php echo (getCurrentBankName()); ?></td>
                     </tr>
                     <tr>
                         <td>On the URL</td>
-                        <td><?php echo (getBankURL()); ?></td>
+                        <td><?php echo (getCurrentBankURL()); ?></td>
                     </tr>
                 </tbody>
 

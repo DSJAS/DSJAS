@@ -24,8 +24,6 @@ require(ABSPATH . INC . "Administration.php");
 
 require_once(ABSPATH . INC . "Customization.php");
 
-require(ABSPATH . INC . "api/theme/General.php");
-
 
 $config = new Configuration(true, false, false, false);
 
@@ -159,13 +157,13 @@ $noDatabase = $config->getKey(ID_GLOBAL_CONFIG, "database", "running_without_dat
             <form>
                 <div class="form-group">
                     <label for="bankName"><strong>Bank name:</strong></label>
-                    <input class="form-control" type="text" id="bankName" value="<?php echo (getBankName()); ?>">
+                    <input class="form-control" type="text" id="bankName" value="<?php echo (getCurrentBankName()); ?>">
                     <small class="form-text text-muted">This is the name which will be visible as the name of the bank</small>
                 </div>
 
                 <div class="form-group">
                     <label for="bankURL"><strong>Bank URL:</strong></label>
-                    <input class="form-control" type="text" id="bankURL" value="<?php echo (getBankURL()); ?>">
+                    <input class="form-control" type="text" id="bankURL" value="<?php echo (getCurrentBankURL()); ?>">
                     <small class="form-text text-muted">This is the URL that you will access the bank through in your web browser</small>
                 </div>
             </form>

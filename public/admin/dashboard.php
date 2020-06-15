@@ -22,7 +22,7 @@ require(ABSPATH . INC . "Users.php");
 require(ABSPATH . INC . "Update.php");
 require(ABSPATH . INC . "Administration.php");
 
-require(ABSPATH . INC . "api/theme/General.php");
+require_once(ABSPATH . INC . "Customization.php");
 
 
 if (isset($_GET["purgeNotifications"])) {
@@ -111,12 +111,12 @@ if ($newAccount) {
 
                 <tr>
                     <td class="admin-info-key">Site name</td>
-                    <td class="admin-info-value"><?php echo (getBankName()); ?></td>
+                    <td class="admin-info-value"><?php echo (getCurrentBankName()); ?></td>
                 </tr>
 
                 <tr>
                     <td class="admin-info-key">Site URL</td>
-                    <td class="admin-info-value"><?php echo (getBankURL()); ?></td>
+                    <td class="admin-info-value"><?php echo (getCurrentBankURL()); ?></td>
                 </tr>
 
                 <tr>
@@ -126,7 +126,7 @@ if ($newAccount) {
 
                 <tr>
                     <td class="admin-info-key">Current theme</td>
-                    <td class="admin-info-value"><?php echo (getCurrentThemeName()); ?></td>
+                    <td class="admin-info-value"><?php echo (getActiveTheme()); ?></td>
                 </tr>
 
                 <thead class="thead-dark">

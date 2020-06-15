@@ -62,5 +62,5 @@ function getBankURL()
 
 function addModuleDescriptor($descriptorName)
 {
-    \gburtini\Hooks\Hooks::run("module_hook_event", [$descriptorName]);
+    \gburtini\Hooks\Hooks::run("module_hook_event", [$descriptorName, $GLOBALS["THEME_GLOBALS"]["module_manager"]]);
 }

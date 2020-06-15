@@ -110,3 +110,30 @@ class Configuration
         return $this->parsedIniData[$file];
     }
 }
+
+function getActiveTheme()
+{
+    $conf = new Configuration(false, true, false, false);
+
+    $default = $conf->getKey(ID_THEME_CONFIG, "config", "use_default");
+
+    if (!$default) {
+        $currentTheme = $conf->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
+    } else {
+        $currentTheme = "default";
+    }
+
+    return $currentTheme;
+}
+
+function getCurrentBankName()
+{
+    $conf = new Configuration(true, false, false, false);
+    return $conf->getKey(ID_GLOBAL_CONFIG, "customization", "bank_name");
+}
+
+function getCurrentBankURL()
+{
+    $conf = new Configuration(true, false, false, false);
+    return $conf->getKey(ID_GLOBAL_CONFIG, "customization", "bank_domain");
+}

@@ -18,12 +18,15 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 require("../include/Bootstrap.php");
 
-require(ABSPATH . INC . "Theme.php");
+require(ABSPATH . INC . "DSJAS.php");
+
 require_once(ABSPATH . INC . "Customization.php");
 
 require(ABSPATH . INC . "Users.php");
 require_once(ABSPATH . INC . "Util.php");
-require(ABSPATH . INC . "Module.php");
+
+require_once(ABSPATH . INC . "Theme.php");
+require_once(ABSPATH . INC . "Module.php");
 
 
 if (!isLoggedIn()) {
@@ -31,26 +34,8 @@ if (!isLoggedIn()) {
     die();
 }
 
-$moduleManager = new ModuleManager("dashboard");
 
-$moduleCallbackFunction = function (string $callbackName) {
-    global $moduleManager;
+// Jump to main DSJAS load code
+dsjas(__FILE__, "user/", function (string $callbackName, ModuleManager $moduleManager) {
     $moduleManager->getAllByCallback($callbackName);
-};
-
-$moduleManager->processModules($moduleCallbackFunction);
-
-\gburtini\Hooks\Hooks::run("module_hook_event", ["all"]);
-\gburtini\Hooks\Hooks::run("module_hook_event", ["user"]);
-
-$config = new Configuration(false, true, false, false);
-
-if (!$config->getKey(ID_THEME_CONFIG, "config", "use_default")) {
-    $currentTheme = $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
-} else {
-    $currentTheme = "default";
-}
-
-$theme = new Theme(__FILE__, "user/", $currentTheme);
-$theme->loadTheme();
-$theme->displayTheme();
+}, "all", ["user"]);
