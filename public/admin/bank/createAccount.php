@@ -127,7 +127,7 @@ regenerateCSRF();
         <div class="card-body">
             <div class="form-group">
                 <label for="initBalance">Initial balance</label>
-                <input type="text" id="initBalance" name="initialBalance" class="form-control" placeholder="$50.00">
+                <input type="number" id="initBalance" name="initialBalance" class="form-control" placeholder="$50.00" step="0.01">
                 <small id="mutedHelpText" class="form-text text-muted">This can be changed at any time, and can be from any negative or positive decimal. If not set, a random value from -200 to 2,000 will be generated</small>
             </div>
 
