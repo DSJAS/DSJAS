@@ -43,7 +43,7 @@ function getTheme()
                 <div class="collapse navbar-collapse" id="navbarMenu">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-link">
-                            <a href="index">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li class="nav-link">
                             <a href="about">About <?= getBankName(); ?></a>
