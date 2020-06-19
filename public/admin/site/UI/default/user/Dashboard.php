@@ -43,7 +43,7 @@ function getTheme()
 { ?>
 
     <body>
-        <?php require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php");
+        <?php require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/"));
 
         addModuleDescriptor("alert_area");  ?>
 

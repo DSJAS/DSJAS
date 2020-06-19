@@ -42,7 +42,7 @@ function getTheme()
 { ?>
 
     <body>
-        <?php require(ABSPATH . "/admin/site/UI/default/components/SupportNav.php"); ?>
+        <?php require(ABSPATH . getRawThemeContent("SupportNav.php", "components/")); ?>
 
         <div class="alert alert-warning">
             <strong>ATTENTION: Security alert</strong> The <?= getBankName() ?> Fraud Prevention Department has become winned of a large amount of technical support and refund scams circulating among customers.

@@ -49,7 +49,7 @@ function getTheme()
 { ?>
 
     <body>
-        <?php require(ABSPATH . "/admin/site/UI/default/components/Nav.php"); ?> </nav>
+        <?php require(ABSPATH . getRawThemeContent("Nav.php", "Components/")); ?> </nav>
 
         <div class="container">
             <h1>Oh dear!</h1>

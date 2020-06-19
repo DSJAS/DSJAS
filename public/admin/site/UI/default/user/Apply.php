@@ -43,9 +43,9 @@ function getTheme()
     <body>
         <?php
         if (shouldAppearLoggedIn()) {
-            require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php");
+            require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/"));
         } else {
-            require(ABSPATH . "/admin/site/UI/default/components/Nav.php"); ?> </nav>
+            require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
         <?php } ?>
 
 

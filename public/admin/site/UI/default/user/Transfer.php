@@ -44,7 +44,7 @@ function getTheme()
 { ?>
 
     <body>
-        <?php require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php"); ?>
+        <?php require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/")); ?>
 
         <?php if (isset($_GET["transferError"])) { ?>
             <div class="alert alert-danger">

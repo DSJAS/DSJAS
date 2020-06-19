@@ -42,7 +42,7 @@ function getTheme()
 { ?>
 
     <body class="bg-light">
-        <?php require(ABSPATH . "/admin/site/UI/default/components/SupportNav.php"); ?>
+        <?php require(ABSPATH . getRawThemeContent("SupportNav.php", "components/")); ?>
     </body>
 
     <div class="alert alert-warning">
