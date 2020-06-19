@@ -22,8 +22,8 @@ For more information of theming and creating your own themes, please refer to th
 API documentation for themes and plugins.
 */
 
-require_once(ABSPATH . INC . "api/theme/General.php");
-require_once(ABSPATH . INC . "api/theme/Appearance.php");
+require_once(THEME_API . "General.php");
+require_once(THEME_API . "Appearance.php");
 
 function getBootstrap()
 {

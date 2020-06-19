@@ -22,7 +22,7 @@ For more information of theming and creating your own themes, please refer to th
 API documentation for themes and plugins.
 */
 
-require(ABSPATH . INC . "api/theme/Dashboard.php");
+require(THEME_API . "Dashboard.php");
 
 function getTheme()
 { ?>
