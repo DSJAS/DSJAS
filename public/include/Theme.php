@@ -158,6 +158,11 @@ class Theme
         $this->property = $val;
     }
 
+    function isThemeLoaded()
+    {
+        return $this->themeLoaded;
+    }
+
     function loadTheme()
     {
         if ($this->providesBootstrapFile()) {
