@@ -79,7 +79,7 @@ regenerateCSRF();
                     <th>Real Name</th>
                     <th>Password hint</th>
                     <th>Email</th>
-                    <th>Associated bank accounts</th>
+                    <th>Owned bank accounts</th>
                     <th>Actions</th>
                 </thead>
 
@@ -91,7 +91,23 @@ regenerateCSRF();
                             <td><?php echo ($account["real_name"]); ?></td>
                             <td><?php echo ($account["password_hint"]); ?></td>
                             <td><?php echo ($account["email"]); ?></td>
-                            <td><?php echo ($account["associated_accounts"]); ?></td>
+                            <td>
+                                <a data-toggle="collapse" href="#accountsCollapse-<?= $account["user_id"] ?>">
+                                    Show
+                                </a>
+
+                                <div class="collapse" id="accountsCollapse-<?= $account["user_id"] ?>">
+
+                                    <?php
+                                    $accounts = getAllAccountsForUser($account["user_id"]);
+
+                                    foreach ($accounts as $bAccount) { ?>
+                                        <ul>
+                                            <li>[<?= $bAccount["account_identifier"] ?>] - <?= $bAccount["account_name"] ?></li>
+                                        </ul>
+                                    <?php } ?>
+                                </div>
+                            </td>
                             <td class="btn-group">
                                 <a href="/admin/bank/editUser.php?editUser=<?php echo ($account["user_id"]); ?>&csrf=<?php echo (getCSRFToken()); ?>" class="btn btn-primary">Edit user</a>
                                 <a href="/admin/bank/createAccount.php?user=<?php echo ($account["user_id"]); ?>" class="btn btn-success">Create bank account</a>
