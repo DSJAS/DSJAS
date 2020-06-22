@@ -34,7 +34,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require(ABSPATH . INC . "/api/theme/Accounts.php");
+require(THEME_API . "Accounts.php");
 
 // Theme entry point
 function getTheme()
@@ -43,9 +43,9 @@ function getTheme()
     <body>
         <?php
         if (shouldAppearLoggedIn()) {
-            require(ABSPATH . "/admin/site/UI/default/components/DashboardNav.php");
+            require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/"));
         } else {
-            require(ABSPATH . "/admin/site/UI/default/components/Nav.php"); ?> </nav>
+            require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
         <?php } ?>
 
 

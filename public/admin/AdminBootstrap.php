@@ -19,6 +19,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
 define("ABSPATH", $_SERVER["DOCUMENT_ROOT"]);
 define("INC", "/include/");
 
+define("API", ABSPATH . INC . "api/");
+define("EXTENSION_API", API . "plugin/");
+
+
 require(ABSPATH . INC . "install/Utils.php");
 require(ABSPATH . INC . "Util.php");
 

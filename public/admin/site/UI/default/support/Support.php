@@ -34,15 +34,15 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(ABSPATH . INC . "api/theme/General.php");
-require_once(ABSPATH . INC . "api/theme/Appearance.php");
+require_once(THEME_API . "General.php");
+require_once(THEME_API . "Appearance.php");
 
 // Theme entry point
 function getTheme()
 { ?>
 
     <body class="bg-light">
-        <?php require(ABSPATH . "/admin/site/UI/default/components/SupportNav.php"); ?>
+        <?php require(ABSPATH . getRawThemeContent("SupportNav.php", "components/")); ?>
     </body>
 
     <div class="alert alert-warning">

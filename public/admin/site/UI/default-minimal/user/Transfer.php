@@ -34,17 +34,17 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(ABSPATH . INC . "api/theme/General.php");
-require_once(ABSPATH . INC . "api/theme/Accounts.php");
-require_once(ABSPATH . INC . "api/theme/Dashboard.php");
-require_once(ABSPATH . INC . "api/theme/Security.php");
+require_once(THEME_API . "General.php");
+require_once(THEME_API . "Accounts.php");
+require_once(THEME_API . "Dashboard.php");
+require_once(THEME_API . "Security.php");
 
 // Theme entry point
 function getTheme()
 { ?>
 
     <body>
-        <?php require(ABSPATH . "/admin/site/UI/default-minimal/components/DashboardNav.php"); ?>
+        <?php require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/")); ?>
 
         <?php if (isset($_GET["transferError"])) { ?>
             <div class="alert alert-danger">
