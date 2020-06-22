@@ -16,6 +16,10 @@
     overflow-y: scroll;
 }
 
+#sidebar::-webkit-scrollbar {
+  display: none;
+}
+
 #sidebar.active {
     margin-left: -250px;
 }
