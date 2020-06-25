@@ -23,3 +23,10 @@ public/Debug.php
 
 # Ignore the dist directory
 dist/*
+
+# Composer
+composer.phar
+/vendor/
+
+# Just in case
+composer-setup.php
