@@ -1,20 +1,19 @@
 <?php
 
-/*
-Welcome to Dave-Smith Johnson & Son family bank!
-
-This is a tool to assist with scam baiting, especially with scammers attempting to
-obtain bank information or to attempt to scam you into giving money.
-
-This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
-is free to use and change for all users. Scam bait as much as you want!
-
-This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
-I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
-
-Please, waste these people's time as much as possible. It's fun and it does good for everyone.
-
-*/
+/**
+ * Welcome to Dave-Smith Johnson & Son family bank!
+ * 
+ * This is a tool to assist with scam baiting, especially with scammers attempting to
+ * obtain bank information or to attempt to scam you into giving money.
+ * 
+ * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
+ * is free to use and change for all users. Scam bait as much as you want!
+ * 
+ * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
+ * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
+ * 
+ * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ */
 
 require "install_bootstrap.php";
 
@@ -33,7 +32,7 @@ if (!verifySetupAuth()) { ?>
     <div class="alert alert-danger" role="alert">
         <p><strong>Security error</strong> You are not authorized to run the setup process. Your authentication token is not authorized to continue the process.</p>
     </div>
-    <?php
+<?php
     die();
 }
 
@@ -54,7 +53,7 @@ if (isset($_GET["error"]) && $_GET["error"] != "") {
         <div class="alert alert-danger" role="alert">
             <p><strong>Weak password</strong> The password entered was not strong enough and has been refused by the server. Please ensure it is at least 5 characters long and includes a number</p>
         </div>
-    <?php }
+<?php }
 }
 
 if (isset($_POST["submitFinal"])) {

@@ -1,20 +1,19 @@
 <?php
 
-/*
-Welcome to Dave-Smith Johnson & Son family bank!
-
-This is a tool to assist with scam baiting, especially with scammers attempting to
-obtain bank information or to attempt to scam you into giving money.
-
-This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
-is free to use and change for all users. Scam bait as much as you want!
-
-This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
-I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
-
-Please, waste these people's time as much as possible. It's fun and it does good for everyone.
-
-*/
+/**
+ * Welcome to Dave-Smith Johnson & Son family bank!
+ * 
+ * This is a tool to assist with scam baiting, especially with scammers attempting to
+ * obtain bank information or to attempt to scam you into giving money.
+ * 
+ * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
+ * is free to use and change for all users. Scam bait as much as you want!
+ * 
+ * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
+ * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
+ * 
+ * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ */
 
 require "../AdminBootstrap.php";
 
@@ -110,7 +109,7 @@ regenerateCSRF();
                     foreach (getAllUsers() as $user) { ?>
                         <option value="<?php echo ($user["user_id"]) ?>" <?php if (isset($_GET["user"]) && $user["user_id"] === $_GET["user"]) {
                                                                                 echo ("selected=\"selected\"");
-} ?>><?php echo ($user["username"]); ?></option>
+                                                                            } ?>><?php echo ($user["username"]); ?></option>
                     <?php }
                     ?>
                 </select>
@@ -135,7 +134,7 @@ regenerateCSRF();
                 <label for="accountName">Holder name</label>
                 <input type="text" id="accountName" name="holderName" class="form-control" placeholder="<?php if (isset($_GET["user"])) {
                                                                                                             echo (getInfoFromUserID($_GET["user"], "real_name"));
-} else { ?> Holder name <?php 
+                                                                                                        } else { ?> Holder name <?php
                                                                                                         } ?>">
                 <small id="mutedHelpText" class="form-text text-muted">If not set, the associated account's <strong>Real Name</strong> property will be used</small>
             </div>

@@ -1,20 +1,19 @@
 <?php
 
-/*
-Welcome to Dave-Smith Johnson & Son family bank!
-
-This is a tool to assist with scam baiting, especially with scammers attempting to
-obtain bank information or to attempt to scam you into giving money.
-
-This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
-is free to use and change for all users. Scam bait as much as you want!
-
-This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
-I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
-
-Please, waste these people's time as much as possible. It's fun and it does good for everyone.
-
-*/
+/**
+ * Welcome to Dave-Smith Johnson & Son family bank!
+ * 
+ * This is a tool to assist with scam baiting, especially with scammers attempting to
+ * obtain bank information or to attempt to scam you into giving money.
+ * 
+ * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
+ * is free to use and change for all users. Scam bait as much as you want!
+ * 
+ * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
+ * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
+ * 
+ * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ */
 
 require_once "Customization.php";
 require_once "Util.php";
@@ -70,33 +69,33 @@ function handleAdminNotices($notices)
 
     foreach ($notices as $notice) {
         switch ($notice["style"]) {
-        case 0:
-            $style = "alert alert-info";
-            break;
+            case 0:
+                $style = "alert alert-info";
+                break;
 
-        case 1:
-            $style = "alert alert-primary";
-            break;
+            case 1:
+                $style = "alert alert-primary";
+                break;
 
-        case 2:
-            $style = "alert alert-secondary";
-            break;
+            case 2:
+                $style = "alert alert-secondary";
+                break;
 
-        case 3:
-            $style = "alert alert-warning";
-            break;
+            case 3:
+                $style = "alert alert-warning";
+                break;
 
-        case 4:
-            $style = "alert alert-danger";
-            break;
+            case 4:
+                $style = "alert alert-danger";
+                break;
 
-        case 5:
-            $style = "alert alert-success";
-            break;
+            case 5:
+                $style = "alert alert-success";
+                break;
 
-        default:
-            $style = "alert alert-info";
-            break;
+            default:
+                $style = "alert alert-info";
+                break;
         }
 
         echo ("<div class=\"$style\" role=\"alert\">");
@@ -147,38 +146,38 @@ function validateThemeUpload()
 function getInstallErrorPage($error)
 {
     switch ($error) {
-    case -1:
-        return "/admin/settings/mod.php?notArchive";
+        case -1:
+            return "/admin/settings/mod.php?notArchive";
 
-    case -2:
-        return "/admin/settings/mod.php?unknownError";
+        case -2:
+            return "/admin/settings/mod.php?unknownError";
 
-    case 1:
-        return "/admin/settings/mod.php?malformedRequest";
+        case 1:
+            return "/admin/settings/mod.php?malformedRequest";
 
-    case 2:
-        return "/admin/settings/mod.php?noFile";
+        case 2:
+            return "/admin/settings/mod.php?noFile";
 
-    case 3:
-        return "/admin/settings/mod.php?unknownError";
+        case 3:
+            return "/admin/settings/mod.php?unknownError";
 
-    case 4:
-        return "/admin/settings/mod.php?sizeError";
+        case 4:
+            return "/admin/settings/mod.php?sizeError";
 
-    case 5:
-        return "/admin/settings/mod.php?missingManifest";
+        case 5:
+            return "/admin/settings/mod.php?missingManifest";
 
-    case 6:
-        return "/admin/settings/mod.php?malformedManifest";
+        case 6:
+            return "/admin/settings/mod.php?malformedManifest";
 
-    case 7:
-        return "/admin/settings/mod.php?alreadyExists";
+        case 7:
+            return "/admin/settings/mod.php?alreadyExists";
 
-    case 8:
-        return "/admin/settings/mod.php?wrongType";
+        case 8:
+            return "/admin/settings/mod.php?wrongType";
 
-    default:
-        return "/admin/settings/mod.php?unknownError";
+        default:
+            return "/admin/settings/mod.php?unknownError";
     }
 }
 
@@ -198,23 +197,24 @@ function validateModuleUpload()
 
 function doModuleUploadValidation()
 {
-    if (!isset($_FILES['moduleFile']['error']) 
+    if (
+        !isset($_FILES['moduleFile']['error'])
         || is_array($_FILES['moduleFile']['error'])
     ) {
         return [false, 1];
     }
 
     switch ($_FILES['moduleFile']['error']) {
-    case UPLOAD_ERR_OK:
-        break;
-    case UPLOAD_ERR_NO_FILE:
-        return [false, 2];
-    case UPLOAD_ERR_INI_SIZE:
-        return [false, 4];
-    case UPLOAD_ERR_FORM_SIZE:
-        return [false, 4];
-    default:
-        return [false, -2];
+        case UPLOAD_ERR_OK:
+            break;
+        case UPLOAD_ERR_NO_FILE:
+            return [false, 2];
+        case UPLOAD_ERR_INI_SIZE:
+            return [false, 4];
+        case UPLOAD_ERR_FORM_SIZE:
+            return [false, 4];
+        default:
+            return [false, -2];
     }
 
     if ($_FILES['moduleFile']['size'] > 50000000) {
@@ -226,23 +226,24 @@ function doModuleUploadValidation()
 
 function doThemeUploadValidation()
 {
-    if (!isset($_FILES['themeFile']['error']) 
+    if (
+        !isset($_FILES['themeFile']['error'])
         || is_array($_FILES['themeFile']['error'])
     ) {
         return [false, 1];
     }
 
     switch ($_FILES['themeFile']['error']) {
-    case UPLOAD_ERR_OK:
-        break;
-    case UPLOAD_ERR_NO_FILE:
-        return [false, 2];
-    case UPLOAD_ERR_INI_SIZE:
-        return [false, 4];
-    case UPLOAD_ERR_FORM_SIZE:
-        return [false, 4];
-    default:
-        return [false, -2];
+        case UPLOAD_ERR_OK:
+            break;
+        case UPLOAD_ERR_NO_FILE:
+            return [false, 2];
+        case UPLOAD_ERR_INI_SIZE:
+            return [false, 4];
+        case UPLOAD_ERR_FORM_SIZE:
+            return [false, 4];
+        default:
+            return [false, -2];
     }
 
     // You should also check filesize here.
@@ -328,8 +329,7 @@ function unpackAndInstallTheme($themeFile, $uploadedFile = true)
         if (!move_uploaded_file(
             $themeFile,
             $fileName
-        )
-        ) {
+        )) {
             return [false, -2];
         }
     } else {
@@ -391,8 +391,7 @@ function unpackAndInstallModule($themeFile, $uploadedFile = true)
         if (!move_uploaded_file(
             $themeFile,
             $fileName
-        )
-        ) {
+        )) {
             return [false, 1];
         }
     } else {
