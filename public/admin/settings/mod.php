@@ -224,7 +224,7 @@ regenerateCSRF();
                             if (is_file(ABSPATH . "/admin/site/UI/" . $theme) || $theme == $activeTheme || $theme == "." || $theme == "..") {
                                 continue;
                             }
-                        ?>
+                            ?>
                             <tr>
                                 <td><?php echo ($theme); ?></td>
                                 <td>
@@ -409,7 +409,7 @@ regenerateCSRF();
                             $config = json_decode($configText, true);
 
                             $enabled = $conf->getKey(ID_MODULE_CONFIG, "active_modules", $module)
-                        ?>
+                            ?>
                             <div class="col-auto mb-3">
                                 <input id="moduleName<?php echo ($count); ?>" type="text" style="visibility: hidden; position: absolute" name="moduleName" value="<?php echo ($module); ?>">
                                 <div class="card" style="width: 18rem;">
@@ -420,7 +420,7 @@ regenerateCSRF();
                                         <div class="custom-control custom-switch" data-toggle="tooltip" data-placement="top" title="Enable/disable module">
                                             <input type="checkbox" class="custom-control-input" id="moduleEnableSwitch<?php echo ($count); ?>" <?php if ($enabled) {
                                                                                                                                                     echo ("checked");
-                                                                                                                                                } ?>>
+} ?>>
                                             <label class="custom-control-label" for="moduleEnableSwitch<?php echo ($count); ?>"></label>
                                         </div>
                                         <?php if (isset($config["information-link"]) && $config["information-link"] != "") { ?>
@@ -430,7 +430,7 @@ regenerateCSRF();
                                     </div>
                                 </div>
                             </div>
-                        <?php
+                            <?php
                             $count++;
                         } ?>
                     </div>

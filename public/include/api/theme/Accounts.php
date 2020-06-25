@@ -43,12 +43,12 @@ function getLoginErrorTitle()
     $code = $_GET["error"];
 
     switch ($code) {
-        case -1:
-            return "Invalid username";
-        case -2:
-            return "Invalid password";
-        default:
-            return "Login failure";
+    case -1:
+        return "Invalid username";
+    case -2:
+        return "Invalid password";
+    default:
+        return "Login failure";
     }
 }
 
@@ -57,12 +57,12 @@ function getLoginErrorMsg()
     $code = $_GET["error"];
 
     switch ($code) {
-        case -1:
-            return "The entered username was not found";
-        case -2:
-            return "The password entered was not correct";
-        default:
-            return "There was an unknown error while attempting to sign you in. Error code: " . $code;
+    case -1:
+        return "The entered username was not found";
+    case -2:
+        return "The password entered was not correct";
+    default:
+        return "There was an unknown error while attempting to sign you in. Error code: " . $code;
     }
 }
 

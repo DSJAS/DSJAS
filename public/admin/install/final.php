@@ -32,7 +32,7 @@ if (!verifySetupAuth()) { ?>
     <div class="alert alert-danger" role="alert">
         <p><strong>Security error</strong> You are not authorized to run the setup process. Your authentication token is not authorized to continue the process.</p>
     </div>
-<?php
+    <?php
     die();
 }
 
@@ -53,7 +53,7 @@ if (isset($_GET["error"]) && $_GET["error"] != "") {
         <div class="alert alert-danger" role="alert">
             <p><strong>Weak password</strong> The password entered was not strong enough and has been refused by the server. Please ensure it is at least 5 characters long and includes a number</p>
         </div>
-<?php }
+    <?php }
 }
 
 if (isset($_POST["submitFinal"])) {

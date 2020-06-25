@@ -38,7 +38,7 @@ require THEME_API . "Accounts.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body class="body-signin bg-img-login">
 
@@ -49,7 +49,7 @@ function getTheme()
                 <div class="alert alert-danger" role="alert">
                     <p><strong><?php echo (getLoginErrorTitle()); ?></strong> <?php echo (getLoginErrorMsg()); ?></p>
                 </div>
-            <?php
+                <?php
             } elseif (isset($_GET["signout_fail"])) { ?>
                 <div class="alert alert-info" role="alert">
                     <p><strong>Failed to sign out</strong> Please sign in before you sign out</p>

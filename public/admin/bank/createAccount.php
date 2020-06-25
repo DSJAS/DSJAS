@@ -109,7 +109,7 @@ regenerateCSRF();
                     foreach (getAllUsers() as $user) { ?>
                         <option value="<?php echo ($user["user_id"]) ?>" <?php if (isset($_GET["user"]) && $user["user_id"] === $_GET["user"]) {
                                                                                 echo ("selected=\"selected\"");
-                                                                            } ?>><?php echo ($user["username"]); ?></option>
+} ?>><?php echo ($user["username"]); ?></option>
                     <?php }
                     ?>
                 </select>
@@ -134,7 +134,7 @@ regenerateCSRF();
                 <label for="accountName">Holder name</label>
                 <input type="text" id="accountName" name="holderName" class="form-control" placeholder="<?php if (isset($_GET["user"])) {
                                                                                                             echo (getInfoFromUserID($_GET["user"], "real_name"));
-                                                                                                        } else { ?> Holder name <?php
+} else { ?> Holder name <?php
                                                                                                         } ?>">
                 <small id="mutedHelpText" class="form-text text-muted">If not set, the associated account's <strong>Real Name</strong> property will be used</small>
             </div>

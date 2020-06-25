@@ -46,7 +46,7 @@ define("timeString", "$randomDay days, $randomHour hours and $randomMinute minut
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("Nav.php", "Components/"); ?> </nav>

@@ -36,7 +36,7 @@
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
     <div class="alert alert-danger">
         <strong>An error occurred, apparently</strong> An error has ocurred, either because you went to a page that doesn't exist or this theme just doesn't implement it. As I said, this theme is less than functional.
     </div>

@@ -135,7 +135,7 @@ if (isset($_POST["installTheme"])) {
             <p><strong>Error</strong> You are attempting to uninstall a theme which does not exist. It may already have been uninstalled or another administrator may have uninstalled it.</p>
             <a href="/admin/settings/mod.php">Go back to themes settings</a>
         </div>
-    <?php
+        <?php
         die();
     }
 
@@ -144,7 +144,7 @@ if (isset($_POST["installTheme"])) {
             <p><strong>Protected theme</strong> You are attempting to uninstall the default theme. This is not possible and the operation was cancelled</p>
             <a href="/admin/settings/mod.php">Go back to themes settings</a>
         </div>
-<?php
+        <?php
         die();
     }
 

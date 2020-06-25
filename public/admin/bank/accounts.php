@@ -103,7 +103,7 @@ if (isset($_GET["closeAccount"])) { ?>
         <a class="btn btn-danger" href="/admin/bank/accounts.php?doCloseAccount=<?php echo ($_GET["closeAccount"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
         <a class="btn btn-secondary" href="/admin/bank/accounts.php">Cancel</a>
     </div>
-<?php
+    <?php
 
     die();
 } else if (isset($_GET["changeBalance"])) { ?>
@@ -134,7 +134,7 @@ if (isset($_GET["closeAccount"])) { ?>
             </form>
         </div>
     </div>
-<?php
+    <?php
 
     die();
 }

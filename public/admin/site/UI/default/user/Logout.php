@@ -38,7 +38,7 @@ require_once THEME_API . "General.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body class="container-fluid" style="text-align: center">
 

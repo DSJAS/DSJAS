@@ -50,7 +50,7 @@ if (isset($_GET["doToggleEnabledUser"])) {
                 <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
             </p>
         </div>
-<?php
+        <?php
         die();
     }
 
@@ -139,7 +139,7 @@ if (isset($_POST["doEditUser"])) {
             <a class="btn btn-danger" href="/admin/settings/editUser.php?doDeleteUser=<?php echo ($_GET["deleteUser"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
             <a class="btn btn-secondary" href="/admin/settings/accounts.php">Cancel</a>
         </div>
-        <?php }
+    <?php }
 
     if (isset($_GET["toggleEnabledUser"])) {
         if (getCurrentUserId(true) == $_GET["toggleEnabledUser"]) { ?>
@@ -150,7 +150,7 @@ if (isset($_POST["doEditUser"])) {
                     <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
                 </p>
             </div>
-        <?php
+            <?php
             die();
         }
 

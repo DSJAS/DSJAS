@@ -142,9 +142,9 @@ if (isInsiderBand()) {
                     <td class="admin-info-key">Opted in to pre-release</td>
                     <td class="admin-info-value"><?php if ($insiderBand) {
                                                         echo ("Yes");
-                                                    } else {
-                                                        echo ("No");
-                                                    } ?></td>
+} else {
+                                                     echo ("No");
+                                                 } ?></td>
                 </tr>
                 <tr>
                     <td class="admin-info-key">Your current release band</td>

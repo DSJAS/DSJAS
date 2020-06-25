@@ -66,7 +66,7 @@ function getTheme()
         $accountStanding = "<span class='text-primary'>good</span>";
     }
 
-?>
+    ?>
 
     <body>
         <script src=<?php echo (getThemeContent("accounts.js", "js/")) ?>></script>

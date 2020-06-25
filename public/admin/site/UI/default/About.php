@@ -40,7 +40,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
     <?php include "components/Nav.php"; ?> </nav>
 
     <div class="container-fluid about-page-teaser">

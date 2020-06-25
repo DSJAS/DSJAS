@@ -49,7 +49,7 @@ if ($information->affectedRows < 1) { ?>
         <strong>Transaction not found</strong> A transaction with that ID could not be found. Please make sure that
         the transaction hasn't been reversed (either by you or another administrator) and try again.
     </div>
-<?php
+    <?php
     die();
 }
 

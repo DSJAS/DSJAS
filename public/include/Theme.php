@@ -202,7 +202,7 @@ class Theme
 
                 Please report this error to the theme developer as their theme is broken.
             </div>
-<?php }
+        <?php }
     }
 
 

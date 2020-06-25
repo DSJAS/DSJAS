@@ -41,7 +41,7 @@ require_once THEME_API . "Security.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/"); ?>

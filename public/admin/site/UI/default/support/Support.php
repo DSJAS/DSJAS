@@ -39,7 +39,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body class="bg-light">
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>

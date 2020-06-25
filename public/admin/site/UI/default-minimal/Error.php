@@ -39,7 +39,7 @@ require_once THEME_API . "Error.php";
 
 function getTheme()
 {
-?>
+    ?>
 
     <body class="body-signin bg-img-login">
 

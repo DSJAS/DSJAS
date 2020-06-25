@@ -36,6 +36,6 @@
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
 <?php }

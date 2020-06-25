@@ -132,7 +132,7 @@ regenerateCSRF();
                 <select class="form-control account-result" name="accountID">
                     <?php foreach (getAllAccounts() as $account) {
                         $accountOwner = getInfoFromUserID($account["associated_online_account_id"], "username");
-                    ?>
+                        ?>
                         <option value="<?php echo $account["account_identifier"] ?>"><strong><?php echo $accountOwner ?></strong> - <?php echo $account["account_name"]; ?> [<?php echo $account["account_identifier"]; ?>]</option>
                     <?php } ?>
                 </select>

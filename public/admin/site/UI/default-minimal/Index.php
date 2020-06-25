@@ -40,7 +40,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body class="body-signin bg-img-login">
 

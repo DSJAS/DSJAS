@@ -38,7 +38,7 @@ require THEME_API . "Accounts.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body class="body-signin bg-img-login">
 

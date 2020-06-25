@@ -36,7 +36,7 @@
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
     <div class="jumbotron">
         <h1 class="display-4">Welcome to the development version of DSJAS!</h1>
         <p class="lead">This theme is only shipped with the development version of DSJAS. So, because you have it, you must have a development version!</p>

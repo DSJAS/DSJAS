@@ -40,7 +40,7 @@ require_once THEME_API . "Dashboard.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body>
         <script src=<?php echo (getThemeContent("accounts.js", "js/")) ?>></script>

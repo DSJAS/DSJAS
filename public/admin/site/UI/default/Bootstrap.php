@@ -41,6 +41,6 @@ require_once THEME_API . "General.php";
 function getBootstrap()
 {
     setTitle(getBankName());
-?>
+    ?>
     <link rel="stylesheet" href=<?php echo (getThemeContent("Styles.css", "styles/")) ?>>
 <?php }

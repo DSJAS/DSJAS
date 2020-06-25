@@ -42,7 +42,7 @@ setTitle("Welcome to " . getBankName());
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body>
 

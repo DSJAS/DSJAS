@@ -40,7 +40,7 @@ require_once THEME_API . "Dashboard.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/");
@@ -168,7 +168,7 @@ function getTheme()
                                 $type = $info["transaction_type"];
                                 $type[0] = strtoupper($type[0]);
 
-                            ?>
+                                ?>
                                 <tr>
                                     <td><?php echo ($info["transaction_date"]); ?></td>
                                     <td><?php echo (censorAccountNumber($info["origin_account_id"])); ?></td>
@@ -176,9 +176,9 @@ function getTheme()
                                     <td><?php echo ($type); ?></th>
                                         <?php if (isPricePositive($info["transaction_amount"])) { ?>
                                     <td class="text-success">$<?php echo ($info["transaction_amount"]); ?></td>
-                                <?php } else { ?>
+                                        <?php } else { ?>
                                     <td class="text-danger">$<?php echo ($info["transaction_amount"]); ?></td>
-                                <?php } ?>
+                                        <?php } ?>
                                 </tr>
                             <?php } ?>
                         </tbody>

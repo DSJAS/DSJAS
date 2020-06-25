@@ -33,7 +33,7 @@ if (!verifySetupAuth()) { ?>
     <div class="alert alert-danger" role="alert">
         <p><strong>Security error</strong> You are not authorised to run the setup process. Your authentication token is not authorised to continue the process.</p>
     </div>
-<?php
+    <?php
     die();
 }
 

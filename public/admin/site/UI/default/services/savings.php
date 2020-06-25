@@ -40,7 +40,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-?>
+    ?>
     <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
     <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>

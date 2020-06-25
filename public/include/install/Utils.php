@@ -120,7 +120,7 @@ function verifySetupAuth()
 
 function handleNoDBConfirmation()
 {
-?>
+    ?>
     <div class="text-center">
         <h1 style="color: red">Warning</h1>
         <p class="lead">Using DSJ&S without a database can lead to buggy behaviour, reduced features and a broken site</p>
