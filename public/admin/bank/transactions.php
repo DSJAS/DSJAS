@@ -16,12 +16,12 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Administration.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Administration.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
 
 regenerateCSRF();
@@ -29,7 +29,7 @@ regenerateCSRF();
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div id="content">
 
@@ -59,18 +59,18 @@ regenerateCSRF();
                 <tbody class="tbody">
                     <?php foreach (getAllTransactions() as $transaction) { ?>
                         <tr>
-                            <td><strong><?= $transaction["transaction_id"] ?></strong></td>
-                            <td><?= $transaction["transaction_date"] ?></td>
-                            <td><?= $transaction["transaction_description"] ?></td>
-                            <td><?= $transaction["origin_account_id"] ?></td>
-                            <td><?= $transaction["dest_account_id"] ?></td>
-                            <td><?= $transaction["transaction_amount"] ?></td>
+                            <td><strong><?php echo $transaction["transaction_id"] ?></strong></td>
+                            <td><?php echo $transaction["transaction_date"] ?></td>
+                            <td><?php echo $transaction["transaction_description"] ?></td>
+                            <td><?php echo $transaction["origin_account_id"] ?></td>
+                            <td><?php echo $transaction["dest_account_id"] ?></td>
+                            <td><?php echo $transaction["transaction_amount"] ?></td>
                             <td>
-                                <a class="text-danger" href="/admin/bank/reverseTransaction.php?id=<?= $transaction["transaction_id"] ?>&csrf=<?= getCSRFToken(); ?>">
+                                <a class="text-danger" href="/admin/bank/reverseTransaction.php?id=<?php echo $transaction["transaction_id"] ?>&csrf=<?php echo getCSRFToken(); ?>">
                                     Reverse
                                 </a>
                                 <br>
-                                <a class="text-primary" href="/admin/bank/transactionInfo.php?id=<?= $transaction["transaction_id"] ?>">More info</a>
+                                <a class="text-primary" href="/admin/bank/transactionInfo.php?id=<?php echo $transaction["transaction_id"] ?>">More info</a>
                             </td>
                         </tr>
                     <?php } ?>

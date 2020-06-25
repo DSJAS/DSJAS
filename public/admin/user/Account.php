@@ -16,10 +16,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "csrf.php");
-require_once(ABSPATH . INC . "Util.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "csrf.php";
+require_once ABSPATH . INC . "Util.php";
 
 redirect("/admin/settings/editUser.php?editUser=" . getCurrentUserId(true) . "&csrf=" . getCSRFToken());

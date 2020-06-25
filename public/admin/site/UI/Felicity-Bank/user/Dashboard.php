@@ -22,10 +22,11 @@ For more information of theming and creating your own themes, please refer to th
 API documentation for themes and plugins.
 */
 
-require(THEME_API . "Dashboard.php");
+require THEME_API . "Dashboard.php";
 
 function getTheme()
-{ ?>
+{
+    ?>
 
     <link rel="stylesheet" href=<?php echo (getThemeContent("dashboard.css", "styles/")) ?>>
 
@@ -39,7 +40,7 @@ function getTheme()
 
         <nav class="navbar navbar-expand-sm navbar-light bg-light border" style="height: 8vh; width: 100%;">
             <div class="container">
-                <a href="#" class="navbar-brand"><?= getBankName(); ?></a>
+                <a href="#" class="navbar-brand"><?php echo getBankName(); ?></a>
 
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                     <span class="navbar-toggler-icon"></span>
@@ -102,10 +103,10 @@ function getTheme()
                             <tbody>
                                 <?php foreach (getAccountsArray() as $account) { ?>
                                     <tr>
-                                        <td><?= $account["account_name"] ?></td>
-                                        <td><?= censorAccountNumber($account["account_identifier"]); ?></td>
-                                        <td>$<?= $account["account_balance"] ?></td>
-                                        <td>$<?= $account["account_balance"] ?></td>
+                                        <td><?php echo $account["account_name"] ?></td>
+                                        <td><?php echo censorAccountNumber($account["account_identifier"]); ?></td>
+                                        <td>$<?php echo $account["account_balance"] ?></td>
+                                        <td>$<?php echo $account["account_balance"] ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -168,13 +169,13 @@ function getTheme()
                             <tbody>
                                 <?php foreach (getRecentTransactionsArray(12) as $transaction) { ?>
                                     <tr>
-                                        <td><?= $transaction["transaction_date"] ?></td>
-                                        <td><?= $transaction["transaction_description"] ?></td>
+                                        <td><?php echo $transaction["transaction_date"] ?></td>
+                                        <td><?php echo $transaction["transaction_description"] ?></td>
                                         <td>
                                             <?php if (isPricePositive($transaction["transaction_amount"])) { ?>
-                                                <span id="greenhighlight">$<?= $transaction["transaction_amount"] ?></span>
+                                                <span id="greenhighlight">$<?php echo $transaction["transaction_amount"] ?></span>
                                             <?php } else { ?>
-                                                <span id="redhighlight">$<?= $transaction["transaction_amount"] ?></span>
+                                                <span id="redhighlight">$<?php echo $transaction["transaction_amount"] ?></span>
                                             <?php } ?>
                                         </td>
                                     </tr>

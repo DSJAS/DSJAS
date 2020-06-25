@@ -16,14 +16,14 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Administration.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Administration.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
-require_once(ABSPATH . INC . "Customization.php");
+require_once ABSPATH . INC . "Customization.php";
 
 
 regenerateCSRF();
@@ -31,7 +31,7 @@ regenerateCSRF();
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">
@@ -92,18 +92,18 @@ regenerateCSRF();
                             <td><?php echo ($account["password_hint"]); ?></td>
                             <td><?php echo ($account["email"]); ?></td>
                             <td>
-                                <a data-toggle="collapse" href="#accountsCollapse-<?= $account["user_id"] ?>">
+                                <a data-toggle="collapse" href="#accountsCollapse-<?php echo $account["user_id"] ?>">
                                     Show
                                 </a>
 
-                                <div class="collapse" id="accountsCollapse-<?= $account["user_id"] ?>">
+                                <div class="collapse" id="accountsCollapse-<?php echo $account["user_id"] ?>">
 
                                     <?php
                                     $accounts = getAllAccountsForUser($account["user_id"]);
 
                                     foreach ($accounts as $bAccount) { ?>
                                         <ul>
-                                            <li>[<?= $bAccount["account_identifier"] ?>] - <?= $bAccount["account_name"] ?></li>
+                                            <li>[<?php echo $bAccount["account_identifier"] ?>] - <?php echo $bAccount["account_name"] ?></li>
                                         </ul>
                                     <?php } ?>
                                 </div>

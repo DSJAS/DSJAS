@@ -16,12 +16,12 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Administration.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Administration.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
 if (!isset($_GET["id"])) {
     header("Location: /admin/bank/transactions.php");

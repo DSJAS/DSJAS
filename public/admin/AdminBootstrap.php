@@ -23,8 +23,8 @@ define("API", ABSPATH . INC . "api/");
 define("EXTENSION_API", API . "plugin/");
 
 
-require(ABSPATH . INC . "install/Utils.php");
-require(ABSPATH . INC . "Util.php");
+require ABSPATH . INC . "install/Utils.php";
+require ABSPATH . INC . "Util.php";
 
 session_start();
 

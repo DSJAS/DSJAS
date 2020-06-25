@@ -22,10 +22,11 @@ For more information of theming and creating your own themes, please refer to th
 API documentation for themes and plugins.
 */
 
-require(THEME_API . "Accounts.php");
+require THEME_API . "Accounts.php";
 
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
         <!--[if lt IE 7]>
@@ -36,7 +37,7 @@ function getTheme()
     <![endif]-->
         <nav class="navbar navbar-expand-sm navbar-light bg-light border" style="height: 8vh;">
             <div class="container">
-                <a href="#" class="navbar-brand"><?= getBankName() ?></a>
+                <a href="#" class="navbar-brand"><?php echo getBankName() ?></a>
 
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                     <span class="navbar-toggler-icon"></span>
@@ -48,7 +49,7 @@ function getTheme()
                             <a href="/">Home</a>
                         </li>
                         <li class="nav-link">
-                            <a href="about">About <?= getBankName() ?></a>
+                            <a href="about">About <?php echo getBankName() ?></a>
                         </li>
                         <li class="nav-link">
                             <a href="invest">Investing</a>
@@ -77,7 +78,7 @@ function getTheme()
                 <p><i class="fa fa-phone"></i>
                     <abbr title="Phone">Phone</abbr>: 1 (800) FELICITY</p>
                 <p><i class="fa fa-envelope-o"></i>
-                    <abbr title="Email">E-mail</abbr>: <a href="mailto:Contact@FelicityBank.com">Contact@<?= getBankURL() ?></a>
+                    <abbr title="Email">E-mail</abbr>: <a href="mailto:Contact@FelicityBank.com">Contact@<?php echo getBankURL() ?></a>
                 </p>
                 <p><i class="fa fa-clock-o"></i>
                     <abbr title="Hours">Hours</abbr>: Mon - Fri: 7:00 AM to 5:00 PM</p>
@@ -136,7 +137,7 @@ function getTheme()
         </div>
         <br>
         <footer>
-            <p>Deposit products offered by <?= getBankName(); ?>, N.A. Member FDIC.</p>
-            <p>Copyright &copy; 1969 - 2019 <?= getBankName(); ?>. All rights reserved. NMLSR ID 420024</p>
+            <p>Deposit products offered by <?php echo getBankName(); ?>, N.A. Member FDIC.</p>
+            <p>Copyright &copy; 1969 - 2019 <?php echo getBankName(); ?>. All rights reserved. NMLSR ID 420024</p>
         </footer>
-    <?php }
+<?php }

@@ -24,8 +24,7 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 
 
-if (!isset($_POST["servername"]) || !isset($_POST["dbname"]) || !isset($_POST["username"]) || !isset($_POST["password"]))
-{
+if (!isset($_POST["servername"]) || !isset($_POST["dbname"]) || !isset($_POST["username"]) || !isset($_POST["password"])) {
     die("Error: one or more required parameters were not specified");
 }
 
@@ -37,8 +36,7 @@ echo 'Connected successfully! | ';
 
 
 mysqli_select_db($link, $dbname);
-if (mysqli_error($link) != NULL)
-{
+if (mysqli_error($link) != null) {
     die("Error while selecting database: " . mysqli_error($link));
 }
 

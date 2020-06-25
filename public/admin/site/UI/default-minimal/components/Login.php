@@ -7,7 +7,7 @@
             <div class="alert alert-danger" role="alert">
                 <p><strong><?php echo (getLoginErrorTitle()); ?></strong> <?php echo (getLoginErrorMsg()); ?></p>
             </div>
-        <?php
+            <?php
         } elseif (isset($_GET["signout_fail"])) { ?>
             <div class="alert alert-info" role="alert">
                 <p><strong>Failed to sign out</strong> Please sign in before you sign out</p>

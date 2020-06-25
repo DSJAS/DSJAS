@@ -1,4 +1,5 @@
-function triggerAdvertisement() {
+function triggerAdvertisement()
+{
     console.log("Playing advertisement...");
 
     $("#advertModal").modal("show");
@@ -6,17 +7,17 @@ function triggerAdvertisement() {
     var ad = randomInteger(3);
 
     switch (ad) {
-        case 1:
-            raidShadowLegends();
+    case 1:
+        raidShadowLegends();
             break;
-        case 2:
-            squareSpace()
+    case 2:
+        squareSpace()
             break;
-        case 3:
-            mafiaCity();
+    case 3:
+        mafiaCity();
             break;
-        default:
-            raidShadowLegends();
+    default:
+        raidShadowLegends();
             break;
     }
 
@@ -25,36 +26,43 @@ function triggerAdvertisement() {
     mainloop();
 }
 
-function raidShadowLegends() {
+function raidShadowLegends()
+{
     $("#raidShadowLegends").removeClass("d-none");
 }
 
-function squareSpace() {
+function squareSpace()
+{
     $("#squareSpace").removeClass("d-none");
 }
 
-function mafiaCity() {
+function mafiaCity()
+{
     $("#mafiaCity").removeClass("d-none");
 }
 
-function mainloop() {
+function mainloop()
+{
     var countdownValue = 30;
 
-    var interval = setInterval(function () {
-        if (countdownValue <= 0) {
-            clearInterval(interval);
-            $("#skipAd").removeClass("d-none");
-            $("#skipCountdown").addClass("d-none");
+    var interval = setInterval(
+        function () {
+            if (countdownValue <= 0) {
+                clearInterval(interval);
+                $("#skipAd").removeClass("d-none");
+                $("#skipCountdown").addClass("d-none");
 
-            return;
-        }
+                return;
+            }
 
-        $("#advertisementCountdownValue").text(countdownValue);
-        countdownValue--;
-    }, 1000);
+            $("#advertisementCountdownValue").text(countdownValue);
+            countdownValue--;
+        }, 1000
+    );
 }
 
-function closeAdvert() {
+function closeAdvert()
+{
     $("#advertModal").modal("hide");
 
     $("#ads").remove();

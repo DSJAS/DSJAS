@@ -16,12 +16,12 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Administration.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Administration.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
 if (!isset($_GET["id"])) {
     header("Location: /admin/bank/transactions.php");
@@ -50,18 +50,18 @@ if ($information->affectedRows < 1) { ?>
         <strong>Transaction not found</strong> A transaction with that ID could not be found. Please make sure that
         the transaction hasn't been reversed (either by you or another administrator) and try again.
     </div>
-<?php
+    <?php
     die();
 }
 
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div id="content">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="admin-header col col-offset-6">Viewing transaction information for transaction ID <strong><?= $info["transaction_id"] ?></strong></h1>
+        <h1 class="admin-header col col-offset-6">Viewing transaction information for transaction ID <strong><?php echo $info["transaction_id"] ?></strong></h1>
     </div>
 
     <div class="alert alert-info">
@@ -75,13 +75,13 @@ if ($information->affectedRows < 1) { ?>
 
         <div class="form-group">
             <label for="id">Transaction ID:</label>
-            <input class="form-control" type="text" value="<?= $info["transaction_id"] ?>" id="id" readonly>
+            <input class="form-control" type="text" value="<?php echo $info["transaction_id"] ?>" id="id" readonly>
             <small class="form-text text-muted">This is used internally by DSJAS and is never displayed to the user</small>
         </div>
 
         <div class="form-group">
             <label for="date">Timestamp:</label>
-            <input class="form-control" type="text" value="<?= $info["transaction_date"] ?>" id="date" readonly>
+            <input class="form-control" type="text" value="<?php echo $info["transaction_date"] ?>" id="date" readonly>
             <small class="form-text text-muted">This timestamp is in the local time of your server (usually the local time at the hosting location)</small>
         </div>
 
@@ -91,7 +91,7 @@ if ($information->affectedRows < 1) { ?>
 
         <div class="form-group">
             <label for="amount">Amount transferred:</label>
-            <input class="form-control" type="text" value="$<?= $info["transaction_amount"] ?>" id="amount" readonly>
+            <input class="form-control" type="text" value="$<?php echo $info["transaction_amount"] ?>" id="amount" readonly>
         </div>
 
         <hr>
@@ -106,7 +106,7 @@ if ($information->affectedRows < 1) { ?>
                     </svg>
                 </span>
             </label>
-            <input class="form-control" type="text" value="<?= $info["origin_account_id"] ?>" id="sender" readonly>
+            <input class="form-control" type="text" value="<?php echo $info["origin_account_id"] ?>" id="sender" readonly>
         </div>
 
         <div class="form-group">
@@ -117,7 +117,7 @@ if ($information->affectedRows < 1) { ?>
                     </svg>
                 </span>
             </label>
-            <input class="form-control" type="text" value="<?= $info["dest_account_id"] ?>" id="dest" readonly>
+            <input class="form-control" type="text" value="<?php echo $info["dest_account_id"] ?>" id="dest" readonly>
         </div>
 
         <hr>
@@ -126,12 +126,12 @@ if ($information->affectedRows < 1) { ?>
 
         <div class="form-group">
             <label for="desc">Transaction description:</label>
-            <input class="form-control" type="text" value="<?= $info["transaction_description"] ?>" id="desc" readonly>
+            <input class="form-control" type="text" value="<?php echo $info["transaction_description"] ?>" id="desc" readonly>
         </div>
 
         <div class="form-group">
             <label for="type">Transaction type:</label>
-            <input class="form-control" type="text" value="<?= $info["transaction_type"] ?>" id="type" readonly>
+            <input class="form-control" type="text" value="<?php echo $info["transaction_type"] ?>" id="type" readonly>
             <small class="form-text text-muted">The transaction type has no impact on financial workings and is purely visual. Some themes may use this for extra information to be displayed</small>
         </div>
     </form>
@@ -140,7 +140,7 @@ if ($information->affectedRows < 1) { ?>
 
     <div class="mt-4">
         <a href="/admin/bank/transactions.php" class="btn btn-secondary">Return to transactions page:</a>
-        <a href="/admin/bank/reverseTransaction.php?id=<?= $info["transaction_id"] ?>&csrf=<?= getCSRFToken(); ?>" class="btn btn-danger">Reverse transaction</a>
+        <a href="/admin/bank/reverseTransaction.php?id=<?php echo $info["transaction_id"] ?>&csrf=<?php echo getCSRFToken(); ?>" class="btn btn-danger">Reverse transaction</a>
     </div>
 </div>
 

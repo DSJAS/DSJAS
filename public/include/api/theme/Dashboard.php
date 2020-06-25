@@ -32,9 +32,9 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once(ABSPATH . INC . "DB.php");
+require_once ABSPATH . INC . "DB.php";
 
-require_once(ABSPATH . INC . "Users.php");
+require_once ABSPATH . INC . "Users.php";
 
 
 // Cached database information for created databases

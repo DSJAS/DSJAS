@@ -34,21 +34,22 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
-    <?php require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+{
+    ?>
+    <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php require(ABSPATH . getRawThemeContent("ServicesHeader.html", "components/")); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
 
     <div class="container">
         <h2>The award winning loans and lendings</h2>
 
-        <p><?= getBankName() ?> lends like we spend: sparsely yet with the spirit of Scrooge himself. Get a loan for up to three hours and $2.00 with our
+        <p><?php echo getBankName() ?> lends like we spend: sparsely yet with the spirit of Scrooge himself. Get a loan for up to three hours and $2.00 with our
             new extended credit scheme!
 
             Now doesn't that sound good...

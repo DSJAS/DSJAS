@@ -16,10 +16,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once("Customization.php");
-require_once("Util.php");
+require_once "Customization.php";
+require_once "Util.php";
 
-require_once("vendor/hooks/src/gburtini/Hooks/Hooks.php");
+require_once "vendor/hooks/src/gburtini/Hooks/Hooks.php";
 
 
 define("MODULE_PATH", "/admin/site/modules/");
@@ -67,8 +67,9 @@ class ModuleManager
     function getModule($moduleName)
     {
         foreach ($this->loadedModuleRoutes[$moduleName] as $route) {
-            if (!$this->shouldLoadModule($moduleName))
+            if (!$this->shouldLoadModule($moduleName)) {
                 continue;
+            }
 
             if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadCSS"]) {
                 echo ("<style>\n");
@@ -94,8 +95,9 @@ class ModuleManager
 
     function getModuleRoute($moduleName, $route)
     {
-        if (!$this->shouldLoadModule($moduleName))
+        if (!$this->shouldLoadModule($moduleName)) {
             return;
+        }
 
         if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadCSS"]) {
             echo ("<style>\n");

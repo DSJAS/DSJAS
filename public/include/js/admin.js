@@ -2,10 +2,13 @@
 
 /* Util */
 
-function encodeString(rawStr) {
-    var encodedStr = rawStr.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
-        return '&#' + i.charCodeAt(0) + ';';
-    });
+function encodeString(rawStr)
+{
+    var encodedStr = rawStr.replace(
+        /[\u00A0-\u9999<>\&]/gim, function (i) {
+            return '&#' + i.charCodeAt(0) + ';';
+        }
+    );
 
     return encodedStr;
 }
@@ -13,23 +16,28 @@ function encodeString(rawStr) {
 
 /* Init code */
 
-$(document).ready(function () {
-    // General panel
-    var dbCheckbox = document.getElementById("noDatabase");
-    if (dbCheckbox != null) {
-        disableDatabaseSettings();
-
-        $("#noDatabase").change(function () {
+$(document).ready(
+    function () {
+        // General panel
+        var dbCheckbox = document.getElementById("noDatabase");
+        if (dbCheckbox != null) {
             disableDatabaseSettings();
-        });
-    }
 
-    // Update panel
-});
+            $("#noDatabase").change(
+                function () {
+                    disableDatabaseSettings();
+                }
+            );
+        }
+
+        // Update panel
+    }
+);
 
 /* General settings pane */
 
-function generalSaveSettings() {
+function generalSaveSettings()
+{
     var progress = document.getElementById("saveProgress");
     progress.style.display = "inline-block";
 
@@ -65,7 +73,8 @@ function generalSaveSettings() {
     request.send(postHeaders);
 }
 
-function resetInstall() {
+function resetInstall()
+{
     console.log("Resetting install process...");
 
     var postdata = "doResetInstall=1";
@@ -83,7 +92,8 @@ function resetInstall() {
     req.send(postdata);
 }
 
-function resetFactory() {
+function resetFactory()
+{
     console.log("Resetting to factory defaults...");
 
     var postdata = "doResetFactory=1";
@@ -101,11 +111,13 @@ function resetFactory() {
     req.send(postdata);
 }
 
-function discardChanges() {
+function discardChanges()
+{
     location.assign(location.pathname); // Reload page without get headers to prevent lingering saved messages
 }
 
-function disableDatabaseSettings() {
+function disableDatabaseSettings()
+{
     currentState = $("#noDatabase").prop("checked");
 
     if (currentState) {
@@ -142,17 +154,22 @@ function disableDatabaseSettings() {
 
 /* Modules and themes pane */
 
-$(document).ready(function () {
-    bsCustomFileInput.init() // Init file upload plugin
-})
+$(document).ready(
+    function () {
+        bsCustomFileInput.init() // Init file upload plugin
+    }
+)
 
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+$(
+    function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    }
+)
 
 var currentPane = 1;
 
-function switchToThemes() {
+function switchToThemes()
+{
     if (currentPane != 1) {
         currentPane = 1;
 
@@ -167,7 +184,8 @@ function switchToThemes() {
     }
 }
 
-function switchToModules() {
+function switchToModules()
+{
     if (currentPane != 2) {
         currentPane = 2;
 
@@ -182,7 +200,8 @@ function switchToModules() {
     }
 }
 
-function saveModuleSettings() {
+function saveModuleSettings()
+{
     var moduleObjects = $("#modulesContainer").children();
     let modules = [];
 
@@ -219,7 +238,8 @@ function saveModuleSettings() {
 
 /* Advanced settings pane */
 
-function advancedSaveSettings() {
+function advancedSaveSettings()
+{
     var progress = document.getElementById("saveProgress");
     progress.style.display = "inline-block";
 

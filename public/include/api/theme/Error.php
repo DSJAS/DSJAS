@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
 Welcome to Dave-Smith Johnson & Son family bank!

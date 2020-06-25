@@ -32,7 +32,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once(ABSPATH . INC . "csrf.php");
+require_once ABSPATH . INC . "csrf.php";
 
 
 function getCSRFForm()

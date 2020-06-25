@@ -34,15 +34,16 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
-        <?php require(ABSPATH . getRawThemeContent("SupportNav.php", "components/")); ?>
+        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
 
         <div class="container mt-4">
 
@@ -55,7 +56,7 @@ function getTheme()
                     <p><i class="fa fa-phone"></i>
                         <abbr title="Phone">Phone</abbr>: 1 (800) 420-990</p>
                     <p><i class="fa fa-envelope-o"></i>
-                        <abbr title="Email">E-mail</abbr>: Contact@<?= getBankURL() ?>
+                        <abbr title="Email">E-mail</abbr>: Contact@<?php echo getBankURL() ?>
                     </p>
                     <p><i class="fa fa-clock-o"></i>
                         <abbr title="Hours">Hours</abbr>: Mon - Fri: 7:00 AM to 5:00 PM</p>
@@ -72,7 +73,7 @@ function getTheme()
 
             <div class="header mb-4">
                 <h1 class="display-4">
-                    Contact <?= getBankName() ?>
+                    Contact <?php echo getBankName() ?>
                 </h1>
 
                 <p class="lead">We're always standing by for communications. Please fill in the details below, along with your message, and we'll get back to you as soon as possible</p>

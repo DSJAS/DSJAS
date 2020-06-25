@@ -16,8 +16,8 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("install_bootstrap.php");
-require("../../include/install/Utils.php");
+require "install_bootstrap.php";
+require "../../include/install/Utils.php";
 
 $configuration = parse_ini_file(ABSPATH . "/Config.ini");
 

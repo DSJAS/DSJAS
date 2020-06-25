@@ -23,7 +23,8 @@ API documentation for themes and plugins.
 */
 
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
         <!--[if lt IE 7]>
@@ -34,7 +35,7 @@ function getTheme()
     <![endif]-->
         <nav class="navbar navbar-expand-sm navbar-light bg-light border" style="height: 8vh;">
             <div class="container">
-                <a href="#" class="navbar-brand"><?= getBankName(); ?></a>
+                <a href="#" class="navbar-brand"><?php echo getBankName(); ?></a>
 
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                     <span class="navbar-toggler-icon"></span>
@@ -46,7 +47,7 @@ function getTheme()
                             <a href="/">Home</a>
                         </li>
                         <li class="nav-link">
-                            <a href="/about">About <?= getBankName(); ?></a>
+                            <a href="/about">About <?php echo getBankName(); ?></a>
                         </li>
                         <li class="nav-link">
                             <a href="/invest">Investing</a>
@@ -71,7 +72,7 @@ function getTheme()
 
             <center>
                 <div class="shadow-sm p-3 mb-5 boxcol rounded col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <h2>Account Reset for <?= getBankName(); ?></h2>
+                    <h2>Account Reset for <?php echo getBankName(); ?></h2>
                     <p style="font-size: 22px;">
                         Forgot your username or password?
                     </p>
@@ -95,8 +96,8 @@ function getTheme()
         </div>
 
         <footer>
-            <p>Deposit products offered by <?= getBankName(); ?>, N.A. Member FDIC.</p>
-            <p>Copyright &copy; 1969 - 2019 <?= getBankName(); ?>. All rights reserved. NMLSR ID 420024</p>
+            <p>Deposit products offered by <?php echo getBankName(); ?>, N.A. Member FDIC.</p>
+            <p>Copyright &copy; 1969 - 2019 <?php echo getBankName(); ?>. All rights reserved. NMLSR ID 420024</p>
         </footer>
     </body>
 <?php }

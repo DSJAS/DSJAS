@@ -34,21 +34,22 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
-    <?php require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+{
+    ?>
+    <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php require(ABSPATH . getRawThemeContent("ServicesHeader.html", "components/")); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
 
     <div class="container">
         <h2>The award winning mortgages and long-term lendings</h2>
 
-        <p><?= getBankName() ?> has given out over five mortgages, giving a kickstart to over three households and happy families.
+        <p><?php echo getBankName() ?> has given out over five mortgages, giving a kickstart to over three households and happy families.
             Yes, it was all out of the goodness of our hearts, we definitely didn't make any money from this at all!
         </p>
 

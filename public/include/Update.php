@@ -117,7 +117,7 @@ function loadVersionInfo()
 {
     global $__version_information;
 
-    if (!isset($__version_information) || $__version_information == NULL) {
+    if (!isset($__version_information) || $__version_information == null) {
         $jsonContent = file_get_contents(ABSPATH . "/Version.json");
 
         $__version_information = json_decode($jsonContent, true);

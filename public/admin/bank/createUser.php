@@ -16,11 +16,11 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
 if (!isset($_POST["createUser"])) {
     header("Location: /admin/bank/users.php");
@@ -47,7 +47,7 @@ header("Location: /admin/bank/users.php?userCreated");
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="container" id="content">
     <div class="alert alert-info">

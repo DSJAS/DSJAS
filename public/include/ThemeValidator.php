@@ -16,11 +16,11 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once("Theme.php");
-require_once("Module.php");
+require_once "Theme.php";
+require_once "Module.php";
 
-require_once("Customization.php");
-require_once("Util.php");
+require_once "Customization.php";
+require_once "Util.php";
 
 
 class ThemeValidator
@@ -107,8 +107,9 @@ class ThemeValidator
     {
         // Test 1: Check that the theme directory exists
         $themeDir = ABSPATH . THEME_PATH . $this->themeTarget . "/";
-        if (!is_dir($themeDir))
+        if (!is_dir($themeDir)) {
             $this->addError("Missing theme directory", "The theme directory appears to be missing. This may be a result of an error in the install process or bad configuration. You should re-install or remove the theme.", true);
+        }
 
         // Test 2: Themes must provide an index page
         $this->testFileExists("Index.php", "/", true, true);

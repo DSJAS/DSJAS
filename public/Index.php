@@ -16,15 +16,15 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("include/Bootstrap.php");
+require "include/Bootstrap.php";
 
-require(ABSPATH . INC . "DSJAS.php");
+require ABSPATH . INC . "DSJAS.php";
 
-require_once(ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php");
+require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
 
-require_once(ABSPATH . INC . "Customization.php");
-require_once(ABSPATH . INC . "Theme.php");
-require_once(ABSPATH . INC . "Module.php");
+require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "Theme.php";
+require_once ABSPATH . INC . "Module.php";
 
 
 $url = $_SERVER["REQUEST_URI"];
@@ -53,6 +53,8 @@ if (shouldProcessPermalink()) {
 }
 
 // Jump to main DSJAS load code
-dsjas($page, $dir, function (string $callbackName, ModuleManager $moduleManager) {
-    $moduleManager->getAllByCallback($callbackName);
-});
+dsjas(
+    $page, $dir, function (string $callbackName, ModuleManager $moduleManager) {
+        $moduleManager->getAllByCallback($callbackName);
+    }
+);

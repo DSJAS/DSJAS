@@ -34,16 +34,17 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Dashboard.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Dashboard.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
-        <?php require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/"));
+        <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/");
 
         addModuleDescriptor("alert_area");  ?>
 
@@ -112,9 +113,9 @@ function getTheme()
                             <td><?php echo ($info["transaction_type"]); ?></th>
                                 <?php if (isPricePositive($info["transaction_amount"])) { ?>
                             <td class="text-success">$<?php echo ($info["transaction_amount"]); ?></td>
-                        <?php } else { ?>
+                                <?php } else { ?>
                             <td class="text-danger">$<?php echo ($info["transaction_amount"]); ?></td>
-                        <?php } ?>
+                                <?php } ?>
                         </tr>
                     <?php } ?>
                 </tbody>

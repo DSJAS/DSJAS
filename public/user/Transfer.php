@@ -16,19 +16,19 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../include/Bootstrap.php");
+require "../include/Bootstrap.php";
 
-require(ABSPATH . INC . "DSJAS.php");
+require ABSPATH . INC . "DSJAS.php";
 
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
-require_once(ABSPATH . INC . "Customization.php");
-require_once(ABSPATH . INC . "Users.php");
-require_once(ABSPATH . INC . "Util.php");
+require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "Users.php";
+require_once ABSPATH . INC . "Util.php";
 
-require_once(ABSPATH . INC . "Theme.php");
-require_once(ABSPATH . INC . "Module.php");
+require_once ABSPATH . INC . "Theme.php";
+require_once ABSPATH . INC . "Module.php";
 
 
 if (isset($_GET["performTransfer"])) {
@@ -78,6 +78,8 @@ if (!isLoggedIn()) {
 
 
 // Jump to main DSJAS load code
-dsjas(__FILE__, "user/", function (string $callbackName, ModuleManager $moduleManager) {
-    $moduleManager->getAllByCallback($callbackName);
-}, "all", ["user"]);
+dsjas(
+    __FILE__, "user/", function (string $callbackName, ModuleManager $moduleManager) {
+        $moduleManager->getAllByCallback($callbackName);
+    }, "all", ["user"]
+);

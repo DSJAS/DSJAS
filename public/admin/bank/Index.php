@@ -16,19 +16,19 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Update.php");
-require(ABSPATH . INC . "Administration.php");
-require(ABSPATH . INC . "Banking.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Update.php";
+require ABSPATH . INC . "Administration.php";
+require ABSPATH . INC . "Banking.php";
 
-require_once(ABSPATH . INC . "Customization.php");
+require_once ABSPATH . INC . "Customization.php";
 
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="content container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">

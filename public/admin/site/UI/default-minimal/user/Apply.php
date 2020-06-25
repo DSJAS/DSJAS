@@ -34,11 +34,12 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require(THEME_API . "Accounts.php");
+require THEME_API . "Accounts.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body class="body-signin bg-img-login">
 

@@ -34,15 +34,16 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
-        <?php require(ABSPATH . getRawThemeContent("SupportNav.php", "components/")); ?>
+        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
 
         <div class="container">
             <div class="header mb-4">
@@ -50,7 +51,7 @@ function getTheme()
                     Online banking support
                 </h1>
 
-                <p class="lead"><?= getBankName() ?> has award winning customer service for our award winning online banking from an award winning reviewing organization who has won awards.</p>
+                <p class="lead"><?php echo getBankName() ?> has award winning customer service for our award winning online banking from an award winning reviewing organization who has won awards.</p>
             </div>
 
             <ul>
@@ -131,7 +132,7 @@ function getTheme()
 
                     <div class="collapse" id="reporting">
                         <div class="card card-body">
-                            <h4><?= getBankName() ?> has that covered for you</h4>
+                            <h4><?php echo getBankName() ?> has that covered for you</h4>
 
                             <ul>
                                 <li>Never give out your banking details, especially not your password</li>

@@ -25,7 +25,7 @@ define("MODULE_API", API . "modules/");
 define("EXTENSION_API", API . "plugin/");
 
 
-require(ABSPATH . INC . "/install/Utils.php");
+require ABSPATH . INC . "/install/Utils.php";
 
 
 session_start();

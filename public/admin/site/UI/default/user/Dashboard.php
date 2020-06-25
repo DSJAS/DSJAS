@@ -34,16 +34,17 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Dashboard.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Dashboard.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
-        <?php require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/"));
+        <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/");
 
         addModuleDescriptor("alert_area");  ?>
 
@@ -79,7 +80,7 @@ function getTheme()
 
                             <div class="text-center">
                                 <a href="https://sourceforge.net/">
-                                    <img src="<?= getRawThemeContent("download-app.png", "assets/"); ?>" alt="Get the app today" width="200" height="150">
+                                    <img src="<?php echo getRawThemeContent("download-app.png", "assets/"); ?>" alt="Get the app today" width="200" height="150">
                                 </a>
                             </div>
 
@@ -168,7 +169,7 @@ function getTheme()
                                 $type = $info["transaction_type"];
                                 $type[0] = strtoupper($type[0]);
 
-                            ?>
+                                ?>
                                 <tr>
                                     <td><?php echo ($info["transaction_date"]); ?></td>
                                     <td><?php echo (censorAccountNumber($info["origin_account_id"])); ?></td>
@@ -176,9 +177,9 @@ function getTheme()
                                     <td><?php echo ($type); ?></th>
                                         <?php if (isPricePositive($info["transaction_amount"])) { ?>
                                     <td class="text-success">$<?php echo ($info["transaction_amount"]); ?></td>
-                                <?php } else { ?>
+                                        <?php } else { ?>
                                     <td class="text-danger">$<?php echo ($info["transaction_amount"]); ?></td>
-                                <?php } ?>
+                                        <?php } ?>
                                 </tr>
                             <?php } ?>
                         </tbody>

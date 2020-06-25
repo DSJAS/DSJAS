@@ -16,11 +16,11 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
 
 if (isset($_POST["createAccount"])) {
@@ -63,7 +63,7 @@ regenerateCSRF();
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <form class="container-fluid" id="content" action="/admin/bank/createAccount.php" method="POST">
 
@@ -110,7 +110,7 @@ regenerateCSRF();
                     foreach (getAllUsers() as $user) { ?>
                         <option value="<?php echo ($user["user_id"]) ?>" <?php if (isset($_GET["user"]) && $user["user_id"] === $_GET["user"]) {
                                                                                 echo ("selected=\"selected\"");
-                                                                            } ?>><?php echo ($user["username"]); ?></option>
+} ?>><?php echo ($user["username"]); ?></option>
                     <?php }
                     ?>
                 </select>
@@ -135,7 +135,8 @@ regenerateCSRF();
                 <label for="accountName">Holder name</label>
                 <input type="text" id="accountName" name="holderName" class="form-control" placeholder="<?php if (isset($_GET["user"])) {
                                                                                                             echo (getInfoFromUserID($_GET["user"], "real_name"));
-                                                                                                        } else { ?> Holder name <?php } ?>">
+} else { ?> Holder name <?php 
+                                                                                                        } ?>">
                 <small id="mutedHelpText" class="form-text text-muted">If not set, the associated account's <strong>Real Name</strong> property will be used</small>
             </div>
         </div>

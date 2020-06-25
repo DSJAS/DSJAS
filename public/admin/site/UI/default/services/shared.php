@@ -34,16 +34,17 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
-    <?php require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+{
+    ?>
+    <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php require(ABSPATH . getRawThemeContent("ServicesHeader.html", "components/")); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
 
     <div class="container">
         <h2>The award winning shared account</h2>

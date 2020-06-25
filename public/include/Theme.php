@@ -16,8 +16,8 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once("Customization.php");
-require_once("Util.php");
+require_once "Customization.php";
+require_once "Util.php";
 
 define("THEME_PATH", "/admin/site/UI/");
 define("DEFAULT_THEME", "default");
@@ -166,7 +166,7 @@ class Theme
     function loadTheme()
     {
         if ($this->providesBootstrapFile()) {
-            require($this->bootstrapPath);
+            include $this->bootstrapPath;
 
             if (function_exists("getBootstrap")) {
                 $this->bootstrapText = getBootstrap();
@@ -174,7 +174,7 @@ class Theme
         }
 
         if (!$this->themeLoaded) {
-            require($this->themePath);
+            include $this->themePath;
 
             if (function_exists("getTheme")) {
                 $this->themeText = getTheme();
@@ -203,7 +203,7 @@ class Theme
 
                 Please report this error to the theme developer as their theme is broken.
             </div>
-<?php }
+        <?php }
     }
 
 

@@ -34,14 +34,15 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
-    <?php require("components/Nav.php"); ?> </nav>
+{
+    ?>
+    <?php include "components/Nav.php"; ?> </nav>
 
     <div class="container-fluid mission-page-teaser">
         <div class="mission-page-teaser-overlay rounded">

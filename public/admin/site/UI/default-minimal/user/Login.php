@@ -32,17 +32,18 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Appearance.php");
-require(THEME_API . "Accounts.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Appearance.php";
+require THEME_API . "Accounts.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
 
-        <?php require(ABSPATH . getRawThemeContent("Login.php", "components/")); ?>
+        <?php include ABSPATH . getRawThemeContent("Login.php", "components/"); ?>
 
     </body>
 

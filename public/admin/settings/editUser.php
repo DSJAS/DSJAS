@@ -16,13 +16,13 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "DB.php");
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Administration.php");
+require ABSPATH . INC . "DB.php";
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Administration.php";
 
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "csrf.php";
 
 
 if (isset($_GET["doDeleteUser"])) {
@@ -51,7 +51,7 @@ if (isset($_GET["doToggleEnabledUser"])) {
                 <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
             </p>
         </div>
-<?php
+        <?php
         die();
     }
 
@@ -120,7 +120,7 @@ if (isset($_POST["doEditUser"])) {
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="content container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">
@@ -129,7 +129,7 @@ if (isset($_POST["doEditUser"])) {
 
     <script src="/include/js/editUser.js"></script>
 
-    <?php require(ABSPATH . INC . "components/AdminSettingsNav.php");
+    <?php require ABSPATH . INC . "components/AdminSettingsNav.php";
 
     if (isset($_GET["deleteUser"])) { ?>
         <div class="text-center">
@@ -140,7 +140,7 @@ if (isset($_POST["doEditUser"])) {
             <a class="btn btn-danger" href="/admin/settings/editUser.php?doDeleteUser=<?php echo ($_GET["deleteUser"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
             <a class="btn btn-secondary" href="/admin/settings/accounts.php">Cancel</a>
         </div>
-        <?php }
+    <?php }
 
     if (isset($_GET["toggleEnabledUser"])) {
         if (getCurrentUserId(true) == $_GET["toggleEnabledUser"]) { ?>
@@ -151,7 +151,7 @@ if (isset($_POST["doEditUser"])) {
                     <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
                 </p>
             </div>
-        <?php
+            <?php
             die();
         }
 

@@ -16,8 +16,8 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once(ABSPATH . INC . "Users.php");
-require_once(ABSPATH . INC . "DB.php");
+require_once ABSPATH . INC . "Users.php";
+require_once ABSPATH . INC . "DB.php";
 
 define("RANDOM_ACCOUNT_NAMES", ["Checking account", "Savings account", "Free basic account", "War bond", "Credit plus"]);
 define("ACCOUNT_TYPES", ["current", "savings", "shared", "misc"]);

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
 Welcome to Dave-Smith Johnson & Son family bank!
@@ -16,12 +16,12 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("AdminBootstrap.php");
+require "AdminBootstrap.php";
 
 ?>
 
 <div id="content">
-    <?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+    <?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
     <div class="alert alert-warning">
         <strong>Coming soon</strong>

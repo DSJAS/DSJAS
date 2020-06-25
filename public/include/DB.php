@@ -171,16 +171,19 @@ class DB
 
     function disconnect()
     {
-        if ($this->statementPrepared) $this->statement->close();
+        if ($this->statementPrepared) { $this->statement->close();
+        }
         $this->sql->close();
     }
 
     function safeDisconnect()
     {
-        if ($this->autocommit = false && $this->uncommittedChanges) $this->commit();
+        if ($this->autocommit = false && $this->uncommittedChanges) { $this->commit();
+        }
 
 
-        if ($this->statementPrepared) $this->statement->close();
+        if ($this->statementPrepared) { $this->statement->close();
+        }
         $this->disconnect();
     }
 
@@ -210,7 +213,8 @@ class DB
 
         $this->statement = $this->sql->prepare($queryObject->getTemplate());
 
-        if (!$this->statement) return;
+        if (!$this->statement) { return;
+        }
 
         $safeBinds = $this->sanitizeInputs($queryObject->getBoundValues());
         $this->statement->bind_param($queryObject->getTypes(), ...$safeBinds);

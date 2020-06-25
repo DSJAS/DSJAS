@@ -22,10 +22,11 @@ For more information of theming and creating your own themes, please refer to th
 API documentation for themes and plugins.
 */
 
-require(ABSPATH . INC . "api/theme/Accounts.php");
+require ABSPATH . INC . "api/theme/Accounts.php";
 
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
         <!--[if lt IE 7]>
@@ -36,7 +37,7 @@ function getTheme()
     <![endif]-->
         <nav class="navbar navbar-expand-sm navbar-light bg-light border" style="height: 8vh;">
             <div class="container">
-                <a href="#" class="navbar-brand"><?= getBankName() ?>.</a>
+                <a href="#" class="navbar-brand"><?php echo getBankName() ?>.</a>
 
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                     <span class="navbar-toggler-icon"></span>
@@ -70,7 +71,7 @@ function getTheme()
 
             <center>
                 <div class="shadow-sm p-3 mb-5 boxcol rounded col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                    <h2>About <?= getBankName() ?></h2>
+                    <h2>About <?php echo getBankName() ?></h2>
 
                     <hr>
 
@@ -90,8 +91,8 @@ function getTheme()
             </center>
         </div>
         <footer>
-            <p>Deposit products offered by <?= getBankName() ?>, N.A. Member FDIC.</p>
-            <p>Copyright &copy; 1969 - 2019 <?= getBankName() ?>. All rights reserved. NMLSR ID 420024</p>
+            <p>Deposit products offered by <?php echo getBankName() ?>, N.A. Member FDIC.</p>
+            <p>Copyright &copy; 1969 - 2019 <?php echo getBankName() ?>. All rights reserved. NMLSR ID 420024</p>
         </footer>
     </body>
 <?php }

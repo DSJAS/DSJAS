@@ -16,10 +16,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../../include/Bootstrap.php");
+require "../../include/Bootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Util.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Util.php";
 
 
 if (!shouldAttemptLogout(true)) {

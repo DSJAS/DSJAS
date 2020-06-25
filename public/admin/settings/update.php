@@ -16,9 +16,9 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Update.php");
+require ABSPATH . INC . "Update.php";
 
 
 if (isInsiderBand()) {
@@ -41,14 +41,14 @@ if (isInsiderBand()) {
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="content container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">
         <p><strong>Warning:</strong> The admin dashboard is not designed for smaller screens, and some functionality may be missing or limited.</p>
     </div>
 
-    <?php require(ABSPATH . INC . "components/AdminSettingsNav.php"); ?>
+    <?php require ABSPATH . INC . "components/AdminSettingsNav.php"; ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="admin-header col col-offset-6">DSJAS Updates</h1>
@@ -143,9 +143,9 @@ if (isInsiderBand()) {
                     <td class="admin-info-key">Opted in to pre-release</td>
                     <td class="admin-info-value"><?php if ($insiderBand) {
                                                         echo ("Yes");
-                                                    } else {
-                                                        echo ("No");
-                                                    } ?></td>
+} else {
+                                                     echo ("No");
+                                                 } ?></td>
                 </tr>
                 <tr>
                     <td class="admin-info-key">Your current release band</td>

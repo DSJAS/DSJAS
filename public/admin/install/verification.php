@@ -1,8 +1,8 @@
 <?php
 
-require("install_bootstrap.php");
+require "install_bootstrap.php";
 
-require_once("../../include/install/Utils.php");
+require_once "../../include/install/Utils.php";
 
 $configuration = parse_ini_file("../../Config.ini");
 

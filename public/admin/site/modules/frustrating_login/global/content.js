@@ -1,7 +1,8 @@
 console.log("Frustrating login process module loaded");
 console.log("This module was written by Ethan Marshall - OverEngineeredCode");
 
-function wait(ms) {
+function wait(ms)
+{
     var start = Date.now(),
         now = start;
     while (now - start < ms) {
@@ -9,15 +10,20 @@ function wait(ms) {
     }
 }
 
-function randomInteger(max) {
+function randomInteger(max)
+{
     return Math.floor(Math.random() * (max + 1));
 }
 
-$(document).ready(function () {
-    var randomNum = randomInteger(5);
-    console.log(randomNum + " will be the verification method used");
+$(document).ready(
+    function () {
+        var randomNum = randomInteger(5);
+        console.log(randomNum + " will be the verification method used");
 
-    $('#loginForm').submit(function () {
-        return runProtection(randomNum);
-    });
-});
+        $('#loginForm').submit(
+            function () {
+                return runProtection(randomNum);
+            }
+        );
+    }
+);

@@ -34,18 +34,19 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require(THEME_API . "Accounts.php");
+require THEME_API . "Accounts.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
         <?php
         if (shouldAppearLoggedIn()) {
-            require(ABSPATH . getRawThemeContent("DashboardNav.php", "components/"));
+            include ABSPATH . getRawThemeContent("DashboardNav.php", "components/");
         } else {
-            require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+            include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
         <?php } ?>
 
 

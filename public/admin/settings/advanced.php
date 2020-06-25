@@ -16,9 +16,9 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "csrf.php";
 
 
 $globalConfigText = file_get_contents(ABSPATH . "/Config.ini");
@@ -57,14 +57,14 @@ if (isset($_POST["doSave"])) {
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="content container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">
         <p><strong>Warning:</strong> The admin dashboard is not designed for smaller screens, and some functionality may be missing or limited.</p>
     </div>
 
-    <?php require(ABSPATH . INC . "components/AdminSettingsNav.php"); ?>
+    <?php require ABSPATH . INC . "components/AdminSettingsNav.php"; ?>
 
     <p style="display: none" id="csrfToken"><?php echo (getCSRFToken()); ?></p>
 

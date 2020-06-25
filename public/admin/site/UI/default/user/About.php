@@ -36,6 +36,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
 <?php }

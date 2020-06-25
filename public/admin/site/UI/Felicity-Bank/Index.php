@@ -23,7 +23,8 @@ API documentation for themes and plugins.
 */
 
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
         <!--[if lt IE 7]>
@@ -34,7 +35,7 @@ function getTheme()
     <![endif]-->
         <nav class="navbar navbar-expand-sm navbar-light bg-light border" style="height: 8vh;">
             <div class="container">
-                <a href="#" class="navbar-brand"><?= getBankName(); ?></a>
+                <a href="#" class="navbar-brand"><?php echo getBankName(); ?></a>
 
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +44,7 @@ function getTheme()
                 <div class="collapse navbar-collapse" id="navbarMenu">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-link">
-                            <a href="/about">About <?= getBankName(); ?></a>
+                            <a href="/about">About <?php echo getBankName(); ?></a>
                         </li>
                         <li class="nav-link">
                             <a href="/invest">Investing</a>
@@ -67,7 +68,7 @@ function getTheme()
             <div class="page-header"></div>
 
             <div class="shadow-sm p-3 mb-5 boxcol rounded col-lg-6 col-md-6 col-sm-6 col-xs-12 float-right">
-                <h2>Welcome to <?= getBankName(); ?></h2>
+                <h2>Welcome to <?php echo getBankName(); ?></h2>
                 <p style="font-size: 22px;">
                     Thank you for banking with us!
                 </p>
@@ -92,6 +93,6 @@ function getTheme()
             </div>
         </div>
 
-        <img class="app" src=<?= getThemeContent("download-app.png", "assets/"); ?>>
+        <img class="app" src=<?php echo getThemeContent("download-app.png", "assets/"); ?>>
     </body>
 <?php }

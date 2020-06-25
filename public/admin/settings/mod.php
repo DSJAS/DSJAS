@@ -16,10 +16,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Customization.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Customization.php";
+require ABSPATH . INC . "csrf.php";
 
 $conf = new Configuration(false, true, false, true);
 
@@ -42,14 +42,14 @@ regenerateCSRF();
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="content container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">
         <p><strong>Warning:</strong> The admin dashboard is not designed for smaller screens, and some functionality may be missing or limited.</p>
     </div>
 
-    <?php require(ABSPATH . INC . "components/AdminSettingsNav.php");
+    <?php require ABSPATH . INC . "components/AdminSettingsNav.php";
 
     if (isset($_GET["notArchive"])) { ?>
         <div class="alert alert-danger">
@@ -340,7 +340,7 @@ regenerateCSRF();
                 <?php if ($lastValidation == "never_run") { ?>
                     <small class="text-small text-secondary">Last validation ran: <strong class="text-danger">You have never ran the validator for this theme</strong></small>
                 <?php } else { ?>
-                    <small class="text-small text-secondary">Last validation ran: <?= date("jS F Y [h:i A]", $lastValidationTimestamp) ?></small>
+                    <small class="text-small text-secondary">Last validation ran: <?php echo date("jS F Y [h:i A]", $lastValidationTimestamp) ?></small>
                 <?php } ?>
             </div>
         </div>

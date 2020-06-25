@@ -34,21 +34,22 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
-    <?php require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+{
+    ?>
+    <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php require(ABSPATH . getRawThemeContent("ServicesHeader.html", "components/")); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
 
     <div class="container">
         <h2>Security deposit boxes, more secure than our CEO's home (don't ask how I know)</h2>
 
-        <p><?= getBankName() ?> has won over one award for our security. Secure deposit is just one of the areas we best out opponents in the ring
+        <p><?php echo getBankName() ?> has won over one award for our security. Secure deposit is just one of the areas we best out opponents in the ring
             of banking.
         </p>
 

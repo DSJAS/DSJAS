@@ -16,13 +16,13 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "DB.php");
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Administration.php");
+require ABSPATH . INC . "DB.php";
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Administration.php";
 
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "csrf.php";
 
 $usersArray = getUsersArray(true);
 
@@ -67,14 +67,14 @@ if (isset($_POST["resetPassword"])) {
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div class="content container-fluid" id="content">
     <div class="alert alert-warning d-lg-none">
         <p><strong>Warning:</strong> The admin dashboard is not designed for smaller screens, and some functionality may be missing or limited.</p>
     </div>
 
-    <?php require(ABSPATH . INC . "components/AdminSettingsNav.php"); ?>
+    <?php require ABSPATH . INC . "components/AdminSettingsNav.php"; ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="admin-header col col-offset-6">DSJAS User Settings</h1>

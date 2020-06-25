@@ -1,14 +1,17 @@
 /* D.S Johnson & Son - Client Side JS */
 
-function selectAccount() {
+function selectAccount()
+{
     $("#selectAccount").removeClass("d-none");
 }
 
-function selectDestination() {
+function selectDestination()
+{
     $("#selectDestination").removeClass("d-none");
 }
 
-function selectFinal() {
+function selectFinal()
+{
     $("#final").removeClass("d-none");
 
     $("#submit").removeClass("d-none");

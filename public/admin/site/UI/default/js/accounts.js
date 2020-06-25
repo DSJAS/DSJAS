@@ -1,3 +1,4 @@
-function closeAccount() {
+function closeAccount()
+{
     $('#closeModal').modal('show')
 }

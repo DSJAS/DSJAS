@@ -22,13 +22,13 @@ For more information of theming and creating your own themes, please refer to th
 API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Appearance.php";
 
 function getBootstrap()
 {
     setTitle("Welcome | " . getBankName());
-?>
-    <link rel="shortcut icon" type="image/png" href="<?= getThemeContent("dogecoin.png", "assets/"); ?>" />
+    ?>
+    <link rel="shortcut icon" type="image/png" href="<?php echo getThemeContent("dogecoin.png", "assets/"); ?>" />
     <link rel="stylesheet" href=<?php echo (getThemeContent("style.css", "styles/")) ?>>
 <?php }

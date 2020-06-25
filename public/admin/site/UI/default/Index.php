@@ -34,19 +34,20 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Appearance.php";
 
 setTitle("Welcome to " . getBankName());
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
 
-        <?php require("components/Nav.php"); ?>
+        <?php include "components/Nav.php"; ?>
 
         <?php
         addModuleDescriptor("nav_bar");

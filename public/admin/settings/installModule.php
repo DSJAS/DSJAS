@@ -16,12 +16,12 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "csrf.php");
-require(ABSPATH . INC . "Administration.php");
+require ABSPATH . INC . "csrf.php";
+require ABSPATH . INC . "Administration.php";
 
-require_once(ABSPATH . INC . "Customization.php");
+require_once ABSPATH . INC . "Customization.php";
 
 ignore_user_abort(true); // Don't allow the user to cancel this install by closing the loading browser
 set_time_limit(0); // Don't stop the script if it takes too long

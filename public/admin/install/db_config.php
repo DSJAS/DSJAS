@@ -16,11 +16,11 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("install_bootstrap.php");
+require "install_bootstrap.php";
 
-require("../../include/install/Database.php");
-require("../../include/install/Utils.php");
-require("../../include/install/TrackState.php");
+require "../../include/install/Database.php";
+require "../../include/install/Utils.php";
+require "../../include/install/TrackState.php";
 
 $configuration = parse_ini_file("../../Config.ini");
 
@@ -34,7 +34,7 @@ if (!verifySetupAuth()) { ?>
     <div class="alert alert-danger" role="alert">
         <p><strong>Security error</strong> You are not authorised to run the setup process. Your authentication token is not authorised to continue the process.</p>
     </div>
-<?php
+    <?php
     die();
 }
 

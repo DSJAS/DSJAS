@@ -16,9 +16,9 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("AdminBootstrap.php");
+require "AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
+require ABSPATH . INC . "Users.php";
 
 if (isLoggedIn(true)) {
     header("Location: /admin/dashboard.php");

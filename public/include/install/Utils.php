@@ -16,7 +16,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once("Database.php");
+require_once "Database.php";
 
 function update_config($section, $key, $value)
 {
@@ -24,9 +24,11 @@ function update_config($section, $key, $value)
     $config_data[$section][$key] = $value;
     $new_content = '';
     foreach ($config_data as $section => $section_content) {
-        $section_content = array_map(function ($value, $key) {
-            return "$key=$value";
-        }, array_values($section_content), array_keys($section_content));
+        $section_content = array_map(
+            function ($value, $key) {
+                return "$key=$value";
+            }, array_values($section_content), array_keys($section_content)
+        );
         $section_content = implode("\n", $section_content);
         $new_content .= "[$section]\n$section_content\n";
     }
@@ -116,7 +118,8 @@ function verifySetupAuth()
 }
 
 function handleNoDBConfirmation()
-{ ?>
+{
+    ?>
     <div class="text-center">
         <h1 style="color: red">Warning</h1>
         <p class="lead">Using DSJ&S without a database can lead to buggy behaviour, reduced features and a broken site</p>
@@ -161,7 +164,7 @@ function handleDBVerification()
 
 
     mysqli_select_db($link, $configuration["database_name"]);
-    if (mysqli_error($link) != NULL) {
+    if (mysqli_error($link) != null) {
         return false;
     }
 

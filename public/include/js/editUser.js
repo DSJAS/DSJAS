@@ -1,11 +1,15 @@
-$(function () {
-    $('[data-toggle="popover"]').popover()
-})
+$(
+    function () {
+        $('[data-toggle="popover"]').popover()
+    }
+)
 
-function onPasswordHover() {
+function onPasswordHover()
+{
     $("#password").popover("show");
 }
 
-function onPasswordHoverEnd() {
+function onPasswordHoverEnd()
+{
     $("#password").popover("hide");
 }

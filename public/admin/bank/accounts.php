@@ -16,14 +16,14 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Administration.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Administration.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
-require_once(ABSPATH . INC . "Customization.php");
+require_once ABSPATH . INC . "Customization.php";
 
 if (isset($_GET["doCloseAccount"])) {
     $csrf = getCSRFSubmission("GET");
@@ -101,17 +101,17 @@ if (isset($_GET["closeAccount"])) { ?>
         <p class="lead">Closing an account is permanent and associated data cannot be recovered. All funds will be drained and the account will not show for any bank users.</p>
         <p><strong>Are you sure you wish to continue?</strong></p>
         <hr>
-        <a class="btn btn-danger" href="/admin/bank/accounts.php?doCloseAccount=<?= ($_GET["closeAccount"]); ?>&csrf=<?= ($_GET["csrf"]); ?>">Confirm</a>
+        <a class="btn btn-danger" href="/admin/bank/accounts.php?doCloseAccount=<?php echo ($_GET["closeAccount"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
         <a class="btn btn-secondary" href="/admin/bank/accounts.php">Cancel</a>
     </div>
-<?php
+    <?php
 
     die();
 } else if (isset($_GET["changeBalance"])) { ?>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Change account balance</h1>
-            <p class="lead">You are changing the account balance of account number <strong><?= $_GET["changeBalance"] ?></strong>.<br> The account balance will be changed to the specified number. Existing transactions will be unaffected.</p>
+            <p class="lead">You are changing the account balance of account number <strong><?php echo $_GET["changeBalance"] ?></strong>.<br> The account balance will be changed to the specified number. Existing transactions will be unaffected.</p>
 
             <hr>
 
@@ -135,7 +135,7 @@ if (isset($_GET["closeAccount"])) { ?>
             </form>
         </div>
     </div>
-<?php
+    <?php
 
     die();
 }
@@ -146,7 +146,7 @@ regenerateCSRF();
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div id="content">
     <?php if (isset($_GET["accountMigrated"])) { ?>
@@ -287,7 +287,7 @@ regenerateCSRF();
                     <label for="sourceAccountSelection">Source account</label>
                     <select class="form-control" id="sourceAccountSelection" name="sourceAccount">
                         <?php foreach (getAllAccounts() as $account) { ?>
-                            <option value="<?= $account["account_identifier"] ?>">[<?= $account["account_identifier"] ?>] <?= $account["account_name"] ?> - <?= getInfoFromUserID($account["associated_online_account_id"], "username");  ?></option>
+                            <option value="<?php echo $account["account_identifier"] ?>">[<?php echo $account["account_identifier"] ?>] <?php echo $account["account_name"] ?> - <?php echo getInfoFromUserID($account["associated_online_account_id"], "username");  ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -296,7 +296,7 @@ regenerateCSRF();
                     <label for="destAccountSelection">Destination account</label>
                     <select class="form-control" id="destAccountSelection" name="destinationAccount">
                         <?php foreach (getAllAccounts() as $account) { ?>
-                            <option value="<?= $account["account_identifier"] ?>">[<?= $account["account_identifier"] ?>] <?= $account["account_name"] ?> - <?= getInfoFromUserID($account["associated_online_account_id"], "username");  ?></option>
+                            <option value="<?php echo $account["account_identifier"] ?>">[<?php echo $account["account_identifier"] ?>] <?php echo $account["account_name"] ?> - <?php echo getInfoFromUserID($account["associated_online_account_id"], "username");  ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -305,7 +305,7 @@ regenerateCSRF();
                     <label for="type">Transaction type</label>
                     <select class="form-control" id="type" name="type">
                         <?php foreach (TRANSACTION_TYPES as $type) { ?>
-                            <option value="<?= $type ?>"><?= $type ?></option>
+                            <option value="<?php echo $type ?>"><?php echo $type ?></option>
                         <?php } ?>
                     </select>
                 </div>

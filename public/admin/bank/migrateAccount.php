@@ -16,11 +16,11 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require("../AdminBootstrap.php");
+require "../AdminBootstrap.php";
 
-require(ABSPATH . INC . "Users.php");
-require(ABSPATH . INC . "Banking.php");
-require(ABSPATH . INC . "csrf.php");
+require ABSPATH . INC . "Users.php";
+require ABSPATH . INC . "Banking.php";
+require ABSPATH . INC . "csrf.php";
 
 
 if (isset($_POST["migrateAccount"])) {
@@ -86,7 +86,7 @@ regenerateCSRF();
 ?>
 
 <html>
-<?php require(ABSPATH . INC . "components/AdminSidebar.php"); ?>
+<?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <script src="/include/js/migrateAccount.js"></script>
 
@@ -133,8 +133,8 @@ regenerateCSRF();
                 <select class="form-control account-result" name="accountID">
                     <?php foreach (getAllAccounts() as $account) {
                         $accountOwner = getInfoFromUserID($account["associated_online_account_id"], "username");
-                    ?>
-                        <option value="<?= $account["account_identifier"] ?>"><strong><?= $accountOwner ?></strong> - <?= $account["account_name"]; ?> [<?= $account["account_identifier"]; ?>]</option>
+                        ?>
+                        <option value="<?php echo $account["account_identifier"] ?>"><strong><?php echo $accountOwner ?></strong> - <?php echo $account["account_name"]; ?> [<?php echo $account["account_identifier"]; ?>]</option>
                     <?php } ?>
                 </select>
 
@@ -162,7 +162,7 @@ regenerateCSRF();
                 <label for="userSelect">Select the user who will own the account after the migration:</label>
                 <select class="form-control" id="userSelect" name="destinationUser">
                     <?php foreach (getAllUsers() as $user) { ?>
-                        <option value="<?= $user["user_id"]; ?>"><?= $user["username"]; ?></option>
+                        <option value="<?php echo $user["user_id"]; ?>"><?php echo $user["username"]; ?></option>
                     <?php } ?>
                 </select>
             </div>

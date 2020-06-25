@@ -16,7 +16,7 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once("DB.php");
+require_once "DB.php";
 
 define("LOGIN_SESSION_STR", "loggedin");
 define("LOGIN_USERNAME_STR", "username");

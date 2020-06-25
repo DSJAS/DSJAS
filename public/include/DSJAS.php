@@ -16,10 +16,10 @@ Please, waste these people's time as much as possible. It's fun and it does good
 
 */
 
-require_once(ABSPATH . INC . "Module.php");
-require_once(ABSPATH . INC . "Module.php");
+require_once ABSPATH . INC . "Module.php";
+require_once ABSPATH . INC . "Module.php";
 
-require_once(ABSPATH . INC . "Customization.php");
+require_once ABSPATH . INC . "Customization.php";
 
 /**
  * The main DSJAS load routine
@@ -30,11 +30,11 @@ require_once(ABSPATH . INC . "Customization.php");
  * 
  * @global array $GLOBALS["THEME_GLOBAL"]               Sends information to the theme and/or associated API or load functions
  * 
- * @param string $fileName (defaults to Index.php)      Used to load files from the theme content directory and the fileFilter engine
- * @param string $dirName (defaults to /)               The current single-level directory we should search for content in (ignored by fileFilter)
- * @param callable $moduleCallBack (defaults to unset)  The callback we should jump to for the theme load hooks (used by things like the validator)
- * @param string $defaultModuleHook (defaults to all)   The name of the global hook we should call on theme load for modules that want content to load when the page does
- * @param array $additionalModuleHooks (no defaults)    The names of additional callbacks which should be called on theme load (for example, user on user page load)
+ * @param string   $fileName              (defaults to Index.php)      Used to load files from the theme content directory and the fileFilter engine
+ * @param string   $dirName               (defaults to /)               The current single-level directory we should search for content in (ignored by fileFilter)
+ * @param callable $moduleCallBack        (defaults to unset)  The callback we should jump to for the theme load hooks (used by things like the validator)
+ * @param string   $defaultModuleHook     (defaults to all)   The name of the global hook we should call on theme load for modules that want content to load when the page does
+ * @param array    $additionalModuleHooks (no defaults)    The names of additional callbacks which should be called on theme load (for example, user on user page load)
  * 
  * @return void This function should not return until the end of script execution
  */

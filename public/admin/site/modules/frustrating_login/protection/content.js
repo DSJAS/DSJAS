@@ -1,17 +1,18 @@
-function runProtection(method) {
+function runProtection(method)
+{
     switch (method) {
-        case 0:
-            floginMath();
+    case 0:
+        floginMath();
             break;
-        case 1:
-            floginSecurityQuestions();
+    case 1:
+        floginSecurityQuestions();
             break;
-        case 2:
-            floginSurvey();
+    case 2:
+        floginSurvey();
             break;
 
-        default:
-            floginMath();
+    default:
+        floginMath();
             break;
     }
 
@@ -20,19 +21,22 @@ function runProtection(method) {
     return false;
 }
 
-function floginMath() {
+function floginMath()
+{
     $("#protectionModalMath").modal("show");
 
     $("#floginEasyProblemSolution").text(randomInteger(9999));
 }
 
-function floginCancelMath() {
+function floginCancelMath()
+{
     $("#protectionModalMath").modal("hide");
 
     location.reload();
 }
 
-function floginSubmitMath() {
+function floginSubmitMath()
+{
     var givenSolution = $("#floginMathProblemInput").val();
 
     if (givenSolution == "69" || givenSolution == "420" || givenSolution == "9000") {
@@ -44,7 +48,8 @@ function floginSubmitMath() {
     }
 }
 
-function floginGetEasyProblemMath() {
+function floginGetEasyProblemMath()
+{
     console.log("Getting an easier problem...");
     $("#floginEasierMath").hide();
 
@@ -55,11 +60,13 @@ function floginGetEasyProblemMath() {
     $("#floginHardProblem").removeClass("d-none");
 }
 
-function floginSecurityQuestions() {
+function floginSecurityQuestions()
+{
     $("#protectionModalSecurityQuestions").modal("show");
 }
 
-function floginSubmitSecurityQuestions() {
+function floginSubmitSecurityQuestions()
+{
     var question1 = $("#floginSecurityQuestion1").val();
     var question2 = $("#floginSecurityQuestion2").val();
     var question3 = $("#floginSecurityQuestion3").val();
@@ -73,19 +80,24 @@ function floginSubmitSecurityQuestions() {
     }
 }
 
-function floginCancelSecurityQuestions() {
+function floginCancelSecurityQuestions()
+{
     $("#floginSecurityQuestionsFlagged").removeClass("d-none");
 
-    setTimeout(function () {
-        location.reload();
-    }, 1000);
+    setTimeout(
+        function () {
+            location.reload();
+        }, 1000
+    );
 }
 
-function floginSurvey() {
+function floginSurvey()
+{
     $("#protectionIntrusiveSurvey").modal("show");
 }
 
-function floginSurveySubmit() {
+function floginSurveySubmit()
+{
     var numberOfQuestions = 6;
     var answers = [];
 
@@ -107,17 +119,20 @@ function floginSurveySubmit() {
         $("#floginSurveyThanks").removeClass("d-none");
         $("#floginSurveyUnfilled").addClass("d-none");
 
-        setTimeout(function () {
-            $('#loginForm').off();
-            $('#loginForm').submit();
-        }, 1500);
+        setTimeout(
+            function () {
+                $('#loginForm').off();
+                $('#loginForm').submit();
+            }, 1500
+        );
     }
     else {
         $("#floginSurveyUnfilled").removeClass("d-none");
     }
 }
 
-function floginSurveyCancel() {
+function floginSurveyCancel()
+{
     $("#protectionIntrusiveSurvey").modal("hide");
 
     location.reload();

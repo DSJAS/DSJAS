@@ -34,21 +34,22 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Accounts.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
-    <?php require(ABSPATH . getRawThemeContent("Nav.php", "components/")); ?> </nav>
+{
+    ?>
+    <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php require(ABSPATH . getRawThemeContent("ServicesHeader.html", "components/")); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
 
     <div class="container">
-        <h2>Securely transfer anywhere in the world with <?= getBankName(); ?> Direct™</h2>
+        <h2>Securely transfer anywhere in the world with <?php echo getBankName(); ?> Direct™</h2>
 
-        <p><?= getBankName() ?> has won over one award for our security. Secure transfer is one of our favorite features. Our service is so secure
+        <p><?php echo getBankName() ?> has won over one award for our security. Secure transfer is one of our favorite features. Our service is so secure
             that wire transfers can be processed without any confirmation at all. How secure is that?
 
             If that weren't enough, your online banking dashboard is protected by the most advanced stock security in the industry (read more below).

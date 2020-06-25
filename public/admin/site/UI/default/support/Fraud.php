@@ -34,18 +34,19 @@ Please, waste these people's time as much as possible. It's fun and it does good
     API documentation for themes and plugins.
 */
 
-require_once(THEME_API . "General.php");
-require_once(THEME_API . "Appearance.php");
+require_once THEME_API . "General.php";
+require_once THEME_API . "Appearance.php";
 
 // Theme entry point
 function getTheme()
-{ ?>
+{
+    ?>
 
     <body>
-        <?php require(ABSPATH . getRawThemeContent("SupportNav.php", "components/")); ?>
+        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
 
         <div class="alert alert-warning">
-            <strong>ATTENTION: Security alert</strong> The <?= getBankName() ?> Fraud Prevention Department has become winned of a large amount of technical support and refund scams circulating among customers.
+            <strong>ATTENTION: Security alert</strong> The <?php echo getBankName() ?> Fraud Prevention Department has become winned of a large amount of technical support and refund scams circulating among customers.
             If <strong>anybody</strong> asks for your login details or for you to sign in to your account, it may be a scam.
             Please learn more <a href="https://www.actionfraud.police.uk/">here</a>.
         </div>
@@ -56,7 +57,7 @@ function getTheme()
                     Fraud prevention and cyber crime
                 </h1>
 
-                <p class="lead"><?= getBankName() ?> is committed to preventing cyber crime and helping people like you keep your money safe from fraudsters.</p>
+                <p class="lead"><?php echo getBankName() ?> is committed to preventing cyber crime and helping people like you keep your money safe from fraudsters.</p>
             </div>
 
             <ul>
@@ -76,7 +77,7 @@ function getTheme()
                             <ul>
                                 <li><strong>Technical support scam</strong> Somebody claiming to be from a tech company will contact you pretending that you have a problem that needs fixing and need to charge you to fix it</li>
                                 <li><strong>Refund scam</strong> Somebody will contact you telling you that a refund is available for you. They will then log in to your bank to "refund you" and will attempt to steal money from there</li>
-                                <li><strong>Wire scam</strong> Some fraudsters may ask you to wire them money in order to pay for something or pay a debt. The <?= getBankName() ?> online banking dashboard is secured to guard against this</li>
+                                <li><strong>Wire scam</strong> Some fraudsters may ask you to wire them money in order to pay for something or pay a debt. The <?php echo getBankName() ?> online banking dashboard is secured to guard against this</li>
                             </ul>
                         </div>
                     </div>
@@ -144,7 +145,7 @@ function getTheme()
 
             <h3>Info at a glance</h3>
 
-            <p><?= getBankName() ?> has been committed to preventing fraud since our founding in 2005. Now, over 15 years later, we still haven't beaten them.
+            <p><?php echo getBankName() ?> has been committed to preventing fraud since our founding in 2005. Now, over 15 years later, we still haven't beaten them.
                 But we have prevented two in three fraud attempts on our website with our proprietary <strong>Scam-B-gone</strong> technology.</p>
         </div>
     </body>
