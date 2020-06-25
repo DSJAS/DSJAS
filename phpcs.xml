@@ -13,7 +13,6 @@
 
 
    <rule ref="pear"/>
-   <rule ref="Security"/>
 
    <rule ref="Generic.Files.LineEndings">
       <properties>
@@ -38,10 +37,6 @@
    </rule>
 
    <rule ref="PEAR.Commenting.ClassComment.Missing">
-      <severity>0</severity>
-   </rule>
-
-   <rule ref="Security.BadFunctions.FilesystemFunctions.WarnFilesystem">
       <severity>0</severity>
    </rule>
 
