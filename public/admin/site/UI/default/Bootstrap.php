@@ -42,5 +42,5 @@ function getBootstrap()
 {
     setTitle(getBankName());
     ?>
-    <link rel="stylesheet" href=<?php echo (getThemeContent("Styles.css", "styles/")) ?>>
+    <link rel="stylesheet" href=<?php echo (getThemeContent("styles.css", "styles/")) ?>>
 <?php }
