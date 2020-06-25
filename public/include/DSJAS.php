@@ -20,6 +20,8 @@ require_once ABSPATH . INC . "Module.php";
 
 require_once ABSPATH . INC . "Customization.php";
 
+require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
+
 /**
  * The main DSJAS load routine
  * 
