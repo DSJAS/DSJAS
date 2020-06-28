@@ -33,6 +33,11 @@
 
 require_once ABSPATH . INC . "Users.php";
 
+
+define("LOGOUT_API_SUCCESS", -1);
+define("LOGOUT_API_FAILURE", -2);
+
+
 function shouldProvideLoginFeedback()
 {
     return isset($_GET["error"]);
@@ -64,6 +69,19 @@ function getLoginErrorMsg()
     default:
         return "There was an unknown error while attempting to sign you in. Error code: " . $code;
     }
+}
+
+function shouldProvideLogoutFeedback()
+{
+    return isset($_GET["success"]) || isset($_GET["signout_fail"]);
+}
+
+function getLogoutFeedback()
+{
+    if (isset($_GET["signout_fail"]) || (isset($_GET["success"]) && !$_GET["success"]))
+        return LOGOUT_API_FAILURE;
+
+    return LOGOUT_API_SUCCESS;
 }
 
 function shouldAppearLoggedIn()
