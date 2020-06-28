@@ -8,7 +8,7 @@
                 <p><strong><?php echo (getLoginErrorTitle()); ?></strong> <?php echo (getLoginErrorMsg()); ?></p>
             </div>
             <?php
-        } elseif (isset($_GET["signout_fail"])) { ?>
+        } elseif (shouldProvideLogoutFeedback() && getLogoutFeedback() == LOGOUT_API_FAILURE) { ?>
             <div class="alert alert-info" role="alert">
                 <p><strong>Failed to sign out</strong> Please sign in before you sign out</p>
             </div>

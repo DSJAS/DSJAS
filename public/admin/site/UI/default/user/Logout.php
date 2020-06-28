@@ -34,6 +34,7 @@
 */
 
 require_once THEME_API . "General.php";
+require_once THEME_API . "Accounts.php";
 
 // Theme entry point
 function getTheme()
@@ -44,7 +45,7 @@ function getTheme()
 
         <?php
         // If we want the success page, display that now
-        if (isset($_GET["success"]) && $_GET["success"] == true) { ?>
+        if (shouldProvideLogoutFeedback() && getLogoutFeedback() == LOGOUT_API_SUCCESS) { ?>
             <div class="jumbotron">
                 <h1>You have been logged out</h1>
                 <p>You have been successfully logged out of your account, you can now return home or sign in again.</p>
