@@ -380,7 +380,7 @@ function createUser($username, $email, $password, $passwordHint, $enabled = true
         $query = new PreparedStatement(
             "INSERT INTO " . $tableName . " (`username`, `email`, `password_hash`, `password_hint`, `account_enabled`, `new_account`, `real_name`) VALUES (?, ?, ?, ?, ?, 1, ?)",
             [$username, $email, $passwordHash, $passwordHint, $enabled, $realName],
-            "ssssiis"
+            "ssssis"
         );
     } else {
         $query = new PreparedStatement(
