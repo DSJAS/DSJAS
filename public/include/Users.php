@@ -329,9 +329,6 @@ function userExists($username = null, $email = null, $realname = null, $siteuser
         $database->query();
     }
 
-    var_dump($query->affectedRows);
-    var_dump($query->result);
-
     return $query->affectedRows > 0;
 }
 
