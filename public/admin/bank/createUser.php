@@ -35,7 +35,7 @@ if (!isset($_POST["username"]) || $_POST["username"] == "" || !isset($_POST["pas
     die("<strong>Error</strong> Please supply all required parameters");
 }
 
-createUser($_POST["username"], $_POST["email"], $_POST["password"], $_POST["passwordHint"]);
+createUser($_POST["username"], $_POST["email"], $_POST["password"], $_POST["passwordHint"], true, false, $_POST["realName"]);
 
 if (isset($_POST["generateBankAccounts"])) {
     genRandomBankAccounts(getUserIDFromName($_POST["username"]));

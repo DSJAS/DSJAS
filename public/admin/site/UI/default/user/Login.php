@@ -16,19 +16,21 @@
  */
 
 /*
-    THEMING API
-    ===========
+    DEFAULT THEME - DSJAS
+    =====================
 
-    This file contains the functions and APIs required to write a theme
-    for DSJAS.
+    This is the theming files included in the default installation of DSJAS.
+    It contains HTML and PHP files required to load and display the default theme.
 
-    It does nothing on its own, but does provide useful utility functions
-    for theming scripts and provides a way for a theme to be consistent
-    in behaviour to the rest of the site.
+    This file should never be accessed directly, and instead should only be
+    required by a file which has already bootstrapped the site.
+    This means that your script must have defined the ABSPATH constants
+    and preformed other required bootstrapping tasks before the page
+    can be displayed.
 
-    For more information on the theming API, please refer to the API
-    documentation.
 
+    For more information of theming and creating your own themes, please refer to the
+    API documentation for themes and plugins.
 */
 
 require_once THEME_API . "General.php";
