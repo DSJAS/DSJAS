@@ -62,7 +62,7 @@ function connectToDatabase()
     return $conn;
 }
 
-function safeInsertUser($username, $password_hash, $password_hint, $email, $userid)
+function safeInsertUser($username, $password_hash, $password_hint, $email, $userid, $realName = "user")
 {
     $configuration = parse_ini_file("../../Config.ini");
 
@@ -74,13 +74,13 @@ function safeInsertUser($username, $password_hash, $password_hint, $email, $user
     $new = 1;
 
     $sql = new mysqli($hostname, $uname, $pw, $dbname);
-    $statement = $sql->prepare("INSERT INTO `siteusers` (`username`, `email`, `password_hash`, `password_hint`, `new_account`, `user_id`) VALUES (?, ?, ?, ?, ?, ?)");
+    $statement = $sql->prepare("INSERT INTO `siteusers` (`username`, `email`, `password_hash`, `password_hint`, `new_account`, `user_id`, `real_name`) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     $username = sanitizeUserCredentials($username, $sql);
     $email = sanitizeUserCredentials($email, $sql);
     $password_hint = sanitizeUserCredentials($password_hint, $sql);
 
-    $statement->bind_param("ssssii", $username, $email, $password_hash, $password_hint, $new, $userid);
+    $statement->bind_param("ssssiis", $username, $email, $password_hash, $password_hint, $new, $userid, $realName);
     $statement->execute();
 
     $statement->close();
