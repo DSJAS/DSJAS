@@ -14,6 +14,26 @@
             }
         },
         {
+            "label": "Build - docker",
+            "type": "shell",
+            "command": "docker-compose build",
+            "args": [
+                "--no-cache"
+            ],
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Start - docker",
+            "type": "shell",
+            "command": "docker-compose up"
+        },
+        {
+            "label": "Clean - docker",
+            "type": "shell",
+            "command": "docker-compose down"
+        },
+        {
             "label": "Install",
             "type": "shell",
             "command": "${workspaceRoot}/scripts/Install.py",
