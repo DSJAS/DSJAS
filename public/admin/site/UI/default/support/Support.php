@@ -39,7 +39,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body class="bg-light">
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
@@ -96,7 +96,7 @@ function getTheme()
                     <h5 class="card-title">Debt management</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Too badly in debt, there are some things we can do to help you out</h6>
                     <p class="card-text">With our all new "Earn quick" scheme, you can do several things to pay off your debt with us. For example, you can rent out your computer to mine bitcoin or give us your data to sell to Google. Easy and free ways to pay off debt, quick!</p>
-                    <a href="#" class="card-link">Card link</a>
+                    <a href="/support/Finances" class="card-link">Tell me more</a>
                     <a href="/support/Contact" class="card-link">Speak to support</a>
                 </div>
             </div>
