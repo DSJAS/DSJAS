@@ -25,21 +25,25 @@ fits on of the below, please contact us using GitHub pull requests or issues:
 1. **My content is not credited in this file!** Please see the note at the top of the file detailing how to get yourself added
 1. **I have a copyright issue!** Please submit a GitHub issue. We take copyright seriously, and if your work has been mistaken for public domain, we need to hear about it.
 
-## Database of third-party work
+## Database of third-party images
 
-| Work title        | Link to original                       | Content licence                                        | Notes               |
-| -------------     | -------------                          | -----                                                  | -----               |
-| scammer-logo      | [Pixabay page](https://bit.ly/3eA7Ls5) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| account-icon      | [Pixabay page](https://bit.ly/2VR1r73) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| loan-icon         | [Pixabay page](https://bit.ly/3asBa46) |[Pixabay standard](https://pixabay.com/service/license/)| Cropped             |
-| happy-family      | [Pixabay page](https://bit.ly/3aloBYk) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| warning-grey      | [Pixabay page](https://bit.ly/3aw0O7Y) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| warning           | [Pixabay page](https://bit.ly/2Vrg69J) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| savings-icon      | [Pixabay page](https://bit.ly/2VtitsY) |[Pixabay standard](https://pixabay.com/service/license/)| Drop shadow added   |
-| digital-marketing | [Pixabay page](https://bit.ly/34TAZxH) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| togetherness      | [Pixabay page](https://bit.ly/2Y2e9CF) |[Pixabay standard](https://pixabay.com/service/license/)| Currently unused    |
-| singapore         | [Pixabay page](https://bit.ly/2Vs1gjl) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| building          | [Pixabay page](https://bit.ly/3cHItpV) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| skyscraper        | [Pixabay page](https://bit.ly/2XWNmrk) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| skyline           | [Pixabay page](https://bit.ly/2RZPniq) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
-| online-banking    | [Pixabay page](https://bit.ly/2KljxbU) |[Pixabay standard](https://pixabay.com/service/license/)|                     |
+All third party images can be found under the *public/assets* directory. These are all either royalty free or licensed under the [Pixabay Licence](https://pixabay.com/service/license/)
+
+## Database of open source projects
+
+You will find all used open source projects in the following locations:
+
+1. **.gitmodules** This file contains git submodule definitions for all the open source projects used by DSJAS
+1. **composer.json** This file contains package definitions for the composer packages DSJAS depends on
+
+## Used frameworks/plugins
+
+You can find files with a name similar to *Bootstrap.php* scattered around the project. These contain include directives for all the frameworks and plugins used on every page. The most important of which are:
+
+* [Bootstrap 4](https://getbootstrap.com)
+* [JQuery](https://jquery.com/)
+* [Popper.JS](https://popper.js.org/)
+
+## In build-in modules/themes
+
+Some builtins use third-party content for their functionality. In this case, they will contain a file which states the sources and licence for them.
