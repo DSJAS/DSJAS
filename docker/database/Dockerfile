@@ -1,8 +1,5 @@
 FROM mysql:latest
 
-ENV MYSQL_RANDOM_ROOT_PASSWORD=yes
-ENV MYSQL_DATABASE=dsjas
-ENV MYSQL_USER=DSJAS
-ENV MYSQL_PASSWORD=passwordforthewebsite4321
+ADD ./docker/database/dsjas_db.sql /docker-entrypoint-initdb.d
 
 EXPOSE 3306

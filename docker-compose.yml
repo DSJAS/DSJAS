@@ -11,7 +11,9 @@ services:
         ports: 
             - 80:80
     database:
-        image: mysql:latest
+        build:
+            context: .
+            dockerfile: ./docker/database/Dockerfile
         environment: 
             MYSQL_RANDOM_ROOT_PASSWORD: 1
             MYSQL_DATABASE: dsjas
