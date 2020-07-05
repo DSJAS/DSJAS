@@ -1,4 +1,4 @@
-# An especially frustrating login process
+# A rather overactive security mechanism
 
     In order to protect your security and privacy (and to make it annoying for fraudsters to get into your account), DSJAS will end your session every three-five minutes if you are inactive.
 
