@@ -30,6 +30,21 @@ session_start();
 
 $configuration = parse_ini_file(ABSPATH . "/Config.ini");
 
+if (!$configuration["allow_access_to_admin"]) {
+    adminAccessDeniedMessage();
+    header('HTTP/1.0 403 Forbidden');
+    die();
+}
+
+if (installRequired($configuration)) {
+    redirectToInstall($configuration);
+}
+
+if (!isset($_SESSION["loggedin_su"]) || !$_SESSION["loggedin_su"]) {
+    header("Location: /admin/user/SignIn.php");
+    die();
+}
+
 ?>
 
 <head>
@@ -54,20 +69,3 @@ $configuration = parse_ini_file(ABSPATH . "/Config.ini");
 
 
 </head>
-
-<?php
-
-if (!$configuration["allow_access_to_admin"]) {
-    adminAccessDeniedMessage();
-    header('HTTP/1.0 403 Forbidden');
-    die();
-}
-
-if (installRequired($configuration)) {
-    redirectToInstall($configuration);
-}
-
-if (!isset($_SESSION["loggedin_su"]) || !$_SESSION["loggedin_su"]) {
-    header("Location: /admin/user/SignIn.php");
-    die();
-}
