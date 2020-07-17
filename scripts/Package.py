@@ -260,7 +260,6 @@ if __name__ == "__main__":
     print("[!] About to package archive")
     print("[?] Please confirm that the following details are accurate and that you are ready to package:\n")
 
-    print("Default config present: " + str(useDefaultConfigs))
     print("Version ID: " + versionMajor + "." +
           versionMinor + "." + patch + "-" + versionBand)
     print("Version name: " + versionName)
