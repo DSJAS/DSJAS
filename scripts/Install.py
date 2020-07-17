@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 # DSJAS development install script
 # Run this script to have the necessary configuration and other files added to your install
 # The site will not function unless this file is run first
