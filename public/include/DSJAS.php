@@ -19,6 +19,7 @@ require_once ABSPATH . INC . "Module.php";
 require_once ABSPATH . INC . "Module.php";
 
 require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "DB.php";
 
 require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
 
@@ -62,12 +63,28 @@ function dsjas($fileName = "Index.php", $dirName = "/", $moduleCallBack = null, 
         $useTheme = $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
     }
 
+    // Initialise shared DB for theme API connections
+    $hostname = $config->getKey(ID_GLOBAL_CONFIG, "database", "server_hostname");
+    $databaseName = $config->getKey(ID_GLOBAL_CONFIG, "database", "database_name");
+    $username = $config->getKey(ID_GLOBAL_CONFIG, "database", "username");
+    $password = $config->getKey(ID_GLOBAL_CONFIG, "database", "password");
+
+    $sharedDB = new DB($hostname, $databaseName, $username, $password);
+
+    // Initialise shared configuration for theme APIs
+    $sharedConfig = new Configuration(true, true, false, true);
+
     // Define globals for theme API
     $GLOBALS["THEME_GLOBALS"] = [];
 
     $GLOBALS["THEME_GLOBALS"]["module_manager"] = $moduleManager;
+    
+    $GLOBALS["THEME_GLOBALS"]["shared_conf"] = $sharedConfig;
+    $GLOBALS["THEME_GLOBALS"]["shared_db"] = $sharedDB;
 
     $theme = new Theme($fileName, $dirName, $useTheme);
     $theme->loadTheme();
     $theme->displayTheme();
+
+    $sharedDB->safeDisconnect();
 }
