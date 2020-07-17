@@ -226,9 +226,6 @@ if __name__ == "__main__":
     print("[i] Please enter that information below")
     print("[!] Default info is shown in parentheses and multiple choice are shown in square braces\n\n")
 
-    useDefaultConfigs = interpretBooleanInput(
-        input("Use the default config provided by the developer? [y/n]:"))
-
     separator()
 
     versionMajor = inputOrDefault(
@@ -250,14 +247,8 @@ if __name__ == "__main__":
     separator()
     print("\n[i] Writing configuration. Please wait...")
 
-    # Copy across the default config files
-    if useDefaultConfigs:
-        copyDefaultConfiguration(distName)
-    else:
-        createDummyVersion(distName)
-
-        print("[!] You have chosen to ignore the default configuration, which will require users to create the config themselves before installing")
-        print("[i] You may wish to inform users of this fact")
+    # Copy across the default config file
+    copyDefaultConfiguration(distName)
 
     # Update version.json
     updateVersionJSON(distName, versionMajor, versionMinor,
