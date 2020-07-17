@@ -37,26 +37,23 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/include/vendor/hooks/src/gburtini/Hoo
 
 function getCurrentThemeName()
 {
-    $config = new Configuration(false, true, false, false);
-    $default = $config->getKey(ID_THEME_CONFIG, "config", "use_default");
+    $default = $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "config", "use_default");
 
     if ($default) {
         return "default";
     } else {
-        return $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
+        return $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
     }
 }
 
 function getBankName()
 {
-    $config = new Configuration(true, false, false, false);
-    return $config->getKey(ID_GLOBAL_CONFIG, "customization", "bank_name");
+    return $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_GLOBAL_CONFIG, "customization", "bank_name");
 }
 
 function getBankURL()
 {
-    $config = new Configuration(true, false, false, false);
-    return $config->getKey(ID_GLOBAL_CONFIG, "customization", "bank_domain");
+    return $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_GLOBAL_CONFIG, "customization", "bank_domain");
 }
 
 function addModuleDescriptor($descriptorName)
