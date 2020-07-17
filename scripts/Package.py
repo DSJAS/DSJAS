@@ -49,7 +49,7 @@ def removeIfDirExists(dir):
         shutil.rmtree(dir)
 
 
-def createDist(distName):
+def createDist():
     os.mkdir("dist")
 
 
