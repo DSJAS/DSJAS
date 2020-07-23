@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 # DSJAS packager scripts
 # This script is used to build the archives and other required distribution files
 # Please see build instructions for more info
@@ -49,7 +51,7 @@ def removeIfDirExists(dir):
         shutil.rmtree(dir)
 
 
-def createDist(distName):
+def createDist():
     os.mkdir("dist")
 
 
@@ -226,9 +228,6 @@ if __name__ == "__main__":
     print("[i] Please enter that information below")
     print("[!] Default info is shown in parentheses and multiple choice are shown in square braces\n\n")
 
-    useDefaultConfigs = interpretBooleanInput(
-        input("Use the default config provided by the developer? [y/n]:"))
-
     separator()
 
     versionMajor = inputOrDefault(
@@ -250,14 +249,8 @@ if __name__ == "__main__":
     separator()
     print("\n[i] Writing configuration. Please wait...")
 
-    # Copy across the default config files
-    if useDefaultConfigs:
-        copyDefaultConfiguration(distName)
-    else:
-        createDummyVersion(distName)
-
-        print("[!] You have chosen to ignore the default configuration, which will require users to create the config themselves before installing")
-        print("[i] You may wish to inform users of this fact")
+    # Copy across the default config file
+    copyDefaultConfiguration(distName)
 
     # Update version.json
     updateVersionJSON(distName, versionMajor, versionMinor,
@@ -269,7 +262,6 @@ if __name__ == "__main__":
     print("[!] About to package archive")
     print("[?] Please confirm that the following details are accurate and that you are ready to package:\n")
 
-    print("Default config present: " + str(useDefaultConfigs))
     print("Version ID: " + versionMajor + "." +
           versionMinor + "." + patch + "-" + versionBand)
     print("Version name: " + versionName)
