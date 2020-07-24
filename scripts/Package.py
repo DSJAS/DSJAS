@@ -19,6 +19,8 @@ def isInRoot():
 
     return ".git" in dirs
 
+def submodulesExist():
+    return os.path.isfile(os.path.abspath("./public/include/vendor/hooks/composer.json"))
 
 def printWelcome():
     print("DSJAS packaging tool")
@@ -183,6 +185,12 @@ if __name__ == "__main__":
         print(
             "[i] You can do this by calling the script with the scripts directory in the path")
         print("[i] For example: ./scripts/Package.py")
+        quit(-1)
+
+    if not submodulesExist():
+        print("[X] You don't appear to have the git submodules on your machine")
+        print("[X] DSJAS needs these submodules to be present on your filesystem to run and package")
+        print("[?] Did you run clone with the recursive flag?")
         quit(-1)
 
     # Print welcome
