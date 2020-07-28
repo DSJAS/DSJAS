@@ -22,7 +22,7 @@ require ABSPATH . INC . "ThemeValidator.php";
 require ABSPATH . INC . "csrf.php";
 require ABSPATH . INC . "Administration.php";
 
-ignore_user_abort(true); // Don't allow the user to cancel this install by closing the loading browser
+ignore_user_abort(true); // Don't allow the user to cancel this operation by closing the loading browser
 
 
 if (isset($_GET["validateTheme"])) {
