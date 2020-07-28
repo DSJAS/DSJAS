@@ -101,3 +101,5 @@ if (isset($_POST["changeModuleStates"])) {
 
     header("Location: /admin/settings/mod.php?moduleUninstalled");
 }
+
+ob_end_flush();
