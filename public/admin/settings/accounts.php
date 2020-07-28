@@ -40,6 +40,7 @@ if (isset($_POST["resetPassword"])) {
     changeUserPassword($userId, $_POST["password"], true);
 
     header("Location: /admin/settings/accounts.php?resetSuccess");
+    die();
 } elseif (isset($_POST["createUser"])) {
     if (!verifyCSRFToken(getCSRFSubmission())) {
         die(getCSRFFailedError());
@@ -60,6 +61,7 @@ if (isset($_POST["resetPassword"])) {
     createUser($_POST["username"], $_POST["email"], $_POST["password"], $_POST["passwordHint"], $enabled, true);
 
     header("Location: /admin/settings/accounts.php?createSuccess");
+    die();
 } else {
     regenerateCSRF();
 }

@@ -61,6 +61,7 @@ if (isset($_GET["doToggleEnabledUser"])) {
     }
 
     header("Location: /admin/settings/accounts.php");
+    die();
 }
 
 if (isset($_POST["doEditUser"])) {
@@ -114,6 +115,7 @@ if (isset($_POST["doEditUser"])) {
     }
 
     header("Location: /admin/settings/accounts.php");
+    die();
 }
 
 ?>

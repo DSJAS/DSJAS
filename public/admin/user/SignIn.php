@@ -22,6 +22,7 @@ require ABSPATH . INC . "Util.php";
 
 if (isLoggedIn(true)) {
     redirectToLoggedIn(true);
+    die();
 }
 
 if (shouldAttemptLogin()) {

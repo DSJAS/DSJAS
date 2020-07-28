@@ -53,8 +53,10 @@ if (isset($_POST["doSave"])) {
     die(); // Don't return the panel for the POST request
 } else if (isset($_POST["doResetInstall"])) {
     installReset($config);
+    die();
 } else if (isset($_POST["doResetFactory"])) {
     factoryReset($config);
+    die();
 }
 
 regenerateCSRF();
