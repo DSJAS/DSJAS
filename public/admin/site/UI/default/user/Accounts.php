@@ -76,7 +76,7 @@ function getTheme()
         <div class="container">
             <br>
 
-            <h3>My Accounts</h3>
+            <h3>Account summary</h3>
 
             <table class="table table-striped">
                 <thead class="thead-dark">
@@ -104,6 +104,8 @@ function getTheme()
                     ?>
                 </tbody>
             </table>
+            
+            <h3>Quick actions</h3>
 
             <?php
             if (count(getAccountsArray()) == 0) { ?>
@@ -111,12 +113,12 @@ function getTheme()
                 <a href="/user/Apply.php">Apply now</a>
             <?php } ?>
 
-            <a href="/user/Apply" class="btn btn-success dashboard-footer-buttons">Apply now</a>
-            <button class="btn btn-danger dashboard-footer-buttons" onclick="closeAccount()">Close an account</button>
+            <a href="/user/Apply" class="btn btn-success">Apply now</a>
+            <button class="btn btn-danger" onclick="closeAccount()">Close an account</button>
 
             <div class="btn-group">
-                <a href="/support/Support" class="btn btn-dark dashboard-footer-buttons">Get help</a>
-                <a href="/support/Contact" class="btn btn-warning dashboard-footer-buttons">Contact support</a>
+                <a href="/support/Support" class="btn btn-dark">Get help</a>
+                <a href="/support/Contact" class="btn btn-warning">Contact support</a>
             </div>
 
             <?php addModuleDescriptor("footer");  ?>
