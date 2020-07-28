@@ -31,7 +31,15 @@ if (shouldAttemptLogin()) {
         if ($result[0]) {
             redirect("/admin/dashboard.php");
         } else {
-            redirect("/admin/user/SignIn.php?error=1");
+            // We need to only send proper feedback if it's to
+            // show a misc error
+            // Otherwise, we are disclosing sensitive info
+            if (!$result[0] && $result[1] == -3)
+            {
+                redirect("/admin/user/SignIn.php?error=" . $result[1]);
+            } else {
+                redirect("/admin/user/SignIn.php?error=-1");
+            }
         }
         die();
     } else {
@@ -61,11 +69,17 @@ if (shouldAttemptLogin()) {
             </div>
         <?php }
 
-        if (isset($_GET["error"])) { ?>
-            <div class="alert alert-danger">
-                <p><strong>Login failure:</strong> Your credentials were incorrect</p>
-            </div>
-        <?php }
+        if (isset($_GET["error"])) { 
+            if ($_GET["error"] == -3) { ?>
+                <div class="alert alert-danger">
+                    <p><strong>Account disabled</strong> Your account has been disabled by the site administrator and is not accessible</p>
+                </div>
+            <?php } else { ?>
+                <div class="alert alert-danger">
+                    <p><strong>Login failure:</strong> Your credentials were incorrect</p>
+                </div>
+            <?php }
+        }
 
         if (!canLogin(true)) { ?>
             <div class="alert alert-danger">
