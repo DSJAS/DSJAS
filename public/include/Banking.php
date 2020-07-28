@@ -325,7 +325,7 @@ function genRandomBankAccounts($userID, $amount = 3)
         $randomBalance = getRandomBalance();
         $randomType = getRandomAccountType();
 
-        createAccount($randomAccountName, $userID, $randomType, getInfoFromUserID($userID, "username"), true, $randomBalance);
+        createAccount($randomAccountName, $userID, $randomType, getInfoFromUserID($userID, "username"), false, $randomBalance);
     }
 }
 
