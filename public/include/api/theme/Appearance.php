@@ -45,13 +45,12 @@ function setMeta($metaTag, $content)
 
 function getThemeContent($scriptName, $themeRelativeLocation = "/")
 {
-    $config = new Configuration(false, true, false, false);
-    $useDefault = $config->getKey(ID_THEME_CONFIG, "config", "use_default");
+    $useDefault = $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "config", "use_default");
 
     if ($useDefault) {
         $themeName = "default";
     } else {
-        $themeName = $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
+        $themeName = $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
     }
 
     $path = "'/admin/site/UI/";
@@ -66,13 +65,12 @@ function getThemeContent($scriptName, $themeRelativeLocation = "/")
 
 function getRawThemeContent($scriptName, $themeRelativeLocation = "/")
 {
-    $config = new Configuration(false, true, false, false);
-    $useDefault = $config->getKey(ID_THEME_CONFIG, "config", "use_default");
+    $useDefault = $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "config", "use_default");
 
     if ($useDefault) {
         $themeName = "default";
     } else {
-        $themeName = $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
+        $themeName = $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
     }
 
     $path = "/admin/site/UI/";

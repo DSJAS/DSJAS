@@ -33,48 +33,25 @@
 */
 
 require_once ABSPATH . INC . "DB.php";
-
 require_once ABSPATH . INC . "Users.php";
 
 
-// Cached database information for created databases
-static $db_hostname = null;
-static $db_username = null;
-static $db_password = null;
-static $db_dbname = null;
-
 function getAccountsArray()
 {
-    $config = dashboardLoadDatabaseInformation();
     $userId = getCurrentUserId();
 
-    $database = new DB(
-        $config["server_hostname"],
-        $config["database_name"],
-        $config["username"],
-        $config["password"]
-    );
-
     $query = new SimpleStatement("SELECT * FROM `accounts` WHERE `associated_online_account_id` = $userId");
-    $database->unsafeQuery($query);
+    $GLOBALS["THEME_GLOBALS"]["shared_db"]->unsafeQuery($query);
 
     return $query->result;
 }
 
 function getRecentTransactionsArray($loadAmount)
 {
-    $config = dashboardLoadDatabaseInformation();
     $userId = getCurrentUserId();
 
-    $database = new DB(
-        $config["server_hostname"],
-        $config["database_name"],
-        $config["username"],
-        $config["password"]
-    );
-
     $accountsQuery = new SimpleStatement("SELECT * FROM `accounts` WHERE `associated_online_account_id` = $userId");
-    $database->unsafeQuery($accountsQuery);
+    $GLOBALS["THEME_GLOBALS"]["shared_db"]->unsafeQuery($accountsQuery);
 
     $whereText = "";
 
@@ -90,7 +67,7 @@ function getRecentTransactionsArray($loadAmount)
     }
 
     $query = new SimpleStatement("SELECT * FROM `transactions` WHERE $whereText ORDER BY `transaction_id` DESC LIMIT $loadAmount");
-    $database->unsafeQuery($query);
+    $GLOBALS["THEME_GLOBALS"]["shared_db"]->unsafeQuery($query);
 
     if ($query->result === false) {
         return [];
@@ -132,48 +109,11 @@ function isPricePositive($priceString, $regionalCurrencySymbol = "$")
 
 function getDisplayBalance($accountID)
 {
-    $config = dashboardLoadDatabaseInformation();
-
-    $database = new DB(
-        $config["server_hostname"],
-        $config["database_name"],
-        $config["username"],
-        $config["password"]
-    );
-
     $query = new PreparedStatement("SELECT `account_balance` FROM `accounts` WHERE `account_identifier` = ?", [$accountID], "i");
-    $database->prepareQuery($query);
-    $database->query();
+    $GLOBALS["THEME_GLOBALS"]["shared_db"]->prepareQuery($query);
+    $GLOBALS["THEME_GLOBALS"]["shared_db"]->query();
 
     $balanceValue = $query->result[0]["account_balance"];
 
     return "$" . $balanceValue;
-}
-
-
-function dashboardLoadDatabaseInformation()
-{
-    global $db_hostname;
-    global $db_dbname;
-    global $db_username;
-    global $db_password;
-
-    if ($db_hostname == null || $db_username == null || $db_password == null || $db_dbname == null) {
-        $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-        $db_hostname = $configuration["server_hostname"];
-        $db_dbname = $configuration["database_name"];
-        $db_username = $configuration["username"];
-        $db_password = $configuration["password"];
-
-        return $configuration;
-    } else {
-        $details = array();
-        $details["server_hostname"] = $db_hostname;
-        $details["database_name"] = $db_dbname;
-        $details["username"] = $db_username;
-        $details["password"] = $db_password;
-
-        return $details;
-    }
 }
