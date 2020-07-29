@@ -1,18 +1,19 @@
 <?php
 
 /**
- * Welcome to Dave-Smith Johnson & Son family bank!
+ * This file is part of DSJAS
+ * Written and maintained by the DSJAS project.
  * 
- * This is a tool to assist with scam baiting, especially with scammers attempting to
- * obtain bank information or to attempt to scam you into giving money.
+ * Copyright (C) 2020 - Ethan Marshall
  * 
- * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
- * is free to use and change for all users. Scam bait as much as you want!
+ * DSJAS is free software which is licensed and distributed under
+ * the terms of the MIT software licence.
+ * Exact terms can be found in the LICENCE file.
  * 
- * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
- * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
- * 
- * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * above mentioned licence for specific details.
  */
 
 /*
@@ -76,7 +77,7 @@ function getTheme()
         <div class="container">
             <br>
 
-            <h3>My Accounts</h3>
+            <h3>Account summary</h3>
 
             <table class="table table-striped">
                 <thead class="thead-dark">
@@ -104,6 +105,8 @@ function getTheme()
                     ?>
                 </tbody>
             </table>
+            
+            <h3>Quick actions</h3>
 
             <?php
             if (count(getAccountsArray()) == 0) { ?>
@@ -111,12 +114,12 @@ function getTheme()
                 <a href="/user/Apply.php">Apply now</a>
             <?php } ?>
 
-            <a href="/user/Apply" class="btn btn-success dashboard-footer-buttons">Apply now</a>
-            <button class="btn btn-danger dashboard-footer-buttons" onclick="closeAccount()">Close an account</button>
+            <a href="/user/Apply" class="btn btn-success">Apply now</a>
+            <button class="btn btn-danger" onclick="closeAccount()">Close an account</button>
 
             <div class="btn-group">
-                <a href="/support/Support" class="btn btn-dark dashboard-footer-buttons">Get help</a>
-                <a href="/support/Contact" class="btn btn-warning dashboard-footer-buttons">Contact support</a>
+                <a href="/support/Support" class="btn btn-dark">Get help</a>
+                <a href="/support/Contact" class="btn btn-warning">Contact support</a>
             </div>
 
             <?php addModuleDescriptor("footer");  ?>

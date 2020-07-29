@@ -1,18 +1,19 @@
 <?php
 
 /**
- * Welcome to Dave-Smith Johnson & Son family bank!
+ * This file is part of DSJAS
+ * Written and maintained by the DSJAS project.
  * 
- * This is a tool to assist with scam baiting, especially with scammers attempting to
- * obtain bank information or to attempt to scam you into giving money.
+ * Copyright (C) 2020 - Ethan Marshall
  * 
- * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
- * is free to use and change for all users. Scam bait as much as you want!
+ * DSJAS is free software which is licensed and distributed under
+ * the terms of the MIT software licence.
+ * Exact terms can be found in the LICENCE file.
  * 
- * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
- * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
- * 
- * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * above mentioned licence for specific details.
  */
 
 require "../../include/Bootstrap.php";
@@ -22,6 +23,7 @@ require ABSPATH . INC . "Util.php";
 
 if (isLoggedIn(true)) {
     redirectToLoggedIn(true);
+    die();
 }
 
 if (shouldAttemptLogin()) {
@@ -30,7 +32,15 @@ if (shouldAttemptLogin()) {
         if ($result[0]) {
             redirect("/admin/dashboard.php");
         } else {
-            redirect("/admin/user/SignIn.php?error=1");
+            // We need to only send proper feedback if it's to
+            // show a misc error
+            // Otherwise, we are disclosing sensitive info
+            if (!$result[0] && $result[1] == -3)
+            {
+                redirect("/admin/user/SignIn.php?error=" . $result[1]);
+            } else {
+                redirect("/admin/user/SignIn.php?error=-1");
+            }
         }
         die();
     } else {
@@ -60,11 +70,17 @@ if (shouldAttemptLogin()) {
             </div>
         <?php }
 
-        if (isset($_GET["error"])) { ?>
-            <div class="alert alert-danger">
-                <p><strong>Login failure:</strong> Your credentials were incorrect</p>
-            </div>
-        <?php }
+        if (isset($_GET["error"])) { 
+            if ($_GET["error"] == -3) { ?>
+                <div class="alert alert-danger">
+                    <p><strong>Account disabled</strong> Your account has been disabled by the site administrator and is not accessible</p>
+                </div>
+            <?php } else { ?>
+                <div class="alert alert-danger">
+                    <p><strong>Login failure:</strong> Your credentials were incorrect</p>
+                </div>
+            <?php }
+        }
 
         if (!canLogin(true)) { ?>
             <div class="alert alert-danger">

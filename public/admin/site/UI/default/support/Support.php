@@ -1,18 +1,19 @@
 <?php
 
 /**
- * Welcome to Dave-Smith Johnson & Son family bank!
+ * This file is part of DSJAS
+ * Written and maintained by the DSJAS project.
  * 
- * This is a tool to assist with scam baiting, especially with scammers attempting to
- * obtain bank information or to attempt to scam you into giving money.
+ * Copyright (C) 2020 - Ethan Marshall
  * 
- * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
- * is free to use and change for all users. Scam bait as much as you want!
+ * DSJAS is free software which is licensed and distributed under
+ * the terms of the MIT software licence.
+ * Exact terms can be found in the LICENCE file.
  * 
- * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
- * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
- * 
- * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * above mentioned licence for specific details.
  */
 
 /*
@@ -39,7 +40,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body class="bg-light">
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
@@ -96,7 +97,7 @@ function getTheme()
                     <h5 class="card-title">Debt management</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Too badly in debt, there are some things we can do to help you out</h6>
                     <p class="card-text">With our all new "Earn quick" scheme, you can do several things to pay off your debt with us. For example, you can rent out your computer to mine bitcoin or give us your data to sell to Google. Easy and free ways to pay off debt, quick!</p>
-                    <a href="#" class="card-link">Card link</a>
+                    <a href="/support/Finances" class="card-link">Tell me more</a>
                     <a href="/support/Contact" class="card-link">Speak to support</a>
                 </div>
             </div>

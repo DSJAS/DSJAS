@@ -1,24 +1,26 @@
 <?php
 
 /**
- * Welcome to Dave-Smith Johnson & Son family bank!
+ * This file is part of DSJAS
+ * Written and maintained by the DSJAS project.
  * 
- * This is a tool to assist with scam baiting, especially with scammers attempting to
- * obtain bank information or to attempt to scam you into giving money.
+ * Copyright (C) 2020 - Ethan Marshall
  * 
- * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
- * is free to use and change for all users. Scam bait as much as you want!
+ * DSJAS is free software which is licensed and distributed under
+ * the terms of the MIT software licence.
+ * Exact terms can be found in the LICENCE file.
  * 
- * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
- * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
- * 
- * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * above mentioned licence for specific details.
  */
 
 require_once ABSPATH . INC . "Module.php";
 require_once ABSPATH . INC . "Module.php";
 
 require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "DB.php";
 
 require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
 
@@ -62,12 +64,28 @@ function dsjas($fileName = "Index.php", $dirName = "/", $moduleCallBack = null, 
         $useTheme = $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
     }
 
+    // Initialise shared DB for theme API connections
+    $hostname = $config->getKey(ID_GLOBAL_CONFIG, "database", "server_hostname");
+    $databaseName = $config->getKey(ID_GLOBAL_CONFIG, "database", "database_name");
+    $username = $config->getKey(ID_GLOBAL_CONFIG, "database", "username");
+    $password = $config->getKey(ID_GLOBAL_CONFIG, "database", "password");
+
+    $sharedDB = new DB($hostname, $databaseName, $username, $password);
+
+    // Initialise shared configuration for theme APIs
+    $sharedConfig = new Configuration(true, true, false, true);
+
     // Define globals for theme API
     $GLOBALS["THEME_GLOBALS"] = [];
 
     $GLOBALS["THEME_GLOBALS"]["module_manager"] = $moduleManager;
+    
+    $GLOBALS["THEME_GLOBALS"]["shared_conf"] = $sharedConfig;
+    $GLOBALS["THEME_GLOBALS"]["shared_db"] = $sharedDB;
 
     $theme = new Theme($fileName, $dirName, $useTheme);
     $theme->loadTheme();
     $theme->displayTheme();
+
+    $sharedDB->safeDisconnect();
 }

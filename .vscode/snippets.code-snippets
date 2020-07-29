@@ -1,0 +1,75 @@
+{
+	"DSJAS copyright": {
+		"prefix": "dsjasc",
+		"body": [
+			"/**",
+			" * Welcome to Dave-Smith Johnson & Son family bank!",
+			" * ",
+			" * This is a tool to assist with scam baiting, especially with scammers attempting to",
+			" * obtain bank information or to attempt to scam you into giving money.",
+			" * ",
+			" * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it",
+			" * is free to use and change for all users. Scam bait as much as you want!",
+			" * ",
+			" * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.",
+			" * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!",
+			" * ",
+			" * Please, waste these people's time as much as possible. It's fun and it does good for everyone.",
+			" */"
+		],
+		"description": "DSJAS copyright"
+	},
+	"Basic theme": {
+		"prefix": "thm",
+		"body": [
+			"<?php",
+			"",
+			"/*",
+			"  ${1:Theme name}",
+			"  ",
+			"  ${1:Theme name} - ${2:Theme description}",
+			"*/",
+			"",
+			"require_once THEME_API . \"General.php\";",
+			"require_once THEME_API . \"Accounts.php\";",
+			"require_once THEME_API . \"Appearance.php\";",
+			"",
+			"// Theme entry point",
+			"function getTheme()",
+			"{",
+			"  ${3:Theme body}",
+			"}"
+		],
+		"description": "Basic theme"
+	},
+	"Basic module": {
+		"prefix": "modl",
+		"body": [
+			"{",
+			"    \"name\": \"${1:Module name}\",",
+			"    \"description\": \"${2:Module description}\",",
+			"    \"version\": \"V${3:1}.${4:0}.${5:0}\",",
+			"    \"hooks\": {",
+			"      ${6:Module hooks}",
+			"    }",
+			"}"
+		],
+		"description": "Basic module"
+	},
+	"Load routine": {
+		"prefix": "load",
+		"body": [
+			"dsjas(",
+			"    __FILE__,",
+			"    \"${1:directory}/\",",
+			"    function (string $callbackName, ModuleManager $moduleManager) {",
+			"        $moduleManager->getAllByCallback($callbackName);",
+			"        ${2:// Custom load actions}",
+			"    },",
+			"    \"all\",",
+			"    [${3:Extra load events}]",
+			");"
+		],
+		"description": "Load routine"
+	}
+}

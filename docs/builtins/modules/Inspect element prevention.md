@@ -1,4 +1,4 @@
-# An especially frustrating login process
+# Inspect element prevention
 
     Many scammers will attempt to use the inspect element tool in your browser to edit information and trick you. This module intercepts the mouse click event, making this very difficult to do.
 

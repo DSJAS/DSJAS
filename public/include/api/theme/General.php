@@ -1,18 +1,19 @@
 <?php
 
 /**
- * Welcome to Dave-Smith Johnson & Son family bank!
+ * This file is part of DSJAS
+ * Written and maintained by the DSJAS project.
  * 
- * This is a tool to assist with scam baiting, especially with scammers attempting to
- * obtain bank information or to attempt to scam you into giving money.
+ * Copyright (C) 2020 - Ethan Marshall
  * 
- * This tool is licensed under the MIT license (copy available here https://opensource.org/licenses/mit), so it
- * is free to use and change for all users. Scam bait as much as you want!
+ * DSJAS is free software which is licensed and distributed under
+ * the terms of the MIT software licence.
+ * Exact terms can be found in the LICENCE file.
  * 
- * This project is heavily inspired by KitBoga (https://youtube.com/c/kitbogashow) and his LR. Jenkins bank.
- * I thought that was a very cool idea, so I created my own version. Now it's out there for everyone!
- * 
- * Please, waste these people's time as much as possible. It's fun and it does good for everyone.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * above mentioned licence for specific details.
  */
 
 /*
@@ -37,26 +38,23 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/include/vendor/hooks/src/gburtini/Hoo
 
 function getCurrentThemeName()
 {
-    $config = new Configuration(false, true, false, false);
-    $default = $config->getKey(ID_THEME_CONFIG, "config", "use_default");
+    $default = $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "config", "use_default");
 
     if ($default) {
         return "default";
     } else {
-        return $config->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
+        return $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_THEME_CONFIG, "extensions", "current_UI_extension");
     }
 }
 
 function getBankName()
 {
-    $config = new Configuration(true, false, false, false);
-    return $config->getKey(ID_GLOBAL_CONFIG, "customization", "bank_name");
+    return $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_GLOBAL_CONFIG, "customization", "bank_name");
 }
 
 function getBankURL()
 {
-    $config = new Configuration(true, false, false, false);
-    return $config->getKey(ID_GLOBAL_CONFIG, "customization", "bank_domain");
+    return $GLOBALS["THEME_GLOBALS"]["shared_conf"]->getKey(ID_GLOBAL_CONFIG, "customization", "bank_domain");
 }
 
 function addModuleDescriptor($descriptorName)
