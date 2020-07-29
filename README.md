@@ -1,5 +1,7 @@
 # DSJAS - *Dave Smith Johnson & Son*
 
+![DSJAS logo](https://dsjas.github.io/assets/scammer-logo-sm.jpg)
+
 **Welcome to DSJAS family bank! Keeping your money somewhat safe since 2005!**
 
 DSJAS is a simple PHP tool designed for "scambaiting". The site is designed to mimic the behavior and feel of a real banking site in order to fool scammers attempting to infiltrate online banking. The site does not handle real money and is therefore ideal for tricking scammers.
@@ -12,42 +14,31 @@ In addition to all that, it's totally free and open source. More specifically, b
 
 > If you don't have experience with web technology and don't want to configure your own webserver and database, an all-in-one in package such as XAMP or MAMP will do this for you. Both of these packages are free for download.
 
-### You must have installed
+To run DSJAS, you will need **either**:
 
-1. The Apache webserver. DSJAS does not support other webservers.
-1. A MySQL database server. DSJAS stores information in a database. You should set one up before installing.
-1. The PHP language and appropriate Apache plugin. The site is written in PHP, so it is naturally required. A version greater than 7.1 is recommended.
-1. A web browser. The site relies on a web installer to configure itself. So, even if you don't want to view the site yourself, you need a browser.
+A working install of the Docker Engine
 
-### You may wish to have installed
+**Or the following:**
 
-1. Git. Git is used in development of the application and is very useful when getting new updates
-1. A good text editor which supports INI files. Things such as Notepad++ and VSCode are preferable.
+* A working install of the Apache webserver
+* The PHP Apache module (usually bundled by default)
+* A working install of an SQL database server
 
-### To develop an extension, theme or contribute; you must have
+## Installation
 
-1. Git. As mentioned before, but more importantly this time. Git is essential to push and synchronize changes.
-1. A good text editor which supports PHP, HTML, CSS, JS, JSON (among others). If you don't know what do go for, either Atom or VSCode are recommended.
-1. The SDK that comes with the repository. This is essential for creating all kinds of work for the site. You will be able to create a theme without them, but it will be significantly more difficult and may even lead to errors.
-1. Python 3.5 or later. This is used to configure the project and is important. Once again, you can survive without it, but it may lead to errors.
+To install the program, please refer to either the **docker** or **install** folder in the docs.
 
-## Install instructions
+## Release bands
 
-> **Important:** The app is currently under development. There is no guarantee that any releases will be available, how long new releases will take and how stable they will be. You should consider all versions as pre-releases until DSJAS comes out of alpha.
-
-### Official releases
+### Stable releases
 
 When an official version is available, it will be pushed to GitHub releases. These releases are the tested and verified releases straight from the developers. If you are not interested in bleeding-edge features or developing a theme/extension, this is the recommended install method.
 
-When you go to GitHub releases, a zip archive will be available to download. This contains all the files required to run the site. You should unzip the archive and set your webserver's root to the resulting directory.
-
-> **Important - the directory must be the webserver root!** If the webserver root is not set to this directory, the site will not load it's content and required scripts and you will just see a white screen on load.
-
-After this, navigating to *localhost* in your browser should display the welcome page and an install wizard. If you do not see that, please refer to the wiki for help.
+When you go to GitHub releases, a zip archive will be available to download. This contains all the files required to run the site.
 
 ### Bleeding edge/pre-releases
 
-Bleeding edge releases refer to releases that are currently being developed and that are not complete yet. If you wish to get features early, this is the way to go. These releases are marked as pre-releases in GitHub releases and are available using the same method detailed above.
+Bleeding edge releases refer to releases that are currently being developed and that are not complete yet. If you wish to get features early, this is the way to go. These releases are marked as pre-releases in GitHub releases.
 
 If you experience any bugs in these versions, it is even more important to report them to the developers before the next stable release to ensure that other users do not have to experience them.
 

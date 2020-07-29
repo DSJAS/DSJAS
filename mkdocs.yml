@@ -1,0 +1,12 @@
+site_name: DSJAS Documentation
+site_description: DSJAS user and developer documentation
+site_author: Ethan Marshall - https://github.com/OverEngineeredCode
+
+copyright: Copyright 2020 - Ethan Marshall
+
+repo_url: https://github.com/DSJAS/DSJAS
+repo_name: GitHub
+
+edit_uri: blob/master/docs/
+
+theme: readthedocs
