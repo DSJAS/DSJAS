@@ -1,5 +1,4 @@
 FROM php:7.2-apache
-COPY ./public /var/www/html/
 
 
 # Prepare APT for package installation
@@ -17,6 +16,9 @@ COPY ./docker/server/dir-index.conf /etc/apache2/mods/enabled/dir.conf
 
 # Configure PHP
 COPY ./docker/server/php.ini /usr/local/etc/php/php.ini
+
+# Copy source tree
+COPY ./public /var/www/html/
 
 # Configure DSJAS
 COPY ./docker/config/Config.ini /var/www/html/Config.ini
