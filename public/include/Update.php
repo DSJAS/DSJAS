@@ -112,7 +112,10 @@ function isUpdateAvailable()
     $currentVersion = getVersionString();
     $latest = getLatestAvailableVersion(getUpdateBand());
 
-    return $currentVersion != $latest;
+    $numericCurrent = (float) $currentVersion;
+    $numericLatest = (float) $latest;
+
+    return $currentVersion < $latest;
 }
 
 function isInsiderBand()
