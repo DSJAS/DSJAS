@@ -69,7 +69,6 @@ if (isInsiderBand()) {
     <div class="card bg-light admin-panel">
         <div class="card-header d-flex justify-content-between">
             <h3>Update status</h3>
-            <a class="btn btn-primary" href="/admin/settings/update.php?forceCheck">Check now</a>
         </div>
 
         <div class="card-body">
