@@ -59,11 +59,12 @@ if (isInsiderBand()) {
         </div>
     </div>
 
-    <div class="alert alert-danger">
-        <p><strong>Attention:</strong> DSJAS is currently in alpha and automatic updates are not yet set up.
-            You may need to manually check for updates until the automatic update system has been set up.
-            In the future, the program will contain an automatic updater and the experience will be much smoother.
-            We apologize for any inconvenience.</p>
+    <div class="alert alert-warning">
+        <p><strong>Attention:</strong> DSJAS does not yet contain an automatic updater. This means that you will need
+            to download and install updates yourself. You can do this by downloading the DSJAS archive and copying
+            the contained files into your DSJAS directory. This will overwrite the required files and update the program.
+            Your configuration should be preserved.
+        </p>
     </div>
 
     <div class="card bg-light admin-panel">
