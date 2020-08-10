@@ -1,6 +1,5 @@
 <?php
 
-// phpcs:disable
 
 /**
  * This file is part of DSJAS
@@ -18,7 +17,6 @@
  * above mentioned licence for specific details.
  */
 
-// phpcs:enable
 
 
 function redirect($path)
