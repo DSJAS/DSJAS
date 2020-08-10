@@ -13,3 +13,4 @@ So, all you need to know are some basic operations for using the admin panel.
 1. **Access management** Signing in, logging out and clearing your session
 1. **The admin dashboard** Using the main dashboard's features and the sidebar
 1. **Your account** Managing your account, changing your password and editing details
+1. **Performing an update** How to update DSJAS to the latest version
