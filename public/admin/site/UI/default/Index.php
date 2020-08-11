@@ -54,7 +54,7 @@ function getTheme()
 
         if (shouldAppearLoggedIn()) { ?>
             <div class="justify-right form-inline">
-                <a class="btn btn-outline-primary" href="/user/dashboard.php" style="margin-right: 25px">Go to my dashboard</a>
+                <a class="btn btn-outline-primary" href="/user/Dashboard.php" style="margin-right: 25px">Go to my dashboard</a>
                 <a class="btn btn-outline-secondary" href="/user/Logout.php">Logout</a>
             </div>
         <?php } else { ?>
@@ -81,7 +81,7 @@ function getTheme()
                 <p>For a limited time only, we're giving families loans at 0% APR and completely free shared accounts. Apply today and don't miss out. Go on, you deserve it mum and dad!</p>
 
                 <br>
-                <a href="/user/Apply" class="btn btn-primary">Apply today</a>
+                <a href="/user/Apply.php" class="btn btn-primary">Apply today</a>
                 <pre class="lead small" style="margin-top: 10; color: white">Terms and conditions apply. While event lasts</pre>
             </div>
         </div>

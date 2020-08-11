@@ -46,8 +46,8 @@ Navbar component file
                     Online banking
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/user/Dashboard">Go to My Bank Online™</a>
-                    <a class="dropdown-item" href="/user/Options">View online banking options</a>
+                    <a class="dropdown-item" href="/user/Dashboard.php">Go to My Bank Online™</a>
+                    <a class="dropdown-item" href="/user/Options.php">View online banking options</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/user/About">About My Bank Online™</a>
                     <a class="dropdown-item" href="/services/online">Our online banking options</a>
