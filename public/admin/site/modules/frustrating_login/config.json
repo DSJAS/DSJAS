@@ -1,6 +1,6 @@
 {
     "name": "An Especially Frustrating Login Process",
-    "description": "The login process is nice and simple, isn't it? Well, not any longer! This module adds lots and lots of steps to the login process to make scammers' lives hell!",
+    "description": "The login process is nice and simple, isn't it? Well, not any longer! This module adds lots and lots of steps to the login process to make scammers' lives especially frustrating!",
     "information-link": "https://github.com/OverEngineeredCode/DSJAS/blob/master/docs/builtins/modules/An%20especially%20frustrating%20login%20process.md",
     "version": "1.0.0",
     "hooks": {

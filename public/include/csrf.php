@@ -48,11 +48,7 @@ function getCSRFFormElement()
 
 function getCSRFSubmission($method = "post")
 {
-    if ($method == "post") {
-        return $_POST[CSRF_FORM_NAME];
-    } else {
-        return $_GET[CSRF_FORM_NAME];
-    }
+    return $_REQUEST[CSRF_FORM_NAME];
 }
 
 function getCSRFFailedError()

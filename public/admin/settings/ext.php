@@ -39,11 +39,10 @@ require ABSPATH . INC . "csrf.php";
     </div>
 
     <div class="alert alert-warning">
-        <p><strong><u>Coming soon</u></strong></p>
-        <br>
-        <p>This version of DSJAS does not yet contain extension support, but don't worry! It's coming very soon. We're working as quickly as possible
-            to bring you the features you ask for and the features we want to add. Extensions are our highest priority for the future and you can rest
-            assured that this panel will soon be filled with great community-made and built-in extensions.
+        <p><strong>Coming soon</strong></p>
+        <p>This version of DSJAS does not yet contain extension support, but don't worry! It's coming very soon.
+            Extensions are being worked on as you read this. Please check in soon and update as soon as possible
+            to access great built-in and community extensions.
         </p>
     </div>
 </div>

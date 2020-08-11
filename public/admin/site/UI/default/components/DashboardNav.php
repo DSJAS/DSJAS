@@ -24,15 +24,15 @@ Support navbar component file
                     Accounts
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/user/accounts">My accounts</a>
-                    <a class="dropdown-item" href="/user/manage">Manage</a>
+                    <a class="dropdown-item" href="/user/Accounts.php">My accounts</a>
+                    <a class="dropdown-item" href="/user/Manage.php">Manage</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/user/Apply.php">Apply for new</a>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/user/transfer">Transfers</a>
+                <a class="nav-link" href="/user/Transfer.php">Transfers</a>
             </li>
 
             <li class="nav-item">

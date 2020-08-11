@@ -77,6 +77,9 @@ if (!isLoggedIn()) {
 }
 
 
+regenerateCSRF();
+
+
 // Jump to main DSJAS load code
 dsjas(
     __FILE__,

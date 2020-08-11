@@ -16,6 +16,12 @@
  * above mentioned licence for specific details.
  */
 
+require ABSPATH . INC . "vendor/requests/library/Requests.php";
+
+
+define("LATEST_UPDATE_ENDPOINT", "https://dsjas.github.io/update/DSJAS/latest-");
+
+
 static $__version_information;
 
 
@@ -90,7 +96,15 @@ function getVersionString()
 
 function getLatestAvailableVersion($band)
 {
-    return "1.0.0"; // Hard code this value until update services are available
+    Requests::register_autoloader();
+
+    $currentBand = getUpdateBand();
+
+    $json = Requests::get(LATEST_UPDATE_ENDPOINT . $currentBand . ".json")->body;
+    $decoded = json_decode($json, true);
+
+    $version = $decoded["latest"];
+    return $version;
 }
 
 function isUpdateAvailable()
@@ -98,7 +112,10 @@ function isUpdateAvailable()
     $currentVersion = getVersionString();
     $latest = getLatestAvailableVersion(getUpdateBand());
 
-    return $currentVersion != $latest;
+    $numericCurrent = (float) $currentVersion;
+    $numericLatest = (float) $latest;
+
+    return $currentVersion < $latest;
 }
 
 function isInsiderBand()

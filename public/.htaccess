@@ -25,6 +25,9 @@ Order Allow,Deny
 Deny from All
 </Files>
 
+# Force output buffering (fixes header errors)
+php_value output_buffering 4096
+
 # Custom error pages
 ErrorDocument 400 /error/Error.php?code=400
 ErrorDocument 401 /error/Error.php?code=401
