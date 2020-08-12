@@ -7,11 +7,5 @@
         "errorno",
         "gburtini",
         "realname"
-    ],
-    "intelephense.files.exclude": [
-        "**/.git/**",
-        "**/.svn/**",
-        "**/.hg/**",
-        "dist/**"
     ]
 }
