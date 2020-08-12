@@ -1,0 +1,26 @@
+version: '3.3'
+services: 
+    server:
+        depends_on:
+            - database
+
+        build:
+            context: .
+            dockerfile: ./docker/server/Dockerfile
+        container_name: DSJAS
+        ports: 
+            - 80:80
+    database:
+        build:
+            context: .
+            dockerfile: ./docker/database/Dockerfile
+        environment: 
+            MYSQL_RANDOM_ROOT_PASSWORD: 1
+            MYSQL_DATABASE: dsjas
+            MYSQL_USER: DSJAS
+            MYSQL_PASSWORD: DSJAS-Default-Password-1234
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        container_name: DSJAS-database
+        ports:
+            - 3306:3306

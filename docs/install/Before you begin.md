@@ -8,6 +8,10 @@ This program mimics a real banking site in order to safely sign scammers in to a
 
 In order to get started, you will need to download and install the program. This process is as simple as possible, but you do need to do a few things before you get into the install process...
 
+## For docker users
+
+**Stop!** You don't actually need to install the program! DSJAS docker images come working out of the box without and installation of further configuration necessary. To get your default credentials, please refer to the docker section of the documentation.
+
 ## Downloading the program
 
 DSJAS is released from a number of locations, but the recommended download location is from GitHub releases. Whenever an update to the program is released, a new release is created there. You can find the releases page here:

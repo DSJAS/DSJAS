@@ -1,15 +1,18 @@
 # Main .htaccess file for the bank
 # Copyright 2019 - Ethan Marshall
 
+# Make sure uppercase directory index is supported
+DirectoryIndex Index.php
+
 # Turn on rewrite engine
 RewriteEngine on
 
 # Pretty permalinks support
 RewriteBase /
-RewriteRule ^index\.php$ - [L]
+RewriteRule ^Index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php?permalink=1 [L]
+RewriteRule . /Index.php?permalink=1 [L]
 
 # Deny access to certain areas
 <Files ~ "\.ini$">
