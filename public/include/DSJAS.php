@@ -3,13 +3,13 @@
 /**
  * This file is part of DSJAS
  * Written and maintained by the DSJAS project.
- * 
+ *
  * Copyright (C) 2020 - Ethan Marshall
- * 
+ *
  * DSJAS is free software which is licensed and distributed under
  * the terms of the MIT software licence.
  * Exact terms can be found in the LICENCE file.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
@@ -26,19 +26,19 @@ require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
 
 /**
  * The main DSJAS load routine
- * 
+ *
  * Handles loading and sending modules, loading the theme and then sending that. In addition,
  * this routine handles setting the THEME_GLOBALS, which are used to send critical info
  * to the theme API/load functions.
- * 
+ *
  * @global array $GLOBALS["THEME_GLOBAL"]               Sends information to the theme and/or associated API or load functions
- * 
+ *
  * @param string   $fileName              (defaults to Index.php)      Used to load files from the theme content directory and the fileFilter engine
  * @param string   $dirName               (defaults to /)               The current single-level directory we should search for content in (ignored by fileFilter)
  * @param callable $moduleCallBack        (defaults to unset)  The callback we should jump to for the theme load hooks (used by things like the validator)
  * @param string   $defaultModuleHook     (defaults to all)   The name of the global hook we should call on theme load for modules that want content to load when the page does
  * @param array    $additionalModuleHooks (no defaults)    The names of additional callbacks which should be called on theme load (for example, user on user page load)
- * 
+ *
  * @return void This function should not return until the end of script execution
  */
 function dsjas($fileName = "Index.php", $dirName = "/", $moduleCallBack = null, $defaultModuleHook = "all", $additionalModuleHooks = [])
@@ -79,7 +79,7 @@ function dsjas($fileName = "Index.php", $dirName = "/", $moduleCallBack = null, 
     $GLOBALS["THEME_GLOBALS"] = [];
 
     $GLOBALS["THEME_GLOBALS"]["module_manager"] = $moduleManager;
-    
+
     $GLOBALS["THEME_GLOBALS"]["shared_conf"] = $sharedConfig;
     $GLOBALS["THEME_GLOBALS"]["shared_db"] = $sharedDB;
 
