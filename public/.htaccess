@@ -12,12 +12,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php?permalink=1 [L]
 
 # Deny access to certain areas
-<Files ~ "\.ini$">  
+<Files ~ "\.ini$">
 Order Allow,Deny
 Deny from All
 </Files>
 
-<Files ~ "setuptoken.txt$">  
+<Files ~ "setuptoken.txt$">
 Order Allow,Deny
 Deny from All
 </Files>
