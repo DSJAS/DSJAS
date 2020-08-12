@@ -8,6 +8,10 @@ RUN apt update && apt upgrade -y
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install fileinfo
 
+# Install developer tools
+RUN apt install bash -y
+RUN apt install git -y
+
 # Copy config files
 COPY ./docker/server/httpd.conf /etc/apache2/httpd.conf
 COPY ./docker/server/mod_rewrite.load /etc/apache2/mods-enabled/mod_rewrite.load
