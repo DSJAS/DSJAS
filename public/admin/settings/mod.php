@@ -176,23 +176,6 @@ regenerateCSRF();
 
         <div class="card bg-light admin-panel">
             <div class="card-header d-flex justify-content-between">
-                <h3>Information</h3>
-            </div>
-
-            <div class="card-body">
-                <h4 class="card-title">Change the way the site looks with a click</h4>
-                <hr>
-
-                <p><strong>DSJAS themes are the face of the site; they define what the site is, how it looks and what pages are available.</strong>
-                    DSJAS themes allow you to specify a set of rules which tell the site what you want the browser to see when it navigates to a bank-side
-                    page. Essentially, a theme contains a lot of code which tells DSJAS what to send to the browser when it asks for something.
-                    There is nothing themes can't change about the process, and no two instances of DSJAS look the same with themes!
-                </p>
-            </div>
-        </div>
-
-        <div class="card bg-light admin-panel">
-            <div class="card-header d-flex justify-content-between">
                 <h3>Installed themes</h3>
             </div>
 
@@ -369,26 +352,6 @@ regenerateCSRF();
     </div>
 
     <div id="modulePanel" style="display: none" class="mt-3">
-
-        <div class="card bg-light admin-panel">
-            <div class="card-header d-flex justify-content-between">
-                <h3>Information</h3>
-            </div>
-
-            <div class="card-body">
-                <h4 class="card-title">Add features and change existing ones with fun, community-made modules</h4>
-                <hr>
-
-                <p><strong>DSJAS modules change the interface (buttons, text fields etc) or add new interfaces to change site behaviour.</strong>
-                    DSJAS modules allow you to add elements to the user interface in the browser. For example, a module may add a reset password button
-                    to the login page. This allows for some really fun and interesting ways of playing with scammers. The best part is that they work with
-                    any theme, meaning that you can swap in modules to add features with a click!
-                    <br>
-                    <br>
-                    DSJAS ships with some interesting modules to try out. Maybe give them a try and see what kind of things you can do!
-                </p>
-            </div>
-        </div>
 
         <div class="card bg-light admin-panel">
             <div class="card-header d-flex justify-content-between">
