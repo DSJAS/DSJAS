@@ -23,3 +23,7 @@ indent_size = 2
 # But if we do modify it, we need to work in tabs
 [.gitmodules]
 indent_style = tab
+
+# Enforce final newline for markdown files
+[*.md]
+insert_final_newline = true
