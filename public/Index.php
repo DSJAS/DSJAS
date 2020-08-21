@@ -31,6 +31,7 @@ $url = $_SERVER["REQUEST_URI"];
 
 if (shouldRedirectToReal($url)) {
     redirectToReal($url);
+    die();
 }
 
 $splitUrl = explode("?", $url);
