@@ -20,6 +20,11 @@ Order Allow,Deny
 Deny from All
 </Files>
 
+<Files ~ "\.json$">
+Order Allow,Deny
+Deny from All
+</Files>
+
 <Files ~ "setuptoken.txt$">
 Order Allow,Deny
 Deny from All
