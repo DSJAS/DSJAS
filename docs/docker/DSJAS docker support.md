@@ -50,9 +50,23 @@ This will allow you to start a single service. For example, if you plan to try r
 
 The GitHub package registry has an entry for DSJAS docker containers. You **must** pull **both** the *DSJAS_database* and *DSJAS_server* packages. These work hand-in-hand and are configured for each other out of the box.
 
-Once you have pulled the images, you can run them with ```docker run``` or ```docker start```.
+To run without the aid of the DSJAS source's ```docker-compose``` file, some special docker commands are needed. Please copy these into two terminal sessions:
 
-This method is being worked on and updates to this package registry might be slow. For now, we recommend just building the image from the repository.
+**To start the webserver, please use the following command:**
+
+```bash
+docker run -p 80:80 docker.pkg.github.com/dsjas/dsjas/dsjas-server:<your-version>
+```
+
+**To start the database server, please use the following command:**
+
+```bash
+docker run -p 3306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=1 -e MYSQL_DATABASE=dsjas -e MYSQL_USER=DSJAS -e MYSQL_PASSWORD=DSJAS-Default-Password-1234 docker.pkg.github.com/dsjas/dsjas/dsjas-database:<your-version>
+```
+
+Replace *your-version* with the tag version you pulled. This is likely to look like *1.0.0-stable* or *1.0.0-beta*. If you don't know what tag you pulled or you didn't specify a tag while pulling, try using *latest*.
+
+Note that the database will not work unless you put the docker containers on a mutual docker network. You can see how to do this and how this works [here](https://docs.docker.com/engine/reference/commandline/network/).
 
 ## After building/pulling
 
