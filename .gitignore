@@ -11,6 +11,7 @@ public/admin/data/AdminNotices.json
 
 # Ignore upload data
 public/uploads/*
+!public/uploads/.htaccess
 
 # Ignore verification token, if present
 setuptoken.txt
