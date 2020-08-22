@@ -25,8 +25,5 @@ COPY ./docker/server/php.ini /usr/local/etc/php/php.ini
 # Make sure the server can write and read the directory
 RUN chown -R www-data:www-data /var/www
 
-# Delete developer folders/files
-RUN rm -rf /var/www/html/admin/site/UI/test_theme
-RUN rm -rf /var/www/html/admin/site/modules/example
 
 EXPOSE 80
