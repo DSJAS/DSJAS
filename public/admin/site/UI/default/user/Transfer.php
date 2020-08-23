@@ -42,7 +42,7 @@ require_once THEME_API . "Security.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/"); ?>
@@ -72,7 +72,7 @@ function getTheme()
 
             <hr class="my-4">
 
-            <form style="margin-top: 15px" action="/user/transfer.php" method="GET">
+            <form style="margin-top: 15px" action="/user/Transfer.php" method="GET">
                 <?php addModuleDescriptor("transfer_content");  ?>
 
                 <?php getCSRFForm(); ?>
