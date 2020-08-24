@@ -1,8 +1,8 @@
 {
     "version": {
-        "major": "1",
+        "major": "0",
         "minor": "0",
-        "patch": "0"
+        "patch": "1"
     },
     "version-name": "Latest stable",
     "version-description": "Initial version",
