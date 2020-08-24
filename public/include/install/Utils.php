@@ -63,7 +63,7 @@ function findRedirectLocation($configuration)
     } elseif (!$configuration["install_finalized"]) {
         return "/admin/install/final.php";
     } else {
-        return "/error";
+        return "/error/Error.php";
     }
 }
 
@@ -105,7 +105,7 @@ function handleVerificationCode($path)
 
         $_SESSION["setup_authorised"] = true;
 
-        header("Location: /admin/install/db_config?feedback_success");
+        header("Location: /admin/install/db_config.php?feedback_success");
         unlink($path);
         die();
     } else {
@@ -121,14 +121,14 @@ function verifySetupAuth()
 
 function handleNoDBConfirmation()
 {
-    ?>
+?>
     <div class="text-center">
         <h1 style="color: red">Warning</h1>
         <p class="lead">Using DSJ&S without a database can lead to buggy behaviour, reduced features and a broken site</p>
         <p><strong>Are you sure you wish to continue?</strong></p>
         <hr>
-        <a class="btn btn-danger" href="/admin/install/db_config?nodb&confirm=1">Yes, I am sure I don't want to setup a database</a>
-        <a class="btn btn-secondary" href="/admin/install/db_config">No, I would like to setup a database</a>
+        <a class="btn btn-danger" href="/admin/install/db_config.php?nodb&confirm=1">Yes, I am sure I don't want to setup a database</a>
+        <a class="btn btn-secondary" href="/admin/install/db_config.php">No, I would like to setup a database</a>
     </div>
 
 <?php }
