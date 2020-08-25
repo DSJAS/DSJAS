@@ -243,7 +243,7 @@ if __name__ == "__main__":
     versionMinor = inputOrDefault(
         input("Minor version number (0):"), initial='', default='0')
     patch = inputOrDefault(
-        input("Major version number (0):"), initial='', default='0')
+        input("Patch identifier (0):"), initial='', default='0')
 
     separator()
 
