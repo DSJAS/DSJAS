@@ -88,5 +88,9 @@ function getTheme()
             <a href="/support/Contact" class="btn btn-secondary">Contact us</a>
             <a href="/support/Fraud" class="btn btn-secondary">Help us fight fraud</a>
         </div>
+
     </div>
+
+
+    <?php require ABSPATH . getRawThemeContent("Footer.php", "components/"); ?>
 <?php }

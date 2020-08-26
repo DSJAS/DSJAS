@@ -72,4 +72,7 @@ function getTheme()
             <small class="text-small text-muted">Thanks to the XKCD licensing organization and the FSF for the above texts</small>
         </p>
     </div>
+
+
+    <?php require ABSPATH . getRawThemeContent("Footer.php", "components/"); ?>
 <?php }
