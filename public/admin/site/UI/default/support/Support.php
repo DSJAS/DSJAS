@@ -143,15 +143,5 @@ function getTheme()
         </li>
     </ul>
 
-    <div class="container-fluid row bg-secondary mt-4">
-        <div class="col footer-text">
-            <pre class="lead small">&copy 2018 Black Mesa Inc. All rights reserved</pre>
-            <?php addModuleDescriptor("footer");  ?>
-        </div>
-
-        <div class="col footer-links">
-            <a href="/" class="btn btn-primary">Home</a>
-            <a href="/user/Login" class="btn btn-dark">Log in</a>
-        </div>
-    </div>
+    <?php require ABSPATH . getRawThemeContent("Footer.php", "components/"); ?>
 <?php }
