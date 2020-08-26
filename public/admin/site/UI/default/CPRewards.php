@@ -50,7 +50,7 @@ function getTheme()
     ?>
 
     <body>
-        <?php include ABSPATH . getRawThemeContent("Nav.php", "Components/"); ?> </nav>
+        <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
         <div class="container">
             <h1>Oh dear!</h1>
