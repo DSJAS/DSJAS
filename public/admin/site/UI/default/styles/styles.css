@@ -156,18 +156,31 @@ div.services-page-teaser-overlay{
 }
 
 div.footer{
-  color: white;
-  width: 100%;
+  position: relative;
   height: 64;
 }
 
 div.footer-text{
   padding-top: 20;
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 div.footer-links{
   text-align: right;
   padding-top: 10;
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 div.int-investment
