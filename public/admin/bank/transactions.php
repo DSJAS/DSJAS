@@ -43,6 +43,10 @@ regenerateCSRF();
         <h1 class="admin-header col col-offset-6">Manage transactions</h1>
     </div>
 
+    <div class="alert alert-info">
+        <strong>Looking to create a transaction?</strong> Transactions can be created on the <a href="/admin/bank/accounts.php#forceTransaction">accounts management page</a>
+    </div>
+
     <div class="card admin-panel">
         <div class="card-body">
             <table class="table table-striped">

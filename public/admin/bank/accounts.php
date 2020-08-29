@@ -104,7 +104,7 @@ if (isset($_GET["closeAccount"])) { ?>
         <a class="btn btn-danger" href="/admin/bank/accounts.php?doCloseAccount=<?php echo ($_GET["closeAccount"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
         <a class="btn btn-secondary" href="/admin/bank/accounts.php">Cancel</a>
     </div>
-    <?php
+<?php
 
     die();
 } else if (isset($_GET["changeBalance"])) { ?>
@@ -135,7 +135,7 @@ if (isset($_GET["closeAccount"])) { ?>
             </form>
         </div>
     </div>
-    <?php
+<?php
 
     die();
 }
@@ -270,7 +270,7 @@ regenerateCSRF();
         </div>
     </div>
 
-    <div class="card bg-light admin-panel">
+    <div id="forceTransaction" class="card bg-light admin-panel">
         <div class="card-header d-flex justify-content-between">
             <h3>Force a transaction</h3>
         </div>
