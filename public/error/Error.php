@@ -27,6 +27,15 @@ require_once ABSPATH . INC . "Theme.php";
 require_once ABSPATH . INC . "Module.php";
 
 
+if (!isset($_GET["code"]) || $_GET["code"] == "") {
+    $code = "404";
+} else {
+    $code = (int)$_GET["code"];
+}
+
+http_response_code($code);
+
+
 // Jump to main DSJAS load code
 dsjas(
     __FILE__,
