@@ -203,7 +203,7 @@ class Theme
 
                 Please report this error to the theme developer as their theme is broken.
             </div>
-        <?php }
+<?php }
     }
 
 
@@ -249,6 +249,9 @@ class Theme
                 $this->themeName = "default";
             } elseif (!file_exists(ABSPATH . THEME_PATH . $this->themeName . "/" . $this->fileName)) {
                 $this->fileName = "Error.php";
+
+                header("Location: /error/Error.php");
+                die();
             }
         }
     }
