@@ -91,7 +91,6 @@ require_once ABSPATH . INC . "Customization.php";
             </div>
 
             <a href="/admin/bank/transactions.php" class="btn btn-warning">Manage transactions</a>
-            <a href="/admin/bank/support.php" class="btn btn-secondary">Manage support requests</a>
         </div>
     </div>
 </div>
