@@ -34,7 +34,7 @@ if (!verifySetupAuth()) { ?>
     <div class="alert alert-danger" role="alert">
         <p><strong>Security error</strong> You are not authorised to run the setup process. Your authentication token is not authorised to continue the process.</p>
     </div>
-    <?php
+<?php
     die();
 }
 
@@ -66,7 +66,7 @@ if (isset($_POST["submit"])) {
     update_config("setup", "database_installed", "1");
     update_config("database", "running_without_database", "0");
 
-    header("Location: /admin/install/final");
+    header("Location: /admin/install/final.php");
 }
 
 ?>
