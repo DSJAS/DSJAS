@@ -23,14 +23,14 @@ require ABSPATH . "/include/install/TrackState.php";
 
 
 if (isset($_GET["regenToken"])) {
-    ?>
+?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Success!</strong> The token has been regenerated.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <?php
+<?php
 } elseif (isset($_GET["completePrimary"])) {
     completePrimarySetup();
 }
@@ -101,7 +101,7 @@ generateVerificationToken(ABSPATH . "/setuptoken.txt");
     <span style="padding: 25">
         <a class="btn btn-rounded btn-primary" href="/admin/install/install.php?completePrimary">Continue to verification</a>
         <a class="btn btn-rounded btn-warning" href="/admin/install/install.php?regenToken">Regenerate token</a>
-        <a class="btn btn-rounded btn-secondary">More information</a>
+        <a class="btn btn-rounded btn-secondary" href="https://github.com/DSJAS/DSJAS/blob/master/docs/install/Verifying%20ownership.md">More information</a>
     </span>
 
 </body>
