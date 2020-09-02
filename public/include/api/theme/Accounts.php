@@ -49,12 +49,12 @@ function getLoginErrorTitle()
     $code = $_GET["error"];
 
     switch ($code) {
-    case -1:
-        return "Invalid username";
-    case -2:
-        return "Invalid password";
-    default:
-        return "Login failure";
+        case -1:
+            return "Invalid username";
+        case -2:
+            return "Invalid password";
+        default:
+            return "Login failure";
     }
 }
 
@@ -63,12 +63,12 @@ function getLoginErrorMsg()
     $code = $_GET["error"];
 
     switch ($code) {
-    case -1:
-        return "The entered username was not found";
-    case -2:
-        return "The password entered was not correct";
-    default:
-        return "There was an unknown error while attempting to sign you in. Error code: " . $code;
+        case -1:
+            return "The entered username was not found";
+        case -2:
+            return "The password entered was not correct";
+        default:
+            return "There was an unknown error while attempting to sign you in. Error code: " . $code;
     }
 }
 
@@ -90,7 +90,13 @@ function shouldAppearLoggedIn()
     return isLoggedIn();
 }
 
-function getDisplayName()
+function getDisplayName($rawUsername = false)
 {
-    return $_SESSION[LOGIN_USERNAME_STR];
+    $realName = getInfoFromUserID($_SESSION[LOGIN_USERID_STR], "real_name");
+
+    if (($realName == "" || $realName == null) || $rawUsername) {
+        return $_SESSION[LOGIN_USERNAME_STR];
+    }
+
+    return $realName;
 }
