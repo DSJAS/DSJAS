@@ -61,34 +61,34 @@ generateVerificationToken(ABSPATH . "/setuptoken.txt");
 
     </div>
 
-    <div class="container-fluid">
-        <div class="row services-panels">
-            <div class="col card">
-                <div class="card-header">
-                    <h5>Step 1</h5>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Access your server and navigate to the root of the webserver</h5>
-                    <p class="card-text">You can do this remotely, for example with ssh, or locally by accessing the server machine. Your server root is the folder where the application is installed. The path is displayed below.</p>
-                </div>
+    <div class="card-deck">
+        <div class="card">
+             <div class="card-header">
+                <h5>Step 1</h5>
             </div>
-            <div class="col card">
-                <div class="card-header">
-                    <h5>Step 2</h5>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Find the setup token file</h5>
-                    <p class="card-text">Find a file named <strong>setuptoken.txt</strong>. This file will contain the token you will need to access the server in the next step. If you don't have this file, click <i>Regenerate Token</i> below. This will make the file and enter the token you need.</p>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title">Access your server and navigate to the root of the webserver</h5>
+                <p class="card-text">You can do this remotely, for example with ssh, or locally by accessing the server machine. Your server root is the folder where the application is installed. The path is displayed below.</p>
             </div>
-            <div class="col card">
-                <div class="card-header">
-                    <h5>Step 3</h5>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Copy or note down the token</h5>
-                    <p class="card-text">This token will allow you to verify your ownership in the next step. Please make sure the token is exactly the same as it was in the file or you <strong>you will not get access.</strong></p>
-                </div>
+        </div>
+
+        <div class="card">
+             <div class="card-header">
+                <h5>Step 2</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Find the setup token file</h5>
+                <p class="card-text">Find a file named <strong>setuptoken.txt</strong>. This file will contain the token you will need to access the server in the next step. If you don't have this file, click <i>Regenerate Token</i> below. This will make the file and enter the token you need.</p>
+            </div>
+        </div>
+
+        <div class="card">
+             <div class="card-header">
+                <h5>Step 3</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Copy or note down the token</h5>
+                <p class="card-text">This token will allow you to verify your ownership in the next step. Please make sure the token is exactly the same as it was in the file or you <strong>you will not get access.</strong></p>
             </div>
         </div>
     </div>
