@@ -46,12 +46,6 @@ function getTheme()
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
     </body>
 
-    <div class="alert alert-warning">
-        <strong>We're here to support you, even during these troubling times</strong> With online services 2 hours a day and a caring support team who is employed legally, we're here to help you get through, wether its with your house or not.
-
-        Please note that <?php echo (getBankName()); ?> is not contributing to any payment holiday schemes or assistance funds. If you have a financial issue, please speak to somebody else.
-    </div>
-
     <div class="container-fluid support-page-teaser">
         <div class="support-page-teaser-overlay rounded">
             <h1>Help and Support</h1>
