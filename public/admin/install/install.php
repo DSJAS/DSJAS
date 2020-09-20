@@ -16,10 +16,11 @@
  * above mentioned licence for specific details.
  */
 
-require "install_bootstrap.php";
+/* Bootstrapper definitions */
+define("STEP_NAME", "DSJAS install welcome");
+define("STEP_URL", "/admin/install/install.php");
 
-require ABSPATH . "/include/install/Utils.php";
-require ABSPATH . "/include/install/TrackState.php";
+require "install_bootstrap.php";
 
 
 if (isset($_GET["regenToken"])) {
@@ -33,15 +34,11 @@ if (isset($_GET["regenToken"])) {
 <?php
 } elseif (isset($_GET["completePrimary"])) {
     completePrimarySetup();
+
+    header("Location: /admin/install/verification.php");
+    die();
 }
 
-$configuration = parse_ini_file("../../Config.ini");
-
-if (!installRequired($configuration)) {
-    header("Location: /");
-} elseif (findRedirectLocation($configuration) != "/admin/install/install.php") {
-    redirectToInstall($configuration);
-}
 
 generateVerificationToken(ABSPATH . "/setuptoken.txt");
 

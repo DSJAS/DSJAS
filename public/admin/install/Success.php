@@ -16,15 +16,8 @@
  * above mentioned licence for specific details.
  */
 
-require "install_bootstrap.php";
-require "../../include/install/Utils.php";
-
-$configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-if (installRequired($configuration)) {
-    redirectToInstall($configuration);
-}
-
+// First time including the main site bootstrap file!
+require "../../include/Bootstrap.php";
 
 ?>
 

@@ -1,16 +1,10 @@
 <?php
 
+/* Bootstrapper definitions */
+define("STEP_NAME", "DSJAS install verification");
+define("STEP_URL", "/admin/install/verification.php");
+
 require "install_bootstrap.php";
-
-require_once "../../include/install/Utils.php";
-
-$configuration = parse_ini_file("../../Config.ini");
-
-if (!installRequired($configuration)) {
-    header("Location: /");
-} elseif (findRedirectLocation($configuration) != "/admin/install/verification.php") {
-    redirectToInstall($configuration);
-}
 
 if (verificationCodeSent()) {
     handleVerificationCode(ABSPATH . "/setuptoken.txt");

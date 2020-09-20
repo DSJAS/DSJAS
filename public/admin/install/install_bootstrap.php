@@ -19,8 +19,33 @@
 define("ABSPATH", $_SERVER["DOCUMENT_ROOT"]);
 define("INC", "/include/");
 
+require ABSPATH . "/include/install/Database.php";
+require ABSPATH . "/include/install/Utils.php";
+require ABSPATH . "/include/install/TrackState.php";
 
+/* Early session init */
 session_start();
+
+$configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+if (!installRequired($configuration)) {
+    header("Location: /");
+} elseif (findRedirectLocation($configuration) != STEP_URL) {
+    redirectToInstall($configuration);
+}
+
+if (defined("STEP_PROTECT") && STEP_PROTECT)
+{
+
+    if (!verifySetupAuth()) { ?>
+        <div class="alert alert-danger" role="alert">
+            <p><strong>Security error</strong> You are not authorized to run the setup process. Your authentication token is not authorized to continue the process.</p>
+        </div>
+    <?php
+        die();
+    }
+}
+
 
 ?>
 

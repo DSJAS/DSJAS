@@ -16,27 +16,12 @@
  * above mentioned licence for specific details.
  */
 
+/* Bootstrapper definitions */
+define("STEP_NAME", "DSJAS database installation");
+define("STEP_URL", "/admin/install/db_config.php");
+define("STEP_PROTECT", true);
+
 require "install_bootstrap.php";
-
-require "../../include/install/Database.php";
-require "../../include/install/Utils.php";
-require "../../include/install/TrackState.php";
-
-$configuration = parse_ini_file("../../Config.ini");
-
-if (!installRequired($configuration)) {
-    header("Location: /");
-} elseif (findRedirectLocation($configuration) != "/admin/install/db_config.php") {
-    redirectToInstall($configuration);
-}
-
-if (!verifySetupAuth()) { ?>
-    <div class="alert alert-danger" role="alert">
-        <p><strong>Security error</strong> You are not authorised to run the setup process. Your authentication token is not authorised to continue the process.</p>
-    </div>
-<?php
-    die();
-}
 
 if (isset($_GET["feedback_success"])) { ?>
     <div class="alert alert-success" role="alert">
