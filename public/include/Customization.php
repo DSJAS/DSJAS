@@ -80,13 +80,15 @@ class Configuration
     {
         $data = $this->parsedIniData[$configFile];
 
-        return $data[$section][$key];
+        $rawData = $data[$section][$key];
+
+        return html_entity_decode($rawData);
     }
 
     function setKey($configFile, $section, $key, $value)
     {
         $config_data = $this->getIniData($configFile);
-        $config_data[$section][$key] = $value;
+        $config_data[$section][$key] = htmlentities($value);
         $new_content = '';
         foreach ($config_data as $section => $section_content) {
             $section_content = array_map(
