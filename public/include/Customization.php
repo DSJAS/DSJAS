@@ -91,7 +91,7 @@ class Configuration
         foreach ($config_data as $section => $section_content) {
             $section_content = array_map(
                 function ($value, $key) {
-                    return "$key=$value";
+                    return "$key=\"$value\"";
                 },
                 array_values($section_content),
                 array_keys($section_content)
