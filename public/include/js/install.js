@@ -128,7 +128,7 @@ function handleServerCheckResponse(response)
     }
 }
 
-/* ==================== [DATABASE CONFIGURATION] =================== */
+/* ==================== [FINAL] =================== */
 function submitFinal()
 {
     console.log(
