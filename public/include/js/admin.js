@@ -1,19 +1,5 @@
 /* D.S Johnson & Son - Client Side JS */
 
-/* Util */
-
-function encodeString(rawStr)
-{
-    var encodedStr = rawStr.replace(
-        /[\u00A0-\u9999<>\&]/gim, function (i) {
-            return '&#' + i.charCodeAt(0) + ';';
-        }
-    );
-
-    return encodedStr;
-}
-
-
 /* Init code */
 
 $(document).ready(
@@ -45,13 +31,13 @@ function generalSaveSettings()
 
     var postHeaders = "doSave=1&csrf=" + csrf;
 
-    postHeaders = postHeaders.concat("&bankName=" + $("#bankName").val());
-    postHeaders = postHeaders.concat("&bankURL=" + $("#bankURL").val());
+    postHeaders = postHeaders.concat("&bankName=" + encodeURIComponent($("#bankName").val()));
+    postHeaders = postHeaders.concat("&bankURL=" + encodeURIComponent($("#bankURL").val()));
     postHeaders = postHeaders.concat("&adminAccess=" + ($("#adminAccess").prop("checked") ? "1" : "0").toString());
-    postHeaders = postHeaders.concat("&dbHost=" + $("#dbHostname").val());
-    postHeaders = postHeaders.concat("&dbDatabase=" + $("#dbDatabase").val());
-    postHeaders = postHeaders.concat("&dbUser=" + $("#dbUsername").val());
-    postHeaders = postHeaders.concat("&dbPass=" + $("#dbPassword").val());
+    postHeaders = postHeaders.concat("&dbHost=" + encodeURIComponent($("#dbHostname").val()));
+    postHeaders = postHeaders.concat("&dbDatabase=" + encodeURIComponent($("#dbDatabase").val()));
+    postHeaders = postHeaders.concat("&dbUser=" + encodeURIComponent($("#dbUsername").val()));
+    postHeaders = postHeaders.concat("&dbPass=" + encodeURIComponent($("#dbPassword").val()));
     postHeaders = postHeaders.concat("&noDB=" + ($("#noDatabase").prop("checked") ? "1" : "0").toString());
 
     var request = new XMLHttpRequest();
@@ -247,10 +233,10 @@ function advancedSaveSettings()
 
     var postHeaders = "doSave=1&csrf=" + csrf;
 
-    postHeaders = postHeaders.concat("&global=" + $("#global").val());
-    postHeaders = postHeaders.concat("&theme=" + $("#theme").val());
-    postHeaders = postHeaders.concat("&module=" + $("#module").val());
-    postHeaders = postHeaders.concat("&extension=" + $("#extension").val());
+    postHeaders = postHeaders.concat("&global=" + encodeURIComponent($("#global").val()));
+    postHeaders = postHeaders.concat("&theme=" + encodeURIComponent($("#theme").val()));
+    postHeaders = postHeaders.concat("&module=" + encodeURIComponent($("#module").val()));
+    postHeaders = postHeaders.concat("&extension=" + encodeURIComponent($("#extension").val()));
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
