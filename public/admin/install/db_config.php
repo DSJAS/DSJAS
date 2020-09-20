@@ -31,8 +31,8 @@ if (isset($_GET["feedback_success"])) { ?>
 
 if (isset($_GET["nodb"])) {
     if (isset($_GET["confirm"]) && $_GET["confirm"] == 1) {
-        update_config("database", "running_without_database", "1");
-        update_config("setup", "database_installed", "1");
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "running_without_database", "1");
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "setup", "database_installed", "1");
 
         header("Location: /admin/install/db_config.php");
         die();
@@ -48,8 +48,8 @@ if (isset($_POST["submit"])) {
 
     completeDatabaseStage();
 } elseif (isset($_GET["manualSetup"])) {
-    update_config("setup", "database_installed", "1");
-    update_config("database", "running_without_database", "0");
+    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "setup", "database_installed", "1");
+    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "running_without_database", "0");
 
     header("Location: /admin/install/final.php");
 }

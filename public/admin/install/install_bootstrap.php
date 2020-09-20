@@ -22,6 +22,10 @@ define("INC", "/include/");
 require ABSPATH . "/include/install/Database.php";
 require ABSPATH . "/include/install/Utils.php";
 require ABSPATH . "/include/install/TrackState.php";
+require_once ABSPATH . INC . "Customization.php";
+
+/* Shared config */
+$sharedInstallConfig = new Configuration(true, false, false, false);
 
 /* Early session init */
 session_start();

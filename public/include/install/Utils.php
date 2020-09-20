@@ -17,25 +17,8 @@
  */
 
 require_once "Database.php";
+require_once ABSPATH . INC . "Customization.php";
 
-function update_config($section, $key, $value)
-{
-    $config_data = parse_ini_file("../../Config.ini", true);
-    $config_data[$section][$key] = $value;
-    $new_content = '';
-    foreach ($config_data as $section => $section_content) {
-        $section_content = array_map(
-            function ($value, $key) {
-                return "$key=$value";
-            },
-            array_values($section_content),
-            array_keys($section_content)
-        );
-        $section_content = implode("\n", $section_content);
-        $new_content .= "[$section]\n$section_content\n";
-    }
-    file_put_contents("../../Config.ini", $new_content);
-}
 
 function installRequired($configuration)
 {
@@ -94,6 +77,8 @@ function verificationCodeSent()
 
 function handleVerificationCode($path)
 {
+    global $sharedInstallConfig;
+
     $myfile = fopen($path, "r") or die("Error: Unable to reopen token file! Did you delete or move it?");
     $code = fread($myfile, filesize($path));
     fclose($myfile);
@@ -101,7 +86,7 @@ function handleVerificationCode($path)
     $input_token = $_POST["code"];
 
     if ($input_token === $code) {
-        update_config("setup", "owner_verified", "1");
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "setup", "owner_verified", "1");
 
         $_SESSION["setup_authorised"] = true;
 
@@ -135,14 +120,16 @@ function handleNoDBConfirmation()
 
 function saveDatabaseInformation()
 {
+    global $sharedInstallConfig;
+
     if (verifyFieldsPresent()) {
 
-        update_config("database", "running_without_database", "0");
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "running_without_database", "0");
 
-        update_config("database", "server_hostname", $_POST["servername"]);
-        update_config("database", "database_name", $_POST["dbname"]);
-        update_config("database", "username", $_POST["username"]);
-        update_config("database", "password", $_POST["password"]);
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "server_hostname", $_POST["servername"]);
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "database_name", $_POST["dbname"]);
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "username", $_POST["username"]);
+        $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "password", $_POST["password"]);
     } else {
         die("Error: One or more required fields were not given");
     }
@@ -195,9 +182,11 @@ function setupPrimaryAdministrator()
 
 function setupPrimarySettings()
 {
-    update_config("customization", "bank_name", $_POST["bankName"]);
-    update_config("customization", "bank_domain", $_POST["url"]);
-    update_config("settings", "allow_access_to_admin", $_POST["admin"]);
+    global $sharedInstallConfig;
+
+    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "customization", "bank_name", $_POST["bankName"]);
+    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "customization", "bank_domain", $_POST["url"]);
+    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "settings", "allow_access_to_admin", $_POST["admin"]);
 }
 
 function handleSkipFinal()
