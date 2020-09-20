@@ -158,21 +158,21 @@ function submitFinal()
         }
     };
 
-    var username = $("#usernameInput").val()
-    var email = $("#emailInput").val()
-    var password = $("#passwordInput").val()
-    var hint = $("#passwordHintInput").val()
+    var username = encodeURIComponent($("#usernameInput").val())
+    var email = encodeURIComponent($("#emailInput").val())
+    var password = encodeURIComponent($("#passwordInput").val())
+    var hint = encodeURIComponent($("#passwordHintInput").val())
 
-    var bankName = $("#banknameInput").val()
-    var url = $("#urlInput").val()
+    var bankName = encodeURIComponent($("#banknameInput").val())
+    var url = encodeURIComponent($("#urlInput").val())
     var admin = $("#administrativeCheck").prop("checked") ? "1" : "0"
 
     if (bankName == "") {
-        bankName = "D.S Johnson & Son"
+        bankName = encodeURIComponent("D.S Johnson & Son");
     }
 
     if (url == "") {
-        url = "https://djohnson.financial"
+        url = encodeURIComponent("https://djohnson.financial");
     }
 
     var postdata =
