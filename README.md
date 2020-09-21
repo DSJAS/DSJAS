@@ -2,13 +2,20 @@
 
 ![DSJAS logo](https://dsjas.github.io/assets/scammer-logo-sm.jpg)
 
-**Welcome to DSJAS family bank! Keeping your money somewhat safe since 2005!**
+**DSJAS: A fully featured bait bank with all the customization you could ask for**
 
-DSJAS is a simple PHP tool designed for "scambaiting". The site is designed to mimic the behavior and feel of a real banking site in order to fool scammers attempting to infiltrate online banking. The site does not handle real money and is therefore ideal for tricking scammers.
+DSJAS is a PHP application designed to mimic a real banking site on your computer in order to waste the time of criminals attempting to infiltrate your real banking site. DSJAS is designed to be a fully featured banking experience, indistinguishable from a real bank, which can change identities at any time - with the name and URL being changeable with the click of a button and the look and feel of the site able to be changed by themes. Notable features include:
 
-The site is highly customizable, with full support for plugins, themes and other trickery. Seemingly large-scale things such as the name and branding of the site can be changed with the click of a button.
+* Full support for common banking activities such as transfers, managing transaction history, accounts and disputing transactions
+* Theme framework for changing how the site looks and disguising the use of DSJAS
+* Name switching capabilities, which allow you to change the name of the site with a click
+* Admin dashboard which allows you to manipulate the bank, changing things like the details of transactions, users, disputes and support requests easily with a nice web interface
+* Built-in themes which emulate popular existing solutions, such as Felicity Bank
+* Extension support - for adding additional features via extensions by other users like you
 
-In addition to all that, it's totally free and open source. More specifically, being licensed under the MIT licence.
+And, **it's free** with no charge for downloads or any additional content. It's also free as in freedom, being licensed under a GPL compatable licence.
+
+**Happy scambaiting!**
 
 ## Requirements
 
@@ -26,7 +33,7 @@ A working install of the Docker Engine
 
 ## Installation
 
-To install the program, please refer to either the **docker** or **install** folder in the docs.
+To install the program, please refer to either the **docker** or **install** folder in the docs for more details.
 
 ## Release bands
 
