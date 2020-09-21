@@ -129,11 +129,18 @@ function handleServerCheckResponse(response)
 }
 
 /* ==================== [FINAL] =================== */
+function showFinalSpinner()
+{
+    $("#saveProgress").removeClass("d-none");
+}
+
 function submitFinal()
 {
     console.log(
         "Submitting the information to the server and awaiting a response"
     );
+
+    showFinalSpinner();
 
     req = new XMLHttpRequest();
     req.onreadystatechange = function () {

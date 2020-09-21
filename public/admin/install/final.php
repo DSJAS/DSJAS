@@ -121,7 +121,10 @@ if (isset($_POST["submitFinal"])) {
 
     <div class="row">
         <div class="col">
-            <button onclick="submitFinal()" class="btn btn-primary form-button-fill">Confirm and complete setup</a>
+            <button onclick="submitFinal()" class="btn btn-primary form-button-fill">
+                Confirm and complete setup
+                <span id="saveProgress" class="spinner-border spinner-border-sm d-none"></span>
+            </button>
         </div>
     </div>
     <div class="row">
