@@ -179,7 +179,7 @@ function submitFinal()
     }
 
     if (url == "") {
-        url = encodeURIComponent("https://djohnson.financial");
+        url = encodeURIComponent("djohnson.financial");
     }
 
     var postdata =
