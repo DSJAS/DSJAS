@@ -88,7 +88,7 @@ if (isset($_POST["submitFinal"])) {
                     <small id="passInfo" class="form-text text-muted">Please choose a strong password, at least 5 characters long and including a number</small>
                 </div>
                 <div class="form-group">
-                    <label for="passwordHintInput">Password</label>
+                    <label for="passwordHintInput">Password hint</label>
                     <input type="text" class="form-control" id="passwordHintInput" placeholder="Password hint">
                     <small id="hintInfo" class="form-text text-muted">If you ever forget your password, this will help you to remember. Don't make it too obvious. Remember, this should only make sense to you</small>
                 </div>
