@@ -55,10 +55,12 @@ if (isset($_POST["submitFinal"])) {
     setupPrimarySettings();
 
     finalizeInstall(); /* After this line of code, we will be redirected to the front page and installation is over */
+    die();
 } elseif (isset($_POST["skipFinal"])) {
     handleSkipFinal();
 
     finalizeInstall(); /* After this line of code, we will be redirected to the front page */
+    die();
 }
 
 
