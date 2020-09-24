@@ -18,7 +18,7 @@
 
 require "../AdminBootstrap.php";
 
-require ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "Customization.php";
 require ABSPATH . INC . "csrf.php";
 
 $conf = new Configuration(false, true, false, true);
