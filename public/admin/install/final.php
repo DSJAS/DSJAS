@@ -37,9 +37,15 @@ if (isset($_GET["error"]) && $_GET["error"] != "") {
         <div class="alert alert-danger" role="alert">
             <p><strong>Missing information</strong> The server reported that some information that is required is not present. Please ensure that you filled in all required fields in the form</p>
         </div>
-    <?php } elseif ($_GET["error"] == "weakpass") { ?>
+    <?php
+    } elseif ($_GET["error"] == "weakpass") { ?>
         <div class="alert alert-danger" role="alert">
             <p><strong>Weak password</strong> The password entered was not strong enough and has been refused by the server. Please ensure it is at least 5 characters long and includes a number</p>
+        </div>
+    <?php
+    } elseif ($_GET["error"] == "unknown") { ?>
+        <div class="alert alert-danger" role="alert">
+            <p><strong>Unknown error</strong> An unknown error has occurred and the settings could not be saved</p>
         </div>
     <?php }
 }

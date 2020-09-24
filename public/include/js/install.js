@@ -147,6 +147,8 @@ function submitFinal()
         response = req.responseText;
 
         if (this.readyState == 4 && this.status == 200) {
+            // The status code is 200 (success)
+
             if (response.indexOf("ERROR: WEAKPASS") != -1) {
                 document.writeln("Error detected, handling...");
 
@@ -162,6 +164,13 @@ function submitFinal()
 
                 location.assign("/admin/install/Success.php");
             }
+        }
+        else if (this.readyState == 4) {
+            // The status code is not 200 (success)
+
+            document.writeln("Unknown error occurred, handling...");
+
+            location.assign("/admin/install/final.php?error=unknown")
         }
     };
 
