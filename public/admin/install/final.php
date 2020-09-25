@@ -51,8 +51,8 @@ if (isset($_GET["error"]) && $_GET["error"] != "") {
 }
 
 if (isset($_POST["submitFinal"])) {
-    setupPrimaryAdministrator();
     setupPrimarySettings();
+    setupPrimaryAdministrator();
 
     finalizeInstall(); /* After this line of code, we will be redirected to the front page and installation is over */
     die();
