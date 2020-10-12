@@ -22,7 +22,7 @@ COPY ./docker/server/vhost-default.conf /etc/apache2/sites-available/000-default
 COPY ./docker/server/dir-index.conf /etc/apache2/mods/enabled/dir.conf
 
 # Configure PHP
-COPY ./docker/server/php.ini /usr/local/etc/php/php.ini
+COPY ./docker/server/php-dev.ini /usr/local/etc/php/php.ini
 
 # Make sure the server can write and read the directory
 RUN chown -R www-data:www-data /var/www
