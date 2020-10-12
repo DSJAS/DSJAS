@@ -13,6 +13,7 @@ RUN apt install bash -y
 RUN apt install git -y
 RUN apt install python3 -y
 RUN apt install gnupg2 -y
+RUN apt install vim -y
 
 # Copy config files
 COPY ./docker/server/httpd.conf /etc/apache2/httpd.conf
