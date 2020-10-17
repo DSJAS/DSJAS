@@ -52,21 +52,29 @@ The GitHub package registry has an entry for DSJAS docker containers. You **must
 
 To run without the aid of the DSJAS source's ```docker-compose``` file, some special docker commands are needed. Please copy these into two terminal sessions:
 
+> **Note:** On some system setups, you may need to run the following commands as root and/or create a "docker machine" before attempting to run the program. Please consult your respective user manuals for further instructions for your sustem.
+
+**First, create a docker network:**
+
+```bash
+docker network create DSJAS
+```
+
 **To start the webserver, please use the following command:**
 
 ```bash
-docker run -p 80:80 docker.pkg.github.com/dsjas/dsjas/dsjas-server:<your-version>
+docker run --name=server --network=DSJAS -p 80:80 ghcr.io/dsjas/dsjas-server:<your-version>
 ```
 
 **To start the database server, please use the following command:**
 
 ```bash
-docker run -p 3306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=1 -e MYSQL_DATABASE=dsjas -e MYSQL_USER=DSJAS -e MYSQL_PASSWORD=DSJAS-Default-Password-1234 docker.pkg.github.com/dsjas/dsjas/dsjas-database:<your-version>
+docker run --name=database --network=DSJAS -p 3306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=1 -e MYSQL_DATABASE=dsjas -e MYSQL_USER=DSJAS -e MYSQL_PASSWORD=DSJAS-Default-Password-1234 ghcr.io/dsjas/dsjas-database:<your-version> --default-authentication-plugin=mysql_native_password
 ```
 
 Replace *your-version* with the tag version you pulled. This is likely to look like *1.0.0-stable* or *1.0.0-beta*. If you don't know what tag you pulled or you didn't specify a tag while pulling, try using *latest*.
 
-Note that the database will not work unless you put the docker containers on a mutual docker network. You can see how to do this and how this works [here](https://docs.docker.com/engine/reference/commandline/network/).
+In some cases, you are required to authenticate to the GitHub registry before pulling. Please follow instructions in the GitHub Container Registry documentation to do this.
 
 ## After building/pulling
 

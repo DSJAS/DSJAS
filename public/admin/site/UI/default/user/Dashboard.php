@@ -100,7 +100,7 @@ function getTheme()
 
                         <p>We sure love reading your messages for ten hours a day! Send us some more!</p>
 
-                        <a href="/support/contact" class="btn btn-warning dashboard-footer-buttons">Contact support</a>
+                        <a href="/support/Contact.php" class="btn btn-warning dashboard-footer-buttons">Contact support</a>
                         <?php addModuleDescriptor("dashboard_footer");  ?>
                     </div>
                 </div>
