@@ -1,6 +1,6 @@
 <?php
 
-const requiredTables = array("users", "siteUsers", "accounts", "transactions");
+const requiredTables = array("users", "siteusers", "accounts", "transactions");
 
 const tableColumns = array(
     "`user_id` BIGINT NOT NULL AUTO_INCREMENT , `username` TINYTEXT NOT NULL , `real_name` TEXT NOT NULL , `password_hash` LONGTEXT NOT NULL , `password_hint` TEXT NOT NULL , `email` TEXT NOT NULL , `date_of_registration` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`user_id`)",
