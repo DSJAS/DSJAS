@@ -46,7 +46,7 @@ There's not really much more to change. After all, the content, appearance and b
 
 ### I'm still not convinced: what about the admin dashboard?
 
-There are settings available which allow the user to hid all DSJAS backend pages. For example, the "Allow access to admin panel" setting allows the site admin to completely turn off the admin panel and replace all pages with a 404 error, mimicking as if they were never there in the first place.
+There are settings available which allow the user to hide all DSJAS backend pages. For example, the "Allow access to admin panel" setting allows the site admin to completely turn off the admin panel and replace all pages with a 404 error, mimicking as if they were never there in the first place.
 
 ### Ok, what about the URL? Scammers can see that you went to "localhost", not a bank!
 
