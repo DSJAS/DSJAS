@@ -46,7 +46,7 @@ function getTheme()
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
 
         <div class="alert alert-warning">
-            <strong>ATTENTION: Security alert</strong> The <?php echo getBankName() ?> Fraud Prevention Department has become winned of a large amount of technical support and refund scams circulating among customers.
+            <strong>ATTENTION: Security alert</strong> The <?php echo getBankName() ?> Fraud Prevention Department has been made aware of a large amount of technical support and refund scams circulating among customers.
             If <strong>anybody</strong> asks for your login details or for you to sign in to your account, it may be a scam.
             Please learn more <a href="https://www.actionfraud.police.uk/">here</a>.
         </div>
