@@ -33,6 +33,9 @@ require "../../include/Bootstrap.php";
         <a class="btn btn-primary" href="/">Go to homepage</a>
         <a class="btn btn-warning" href="/admin/user/SignIn.php?post_install">Admin dashboard</a>
 
+        <hr>
+        <a href="https://github.com/DSJAS/DSJAS/blob/master/docs/install/First%20steps%20in%20the%20program.md">Need help getting started?</a>
+
     </div>
 
 </body>
