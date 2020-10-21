@@ -236,3 +236,41 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade text-dark" id="protectionAnnoyingCaptcha" data-backdrop="static" data-keyboard="false"
+    tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="protectionCaptchaHeader"><strong>Stop!</strong> Identify yourself</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>
+                    Our systems have flagged you and require that you prove your humanity
+                </strong></p>
+
+                <p>Please describe the image below in as much detail as possible. You will have three attempts to complete
+                    this test.</p>
+
+                <div id="floginCaptchaImages">
+                    <img id="floginCaptchaImage1" src="https://source.unsplash.com/random/300x300" width=300 height=300>
+                    <img id="floginCaptchaImage2" src="https://source.unsplash.com/random/400x400" width=300 height=300 class="d-none">
+                    <img id="floginCaptchaImage3" src="https://source.unsplash.com/random/500x500" width=300 height=300 class="d-none">
+                </div>
+
+                <hr>
+
+                <div id="floginCaptchaInputs">
+                    <p class="text-danger d-none" id="floginCaptchaFailure"><strong>Verification failed</strong> Please try again</p>
+                    <div class="spinner-border text-primary d-none" id="floginCaptchaSuccess"></div>
+
+                    <input type="text" id="floginCaptchaInput" class="form-element">
+                    <button type="button" id="floginCaptchaSubmit" onclick="floginCaptchaInputHandler()" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

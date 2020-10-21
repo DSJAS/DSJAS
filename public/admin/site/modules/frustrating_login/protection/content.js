@@ -1,3 +1,7 @@
+/* Global variables */
+var currentCaptchaStage = 1;
+var captchaDebounce = false;
+
 function runProtection(method)
 {
     switch (method) {
@@ -10,13 +14,13 @@ function runProtection(method)
     case 2:
         floginSurvey();
             break;
-
+    case 3:
+        floginCaptcha();
+            break;
     default:
         floginMath();
             break;
     }
-
-
 
     return false;
 }
@@ -136,4 +140,50 @@ function floginSurveyCancel()
     $("#protectionIntrusiveSurvey").modal("hide");
 
     location.reload();
+}
+
+function floginCaptcha()
+{
+    $("#protectionAnnoyingCaptcha").modal("show");
+}
+
+function floginCaptchaInputHandler()
+{
+    if (captchaDebounce) return;
+    captchaDebounce = true;
+
+    $("#floginCaptchaInput").val("");
+
+    if (currentCaptchaStage < 3){
+        $("#floginCaptchaFailure").removeClass("d-none");
+
+        setTimeout(
+            function() {
+                $("#floginCaptchaFailure").addClass("d-none");
+                captchaDebounce = false;
+
+                const currentImageId = "floginCaptchaImage" + (currentCaptchaStage).toString();
+                const nextImageId = "floginCaptchaImage" + (currentCaptchaStage + 1).toString();
+
+                $("#" + currentImageId).addClass("d-none");
+                $("#" + nextImageId).removeClass("d-none");
+
+                currentCaptchaStage++;
+            }, 2000
+        )
+    }else{
+        $("#floginCaptchaInput").addClass("d-none");
+        $("#floginCaptchaSubmit").addClass("d-none");
+
+        $("#floginCaptchaSuccess").removeClass("d-none");
+
+        setTimeout(
+            function() {
+                $('#loginForm').off();
+                $('#loginForm').submit();
+            }, 2000
+        )
+
+    }
+
 }
