@@ -339,14 +339,13 @@ regenerateCSRF();
                 <hr>
 
                 <p>
-                    The DSJAS theme API is designed to be as simple as it could be, whilst still giving
-                    you, the theme developer, complete control.
+                    DSJAS themes allow for the appearance and content of the site to be changed completely
+                    by developers and users.
 
-                    To get started, visit our wiki for instructions on getting started, how to use the API
-                    and how to use the development kit.
+                    If UI is your thing or that sounds interesting to you, look into DSJAS theme development:
                 </p>
 
-                <a href="https://github.com/OverEngineeredCode/DSJAS/wiki" class="btn btn-primary">Go to the wiki</a>
+                <a href="https://github.com/DSJAS/DSJAS/tree/master/docs/themes" class="btn btn-primary">Go to the wiki</a>
             </div>
         </div>
     </div>
@@ -455,22 +454,12 @@ regenerateCSRF();
                 <hr>
 
                 <p>
-                    Modules are the core of DSJAS and are one of the most rewarding and fun things to make.
-                    Just about anything can be done with them, provided you know how.
-
-                    However, the "provided you know how" part is a little bit of a problem.
-                    Modules are the most complex extension pipelines the site exposes.
-                    So, you will need to learn how to use them before even attempting to
-                    make one.
+                    Modules provide a way of adding more features to whatever theme's appearance they come across.
+                    If that interests you, look into DSJAS module development
                 </p>
                 <br>
-                <p>
-                    To get started, visit our wiki for instructions and a getting started guide - as well as an in-depth
-                    explanation of how modules work and how they are programmed internally. The modules API and SDK is
-                    free from the usual download location.
-                </p>
 
-                <a href="https://github.com/OverEngineeredCode/DSJAS/wiki" class="btn btn-primary">Go to the wiki</a>
+                <a href="https://github.com/DSJAS/DSJAS/tree/master/docs/modules" class="btn btn-primary">Go to the wiki</a>
             </div>
         </div>
     </div>
