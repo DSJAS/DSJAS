@@ -1,5 +1,5 @@
 console.log("Frustrating login process module loaded");
-console.log("This module was written by Ethan Marshall - OverEngineeredCode");
+console.log("This module was written by Ethan Marshall - ethanv2");
 
 function wait(ms)
 {
