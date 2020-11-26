@@ -154,6 +154,12 @@ Finally, sometimes PHP has an annoying habit of failing to load a script properl
 
 This documentation details all that and much more. We can't even scratch the surface in a short FAQ paragraph, so I'll just refer you to the theme folder in the GitHub docs. *Happy building :)*
 
+## Why are there so many unverified commits?
+
+Unfortunately, my old signing key for GitHub expired when my email address changed on GitHub. This caused all commits before I started using my new signature key to become unverified.
+
+This is nothing to worry about. If the key were still valid, all these commits would be perfectly fine and verified. But, in the future, to verify commits, the new key **must** be used.
+
 ---
 
 *Got an FAQ you want added? Submit them to us by GitHub PRs or Issues* *Thanks, and happy scambaiting!*
