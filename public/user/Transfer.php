@@ -38,22 +38,22 @@ if (isset($_GET["performTransfer"])) {
     }
 
     if (!isset($_GET["amount"]) || !isset($_GET["originAccount"]) || !isset($_GET["destinationAccount"])) {
-        header("Location: /user/transfer.php?transferError=1");
+        header("Location: /user/Transfer.php?transferError=1");
         die();
     }
 
     if ($_GET["amount"] == null || $_GET["originAccount"] == null || $_GET["destinationAccount"] == null) {
-        header("Location: /user/transfer.php?transferError=1");
+        header("Location: /user/Transfer.php?transferError=1");
         die();
     }
 
     if (!userOwnsAccount($_GET["originAccount"], getCurrentUserId())) {
-        header("Location: /user/transfer.php?transferError=1");
+        header("Location: /user/Transfer.php?transferError=1");
         die();
     }
 
     if ($_GET["amount"] < 0) {
-        header("Location: /user/transfer.php?transferError=1");
+        header("Location: /user/Transfer.php?transferError=1");
         die();
     }
 
@@ -64,7 +64,7 @@ if (isset($_GET["performTransfer"])) {
         performTransaction($_GET["originAccount"], $_GET["destinationAccount"], $_GET["amount"]);
     }
 
-    header("Location: /user/transfer.php?transferSuccess=1&originAccount=" . $_GET["originAccount"] . "&amount=" . $_GET["amount"]);
+    header("Location: /user/Transfer.php?transferSuccess=1&originAccount=" . $_GET["originAccount"] . "&amount=" . $_GET["amount"]);
     die();
 } else {
     regenerateCSRF();
