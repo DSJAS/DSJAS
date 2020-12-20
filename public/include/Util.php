@@ -65,3 +65,24 @@ function recursiveDeleteDirectory($dir)
         rmdir($dir);
     }
 }
+
+function dsjas_alert($title, $body="", $style="info", $dismissible=false, $appendCSS="")
+{
+    $alertClass = "alert alert-" . $style . " " . $appendCSS;
+    if ($dismissible)
+    {
+        $alertClass .= " alert-dismissible fade show";
+    }
+
+    ?>
+    <div class="<?= $alertClass ?>" role="alert">
+        <strong><?= $title ?></strong> <?= $body ?>
+    <?php if ($dismissible) { ?>
+        <button type="button" class="close" data-dismiss="alert">
+              <span>&times;</span>
+        </button>
+    <?php } ?>
+    </div>
+
+    <?php
+}
