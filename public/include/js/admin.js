@@ -252,7 +252,7 @@ function advancedSaveSettings()
         }
     };
 
-    request.open("POST", "/admin/settings/Advanced.php", true);
+    request.open("POST", "/admin/settings/advanced.php", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(postHeaders);
 }
