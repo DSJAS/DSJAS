@@ -115,6 +115,10 @@ settings panel", "danger", true);
         dsjas_alert("Module uninstalled", "The specified module has been deleted. Your module configuration has been preserved", "success", true);
     }
 
+    if (isset($_GET["noSuchTheme"])) {
+        dsjas_alert("No such theme", "The theme requested for application does not exist", "danger", true);
+    }
+
     ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">

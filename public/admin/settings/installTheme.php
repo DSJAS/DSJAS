@@ -111,6 +111,11 @@ if (isset($_POST["installTheme"])) {
         die();
     }
 
+    if (!themeExists($_GET["enableTheme"])) {
+        redirect("/admin/settings/mod.php?noSuchTheme");
+        die();
+    }
+
     enableTheme($_GET["enableTheme"]);
     resetValidatorState();
 
