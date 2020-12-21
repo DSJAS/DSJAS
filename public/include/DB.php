@@ -82,6 +82,7 @@ class PreparedStatement
 
     function rebindValues($types, $values)
     {
+        $this->types = $types;
         $this->values = $values;
     }
 
@@ -121,36 +122,65 @@ class DB
         $this->username = $username;
         $this->password = $password;
 
-        $this->sql = new mysqli($hostname, $username, $password, $dbname, $port);
+        $this->sql = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
 
         $this->config = parse_ini_file(ABSPATH . "/Config.ini", true);
-        $this->dbEnabled = $this->config["database"]["running_without_database"];
+        $this->dbEnabled = !$this->config["database"]["running_without_database"];
     }
 
     function __destruct()
     {
     }
 
-    function __get($property)
-    {
-        return $this->property;
-    }
-
-    function __set($property, $val)
-    {
-        $this->property = $val;
-    }
-
     function validateConnection()
     {
+        if (!$this->dbEnabled) {
+            return false;
+        }
         if ($this->sql->connect_errno) {
-            return array($this->sql->connect_errno, $this->sql->connect_error);
+            return false;
+        }
+
+        return true;
+    }
+
+    function getConnectionErrors()
+    {
+        if (!$this->dbEnabled) {
+            return "Refused to connect: Database disabled via site configuration";
+        }
+        else if ($this->sql->connect_errno) {
+            return $this->sql->connect_error;
+        }
+        else {
+            return "No errors reported";
         }
     }
 
     function validateAction()
     {
-        return array($this->sql->errno, $this->sql->error);
+        if (!$this->dbEnabled) {
+            return false;
+        }
+        if ($this->sql->errno) {
+            return false;
+        }
+
+        return true;
+    }
+
+    function getActionErrors()
+    {
+        if (!$this->dbEnabled) {
+            return "Action refused: Database disabled via site configuration";
+        }
+        else if ($this->sql->errno) {
+            return $this->sql->error;
+        }
+        else {
+            return "No errors reported";
+        }
+
     }
 
     function configureAutoCommit($commit = true)
