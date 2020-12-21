@@ -121,7 +121,7 @@ class DB
         $this->username = $username;
         $this->password = $password;
 
-        $this->sql = new mysqli($hostname, $username, $password, $dbname, $port);
+        $this->sql = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
 
         $this->config = parse_ini_file(ABSPATH . "/Config.ini", true);
         $this->dbEnabled = $this->config["database"]["running_without_database"];
