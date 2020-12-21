@@ -23,6 +23,7 @@ require ABSPATH . INC . "Users.php";
 require ABSPATH . INC . "Administration.php";
 
 require ABSPATH . INC . "csrf.php";
+require_once ABSPATH . INC . "Util.php";
 
 $usersArray = getUsersArray(true);
 
@@ -82,33 +83,24 @@ if (isset($_POST["resetPassword"])) {
         <h1 class="admin-header col col-offset-6">DSJAS User Settings</h1>
     </div>
 
-    <?php if (isset($_GET["resetFailed"])) { ?>
-        <div class="alert alert-danger">
-            <strong>Failed to reset password</strong> An error occurred while attempting to reset that user's password.
-            This could be due to a faulty database. Please, <a href="/admin/settings/Index.php">verify your database settings</a>.
-        </div>
-    <?php } ?>
+    <?php if (isset($_GET["resetFailed"])) {
+        dsjas_alert("Failed to reset password", "An error occured while attempting to reset a user password
+This is likely due to a faulty database. Please, <a href=\"/admin/settings/Index.php\">verify your database settings</a>", "danger", true);
+    }
 
-    <?php if (isset($_GET["createFailed"])) { ?>
-        <div class="alert alert-danger">
-            <strong>Failed to create user</strong> An error occurred while attempting to create a user.
-            Please ensure that the username entered is not already in use and that your database is configured correctly.
-        </div>
-    <?php } ?>
+    if (isset($_GET["createFailed"])) {
+        dsjas_alert("Failed to create user", "An error occured while attempting to create a user. Please ensure that the
+username is not already in use and <a href=\"/admin/settings/Index.php\">verify your database settings</a>", "danger", true);
+    }
 
-    <?php if (isset($_GET["resetSuccess"])) { ?>
-        <div class="alert alert-success">
-            <strong>Successfully reset password</strong> The specified user's password has been reset to the requested value.
-            All active logon sessions have been destroyed.
-        </div>
-    <?php } ?>
+    if (isset($_GET["resetSuccess"])) {
+        dsjas_alert("Successfully reset password", "The specified user's password was reset to the requested value. All active sessions have been ended", "success", true);
+    }
 
-    <?php if (isset($_GET["createSuccess"])) { ?>
-        <div class="alert alert-success">
-            <strong>Successfully created new user</strong> The requested user has been created.
-            If the account was marked as enabled, you can now sign in to the new account with the credentials you specified.
-        </div>
-    <?php } ?>
+    if (isset($_GET["createSuccess"])) {
+        dsjas_alert("Successfully created new user", "A user has been created with the requested values. If enabled, the account can now be accessed with the specified
+credentials via <a href=\"/user/Login.php\">the bank login</a>", "success", true);
+    } ?>
 
     <div class="card bg-light admin-panel">
         <div class="card-header d-flex justify-content-between">

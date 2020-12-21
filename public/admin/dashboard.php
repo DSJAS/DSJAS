@@ -23,6 +23,7 @@ require ABSPATH . INC . "Update.php";
 require ABSPATH . INC . "Administration.php";
 
 require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "Util.php";
 
 
 if (isset($_GET["purgeNotifications"])) {
@@ -77,20 +78,15 @@ if ($newAccount) {
             if ($areAdminNotices || isset($_GET["purgeNotifications"]) || $newAccount) {
                 handleAdminNotices($adminNotices);
 
-                if (isset($_GET["purgeNotifications"])) { ?>
-                    <div class="alert alert-success">
-                        <p><strong>Notifications cleared</strong> <i>(This message will be removed automatically)</i></p>
-                    </div>
-                <?php }
+                if (isset($_GET["purgeNotifications"])) {
+                    dsjas_alert("Notifications cleared", "This message will be removed automatically", "success");
+                }
 
-                if ($newAccount) { ?>
-                    <div class="alert alert-info">
-                        <p><strong>Welcome to DSJAS!</strong> DSJAS has detected that your account is new. Welcome! You have reached the admin dashboard,
-                            where you can perform the majority of the admin operations of the site. More information on what to do next
-                            and on what actions you may wish to perform is available on the wiki, accessible through the help link in the
-                            sidebar. Have fun and happy scambaiting! <i>(This message will only appear once and will be cleared automatically)</i></p>
-                    </div>
-                <?php }
+                if ($newAccount) {
+                    dsjas_alert("Welcome to DSJAS!", "DSJAS has detected that your account is new. Welcome! You have reached the admin dashboard,
+where you can find most of the site's features. If you need any help, you can probably find it in the wiki, accessible through the help link
+on the sidebar. Have fun and happy scambaiting! <i>(This message will only appear once and will be cleared automtically)</i>", "info");
+                }
             } else { ?>
                 <p class="text-small text-muted">No notifications are available</p>
             <?php } ?>

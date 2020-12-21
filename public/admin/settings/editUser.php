@@ -23,6 +23,7 @@ require ABSPATH . INC . "Users.php";
 require ABSPATH . INC . "Administration.php";
 
 require ABSPATH . INC . "csrf.php";
+require_once ABSPATH . INC . "Util.php";
 
 
 if (isset($_GET["doDeleteUser"])) {
@@ -43,16 +44,8 @@ if (isset($_GET["doToggleEnabledUser"])) {
         die();
     }
 
-    if (getCurrentUserId(true) == $_GET["doToggleEnabledUser"]) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Cannot disable account</strong> You appear to be attempting to disable your own account. You cannot disable the account you are logged in to.
-                To disable this account, please create or login to another account and order the disable from that other account.
-
-                <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
-            </p>
-        </div>
-        <?php
-        die();
+    if (getCurrentUserId(true) == $_GET["doToggleEnabledUser"]) {
+        die("Error: Refusing to disable the currently logged account");
     }
 
     if (getInfoFromUserID($_GET["doToggleEnabledUser"], "account_enabled", true)) {
@@ -145,11 +138,11 @@ if (isset($_POST["doEditUser"])) {
     <?php }
 
     if (isset($_GET["toggleEnabledUser"])) {
-        if (getCurrentUserId(true) == $_GET["toggleEnabledUser"]) { ?>
-            <div class="alert alert-danger">
-                <p><strong>Cannot disable account</strong> You appear to be attempting to disable your own account. You cannot disable the account you are logged in to.
-                    To disable this account, please create or login to another account and order the disable from that account.
+        if (getCurrentUserId(true) == $_GET["toggleEnabledUser"]) {
+            dsjas_alert("Cannot disable account", "You appear to be attempting to disable your own account. You cannot disable the currently signed in account.
+To disable this account, create of login to another account and order the disable from there", "danger", false);
 
+            ?>
                     <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
                 </p>
             </div>
@@ -181,24 +174,21 @@ if (isset($_POST["doEditUser"])) {
         <?php }
     }
 
-    if (isset($_GET["editUser"])) { ?>
+    if (isset($_GET["editUser"])) {
+        if (!getInfoFromUserID($_GET["editUser"], "account_enabled", true)) {
+            $enableLink = "/admin/settings/editUser.php?toggleEnabledUser=" . htmlentities($_GET["editUser"]) . "&csrf=" . getCSRFToken();
 
-        <?php if (!getInfoFromUserID($_GET["editUser"], "account_enabled", true)) { ?>
-            <div class="alert alert-warning">
-                <p><strong>This account is disabled</strong> You're editing an account which is currently disabled. Regardless of changes, this user will not be able to access their account or profile.</p>
-                <a href="/admin/settings/editUser.php?toggleEnabledUser=<?php echo ($_GET["editUser"]); ?>&csrf=<?php echo (getCSRFToken()); ?>">Enable this account</a>
-            </div>
-        <?php } ?>
+            dsjas_alert("<p>This account is disabled", "You are editing an account which is currently disabled. Regardless of changes, this user will still not be able to access their account.</p>" .
+                        "<a href=\"$enableLink\">Enable this account</a>", "warning", false);
+        }
 
-        <?php if ($_GET["editUser"] == getCurrentUserId(true)) { ?>
-            <div class="alert alert-info">
-                <p><strong>This is you!</strong> You're editing your own account information. Any changes made will immediately be reflected on your profile.</p>
-            </div>
-        <?php } else { ?>
-            <div class="alert alert-warning">
-                <p><strong>Take care: This isn't your account!</strong> You're editing your another person's account information. Please take care and avoid making unwanted changes.</p>
-            </div>
-        <?php } ?>
+        if ($_GET["editUser"] == getCurrentUserId(true)) {
+            dsjas_alert("This is you!", "You're editing your own account information. Any changes will be reflected on your profile", "info", false);
+        } else {
+            dsjas_alert("Take care: This isn't your account!", "You're editing another person's account information. Please take care and avoid making unwanted changes", "warning", false);
+        }
+        ?>
+
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="admin-header col col-offset-6">Now editing user "<?php echo (getInfoFromUserID($_GET["editUser"], "username", true)); ?>"</h1>

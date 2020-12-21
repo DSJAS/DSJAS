@@ -22,6 +22,7 @@ require ABSPATH . INC . "ThemeValidator.php";
 
 require ABSPATH . INC . "csrf.php";
 require ABSPATH . INC . "Administration.php";
+require_once ABSPATH . INC . "Util.php";
 
 ignore_user_abort(true); // Don't allow the user to cancel this operation by closing the loading browser
 
@@ -119,66 +120,32 @@ if (isset($_GET["validateTheme"])) {
 <?php require ABSPATH . INC . "/components/AdminSidebar.php"; ?>
 
 <div id="content">
-    <div class="alert alert-success">
-        <strong>Validator ran</strong>
-        The validator has finished running and results have been stored.
+    <?php dsjas_alert("Validation complete", "The validator has completed and the results are available" .
+                      "<a href=\"/admin/settings/mod.php#validatorResults\">View full results</a>", "info", false);
 
-        <a href="/admin/settings/mod.php#validatorResults">View full results</a>
-    </div>
-
-    <?php
     switch ($results[0]) {
-    case "fatal_error": ?>
-            <div class="alert alert-danger">
-                <strong>Results summary: Fatal error</strong>
-                The validator ran and encountered an invalid theme, making it impossible to continue/load.
-
-                The current theme caused a fatal error, meaning that it would likely crash a site if used. We recommend uninstalling this theme until the developer fixes the problem.
-
-                If all else fails, check that your configuration is valid. Switch to and from this theme to refresh the config cache.
-
-                <i>This theme will not work, please do not attempt to use it</i>
-            </div>
-        <?php
+    case "fatal_error":
+        dsjas_alert("Results summary: Fatal error", "The validator ran and encountered an invalid theme, making it impossible to continue loading.
+This means that this theme is invalid and will crash the site if used. We recommend uninstalling it and switching to another theme", "danger", false);
         break;
 
-    case "errors_found": ?>
-            <div class="alert alert-danger">
-                <strong>Results summary: Failed</strong>
-                The validator ran and reported a fail. This means that the theme is either invalid or fails to provide the basic elements a valid theme requires.
-
-                We recommend that you <strong>do not use this theme</strong> for stability reasons, until the developer has fixed the issues it causes.
-            </div>
-        <?php
+    case "errors_found":
+        dsjas_alert("Results summary: Fail", "The validator ran and reported a fail. This means that the theme is either invalid or failes to provide
+the basic elements of a valid theme. We recommend that this theme should not be used, as it is likely to be unstable", "danger", false);
         break;
 
-    case "passed_warnings": ?>
-            <div class="alert alert-warning">
-                <strong>Results summary: Passed with warnings</strong>
-                The validator ran and reported a pass with warnings. This means that the theme is probably working fine, but may behave strangely in some circumstances.
-
-                <i>It will probably be fine, right?</i>
-            </div>
-        <?php
+    case "passed_warnings":
+        dsjas_alert("Results summary: Passed with warnings", "The validator ran and reported minor issues (warnings). This means that the theme is likely
+to work but may have minor instabilities", "warning", false);
         break;
 
-    case "passed": ?>
-            <div class="alert alert-success">
-                <strong>Results summary: Passed</strong>
-                The validator ran and reports a pass. This means that the theme is verifiably valid and working.
-                You can expect this theme to function normally in almost all situations.
-            </div>
-        <?php
+    case "passed":
+        dsjas_alert("Results summary: Passed", "The validator ran and reported a pass. This means that the theme is verifiably working. You can expect
+this theme to function normally in most situations", "success", false);
         break;
 
-    default: ?>
-            <div class="alert alert-info">
-                <strong>Results summary: No result</strong>
-                The validator ran and failed to provide a result. This probably means there were no issues.
-
-                <i>No news is good news</i>
-            </div>
-        <?php
+    default:
+        dsjas_alert("Results summary: No result", "The validator ran and failed to provide a result. This probably means there were no issues", "primary", false);
         break;
     }
     ?>

@@ -19,6 +19,7 @@
 require "../AdminBootstrap.php";
 
 require ABSPATH . INC . "csrf.php";
+require_once ABSPATH . INC . "Util.php";
 
 
 $globalConfigText = file_get_contents(ABSPATH . "/Config.ini");
@@ -72,21 +73,15 @@ if (isset($_POST["doSave"])) {
         <h1 class="admin-header col col-offset-6">Advanced settings</h1>
     </div>
 
-    <?php if (isset($_GET["success"])) { ?>
-        <div class="alert alert-success alert-dismissible fade show">
-            <strong>Settings saved</strong> Your settings changes were saved.
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-        </div>
-    <?php } else if (isset($_GET["error"])) { ?>
-        <div class="alert alert-danger alert-dismissible fade show">
-            <strong>Error saving settings</strong> There was an error while attempting to save your settings. Your changes were not saved.
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-        </div>
-    <?php } ?>
+    <?php
+
+    if (isset($_GET["success"])) {
+        dsjas_alert("Settings saved", "The requested configuration values were overwritten", "success", false);
+    } else if (isset($_GET["error"])) {
+        dsjas_alert("Failed to save settings", "There was an error while attempting to save your settings. Any changes were discarded", "danger", false);
+    }
+
+?>
 
     <div class="card bg-light admin-panel">
         <div class="card-header d-flex justify-content-between">

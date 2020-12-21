@@ -21,6 +21,8 @@ require "../AdminBootstrap.php";
 require_once ABSPATH . INC . "Customization.php";
 require ABSPATH . INC . "csrf.php";
 
+require_once ABSPATH . INC . "Util.php";
+
 $conf = new Configuration(false, true, false, true);
 
 $lastValidation = $conf->getKey(ID_THEME_CONFIG, "validation", "last_validation");
@@ -51,113 +53,69 @@ regenerateCSRF();
 
     <?php require ABSPATH . INC . "components/AdminSettingsNav.php";
 
-    if (isset($_GET["notArchive"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Theme or module failed to install</strong> The file you just attempted to upload as a theme or module is not a valid archive.
-                Your theme/module should be delivered in a zip archive.
-                If you have downloaded a one of the above which is not a zip archive, please contact the developer; their extension is broken.</p>
-        </div>
-    <?php }
+    if (isset($_GET["notArchive"])) {
+        dsjas_alert("Invalid package archive", "The uploaded installation file was not a valid package archive. You should be uploading a zip archive file.", "danger", true);
+    }
 
-    if (isset($_GET["wrongType"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>You're trying to install this extension in the wrong place</strong> You tried to install the wrong type extension in this place.
-                Please make sure that you are uploading the correct package and that you are on the right page.</p>
-        </div>
-    <?php }
+    if (isset($_GET["wrongType"])) {
+        dsjas_alert("Invalid extension type", "You are attempting to upload a module as a theme or a theme as a module. Please check that you uploaded the archive to the correct
+settings panel", "danger", true);
+    }
 
-    if (isset($_GET["unknownError"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Theme or module failed to install</strong> There was an unknown error while attempting to install that theme/module.
-                Please try again or report to the developers. Perhaps try downloading the package again?</p>
-        </div>
-    <?php }
+    if (isset($_GET["unknownError"])) {
+        dsjas_alert("Package failed to install", "An unknown error has prevented the installation of the uploaded package. Please try again later", "danger", false);
+    }
 
-    if (isset($_GET["noFile"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Theme or module failed to install</strong> No upload package was provided.</p>
-        </div>
-    <?php }
+    if (isset($_GET["noFile"])) {
+        dsjas_alert("No provided file", "No package archive was provided", "danger", true);
+    }
 
-    if (isset($_GET["sizeError"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Theme or module failed to install</strong> This plugin is too large. DSJAS themes and modules have a maximum file size due to technical constraints.
-                Please contact the plugin developer</p>
-        </div>
-    <?php }
+    if (isset($_GET["sizeError"])) {
+        dsjas_alert("Package too large", "The uploaded package archive has exceeded the maximum upload limit. Plese contact the package developer", "danger", true);
+    }
 
-    if (isset($_GET["missingManifest"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Malformed or invalid package</strong> The uploaded archive is not a valid DSJAS package.
-                Please make sure that the archive you uploaded is a package and that the archive has not been damaged.</p>
-        </div>
-    <?php }
+    if (isset($_GET["missingManifest"])) {
+        dsjas_alert("Not a package archive", "The uploaded archive is not a valid DSJAS package. Please contact the package developer", "danger", true);
+    }
 
-    if (isset($_GET["malformedManifest"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Theme failed to install</strong> The uploaded archive is a package, but the contained configuration is invalid.
-                This means that DSJAS was unable to read the instructions the developer has provided on how to perform the install.</p>
-            </p>
-        </div>
-    <?php }
+    if (isset($_GET["malformedManifest"])) {
+        dsjas_alert("Malformed package archive", "The uploaded package archive's settings could not be read. Please contact the package developer", "danger", true);
+    }
 
-    if (isset($_GET["alreadyExists"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Theme or module already installed</strong> You've tried to upload a theme or module which has already been installed - either by you or another administrator.
-                You are not able to install the same theme or module twice. If the extension you are uploading is not already installed, the name may be already in use.
-                <br>
-                <strong>Before you can use an extension, you need to enable it!</strong> Before DSJAS will load any modules or themes, they need to be enabled.
-                You can do this through the settings panel.
-            </p>
-            </p>
-        </div>
-    <?php }
+    if (isset($_GET["alreadyExists"])) {
+        dsjas_alert("Package already exists", "The theme/module uploaded already exists and cannot be re-installed", "danger", true);
+        dsjas_alert("Have you enabled this package?", "To apply installed packages, they must first be enabled in the settings panel below", "primary", true);
+    }
 
-    if (isset($_GET["themeInstalled"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Theme successfully installed</strong> DSJAS has installed your theme.
-                To apply this theme and use it as the active one for the site, you must enable it from the installed theme settings panel.
-            </p>
-        </div>
-    <?php }
+    if (isset($_GET["themeInstalled"])) {
+        dsjas_alert("Theme successfully installed", "DSJAS has installed your theme, but not applied it. To apply this theme to your site, enable it from the theme settings panel", "success", true);
+    }
 
-    if (isset($_GET["themeInstalledEnabled"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Theme successfully installed</strong> DSJAS has installed your theme.
-                The theme has also been enabled. Reload your page to apply the changes to the bank.
-            </p>
-        </div>
-    <?php }
+    if (isset($_GET["themeInstalledEnabled"])) {
+        dsjas_alert("Theme successfully applied", "DSJAS has installed and applied the requested theme", "success", true);
+    }
 
-    if (isset($_GET["activatedTheme"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Enabled theme</strong> That theme has been enabled. Refresh any bank pages to apply the new theme.</p>
-        </div>
-    <?php }
+    if (isset($_GET["activatedTheme"])) {
+        dsjas_alert("Theme applied", "Successfully enabled and applied the requested theme. Refresh any bank pages for changes to take effect", "success", true);
+    }
 
-    if (isset($_GET["uninstalledTheme"])) { ?>
-        <div class="alert alert-warning">
-            <p><strong>Uninstalled theme</strong> The specified theme has been deleted. Your theme has been reset to the default until another is specified.</p>
-        </div>
-    <?php }
+    if (isset($_GET["uninstalledTheme"])) {
+        dsjas_alert("Uninstalled theme", "The specified theme has been deleted. Your theme bas been reset to the default until another is specified", "success", true);
+    }
 
-    if (isset($_GET["themeDownloadFailed"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Failed to download theme</strong> There was an error while attempting to download your theme from that URL. Please check the URL is correct and that your server is able to reach the location.</p>
-        </div>
-    <?php }
+    if (isset($_GET["themeDownloadFailed"])) {
+        dsjas_alert("Package download failed", "DSJAS failed to download a package archive from the given URL. Contact the vendor and check the URL's correctness", "danger", true);
+    }
 
-    if (isset($_GET["moduleSaved"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Settings saved</strong> Your module settings saved successfully. Any disabled or enabled modules have had their status updated</p>
-        </div>
-    <?php }
+    if (isset($_GET["moduleSaved"])) {
+        dsjas_alert("Settings saved", "Module changes applied. Refresh any open bank pages for changes to take effect", "success", true);
+    }
 
-    if (isset($_GET["moduleUninstalled"])) { ?>
-        <div class="alert alert-warning">
-            <p><strong>Module uninstalled</strong> The selected module was uninstalled. If you ever choose to re-install the module, your configuration will be preserved.</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["moduleUninstalled"])) {
+        dsjas_alert("Module uninstalled", "The specified module has been deleted. Your module configuration has been preserved", "success", true);
+    }
+
+    ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="admin-header col col-offset-6">Modules and Themes</h1>

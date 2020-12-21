@@ -21,6 +21,8 @@ require "../AdminBootstrap.php";
 require ABSPATH . INC . "csrf.php";
 require ABSPATH . INC . "Administration.php";
 
+require_once ABSPATH . INC . "Util.php";
+
 ignore_user_abort(true); // Don't allow the user to cancel this install by closing the loading browser
 set_time_limit(0); // Don't stop the script if it takes too long
 ob_start(); // Enable output buffering
@@ -131,21 +133,15 @@ if (isset($_POST["installTheme"])) {
         die(getCSRFFailedError());
     }
 
-    if (!themeExists($_GET["doUninstallTheme"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Error</strong> You are attempting to uninstall a theme which does not exist. It may already have been uninstalled or another administrator may have uninstalled it.</p>
-            <a href="/admin/settings/mod.php">Go back to themes settings</a>
-        </div>
-        <?php
+    if (!themeExists($_GET["doUninstallTheme"])) {
+        dsjas_alert("Error", "The theme requested for deletion no longer exists. Was it deleted by another administrator?" .
+                    "<br> <a href=\"/admin/settings/mod.php\">Return to theme settings</a>", "danger", false);
         die();
     }
 
-    if ($_GET["doUninstallTheme"] == "default") { ?>
-        <div class="alert alert-danger">
-            <p><strong>Protected theme</strong> You are attempting to uninstall the default theme. This is not possible and the operation was cancelled</p>
-            <a href="/admin/settings/mod.php">Go back to themes settings</a>
-        </div>
-        <?php
+    if ($_GET["doUninstallTheme"] == "default") {
+        dsjas_alert("Protected theme", "You are attempting to uninstall the default theme. This is not possible and the operation was cancelled" .
+                    "<br> <a href=\"/admin/settings/mod.php\">Return to theme settings</a>", "danger", false);
         die();
     }
 

@@ -23,6 +23,7 @@ require ABSPATH . INC . "csrf.php";
 require ABSPATH . INC . "Administration.php";
 
 require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "Util.php";
 
 
 $config = new Configuration(true, false, false, false);
@@ -78,28 +79,13 @@ $noDatabase = $config->getKey(ID_GLOBAL_CONFIG, "database", "running_without_dat
 
     <?php require ABSPATH . INC . "components/AdminSettingsNav.php";
 
-    if (isset($_GET["success"])) { ?>
-        <div class="alert alert-success alert-dismissible fade show">
-            <strong>Settings saved</strong> Your settings changes were saved.
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-        </div>
-    <?php } else if (isset($_GET["error"])) { ?>
-        <div class="alert alert-danger alert-dismissible fade show">
-            <strong>Error saving settings</strong> There was an error while attempting to save your settings. Your changes were not saved.
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-        </div>
-    <?php } else if (isset($_GET["factorySuccess"])) { ?>
-        <div class="alert alert-info alert-dismissible fade show">
-            <strong>Factory reset complete</strong> The site has been reset to default factory settings.
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
-        </div>
-    <?php }
+    if (isset($_GET["success"])) {
+        dsjas_alert("Success", "Settings saved successfully", "success", true);
+    } else if (isset($_GET["error"])) {
+        dsjas_alert("Error saving settings", "There was an error whilc attempting to save your settings. The changes have been lost", "danger", true);
+    } else if (isset($_GET["factorySuccess"])) {
+        dsjas_alert("Factory reset complete", "The site has been reset to factory default settings", "info", true);
+    }
 
     ?>
 
