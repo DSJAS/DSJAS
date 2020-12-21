@@ -82,6 +82,7 @@ class PreparedStatement
 
     function rebindValues($types, $values)
     {
+        $this->types = $types;
         $this->values = $values;
     }
 
