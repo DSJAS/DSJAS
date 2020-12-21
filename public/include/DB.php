@@ -132,16 +132,6 @@ class DB
     {
     }
 
-    function __get($property)
-    {
-        return $this->property;
-    }
-
-    function __set($property, $val)
-    {
-        $this->property = $val;
-    }
-
     function validateConnection()
     {
         if (!$this->dbEnabled) {
