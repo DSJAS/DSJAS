@@ -24,6 +24,7 @@ require ABSPATH . INC . "Banking.php";
 require ABSPATH . INC . "csrf.php";
 
 require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "Util.php";
 
 if (isset($_GET["doCloseAccount"])) {
     $csrf = getCSRFSubmission("GET");
@@ -149,41 +150,31 @@ regenerateCSRF();
 <?php require ABSPATH . INC . "components/AdminSidebar.php"; ?>
 
 <div id="content">
-    <?php if (isset($_GET["accountMigrated"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Successfully migrated the specified account</strong> The specified account has been migrated and any associated tasks have completed. You may have to refresh bank pages for the changes to take effect.</p>
-        </div>
-    <?php } ?>
+    <?php
+    if (isset($_GET["accountMigrated"])) {
+        dsjas_alert("Successfully migrated the specified account", "The specified account has been migrated across accounts successfully. Refresh open bank pages for changes to take effect", "success", true);
+    }
 
-    <?php if (isset($_GET["migrationFailed"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Failed to migrate user account</strong> The specified user account could not be deleted due to an error. Please ensure that you provided all required information.</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["migrationFailed"])) {
+        dsjas_alert("Failed to migrate user account", "An unknown error prevented the migration of the requested bank account. Please check the provided details were correct and try again later", "danger", true);
+    }
 
-    <?php if (isset($_GET["accountCreated"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Account creation success</strong> An account has been created and stored with the specified information. You may need to reload any open bank pages for the changes to take effect.</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["accountCreated"])) {
+        dsjas_alert("Account creation success", "An account has been created with the specified information. The specified details can now be used to access the banking dashboard", "success", true);
+    }
 
-    <?php if (isset($_GET["accountDeleted"])) { ?>
-        <div class="alert alert-warning">
-            <p><strong>Account closed</strong> The specified account was deleted and any remaining funds were drained.</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["accountDeleted"])) {
+        dsjas_alert("Account closed", "The specified account has been closed and any remaining funds have been drained", "primary", true);
+    }
 
-    <?php if (isset($_GET["creationFailed"])) { ?>
-        <div class="alert alert-danger">
-            <p><strong>Failed to create account</strong> An error ocurred while attempting to create that account. Please try again and ensure that all required information has been provided.</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["creationFailed"])) {
+        dsjas_alert("Failed to create account", "An error prevented while attempting to create the requested account. Please try again and ensure that all required information was provided", "danger", true);
+    }
 
-    <?php if (isset($_GET["changesSaved"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Changes saved</strong> The requested changes have been stored. Affected accounts have been updated.</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["changesSaved"])) {
+        dsjas_alert("Changes saved", "The requested changes have been stored. Refresh open bank pages for changes to take effect", "success", true);
+    }
+    ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="admin-header col col-offset-6">Manage bank accounts</h1>

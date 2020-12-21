@@ -24,6 +24,7 @@ require ABSPATH . INC . "Banking.php";
 require ABSPATH . INC . "csrf.php";
 
 require_once ABSPATH . INC . "Customization.php";
+require_once ABSPATH . INC . "Util.php";
 
 
 regenerateCSRF();
@@ -38,29 +39,23 @@ regenerateCSRF();
         <p><strong>Warning:</strong> The admin dashboard is not designed for smaller screens, and some functionality may be missing or limited.</p>
     </div>
 
-    <?php if (isset($_GET["success"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Success</strong> The action completed successfully. Affected accounts have been updated.</p>
-        </div>
-    <?php } ?>
+    <?php
+    if (isset($_GET["success"])) {
+        dsjas_alert("Success", "The action completed successfully", "success");
+    }
 
-    <?php if (isset($_GET["resetFailed"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>Failed to reset password</strong> There was an issue while attempting to reset that user's password. Please try again and make sure you provided a password</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["resetFailed"])) {
+        dsjas_alert("Failed to reset password", "There was an error while attempting to reset the requested user's password. Please ensure you provided a reset password", "success");
+    }
 
-    <?php if (isset($_GET["userDeleted"])) { ?>
-        <div class="alert alert-warning">
-            <p><strong>The specified user was deleted</strong> The requested user account has been erased and all associated bank accounts have been closed. Running sessions have been ended and this account is no longer accessible. Any remaining funds were permanently drained.</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["userDeleted"])) {
+        dsjas_alert("User deleted", "The requested user account has been erased and all associated bank account have been closed", "primary");
+    }
 
-    <?php if (isset($_GET["userCreated"])) { ?>
-        <div class="alert alert-success">
-            <p><strong>User creation succeeded</strong> A user has been created with the specified details. If you asked DSJAS to generate random bank accounts, the accounts have been created, enabled and associated with the account</p>
-        </div>
-    <?php } ?>
+    if (isset($_GET["userCreated"])) {
+        dsjas_alert("User created", "A user has been created with the specified details. If you asked DSJAS to generate random bank account, the accounts have been created, enabled and associated with the account", "success");
+    }
+    ?>
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="admin-header col col-offset-6">Manage bank users</h1>

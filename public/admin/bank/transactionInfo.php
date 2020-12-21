@@ -23,6 +23,8 @@ require ABSPATH . INC . "Administration.php";
 require ABSPATH . INC . "Banking.php";
 require ABSPATH . INC . "csrf.php";
 
+require_once ABSPATH . INC . "Util.php";
+
 if (!isset($_GET["id"])) {
     header("Location: /admin/bank/transactions.php");
 }
@@ -45,12 +47,8 @@ $database->query();
 
 $info = $information->result[0];
 
-if ($information->affectedRows < 1) { ?>
-    <div class="alert alert-danger">
-        <strong>Transaction not found</strong> A transaction with that ID could not be found. Please make sure that
-        the transaction hasn't been reversed (either by you or another administrator) and try again.
-    </div>
-    <?php
+if ($information->affectedRows < 1) {
+    dsjas_alert("No such transaction", "A transaction with the specified ID does not exist", "danger");
     die();
 }
 
