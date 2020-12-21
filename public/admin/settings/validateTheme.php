@@ -121,7 +121,7 @@ if (isset($_GET["validateTheme"])) {
 
 <div id="content">
     <?php dsjas_alert("Validation complete", "The validator has completed and the results are available" .
-                      "<a href=\"/admin/settings/mod.php#validatorResults\">View full results</a>", "info", false);
+                      "<br> <a href=\"/admin/settings/mod.php#validatorResults\">View full results</a>", "info", false);
 
     switch ($results[0]) {
     case "fatal_error":
