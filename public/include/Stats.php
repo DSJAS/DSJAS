@@ -245,6 +245,9 @@ class Statistics
 
 
     private function performOnWritePrequesites($statName, $requiredType, $extraAllowedTypes=[]) {
+        if (!$this->statisticExists($statName))
+            $this->registerStatistic($statName, $requiredType, $statName, STATISTICS_DEFAULT_CATEGORY);
+
         $type = $this->getStatisticType($statName);
         if ($type != $requiredType) {
             if (count($extraAllowedTypes) > 0) {
@@ -261,8 +264,6 @@ class Statistics
         if ($this->getCurrentStatsState() != STATSTATE_ACTIVE)
             return false;
 
-        if (!$this->statisticExists($statName))
-            $this->registerStatistic($statName, $requiredType, $statName, STATISTICS_DEFAULT_CATEGORY);
 
         return true;
     }
