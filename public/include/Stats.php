@@ -243,6 +243,25 @@ class Statistics
         return true;
     }
 
+    function getStatistic($statName) {
+        if ($this->isStatisticSystemReserved($statName))
+            return 0;
+
+        if (!$this->statisticExists($statName))
+            return 0;
+
+        $query = new PreparedStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = ?",
+                                        [$statName],
+                                        "s");
+
+        $this->database->prepareQuery($query);
+        $this->database->query();
+
+        if (!$this->database->validateAction())
+            return 0;
+
+        return $query->result[0]["stat_value"];
+    }
 
     private function performOnWritePrequesites($statName, $requiredType, $extraAllowedTypes=[]) {
         if (!$this->statisticExists($statName))
