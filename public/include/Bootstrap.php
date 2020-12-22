@@ -37,6 +37,7 @@ if (installRequired($configuration)) {
     redirectToInstall($configuration);
 }
 
+if (!defined("NOLOAD_BOOTSTRAP_HEAD")) {
 ?>
 
 <head>
@@ -56,3 +57,5 @@ if (installRequired($configuration)) {
 
 
 </head>
+
+<?php }

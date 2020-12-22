@@ -46,8 +46,8 @@ if (!isset($_SESSION["loggedin_su"]) || !$_SESSION["loggedin_su"]) {
     die();
 }
 
+if (!defined("NOLOAD_BOOTSTRAP_HEAD")) {
 ?>
-
 <head>
     <title>DSJAS Administration Panel</title>
 
@@ -70,3 +70,5 @@ if (!isset($_SESSION["loggedin_su"]) || !$_SESSION["loggedin_su"]) {
 
 
 </head>
+
+<?php }
