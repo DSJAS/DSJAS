@@ -197,6 +197,29 @@ class Statistics
         return true;
     }
 
+    function getSessionTimestamps() {
+        // Get start time
+        $query = new SimpleStatement("SELECT `stat_value` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = '" . STATISTICS_BEGIN_NAME . "'");
+        $this->database->unsafeQuery($query);
+
+        if (!$this->database->validateAction())
+            $startTime = 0;
+
+        $startTime = $query->result[0]["stat_value"];
+
+        // Get end time
+        $query = new SimpleStatement("SELECT `stat_value` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = '" . STATISTICS_ENDED_NAME . "'");
+        $this->database->unsafeQuery($query);
+
+
+        if (!$this->database->validateAction())
+            $endTime = 0;
+
+        $endTime = $query->result[0]["stat_value"];
+
+        return [$startTime, $endTime];
+    }
+
     function incrementCounterStat($statName) {
         if (!$this->performOnWritePrequesites($statName, STATISTICS_TYPE_COUNTER, [STATISTICS_TYPE_NUMBER]))
             return false;
