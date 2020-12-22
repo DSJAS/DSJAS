@@ -246,7 +246,8 @@ class Statistics
 
     private function performOnWritePrequesites($statName, $requiredType, $extraAllowedTypes=[]) {
         if (!$this->statisticExists($statName))
-            $this->registerStatistic($statName, $requiredType, $statName, STATISTICS_DEFAULT_CATEGORY);
+            if (!$this->registerStatistic($statName, $requiredType, $statName, STATISTICS_DEFAULT_CATEGORY))
+                return false;
 
         $type = $this->getStatisticType($statName);
         if ($type != $requiredType) {
