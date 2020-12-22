@@ -4,6 +4,9 @@
 
 $(document).ready(
     function () {
+        // Global initialisation
+        $('[data-toggle="popover"]').popover()
+
         // General panel
         var dbCheckbox = document.getElementById("noDatabase");
         if (dbCheckbox != null) {
