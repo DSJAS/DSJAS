@@ -167,10 +167,10 @@ $csrfToken = getCSRFToken();
                     <h3 class="text-primary text-monospace font-weight-bold"><?= $minutesActive ?><br>(mins)</h3>
                     <?php } else if ($statState == STATSTATE_ACTIVE) { ?>
                     <h3 class="text-primary text-monospace font-weight-bold">
-                    <span id="hours"><?= $hoursActive ?></span>:<span id="minutes"><?= $minutesActive ?></span>:<span id="seconds"><?= $secondsFormatted ?></span>
+                    <span class="d-none" id="hourL0">0</span><span id="hours"><?= $hoursActive ?></span>:<span class="d-none" id="minL0">0</span><span id="minutes"><?= $minutesActive ?></span>:<span class="d-none" id="secL0">0</span><span id="seconds"><?= $secondsFormatted ?></span>
                     </h3>
                     <?php } else if ($statState == STATSTATE_INACTIVE) { ?>
-                    <h3 class="text-secondary text-monospace font-weight-bold">N/A</h3>
+                    <h3 class="text-secondary text-monospace font-weight-bold">0</h3>
                     <?php } ?>
                     <hr>
                     <p>Total scammer time wasted</p>
@@ -194,9 +194,9 @@ $csrfToken = getCSRFToken();
                     <?php if ($statState == STATSTATE_FROZEN) { ?>
                     <h3 class="text-primary text-monospace font-weight-bold"><?= $totalPageHits ?></h3>
                     <?php } else if ($statState == STATSTATE_ACTIVE) { ?>
-                    <h3 class="text-primary text-monospace font-weight-bold"><?= $totalPageHits ?></h3>
+                    <h3 id="hitsCounter" class="text-primary text-monospace font-weight-bold"><?= $totalPageHits ?></h3>
                     <?php } else if ($statState == STATSTATE_INACTIVE) { ?>
-                    <h3 class="text-secondary text-monospace font-weight-bold">N/A</h3>
+                    <h3 class="text-secondary text-monospace font-weight-bold">0</h3>
                     <?php } ?>
 
                     <br>
