@@ -89,6 +89,9 @@ if (isset($_GET["shiftState"])) {
 
     $stats->shiftStatsState();
 
+    if ($stats->getCurrentStatsState() == STATSTATE_ACTIVE)
+        registerDefaultStatistics($stats);
+
     redirect("/admin/stats.php");
     die();
 } else {

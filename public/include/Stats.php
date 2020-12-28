@@ -58,6 +58,34 @@ const sysdat_fields = [ [
 ];
 define("STATISTICS_SYSDAT_COUNT", count(sysdat_fields));   // The amount of sys_dat fields required for statistics to be initialised
 
+/*
+ * Routine for registering the default statistics that DSJAS
+ * will fill out and manage out of the box
+ *
+ * Writes sensible default values/types and leaves the statistics
+ * at that
+ *
+ * @param $statsInstance - Statistics - The statistics manager instance that should be used by the routine
+ */
+function registerDefaultStatistics(Statistics $statsInstance) {
+    // Page hits
+    $statsInstance->registerStatistic("total_page_hits", STATISTICS_TYPE_COUNTER, "Total page views", "Page hits");
+    $statsInstance->registerStatistic("admin_page_hits", STATISTICS_TYPE_COUNTER, "Total views of the admin panel", "Page hits");
+    $statsInstance->registerStatistic("bank_page_hits", STATISTICS_TYPE_COUNTER, "Total views of bank pages", "Page hits", 1);
+
+    // Account control
+    $statsInstance->registerStatistic("total_signins", STATISTICS_TYPE_COUNTER, "Total logins", "Accounts and logins");
+    $statsInstance->registerStatistic("bank_signins", STATISTICS_TYPE_COUNTER, "Logins to the bank", "Accounts and logins");
+    $statsInstance->registerStatistic("admin_signins", STATISTICS_TYPE_COUNTER, "Logins to the admin dashboard", "Accounts and logins");
+    $statsInstance->registerStatistic("last_bank_signin", STATISTICS_TYPE_TIMESTAMP, "Last login to the bank", "Accounts and logins", time());
+    $statsInstance->registerStatistic("last_admin_signin", STATISTICS_TYPE_TIMESTAMP, "Last login to the admin dashbord", "Accounts and logins", time());
+
+    // Transactions
+    $statsInstance->registerStatistic("total_transactions", STATISTICS_TYPE_COUNTER, "Number of transactions completed", "Transactions and transfers");
+    $statsInstance->registerStatistic("total_transferred", STATISTICS_TYPE_NUMBER, "Total funds transferred $", "Transactions and transfers");
+    $statsInstance->registerStatistic("highest_transfer", STATISTICS_TYPE_NUMBER, "Highest amount transferred $", "Transactions and transfers");
+}
+
 
 class Statistics
 {
