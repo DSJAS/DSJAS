@@ -83,7 +83,6 @@ switch ($statState) {
 
 if (isset($_GET["shiftState"])) {
     $csrf = getCSRFSubmission();
-    var_dump($csrf);
     if (!verifyCSRFToken($csrf)) {
         die(getCSRFFailedError());
     }
