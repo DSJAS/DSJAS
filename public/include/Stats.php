@@ -136,9 +136,6 @@ class Statistics
     }
 
     function __destruct() {
-        if ($this->ownDatabaseInstance) {
-            $this->database->safeDisconnect();
-        }
     }
 
     function statisticsAvailable() {
