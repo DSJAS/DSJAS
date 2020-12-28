@@ -318,6 +318,17 @@ class Statistics
         return $query->result;
     }
 
+    function getThemeStatistics() {
+        $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `theme_def` = 1 AND `sys_data` = 0");
+        $this->database->unsafeQuery($query);
+
+        if (!$this->database->validateAction()) {
+            return [];
+        }
+
+        return $query->result;
+    }
+
     function getStatisticsByCategory($category, $includeSystem=false) {
         $selector = ($includeSystem ? "WHERE `stat_category` = '$category'" : "WHERE `stat_category` = '$category' AND `sys_data` = 0");
 
