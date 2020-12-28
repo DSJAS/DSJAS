@@ -302,6 +302,55 @@ class Statistics
         return $query->result[0]["stat_value"];
     }
 
+    function getStatistics($includeSystem=false) {
+        if (!$includeSystem) {
+            $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `sys_data` = 0");
+        }else{
+            $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "`");
+        }
+
+        $this->database->unsafeQuery($query);
+
+        if (!$this->database->validateAction()) {
+            return [];
+        }
+
+        return $query->result;
+    }
+
+    function getStatisticsByCategory($category, $includeSystem=false) {
+        $selector = ($includeSystem ? "WHERE `stat_category` = '$category'" : "WHERE `stat_category` = '$category' AND `sys_data` = 0");
+
+        $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` $selector");
+        $this->database->unsafeQuery($query);
+
+        if (!$this->database->validateAction()) {
+            return [];
+        }
+
+        return $query->result;
+    }
+
+    function getCategories() {
+        $found = [];
+
+        $query = new SimpleStatement("SELECT `stat_category` FROM `" . STATISTICS_TABLE . "`");
+        $this->database->unsafeQuery($query);
+
+        if (!$this->database->validateAction()) {
+            return [];
+        }
+
+        foreach ($query->result as $category) {
+            $categoryStr = $category["stat_category"];
+            if (!in_array($categoryStr, $found)) {
+                array_push($found, $categoryStr);
+            }
+        }
+
+        return $found;
+    }
+
     private function performOnWritePrequesites($statName, $requiredType, $extraAllowedTypes=[]) {
         if (!$this->statisticExists($statName))
             if (!$this->registerStatistic($statName, $requiredType, $statName, STATISTICS_DEFAULT_CATEGORY))
