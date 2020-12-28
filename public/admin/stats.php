@@ -115,7 +115,7 @@ if ($statState == STATSTATE_FROZEN) {
 }
 
 $totalPageHits = $stats->getStatistic("total_page_hits");
-
+$categories = $stats->getCategories();
 
 $csrfToken = getCSRFToken();
 ?>
@@ -207,4 +207,77 @@ $csrfToken = getCSRFToken();
         </div>
     </div>
 
+    <?php
+
+    if ($statState == STATSTATE_FROZEN) { ?>
+
+    <hr>
+
+    <div id="statistics-summary">
+        <h2>Statistics for this session</h2>
+    </div>
+
+    <?php
+    if (count($categories) == 0) { ?>
+        <p class="text-secondary">No statistics recorded</p>
+    <?php
+        die();
+    }
+    ?>
+
+    <div class="accordion" id="resultCollapses">
+        <?php
+
+        foreach ($categories as $category) {
+
+            $categoryStats = $stats->getStatisticsByCategory($category);
+            $categoryId = str_replace(" ", "-", $category);
+        ?>
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#<?= $categoryId ?>">
+                        <?= $category ?>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="<?= $categoryId ?>" class="collapse" data-parent="#resultCollapses">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($categoryStats as $stat) {
+
+                                if ($stat["stat_type"] == STATISTICS_TYPE_TIMESTAMP) {
+                                    $formattedStat = date("F j, Y, g:i a", $stat["stat_value"]);
+                                }else{
+                                    $formattedStat = $stat["stat_value"];
+                                }
+                            ?>
+                                <tr>
+                                    <th scope="row"><?php
+                                        echo($stat["stat_label"]);
+                                        if ($stat["theme_def"]) { ?>
+                                            <span class="badge badge-warning" data-toggle="tooltip" data-placement="bottom" title="This statistic was provided by data from your theme">
+                                                Theme statistic
+                                            </span>
+                                        <?php } ?>
+                                    </th>
+                                    <td><?= $formattedStat ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
+    </div>
+    <?php } ?>
 </div>
