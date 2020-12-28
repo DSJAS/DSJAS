@@ -71,7 +71,7 @@ function registerDefaultStatistics(Statistics $statsInstance) {
     // Page hits
     $statsInstance->registerStatistic("total_page_hits", STATISTICS_TYPE_COUNTER, "Total page views", "Page hits");
     $statsInstance->registerStatistic("admin_page_hits", STATISTICS_TYPE_COUNTER, "Total views of the admin panel", "Page hits");
-    $statsInstance->registerStatistic("bank_page_hits", STATISTICS_TYPE_COUNTER, "Total views of bank pages", "Page hits", 1);
+    $statsInstance->registerStatistic("bank_page_hits", STATISTICS_TYPE_COUNTER, "Total views of bank pages", "Page hits");
 
     // Account control
     $statsInstance->registerStatistic("total_signins", STATISTICS_TYPE_COUNTER, "Total logins", "Accounts and logins");
