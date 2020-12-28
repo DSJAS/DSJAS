@@ -342,7 +342,7 @@ class Statistics
         return $query->result;
     }
 
-    function getCategories() {
+    function getCategories($includeSystem=false) {
         $found = [];
 
         $query = new SimpleStatement("SELECT `stat_category` FROM `" . STATISTICS_TABLE . "`");
@@ -355,6 +355,9 @@ class Statistics
         foreach ($query->result as $category) {
             $categoryStr = $category["stat_category"];
             if (!in_array($categoryStr, $found)) {
+                if (!$includeSystem && $categoryStr == "System reserved")
+                    continue;
+
                 array_push($found, $categoryStr);
             }
         }
