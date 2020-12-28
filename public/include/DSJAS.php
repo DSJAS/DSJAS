@@ -22,6 +22,8 @@ require_once ABSPATH . INC . "Module.php";
 require_once ABSPATH . INC . "Customization.php";
 require_once ABSPATH . INC . "DB.php";
 
+require_once ABSPATH . INC . "Stats.php";
+
 require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
 
 /**
@@ -29,7 +31,8 @@ require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
  *
  * Handles loading and sending modules, loading the theme and then sending that. In addition,
  * this routine handles setting the THEME_GLOBALS, which are used to send critical info
- * to the theme API/load functions.
+ * to the theme API/load functions Finally, any required statistics will be modified to the
+ * appropriate values
  *
  * @global array $GLOBALS["THEME_GLOBAL"]               Sends information to the theme and/or associated API or load functions
  *
@@ -75,6 +78,13 @@ function dsjas($fileName = "Index.php", $dirName = "/", $moduleCallBack = null, 
     // Initialise shared configuration for theme APIs
     $sharedConfig = new Configuration(true, true, false, true);
 
+    // Initialise statistics manager for theme APIs
+    $statisticsManager = new Statistics($sharedConfig, $sharedDB);
+
+    // Modify appropriate statistics
+    $statisticsManager->incrementCounterStat("total_page_hits");
+    $statisticsManager->incrementCounterStat("bank_page_hits");
+
     // Define globals for theme API
     $GLOBALS["THEME_GLOBALS"] = [];
 
@@ -82,6 +92,8 @@ function dsjas($fileName = "Index.php", $dirName = "/", $moduleCallBack = null, 
 
     $GLOBALS["THEME_GLOBALS"]["shared_conf"] = $sharedConfig;
     $GLOBALS["THEME_GLOBALS"]["shared_db"] = $sharedDB;
+
+    $GLOBALS["THEME_GLOBALS"]["statistics_manager"] = $statisticsManager;
 
     $theme = new Theme($fileName, $dirName, $useTheme);
     $theme->loadTheme();
