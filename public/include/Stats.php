@@ -89,17 +89,17 @@ function registerDefaultStatistics(Statistics $statsInstance) {
 
 class Statistics
 {
-    private DB $database;
-    private Configuration $config;
-    private bool $ownDatabaseInstance = false;
-    private bool $ownConfigInstance = false;
+    private $database;
+    private $config;
+    private $ownDatabaseInstance = false;
+    private $ownConfigInstance = false;
 
-    private bool $statsAvailable = true;
+    private $statsAvailable = true;
 
-    private string $db_host;
-    private string $db_name;
-    private string $db_username;
-    private string $db_password;
+    private $db_host;
+    private $db_name;
+    private $db_username;
+    private $db_password;
 
 
     function __construct(Configuration $configInstance=null, DB $databaseInstance=null) {
