@@ -4,9 +4,13 @@ FROM php:7.2-apache
 # Prepare APT for package installation
 RUN apt update && apt upgrade -y
 
+# Install zlib for php extension
+RUN apt install zlib1g zlib1g-dev -y
+
 # Install required extensions
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install fileinfo
+RUN docker-php-ext-install zip
 
 # Copy config files
 COPY ./docker/server/httpd.conf /etc/apache2/httpd.conf
