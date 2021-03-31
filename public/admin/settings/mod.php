@@ -91,6 +91,10 @@ settings panel", "danger", true);
         dsjas_alert("Theme successfully installed", "DSJAS has installed your theme, but not applied it. To apply this theme to your site, enable it from the theme settings panel", "success", true);
     }
 
+    if (isset($_GET["moduleInstalled"])) {
+        dsjas_alert("Module successfully installed", "DSJAS has installed your module, but not enabled it. Modules must be enabled before they are applied to the side", "success", true);
+    }
+
     if (isset($_GET["themeInstalledEnabled"])) {
         dsjas_alert("Theme successfully applied", "DSJAS has installed and applied the requested theme", "success", true);
     }
