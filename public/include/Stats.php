@@ -40,21 +40,22 @@ define("STATISTICS_TYPE_TIMESTAMP", 2);     // TIMESTAMP - 2: A timestamp object
 
 
 // System data fields and their initial values
-const sysdat_fields = [ [
-                            STATISTICS_STATE_NAME,      // stat_name  - Statistic name in database
-                            STATISTICS_TYPE_NUMBER,     // stat_type  - Data type of statistic in database
-                            STATSTATE_INACTIVE          // stat_value - Initial value of the sysval in database
-                        ],
-                        [
-                            STATISTICS_BEGIN_NAME,
-                            STATISTICS_TYPE_TIMESTAMP,
-                            0
-                        ],
-                        [
-                            STATISTICS_ENDED_NAME,
-                            STATISTICS_TYPE_TIMESTAMP,
-                            0
-                        ]
+const sysdat_fields = [
+    [
+        STATISTICS_STATE_NAME,      // stat_name  - Statistic name in database
+        STATISTICS_TYPE_NUMBER,     // stat_type  - Data type of statistic in database
+        STATSTATE_INACTIVE          // stat_value - Initial value of the sysval in database
+    ],
+    [
+        STATISTICS_BEGIN_NAME,
+        STATISTICS_TYPE_TIMESTAMP,
+        0
+    ],
+    [
+        STATISTICS_ENDED_NAME,
+        STATISTICS_TYPE_TIMESTAMP,
+        0
+    ]
 ];
 define("STATISTICS_SYSDAT_COUNT", count(sysdat_fields));   // The amount of sys_dat fields required for statistics to be initialised
 
@@ -67,7 +68,8 @@ define("STATISTICS_SYSDAT_COUNT", count(sysdat_fields));   // The amount of sys_
  *
  * @param $statsInstance - Statistics - The statistics manager instance that should be used by the routine
  */
-function registerDefaultStatistics(Statistics $statsInstance) {
+function registerDefaultStatistics(Statistics $statsInstance)
+{
     // Page hits
     $statsInstance->registerStatistic("total_page_hits", STATISTICS_TYPE_COUNTER, "Total page views", "Page hits");
     $statsInstance->registerStatistic("admin_page_hits", STATISTICS_TYPE_COUNTER, "Total views of the admin panel", "Page hits");
@@ -102,12 +104,12 @@ class Statistics
     private $db_password;
 
 
-    function __construct(Configuration $configInstance=null, DB $databaseInstance=null) {
+    function __construct(Configuration $configInstance = null, DB $databaseInstance = null)
+    {
         if ($configInstance == null) {
             $this->config = new Configuration(true, false, false, false);
             $this->ownConfigInstance = true;
-        }
-        else {
+        } else {
             $this->config = $configInstance;
         }
 
@@ -125,8 +127,7 @@ class Statistics
                 $this->statsAvailable = false;
                 return;
             }
-        }
-        else {
+        } else {
             $this->database = $databaseInstance;
         }
 
@@ -135,18 +136,22 @@ class Statistics
         }
     }
 
-    function __destruct() {
+    function __destruct()
+    {
     }
 
-    function statisticsAvailable() {
+    function statisticsAvailable()
+    {
         return $this->statsAvailable;
     }
 
-    function getStatsResources() {
+    function getStatsResources()
+    {
         return [$this->ownConfigInstance, $this->ownDatabaseInstance];
     }
 
-    function getCurrentStatsState() {
+    function getCurrentStatsState()
+    {
         $retrieveQuery = new SimpleStatement("SELECT `stat_value` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = '" . STATISTICS_STATE_NAME . "'");
         $this->database->unsafeQuery($retrieveQuery);
 
@@ -154,14 +159,14 @@ class Statistics
             return STATSTATE_INACTIVE;
         }
 
-        return (integer)$retrieveQuery->result[0]["stat_value"];
+        return (int)$retrieveQuery->result[0]["stat_value"];
     }
 
-    function shiftStatsState() {
+    function shiftStatsState()
+    {
         $currentState = $this->getCurrentStatsState();
 
-        switch ($currentState)
-        {
+        switch ($currentState) {
             case STATSTATE_INACTIVE:
                 if (!$this->handleActiveShift())
                     return false;
@@ -192,7 +197,8 @@ class Statistics
         return true;
     }
 
-    function getStatisticType($statisticName) {
+    function getStatisticType($statisticName)
+    {
         $query = new SimpleStatement("SELECT `stat_type` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = '$statisticName'");
         $this->database->unsafeQuery($query);
 
@@ -202,14 +208,16 @@ class Statistics
         return $query->result[0]["stat_type"];
     }
 
-    function statisticExists($statisticName) {
+    function statisticExists($statisticName)
+    {
         $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = '$statisticName'");
         $this->database->unsafeQuery($query);
 
         return ($query->affectedRows > 0);
     }
 
-    function isStatisticSystemReserved($statisticName) {
+    function isStatisticSystemReserved($statisticName)
+    {
         $query = new SimpleStatement("SELECT `sys_data` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = $statisticName");
         $this->database->unsafeQuery($query);
 
@@ -219,16 +227,19 @@ class Statistics
         return $query->result[0]["sys_data"];
     }
 
-    function registerStatistic($statisticName, $statisticType=STATISTICS_TYPE_NUMBER, $statLabel=" ", $statCategory=" ", $initialValue=0, $themeSourced=false) {
+    function registerStatistic($statisticName, $statisticType = STATISTICS_TYPE_NUMBER, $statLabel = " ", $statCategory = " ", $initialValue = 0, $themeSourced = false)
+    {
         if ($this->statisticExists($statisticName))
             return false;
 
         if ($this->getCurrentStatsState() != STATSTATE_ACTIVE)
             return false;
 
-        $query = new PreparedStatement("INSERT INTO `" . STATISTICS_TABLE . "` (`stat_name`, `stat_type`, `stat_value`, `stat_label`, `stat_category`, `sys_data`, `theme_def`) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                                        [$statisticName, $statisticType, $initialValue, $statLabel, $statCategory, 0, (int)$themeSourced],
-                                        "siissii");
+        $query = new PreparedStatement(
+            "INSERT INTO `" . STATISTICS_TABLE . "` (`stat_name`, `stat_type`, `stat_value`, `stat_label`, `stat_category`, `sys_data`, `theme_def`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [$statisticName, $statisticType, $initialValue, $statLabel, $statCategory, 0, (int)$themeSourced],
+            "siissii"
+        );
         $this->database->prepareQuery($query);
         $this->database->query();
 
@@ -238,7 +249,8 @@ class Statistics
         return true;
     }
 
-    function getSessionTimestamps() {
+    function getSessionTimestamps()
+    {
         // Get start time
         $query = new SimpleStatement("SELECT `stat_value` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = '" . STATISTICS_BEGIN_NAME . "'");
         $this->database->unsafeQuery($query);
@@ -261,7 +273,8 @@ class Statistics
         return [$startTime, $endTime];
     }
 
-    function incrementCounterStat($statName) {
+    function incrementCounterStat($statName)
+    {
         if (!$this->performOnWritePrequesites($statName, STATISTICS_TYPE_COUNTER, [STATISTICS_TYPE_NUMBER]))
             return false;
 
@@ -274,13 +287,16 @@ class Statistics
         return true;
     }
 
-    function setNumberStat($statName, $statVal=0) {
+    function setNumberStat($statName, $statVal = 0)
+    {
         if (!$this->performOnWritePrequesites($statName, STATISTICS_TYPE_NUMBER))
             return false;
 
-        $query = new PreparedStatement("UPDATE `" . STATISTICS_TABLE . "` SET `stat_value` = ? WHERE `stat_name` = ?",
-                                        [$statVal, $statName],
-                                        "is");
+        $query = new PreparedStatement(
+            "UPDATE `" . STATISTICS_TABLE . "` SET `stat_value` = ? WHERE `stat_name` = ?",
+            [$statVal, $statName],
+            "is"
+        );
 
         $this->database->prepareQuery($query);
         $this->database->query();
@@ -289,10 +305,10 @@ class Statistics
             return false;
 
         return true;
-
     }
 
-    function stampTimestampStat($statName) {
+    function stampTimestampStat($statName)
+    {
         if (!$this->performOnWritePrequesites($statName, STATISTICS_TYPE_TIMESTAMP))
             return false;
 
@@ -307,16 +323,19 @@ class Statistics
         return true;
     }
 
-    function getStatistic($statName) {
+    function getStatistic($statName)
+    {
         if ($this->isStatisticSystemReserved($statName))
             return 0;
 
         if (!$this->statisticExists($statName))
             return 0;
 
-        $query = new PreparedStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = ?",
-                                        [$statName],
-                                        "s");
+        $query = new PreparedStatement(
+            "SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = ?",
+            [$statName],
+            "s"
+        );
 
         $this->database->prepareQuery($query);
         $this->database->query();
@@ -327,10 +346,11 @@ class Statistics
         return $query->result[0]["stat_value"];
     }
 
-    function getStatistics($includeSystem=false) {
+    function getStatistics($includeSystem = false)
+    {
         if (!$includeSystem) {
             $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `sys_data` = 0");
-        }else{
+        } else {
             $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "`");
         }
 
@@ -343,7 +363,8 @@ class Statistics
         return $query->result;
     }
 
-    function getThemeStatistics() {
+    function getThemeStatistics()
+    {
         $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `theme_def` = 1 AND `sys_data` = 0");
         $this->database->unsafeQuery($query);
 
@@ -354,7 +375,8 @@ class Statistics
         return $query->result;
     }
 
-    function getStatisticsByCategory($category, $includeSystem=false) {
+    function getStatisticsByCategory($category, $includeSystem = false)
+    {
         $selector = ($includeSystem ? "WHERE `stat_category` = '$category'" : "WHERE `stat_category` = '$category' AND `sys_data` = 0");
 
         $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` $selector");
@@ -367,7 +389,8 @@ class Statistics
         return $query->result;
     }
 
-    function getCategories($includeSystem=false) {
+    function getCategories($includeSystem = false)
+    {
         $found = [];
 
         $query = new SimpleStatement("SELECT `stat_category` FROM `" . STATISTICS_TABLE . "`");
@@ -390,7 +413,8 @@ class Statistics
         return $found;
     }
 
-    private function performOnWritePrequesites($statName, $requiredType, $extraAllowedTypes=[]) {
+    private function performOnWritePrequesites($statName, $requiredType, $extraAllowedTypes = [])
+    {
         if (!$this->statisticExists($statName))
             if (!$this->registerStatistic($statName, $requiredType, $statName, STATISTICS_DEFAULT_CATEGORY))
                 return false;
@@ -415,7 +439,8 @@ class Statistics
         return true;
     }
 
-    private function sysdatPresent() {
+    private function sysdatPresent()
+    {
         $query = new SimpleStatement("SELECT * FROM `" . STATISTICS_TABLE . "` WHERE `sys_data` = 1");
         $this->database->unsafeQuery($query);
 
@@ -426,29 +451,31 @@ class Statistics
         return true;
     }
 
-    private function initialiseSysdat() {
+    private function initialiseSysdat()
+    {
         // If we have deleted the sysdat fields, we should just reset to defaults
         // because something has gone... quite wrong...
-        foreach (sysdat_fields as $sysdat)
-        {
+        foreach (sysdat_fields as $sysdat) {
             $name = $sysdat[0];
             $type = $sysdat[1];
             $initial_value = $sysdat[2];
 
             $query = new SimpleStatement("INSERT INTO `" . STATISTICS_TABLE . "`
-(`stat_name`, `stat_type`, `stat_value`, `sys_data`, `stat_label`, `stat_category`)
-VALUES ('$name', '$type', '$initial_value', 1, '$name', 'System reserved')");
+(`stat_name`, `stat_type`, `stat_value`, `sys_data`, `stat_label`, `stat_category`, `theme_def`)
+VALUES ('$name', '$type', '$initial_value', 1, '$name', 'System reserved', 0)");
 
             $this->database->unsafeQuery($query);
         }
     }
 
-    private function rawShiftState($newState) {
+    private function rawShiftState($newState)
+    {
         $query = new SimpleStatement("UPDATE `" . STATISTICS_TABLE . "` SET `stat_value` = $newState WHERE `stat_name` = '" . STATISTICS_STATE_NAME . "'");
         $this->database->unsafeQuery($query);
     }
 
-    private function handleActiveShift() {
+    private function handleActiveShift()
+    {
         // Timestamp session beginning
         $timestamp = time();
 
@@ -462,7 +489,8 @@ VALUES ('$name', '$type', '$initial_value', 1, '$name', 'System reserved')");
         return true;
     }
 
-    private function handleInactiveShift() {
+    private function handleInactiveShift()
+    {
         // Purge all current session data
         $query = new SimpleStatement("DELETE FROM `" . STATISTICS_TABLE . "` WHERE `sys_data` = 0");
         $this->database->unsafeQuery($query);
@@ -473,7 +501,8 @@ VALUES ('$name', '$type', '$initial_value', 1, '$name', 'System reserved')");
         return true;
     }
 
-    private function handleFrozenShift() {
+    private function handleFrozenShift()
+    {
         // Timestamp session ending
         $timestamp = time();
 
