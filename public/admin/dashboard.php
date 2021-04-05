@@ -22,6 +22,8 @@ require ABSPATH . INC . "Users.php";
 require ABSPATH . INC . "Update.php";
 require ABSPATH . INC . "Administration.php";
 
+require ABSPATH . INC . "Stats.php";
+
 require_once ABSPATH . INC . "Customization.php";
 require_once ABSPATH . INC . "Util.php";
 
@@ -45,6 +47,11 @@ $newAccount = currentUserIsNew(true);
 if ($newAccount) {
     makeCurrentUserUsed(true);
 }
+
+
+$stats = new Statistics();
+$stats->incrementCounterStat("total_page_hits");
+$stats->incrementCounterStat("admin_page_hits");
 
 ?>
 
