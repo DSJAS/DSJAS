@@ -23,6 +23,8 @@ require ABSPATH . INC . "DSJAS.php";
 require ABSPATH . INC . "Banking.php";
 require ABSPATH . INC . "csrf.php";
 
+require_once ABSPATH . INC . "Stats.php";
+
 require_once ABSPATH . INC . "Customization.php";
 require_once ABSPATH . INC . "Users.php";
 require_once ABSPATH . INC . "Util.php";
@@ -30,6 +32,8 @@ require_once ABSPATH . INC . "Util.php";
 require_once ABSPATH . INC . "Theme.php";
 require_once ABSPATH . INC . "Module.php";
 
+
+$stats = new Statistics();
 
 if (isset($_GET["performTransfer"])) {
     $csrf = verifyCSRFToken(getCSRFSubmission($method = "get"));
@@ -62,6 +66,18 @@ if (isset($_GET["performTransfer"])) {
         performTransaction($_GET["originAccount"], $_GET["destinationAccount"], $_GET["amount"], $_GET["description"]);
     } else {
         performTransaction($_GET["originAccount"], $_GET["destinationAccount"], $_GET["amount"]);
+    }
+
+    $lastGreatest = $stats->getStatistic("highest_transfer");
+    $currentTotal = $stats->getStatistic("total_transferred");
+
+    $nowTotal = $currentTotal + $_GET["amount"];
+    $stats->setNumberStat("total_transferred", $nowTotal);
+
+    $stats->incrementCounterStat("total_transactions");
+
+    if ((int)$_GET["amount"] > $lastGreatest) {
+        $stats->setNumberStat("highest_transfer", (int)$_GET["amount"]);
     }
 
     header("Location: /user/Transfer.php?transferSuccess=1&originAccount=" . $_GET["originAccount"] . "&amount=" . $_GET["amount"]);
