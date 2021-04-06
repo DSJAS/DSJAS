@@ -58,7 +58,6 @@ if (isset($_GET["performTransfer"])) {
     }
 
     if (isset($_GET["description"]) && $_GET["description"] != null) {
-        echo ("Description provided!");
         performTransaction($_GET["originAccount"], $_GET["destinationAccount"], $_GET["amount"], $_GET["description"]);
     } else {
         performTransaction($_GET["originAccount"], $_GET["destinationAccount"], $_GET["amount"]);
