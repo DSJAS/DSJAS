@@ -129,6 +129,44 @@ settings panel", "danger", true);
         <h1 class="admin-header col col-offset-6">Modules and Themes</h1>
     </div>
 
+    <?php
+        
+        foreach ($installedModules as $module) {
+            if (is_file(ABSPATH . "/admin/site/modules/" . $module) || $module == "." || $module == "..") {
+                continue;
+            }
+
+            $configText = file_get_contents(ABSPATH . "/admin/site/modules/" . $module . "/config.json");
+            $config = json_decode($configText, true);
+
+            $modalName = "deleteModal" . $module;
+            $modalTitle = "Really delete \"" . $config["name"] . "\"?";
+            ?>
+
+            <div class="modal fade" id="<?= $modalName ?>" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><?= $modalTitle ?></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Deleting a module is permanent and cannot be undone once completed.
+                            Are you sure you wish to continue?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/admin/settings/installModule.php?uninstallModule=<?= $module ?>&csrf=<?php echo (getCSRFToken()); ?>" type="button" class="btn btn-danger">Confirm</a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+    ?>
+
     <ul class="nav nav-tabs nav-fill">
         <li class="nav-item">
             <a class="nav-link active text-primary" onclick="switchToThemes()" id="themeTabBar">Theme</a>
@@ -337,7 +375,8 @@ settings panel", "danger", true);
                             $configText = file_get_contents(ABSPATH . "/admin/site/modules/" . $module . "/config.json");
                             $config = json_decode($configText, true);
 
-                            $enabled = $conf->getKey(ID_MODULE_CONFIG, "active_modules", $module)
+                            $enabled = $conf->getKey(ID_MODULE_CONFIG, "active_modules", $module);
+                            $uninstallModal = "deleteModal" . $module;
                             ?>
                             <div class="col-auto mb-3">
                                 <input id="moduleName<?php echo ($count); ?>" type="text" style="visibility: hidden; position: absolute" name="moduleName" value="<?php echo ($module); ?>">
@@ -355,7 +394,7 @@ settings panel", "danger", true);
                                         <?php if (isset($config["information-link"]) && $config["information-link"] != "") { ?>
                                             <a href="<?php echo ($config["information-link"]); ?>" class="card-link">More details</a>
                                         <?php } ?>
-                                        <a class="text-danger ml-1" href="/admin/settings/installModule.php?uninstallModule=<?php echo ($module) ?>&csrf=<?php echo (getCSRFToken()); ?>">Uninstall</a>
+                                        <a class="text-danger ml-1" href="#" data-toggle="modal" data-target="#<?= $uninstallModal ?>">Uninstall</a>
                                     </div>
                                 </div>
                             </div>
