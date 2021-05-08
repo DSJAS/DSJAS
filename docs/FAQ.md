@@ -150,6 +150,12 @@ If you get a timeout error, make sure your webserver **and database server** are
 
 Finally, sometimes PHP has an annoying habit of failing to load a script properly if the webserver has been idle for an extended period of time. If you have left the server idle (in other words, without accepting any requests) for a while, refresh the page as second time. If the page refreshes with the content loading correctly, you can take out your frustration on PHP.
 
+## The site fails to load! It says something about "require\_once, failed to open stream"?
+
+Don't panic! Make sure you cloned the site with the git ``--recursive`` option, or all the submodules will not be cloned along with the site, making some required libraries be absent.
+
+If you have already cloned the site to your machine, just run ``git submodule update --init --recursive``, and git will fix the problem for you.
+
 ## How can I write themes and extensions?
 
 This documentation details all that and much more. We can't even scratch the surface in a short FAQ paragraph, so I'll just refer you to the theme folder in the GitHub docs. *Happy building :)*
@@ -159,7 +165,5 @@ This documentation details all that and much more. We can't even scratch the sur
 Unfortunately, my old signing key for GitHub expired when my email address changed on GitHub. This caused all commits before I started using my new signature key to become unverified.
 
 This is nothing to worry about. If the key were still valid, all these commits would be perfectly fine and verified. But, in the future, to verify commits, the new key **must** be used.
-
----
 
 *Got an FAQ you want added? Submit them to us by GitHub PRs or Issues* *Thanks, and happy scambaiting!*

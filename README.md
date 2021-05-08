@@ -56,7 +56,7 @@ When using this version, you should expect a lot more frequent updates. If too m
 If you wish to develop content for the site (such as a theme, extension or just contribute to the core of the site), you will have to build the app yourself. Luckily, the site is powered by PHP, which does not require compilation. All you need to do is configure and install the required files using the tools provided.
 
 To get started, clone the repository with:
-```git clone https://github.com/DSJAS/DSJAS.git```
+```git clone --recursive https://github.com/DSJAS/DSJAS.git```
 
 This will create a folder called "DSJAS" on your local machine and place the required files inside of it.
 
