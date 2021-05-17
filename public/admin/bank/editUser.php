@@ -140,7 +140,7 @@ require ABSPATH . INC . "csrf.php";
                 <a href="/admin/bank/migrateAccount.php?user=<?php echo ($_GET["editUser"]); ?>" class="btn btn-secondary">Migrate an account to this user</a>
             </div>
 
-            <a href="/admin/bank/editUser?deleteUser=<?php echo ($_GET["editUser"]); ?>" class="btn btn-danger">Delete this user</a>
+            <a href="/admin/bank/editUser?deleteUser=<?php echo ($_GET["editUser"]); ?>&csrf=<?= getCSRFToken(); ?>" class="btn btn-danger">Delete this user</a>
 
             <br><br>
             <small class="text-muted">Looking for passwords? You can reset passwords on the accounts screen. Your password is not available once stored and can only be reset by an administrator.</small>
