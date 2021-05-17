@@ -126,7 +126,20 @@ if (isset($_POST["doEditUser"])) {
 
     <?php require ABSPATH . INC . "components/AdminSettingsNav.php";
 
-    if (isset($_GET["deleteUser"])) { ?>
+    if (isset($_GET["deleteUser"])) {
+        if (getCurrentUserId(true) == $_GET["deleteUser"]) {
+            dsjas_alert("Cannot delete account", "You appear to be attempting to delete your own account. This action is not allowed and the operation has been cancelled",
+                        "danger", false);
+
+    ?>
+
+                    <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
+                </p>
+            </div>
+    <?php
+        die();
+    } ?>
+
         <div class="text-center">
             <h1 style="color: red">Warning</h1>
             <p class="lead">Deleting a user is permanent and will erase all data associated with the account. You cannot undo this action and the account data will not be recoverable.</p>
@@ -135,6 +148,7 @@ if (isset($_POST["doEditUser"])) {
             <a class="btn btn-danger" href="/admin/settings/editUser.php?doDeleteUser=<?php echo ($_GET["deleteUser"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
             <a class="btn btn-secondary" href="/admin/settings/accounts.php">Cancel</a>
         </div>
+
     <?php }
 
     if (isset($_GET["toggleEnabledUser"])) {
