@@ -155,8 +155,6 @@ function currentUserIsNew($siteuser = false)
         $database->prepareQuery($query);
         $database->query();
 
-        $database->disconnect();
-
         return $query->result[0]["new_account"];
     } else {
         return false;
