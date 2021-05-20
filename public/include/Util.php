@@ -40,9 +40,20 @@ function endsWith($string, $suffix)
     return (substr($string, -$length) === $suffix);
 }
 
+function generateRandomIdentifier($len)
+{
+    $characters = '0123456789';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $len; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
 function adminAccessDeniedMessage()
 {
-    ?>
+?>
     <div class="alert alert-danger" role="alert">
         <p><strong>Access denied</strong> The administration panel has been disabled in the site settings.</p>
         <a class="btn btn-danger" href="/">Return to homepage</a>
@@ -66,23 +77,22 @@ function recursiveDeleteDirectory($dir)
     }
 }
 
-function dsjas_alert($title, $body="", $style="info", $dismissible=false, $appendCSS="")
+function dsjas_alert($title, $body = "", $style = "info", $dismissible = false, $appendCSS = "")
 {
     $alertClass = "alert alert-" . $style . " " . $appendCSS;
-    if ($dismissible)
-    {
+    if ($dismissible) {
         $alertClass .= " alert-dismissible fade show";
     }
 
-    ?>
+?>
     <div class="<?= $alertClass ?>" role="alert">
         <strong><?= $title ?></strong> <?= $body ?>
-    <?php if ($dismissible) { ?>
-        <button type="button" class="close" data-dismiss="alert">
-              <span>&times;</span>
-        </button>
-    <?php } ?>
+        <?php if ($dismissible) { ?>
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        <?php } ?>
     </div>
 
-    <?php
+<?php
 }

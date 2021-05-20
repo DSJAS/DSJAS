@@ -19,6 +19,8 @@
 require_once ABSPATH . INC . "Users.php";
 require_once ABSPATH . INC . "DB.php";
 
+require_once ABSPATH . INC . "Util.php";
+
 define("RANDOM_ACCOUNT_NAMES", ["Checking account", "Savings account", "Free basic account", "War bond", "Credit plus"]);
 define("ACCOUNT_TYPES", ["current", "savings", "shared", "misc"]);
 
@@ -289,10 +291,12 @@ function createAccount($accountName, $associatedID, $type, $holderName = "John D
         $configuration["password"]
     );
 
+    $accountIdentifier = generateRandomIdentifier(9);
+
     $query = new PreparedStatement(
-        "INSERT INTO `accounts` (`account_name`, `account_type`, `account_balance`, `holder_name`, `associated_online_account_id`, `account_disabled`) VALUES (?, ?, ?, ?, ?, ?)",
-        [$accountName, $type, $initialBalance, $holderName, $associatedID, $disabled],
-        "ssdsii"
+        "INSERT INTO `accounts` (`account_number`, `account_name`, `account_type`, `account_balance`, `holder_name`, `associated_online_account_id`, `account_disabled`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [$accountIdentifier, $accountName, $type, $initialBalance, $holderName, $associatedID, $disabled],
+        "issdsii"
     );
 
     $database->prepareQuery($query);

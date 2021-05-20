@@ -33,6 +33,7 @@ USE dsjas
 
 CREATE TABLE `accounts` (
   `account_identifier` int(11) NOT NULL,
+  `account_number` int(11) NOT NULL,
   `account_name` text NOT NULL,
   `account_type` enum('current','savings','shared','misc') NOT NULL DEFAULT 'current',
   `account_balance` decimal(11,2) NOT NULL DEFAULT '0.00',
@@ -45,11 +46,11 @@ CREATE TABLE `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`account_identifier`, `account_name`, `account_type`, `account_balance`, `holder_name`, `associated_online_account_id`, `account_disabled`) VALUES
-(1, 'Checking Account', 'current', '1200.00', 'Edna Gooseberry', 1, 0),
-(2, 'Savings Account', 'savings', '5420.00', 'Edna Gooseberry', 1, 0),
-(3, 'War bond', 'misc', '3600.00', 'Edna Gooseberry', 1, 0),
-(4, 'Money Market', 'misc', '1500250.42', 'Edna Gooseberry', 1, 0);
+INSERT INTO `accounts` (`account_identifier`, `account_number`, `account_name`, `account_type`, `account_balance`, `holder_name`, `associated_online_account_id`, `account_disabled`) VALUES
+(1, 909111628, 'Checking Account', 'current', '1200.00', 'Edna Gooseberry', 1, 0),
+(2, 285058645, 'Savings Account', 'savings', '5420.00', 'Edna Gooseberry', 1, 0),
+(3, 786878148, 'War bond', 'misc', '3600.00', 'Edna Gooseberry', 1, 0),
+(4, 869033308, 'Money Market', 'misc', '1500250.42', 'Edna Gooseberry', 1, 0);
 
 -- --------------------------------------------------------
 
