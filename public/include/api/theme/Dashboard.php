@@ -34,6 +34,7 @@
 
 require_once ABSPATH . INC . "DB.php";
 require_once ABSPATH . INC . "Users.php";
+require_once ABSPATH . INC . "Banking.php";
 
 
 function getAccountsArray()
@@ -116,4 +117,9 @@ function getDisplayBalance($accountID)
     $balanceValue = $query->result[0]["account_balance"];
 
     return "$" . $balanceValue;
+}
+
+function getDisplayAccountNumber($accountID)
+{
+    return censorAccountNumber(getAccountNumber($accountID));
 }
