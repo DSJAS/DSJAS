@@ -41,7 +41,7 @@ require_once THEME_API . "Dashboard.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/");
@@ -67,7 +67,7 @@ function getTheme()
                     foreach (getAccountsArray() as $account) { ?>
                         <tr>
                             <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
-                            <td><?php echo (censorAccountNumber($account["account_identifier"])); ?></td>
+                            <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
                             <?php if (isPricePositive($account["account_balance"])) { ?>
                                 <td class="text-success">$<?php echo ($account["account_balance"]); ?></td>
                             <?php } else { ?>
@@ -104,18 +104,17 @@ function getTheme()
                 </thead>
                 <tbody>
                     <?php
-                    $iteration = 0;
                     foreach (getRecentTransactionsArray(5) as $info) { ?>
                         <tr>
                             <td><?php echo ($info["transaction_date"]); ?></td>
-                            <td><?php echo (censorAccountNumber(censorAccountNumber($info["origin_account_id"]))); ?></td>
+                            <td><?php echo (getDisplayAccountNumber($info["origin_account_id"])); ?></td>
                             <td><?php echo ($info["transaction_description"]); ?></th>
                             <td><?php echo ($info["transaction_type"]); ?></th>
                                 <?php if (isPricePositive($info["transaction_amount"])) { ?>
                             <td class="text-success">$<?php echo ($info["transaction_amount"]); ?></td>
-                                <?php } else { ?>
+                        <?php } else { ?>
                             <td class="text-danger">$<?php echo ($info["transaction_amount"]); ?></td>
-                                <?php } ?>
+                        <?php } ?>
                         </tr>
                     <?php } ?>
                 </tbody>

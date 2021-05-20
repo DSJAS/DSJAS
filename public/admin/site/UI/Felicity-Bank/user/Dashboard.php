@@ -26,7 +26,7 @@ require THEME_API . "Dashboard.php";
 
 function getTheme()
 {
-    ?>
+?>
 
     <link rel="stylesheet" href=<?php echo (getThemeContent("dashboard.css", "styles/")) ?>>
 
@@ -104,7 +104,7 @@ function getTheme()
                                 <?php foreach (getAccountsArray() as $account) { ?>
                                     <tr>
                                         <td><?php echo $account["account_name"] ?></td>
-                                        <td><?php echo censorAccountNumber($account["account_identifier"]); ?></td>
+                                        <td><?php echo censorAccountNumber($account["account_number"]); ?></td>
                                         <td>$<?php echo $account["account_balance"] ?></td>
                                         <td>$<?php echo $account["account_balance"] ?></td>
                                     </tr>

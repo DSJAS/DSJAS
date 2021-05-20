@@ -127,7 +127,7 @@ function getTheme()
                             foreach (getAccountsArray() as $account) { ?>
                                 <tr>
                                     <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
-                                    <td><?php echo (censorAccountNumber($account["account_identifier"])); ?></td>
+                                    <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
                                     <?php if (isPricePositive($account["account_balance"])) { ?>
                                         <td class="text-success">$<?php echo ($account["account_balance"]); ?></td>
                                     <?php } else { ?>
@@ -174,7 +174,7 @@ function getTheme()
                             ?>
                                 <tr>
                                     <td><?php echo ($info["transaction_date"]); ?></td>
-                                    <td><?php echo (censorAccountNumber($info["origin_account_id"])); ?></td>
+                                    <td><?php echo (getDisplayAccountNumber($info["origin_account_id"])); ?></td>
                                     <td><?php echo ($info["transaction_description"]); ?></th>
                                     <td><?php echo ($type); ?></th>
                                         <?php if (isPricePositive($info["transaction_amount"])) { ?>

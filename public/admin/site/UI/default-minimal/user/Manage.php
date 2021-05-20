@@ -67,7 +67,7 @@ function getTheme()
         $accountStanding = "<span class='text-primary'>good</span>";
     }
 
-    ?>
+?>
 
     <body>
         <script src=<?php echo (getThemeContent("accounts.js", "js/")) ?>></script>
@@ -112,7 +112,7 @@ function getTheme()
                     foreach (getAccountsArray() as $account) { ?>
                         <tr>
                             <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
-                            <td><?php echo (censorAccountNumber($account["account_identifier"])); ?></td>
+                            <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
                             <?php if (isPricePositive($account["account_balance"])) { ?>
                                 <td class="text-success">$<?php echo ($account["account_balance"]); ?></td>
                             <?php } else { ?>
