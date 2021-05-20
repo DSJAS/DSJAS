@@ -165,6 +165,24 @@ function userOwnsAccount($accountID, $userID)
     return ($query->result[0]["associated_online_account_id"] == $userID);
 }
 
+function getAccountNumber($id)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new SimpleStatement("SELECT `account_number` FROM `accounts` WHERE `account_identifier` = $id");
+
+    $database->unsafeQuery($query);
+
+    return $query->result[0]["account_number"];
+}
+
 function getNumberOfAccounts()
 {
     $configuration = parse_ini_file(ABSPATH . "/Config.ini");
