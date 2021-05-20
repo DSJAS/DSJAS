@@ -26,7 +26,7 @@ require THEME_API . "Accounts.php";
 
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <!--[if lt IE 7]>
@@ -88,7 +88,7 @@ function getTheme()
 
                 <form id="loginForm" action="/user/Login.php" method="POST">
                     <div class="form-group form-inline d-flex justify-content-between">
-                        <input name="username" type="text" class="form-control" placeholder="Username" style="width: 48%;" />
+                        <input name="username" type="text" class="form-control" autocomplete="off" placeholder="Username" style="width: 48%;" />
                         <input name="password" type="password" class="form-control" placeholder="Password" style="width: 48%;" />
                     </div>
                     <button type="submit" class="btn btn-success">

@@ -41,7 +41,7 @@ require THEME_API . "Accounts.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body class="body-signin bg-img-login">
 
@@ -52,7 +52,7 @@ function getTheme()
                 <div class="alert alert-danger" role="alert">
                     <p><strong><?php echo (getLoginErrorTitle()); ?></strong> <?php echo (getLoginErrorMsg()); ?></p>
                 </div>
-                <?php
+            <?php
             } elseif (shouldProvideLogoutFeedback() && getLogoutFeedback() == LOGOUT_API_FAILURE) { ?>
                 <div class="alert alert-info" role="alert">
                     <p><strong>Failed to sign out</strong> Please sign in before you sign out</p>
@@ -67,7 +67,7 @@ function getTheme()
             <?php addModuleDescriptor("login_box_content");  ?>
 
             <label for="inputEmail" class="sr-only">Username</label>
-            <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+            <input name="username" type="text" autocomplete="off" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
 
             <label for="inputPassword" class="sr-only">Password</label>
             <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
