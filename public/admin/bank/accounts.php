@@ -112,7 +112,7 @@ if (isset($_GET["closeAccount"])) { ?>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Change account balance</h1>
-            <p class="lead">You are changing the account balance of account number <strong><?php echo $_GET["changeBalance"] ?></strong>.<br> The account balance will be changed to the specified number. Existing transactions will be unaffected.</p>
+            <p class="lead">You are changing the account balance of account number <strong><?php printf("%s (%s)", $_GET["changeBalance"], getAccountNumber($_GET["changeBalance"])) ?></strong>.<br> The account balance will be changed to the specified number. Existing transactions will be unaffected.</p>
 
             <hr>
 
@@ -205,7 +205,7 @@ regenerateCSRF();
                     <tbody>
                         <?php foreach (getAllAccounts() as $account) { ?>
                             <tr>
-                                <td><strong><?php echo ($account["account_identifier"]); ?></strong></td>
+                                <td><strong><?php printf("%s (%s)", $account["account_identifier"], $account["account_number"]); ?></strong></td>
                                 <td><?php echo ($account["account_name"]); ?></td>
                                 <td><?php echo ($account["account_type"]); ?></td>
                                 <td><?php echo (getInfoFromUserID($account["associated_online_account_id"], "username")); ?></td>
