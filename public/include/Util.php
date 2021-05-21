@@ -24,6 +24,13 @@ function redirect($path)
     header("Location: " . $path);
 }
 
+function startDownload($type = "application/html", $filename = "download")
+{
+    header("Content-Description: File Transfer");
+    header("Content-Type: $type");
+    header("Content-Disposition: attachment; filename=\"$filename\"");
+}
+
 function startsWith($string, $prefix)
 {
     $length = strlen($prefix);
@@ -42,7 +49,7 @@ function endsWith($string, $suffix)
 
 function adminAccessDeniedMessage()
 {
-    ?>
+?>
     <div class="alert alert-danger" role="alert">
         <p><strong>Access denied</strong> The administration panel has been disabled in the site settings.</p>
         <a class="btn btn-danger" href="/">Return to homepage</a>
@@ -66,23 +73,22 @@ function recursiveDeleteDirectory($dir)
     }
 }
 
-function dsjas_alert($title, $body="", $style="info", $dismissible=false, $appendCSS="")
+function dsjas_alert($title, $body = "", $style = "info", $dismissible = false, $appendCSS = "")
 {
     $alertClass = "alert alert-" . $style . " " . $appendCSS;
-    if ($dismissible)
-    {
+    if ($dismissible) {
         $alertClass .= " alert-dismissible fade show";
     }
 
-    ?>
+?>
     <div class="<?= $alertClass ?>" role="alert">
         <strong><?= $title ?></strong> <?= $body ?>
-    <?php if ($dismissible) { ?>
-        <button type="button" class="close" data-dismiss="alert">
-              <span>&times;</span>
-        </button>
-    <?php } ?>
+        <?php if ($dismissible) { ?>
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        <?php } ?>
     </div>
 
-    <?php
+<?php
 }
