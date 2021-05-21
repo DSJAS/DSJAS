@@ -51,6 +51,7 @@ if (isset($_POST["doSave"])) {
     $config->setKey(ID_GLOBAL_CONFIG, "customization", "bank_domain", $_POST["bankURL"]);
 
     $config->setKey(ID_GLOBAL_CONFIG, "settings", "allow_access_to_admin", $_POST["adminAccess"]);
+    $config->setKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_nolog_admin", $_POST["adminMissing"]);
 
     die(); // Don't return the panel for the POST request
 } else if (isset($_POST["doResetInstall"])) {
@@ -64,6 +65,7 @@ if (isset($_POST["doSave"])) {
 regenerateCSRF();
 
 $noDatabase = $config->getKey(ID_GLOBAL_CONFIG, "database", "running_without_database");
+$adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_nolog_admin");
 
 ?>
 
@@ -173,6 +175,16 @@ $noDatabase = $config->getKey(ID_GLOBAL_CONFIG, "database", "running_without_dat
                     <small class="form-text text-muted">Disabling access to the admin panel will prevent administrator logins and all admin pages.
                         You may wish to disable this during a live site usage or if you do not plan on changing settings mid-use.
                         However, you will be unable to access this page again to disable the setting and will need to edit the configuration on disk to revert this.
+                    </small>
+                </div>
+                <div class="form-check">
+		<input class="form-check-input" type="checkbox" id="admin404" <?php if ($adminMissing) { echo ("checked"); } ?>>
+                    <label class="form-check-label" for="admin404">
+                        Simulate a 404 error on unauthorised admin pages
+                    </label>
+                    <small class="form-text text-muted">
+                        When not logged in, pages in the admin panel will not redirect to the login and will instead simulate a 404 (page missing) error by
+                        redirecting to the 404 error page. This <strong>will not</strong> prevent admin logins, and so can be disabled in the admin panel.
                     </small>
                 </div>
             </form>

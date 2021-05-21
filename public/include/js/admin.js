@@ -34,6 +34,7 @@ function generalSaveSettings()
     postHeaders = postHeaders.concat("&bankName=" + encodeURIComponent($("#bankName").val()));
     postHeaders = postHeaders.concat("&bankURL=" + encodeURIComponent($("#bankURL").val()));
     postHeaders = postHeaders.concat("&adminAccess=" + ($("#adminAccess").prop("checked") ? "1" : "0").toString());
+    postHeaders = postHeaders.concat("&adminMissing=" + ($("#admin404").prop("checked") ? "1" : "0").toString());
     postHeaders = postHeaders.concat("&dbHost=" + encodeURIComponent($("#dbHostname").val()));
     postHeaders = postHeaders.concat("&dbDatabase=" + encodeURIComponent($("#dbDatabase").val()));
     postHeaders = postHeaders.concat("&dbUser=" + encodeURIComponent($("#dbUsername").val()));

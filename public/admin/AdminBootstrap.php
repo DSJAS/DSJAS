@@ -42,6 +42,10 @@ if (installRequired($configuration)) {
 }
 
 if (!isset($_SESSION["loggedin_su"]) || !$_SESSION["loggedin_su"]) {
+    if ($configuration["simulate_missing_nolog_admin"]) {
+	header("Location: /error/Error.php");
+	die();
+    }
     header("Location: /admin/user/SignIn.php");
     die();
 }
