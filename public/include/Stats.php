@@ -413,6 +413,21 @@ class Statistics
         return $found;
     }
 
+    function exportStatistics()
+    {
+        $query = new SimpleStatement("SELECT `stat_label`, `stat_category`, `stat_value` FROM `" . STATISTICS_TABLE . "` WHERE `sys_data` = 0");
+        $this->database->unsafeQuery($query);
+
+        $stdout = fopen('php://output', 'w');
+        fputcsv($stdout, array("Name", "Category", "Value"));
+
+        for ($i = 0; $i < $query->affectedRows; $i++) {
+            fputcsv($stdout, $query->result[$i]);
+        }
+
+        fclose($stdout);
+    }
+
     private function performOnWritePrequesites($statName, $requiredType, $extraAllowedTypes = [])
     {
         if (!$this->statisticExists($statName))
