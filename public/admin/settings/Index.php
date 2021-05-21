@@ -85,7 +85,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
     if (isset($_GET["success"])) {
         dsjas_alert("Success", "Settings saved successfully", "success", true);
     } else if (isset($_GET["error"])) {
-        dsjas_alert("Error saving settings", "There was an error whilc attempting to save your settings. The changes have been lost", "danger", true);
+        dsjas_alert("Error saving settings", "There was an error while attempting to save your settings. The changes have been lost", "danger", true);
     } else if (isset($_GET["factorySuccess"])) {
         dsjas_alert("Factory reset complete", "The site has been reset to factory default settings", "info", true);
     }
