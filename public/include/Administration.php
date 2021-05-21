@@ -120,6 +120,7 @@ function factoryReset(Configuration $config)
     $config->setKey(ID_GLOBAL_CONFIG, "customization", "bank_domain", "https://djohnson.financial");
 
     $config->setKey(ID_GLOBAL_CONFIG, "settings", "allow_access_to_admin", "1");
+    $config->setKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_nolog_admin", "0");
 }
 
 function installReset(Configuration $config)
