@@ -47,7 +47,7 @@ if (isset($_GET["error"]) && $_GET["error"] != "") {
         <div class="alert alert-danger" role="alert">
             <p><strong>Unknown error</strong> An unknown error has occurred and the settings could not be saved</p>
         </div>
-    <?php }
+<?php }
 }
 
 if (isset($_POST["submitFinal"])) {
@@ -118,7 +118,7 @@ if (isset($_POST["submitFinal"])) {
                     <small id="urlHelp" class="form-text text-muted">This is the URL that you have set up the bank to be served on. If you have not done this, leave it blank</small>
                 </div>
                 <div class="form-group form-check">
-                    <input checked type="checkbox" class="form-check-input" id="administrativeCheck">
+                    <input type="checkbox" class="form-check-input" id="administrativeCheck">
                     <label class="form-check-label" for="administrativeCheck">Disable administrator dashboard (not recommended)</label>
                 </div>
             </form>
