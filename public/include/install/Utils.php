@@ -186,7 +186,7 @@ function setupPrimarySettings()
 
     $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "customization", "bank_name", $_POST["bankName"]);
     $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "customization", "bank_domain", $_POST["url"]);
-    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "settings", "allow_access_to_admin", $_POST["admin"]);
+    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "settings", "disable_admin", $_POST["admin"]);
 }
 
 function handleSkipFinal()

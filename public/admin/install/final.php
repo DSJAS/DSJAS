@@ -119,7 +119,7 @@ if (isset($_POST["submitFinal"])) {
                 </div>
                 <div class="form-group form-check">
                     <input checked type="checkbox" class="form-check-input" id="administrativeCheck">
-                    <label class="form-check-label" for="administrativeCheck">Allow access to administrator areas by default (recommended)</label>
+                    <label class="form-check-label" for="administrativeCheck">Disable administrator dashboard (not recommended)</label>
                 </div>
             </form>
         </div>

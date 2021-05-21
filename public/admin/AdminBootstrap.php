@@ -31,7 +31,7 @@ session_start();
 
 $configuration = parse_ini_file(ABSPATH . "/Config.ini");
 
-if (!$configuration["allow_access_to_admin"]) {
+if ($configuration["disable_admin"]) {
     adminAccessDeniedMessage();
     header('HTTP/1.0 403 Forbidden');
     die();

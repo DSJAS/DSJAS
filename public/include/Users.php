@@ -38,7 +38,7 @@ function canLogin($siteuser = false)
     $configuration = parse_ini_file(ABSPATH . "/Config.ini");
 
     if ($siteuser) {
-        return $configuration["allow_access_to_admin"];
+        return !$configuration["disable_admin"];
     }
 
     if ($configuration["running_without_database"]) {

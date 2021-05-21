@@ -50,7 +50,7 @@ if (isset($_POST["doSave"])) {
     $config->setKey(ID_GLOBAL_CONFIG, "customization", "bank_name", $_POST["bankName"]);
     $config->setKey(ID_GLOBAL_CONFIG, "customization", "bank_domain", $_POST["bankURL"]);
 
-    $config->setKey(ID_GLOBAL_CONFIG, "settings", "allow_access_to_admin", $_POST["adminAccess"]);
+    $config->setKey(ID_GLOBAL_CONFIG, "settings", "disable_admin", $_POST["adminAccess"]);
     $config->setKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_nolog_admin", $_POST["adminMissing"]);
 
     die(); // Don't return the panel for the POST request
@@ -65,6 +65,7 @@ if (isset($_POST["doSave"])) {
 regenerateCSRF();
 
 $noDatabase = $config->getKey(ID_GLOBAL_CONFIG, "database", "running_without_database");
+$adminDisabled = $config->getKey(ID_GLOBAL_CONFIG, "settings", "disable_admin");
 $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_nolog_admin");
 
 ?>
@@ -168,13 +169,13 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
         <div class="card-body">
             <form>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="adminAccess" checked>
+                    <input class="form-check-input" type="checkbox" id="adminAccess" <?php if ($adminDisabled) { echo ("checked"); } ?>>
                     <label class="form-check-label" for="adminAccess">
-                        Allow access to admin panel
+                        Disable all access to admin panel
                     </label>
-                    <small class="form-text text-muted">Disabling access to the admin panel will prevent administrator logins and all admin pages.
-                        You may wish to disable this during a live site usage or if you do not plan on changing settings mid-use.
-                        However, you will be unable to access this page again to disable the setting and will need to edit the configuration on disk to revert this.
+                    <small class="form-text text-muted">
+                        Prevent any and all access to the admin panel and make all sign in attempts automatically fail. This may be useful to hide DSJAS presence from
+                        particularly suspicious scammers. This may also be useful for security to prevent admin logins to instances exposed to the internet when not in use.
                     </small>
                 </div>
                 <div class="form-check">
