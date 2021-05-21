@@ -163,7 +163,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
 
     <div class="card bg-light admin-panel">
         <div class="card-header d-flex justify-content-between">
-            <h3>Security settings</h3>
+            <h3>Stealth settings</h3>
         </div>
 
         <div class="card-body">
