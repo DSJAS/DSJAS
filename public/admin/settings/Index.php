@@ -174,8 +174,10 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
                         Disable all access to admin panel
                     </label>
                     <small class="form-text text-muted">
-                        Prevent any and all access to the admin panel and make all sign in attempts automatically fail. This may be useful to hide DSJAS presence from
-                        particularly suspicious scammers. This may also be useful for security to prevent admin logins to instances exposed to the internet when not in use.
+                        Prevent any and all access to the admin panel and any further logins. Currently logged in users will not be affected.
+                        <strong>Warning:</strong> Your current login session will be preserved, but you will not be able to sign in again.
+                        If you wish to disable this setting again (and use the admin dashboard from this session), <strong>do not</strong>
+                        sign out from your current session.
                     </small>
                 </div>
                 <div class="form-check">

@@ -31,17 +31,18 @@ session_start();
 
 $configuration = parse_ini_file(ABSPATH . "/Config.ini");
 
-if ($configuration["disable_admin"]) {
-    adminAccessDeniedMessage();
-    header('HTTP/1.0 403 Forbidden');
-    die();
-}
 
 if (installRequired($configuration)) {
     redirectToInstall($configuration);
 }
 
 if (!isset($_SESSION["loggedin_su"]) || !$_SESSION["loggedin_su"]) {
+    if ($configuration["disable_admin"]) {
+        adminAccessDeniedMessage();
+        header('HTTP/1.0 403 Forbidden');
+        die();
+    }
+
     if ($configuration["simulate_missing_nolog_admin"]) {
 	header("Location: /error/Error.php");
 	die();
