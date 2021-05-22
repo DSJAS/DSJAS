@@ -61,9 +61,8 @@ if (isInsiderBand()) {
 
     <div class="alert alert-warning">
         <p><strong>Attention:</strong> DSJAS does not yet contain an automatic updater. This means that you will need
-            to download and install updates yourself. You can do this by downloading the DSJAS archive and copying
-            the contained files into your DSJAS directory. This will overwrite the required files and update the program.
-            Your themes and modules will be preserved - but you will need to run the installer again.
+            to download and install updates yourself. For more information and specific instructions, please see the
+            <a href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">upgrade guide</a>.
         </p>
     </div>
 
@@ -90,7 +89,7 @@ if (isInsiderBand()) {
 
                     <div class="btn-group">
                         <a class="btn btn-primary" href="https://github.com/DSJAS/DSJAS/releases">Download update</a>
-                        <a class="btn btn-secondary" href="https://github.com/DSJAS/DSJAS/tree/master/docs/administration">More information</a>
+                        <a class="btn btn-secondary" href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">More information</a>
                     </div>
             <?php } ?>
 
