@@ -179,7 +179,7 @@ CREATE TABLE `dsjas`.`statistics` ( `stat_name` VARCHAR(255) NOT NULL , `stat_ty
 
 --
 -- Indexes for table `statistics`
-ALTER TABLE `users`
+ALTER TABLE `statistics`
   ADD PRIMARY KEY (`stat_name`);
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
