@@ -1,0 +1,121 @@
+<div class="modal fade text-dark" id="protectionModalWait" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+   <div class="modal-dialog modal-dialog-centered" role="dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h6 class="modal-title">Two factor authentication</h6>
+         </div>
+         <div class="modal-body">
+            <br>
+            <div class="container col-md-9">
+               <div class="row">
+                  <div class="col-md-4">
+                     <div class="spinner">
+                        <div></div>
+                        <div></div>
+                     </div>
+                  </div>
+                  <div class="col-md-8">
+                     <br>
+                     Processing...
+                  </div>
+               </div>
+               <br><br>
+            </div>
+            <div class="modal-footer">
+               <br>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<div class="modal fade text-dark" id="protectionModalChoice" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+   <div class="modal-dialog modal-dialog-centered" role="dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h6 class="modal-title">Two factor authentication</h6>
+            <button type="button" class="close" onClick="floginCancelAuth();" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p>Select a verification method:</p>
+            <div class="container col-md-12">
+               <div class="row">
+                  <div class="col-md-3">
+                     <img src="/admin/site/modules/two_factor_auth/shield.svg" alt="Secure Shield" width="100" height="100">
+                  </div>
+				   <div class="col-md-9">
+                        <br>
+                        <input type="radio" class="form-radio-input" id="exampleCheck1" name="group">
+                        <label class="form-radio-label" for="exampleCheck1" id="callme">Call me at (702) 545-1964</label>
+                        <br>
+                        <input type="radio" class="form-radio-input" id="exampleCheck2" name="group" checked="checked">
+                        <label class="form-radio-label" for="exampleCheck2" id="textme">Text me at (702) 545-1964</label>
+                     </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary" onClick="runInitialPrompt();">Submit</button>
+               <button type="button" class="btn btn-secondary" onClick="floginCancelAuth();">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<div class="modal fade text-dark" id="protectionModalResponse" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+   <div class="modal-dialog modal-dialog-centered" role="dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h6 class="modal-title">Two factor authentication</h6>
+            <button type="button" class="close" onClick="floginCancelAuth();" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p>You should have received a passcode.</p>
+            <div class="container col-md-12">
+               <div class="row">
+                  <div class="col-md-5">
+                     <img src="/admin/site/modules/two_factor_auth/shield.svg" alt="Secure Shield" width="100" height="100">
+				   </div>
+					  <div class="col-md-7" id="codeEntry">
+                        <br>Please enter the code:<br>
+                        <input id="floginVerificationInput" type="text" value="" placeholder="code" maxlength="12" style="width:8em;font-size:25px">
+                        <br><br>
+                     </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary" onClick="runVerification();">Submit</button>
+               <button type="button" class="btn btn-secondary" onClick="floginCancelAuth();">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade text-dark" id="protectionModalHelp" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+   <div class="modal-dialog modal-dialog-centered" role="dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h6 class="modal-title">Two factor authentication</h6>
+            <button type="button" class="close" onClick="floginCancelAuth();" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body d-block text-center">
+            <h3>Having trouble?</h3>
+            If you need assistance please call or visit your local branch.
+            <h4>1-800-872-2657</h4>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onClick="floginCancelAuth();">Close</button>
+         </div>
+      </div>
+   </div>
+</div>

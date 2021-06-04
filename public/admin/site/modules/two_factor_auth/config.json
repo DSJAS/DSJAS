@@ -1,0 +1,23 @@
+{
+    "name": "Two Factor Authentication",
+    "description": "Adds 2FA additional login process.  Your code can be anything, at least 6 characters and must end with a 0 (zero).",
+    "information-link": "https://github.com/DSJAS/public/admin/site/modules/two_factor_auth",
+    "version": "1.0.0",
+    "hooks": {
+        "global": {
+            "triggerEvent": "all",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": false
+        },
+        "protection": {
+            "triggerEvent": "all",
+            "loadCSS": true,
+            "loadJS": true,
+            "loadHTML": true
+        }
+    },
+    "fileFilter": [
+        "login"
+    ]
+}
