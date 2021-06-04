@@ -1,7 +1,7 @@
 {
     "name": "Two Factor Authentication",
     "description": "In order do protect your account from fraud and theft, DSJAS now requires mandatory two factor authentication for all customers.",
-    "information-link": "https://github.com/DSJAS/DSJAS/tree/master/public/admin/site/modules/two_factor_auth",
+    "information-link": "https://github.com/DSJAS/DSJAS/blob/master/docs/builtins/modules/Two%20Factor%20Authentication.md",
     "version": "1.0.0",
     "hooks": {
         "global": {
