@@ -1,6 +1,6 @@
 {
     "name": "Two Factor Authentication",
-    "description": "Adds 2FA additional login process.  Your code can be anything, at least 6 characters and must end with a 0 (zero).",
+    "description": "In order do protect your account from fraud and theft, DSJAS now requires mandatory two factor authentication for all customers.",
     "information-link": "https://github.com/DSJAS/DSJAS/tree/master/public/admin/site/modules/two_factor_auth",
     "version": "1.0.0",
     "hooks": {
