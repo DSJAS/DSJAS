@@ -72,13 +72,22 @@ if (isInsiderBand()) {
         </div>
 
         <div class="card-body">
-            <?php if (!isUpdateAvailable()) { ?>
-                <h3 class="text-success">
-                    <svg class="bi bi-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd" />
+            <?php if (getLatestAvailableVersion($band) == "0.0.0") { ?>
+
+
+                <h3 class="text-danger">
+                    <svg class="bi bi-exclamation-triangle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8.982 1.566a1.13 1.13 0 00-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5a.905.905 0 00-.9.995l.35 3.507a.552.552 0 001.1 0l.35-3.507A.905.905 0 008 5zm.002 6a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
                     </svg>
-                    You're up to date!</h3>
-            <?php } else { ?>
+                    Check failed</h3>
+
+                    <hr>
+
+                    <a class="text-secondary">DSJAS failed to contact the update server. It may be under maintainence, down or your server may have lost internet connection</a>
+
+            <?php } else {
+
+            if (isUpdateAvailable()) { ?>
                 <h3 class="text-warning">
                     <svg class="bi bi-exclamation-triangle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8.982 1.566a1.13 1.13 0 00-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5a.905.905 0 00-.9.995l.35 3.507a.552.552 0 001.1 0l.35-3.507A.905.905 0 008 5zm.002 6a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
@@ -91,7 +100,16 @@ if (isInsiderBand()) {
                         <a class="btn btn-primary" href="https://github.com/DSJAS/DSJAS/releases">Download update</a>
                         <a class="btn btn-secondary" href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">More information</a>
                     </div>
-            <?php } ?>
+            <?php } else { ?>
+                <h3 class="text-success">
+                    <svg class="bi bi-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd" />
+                    </svg>
+                    You're up to date!</h3>
+
+            <?php }
+            } ?>
+
 
             <hr>
 

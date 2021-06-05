@@ -100,8 +100,12 @@ function getLatestAvailableVersion($band)
 
     $currentBand = getUpdateBand();
 
-    $json = Requests::get(LATEST_UPDATE_ENDPOINT . $currentBand . ".json")->body;
-    $decoded = json_decode($json, true);
+    try {
+        $json = Requests::get(LATEST_UPDATE_ENDPOINT . $currentBand . ".json")->body;
+        $decoded = json_decode($json, true);
+    } catch (Requests_Exception $e) {
+        return "0.0.0";
+    }
 
     $version = $decoded["latest"];
     return $version;
