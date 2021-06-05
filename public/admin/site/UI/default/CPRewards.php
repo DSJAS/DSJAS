@@ -37,6 +37,8 @@
 require_once THEME_API . "General.php";
 require_once THEME_API . "Accounts.php";
 
+updateStatistic("Rewards claimed", 0, STATISTICS_TYPE_COUNTER, "Banking rewards");
+updateStatistic("Last reward claimed", 0, STATISTICS_TYPE_TIMESTAMP, "Banking rewards");
 
 $randomMinute = rand(1, 59);
 $randomHour = rand(0, 23);
@@ -47,7 +49,7 @@ define("timeString", "$randomDay days, $randomHour hours and $randomMinute minut
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>

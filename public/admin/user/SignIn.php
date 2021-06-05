@@ -18,15 +18,29 @@
 
 require "../../include/Bootstrap.php";
 
-require ABSPATH . INC . "Users.php";
-require ABSPATH . INC . "Util.php";
+require ABSPATH . INC . "Stats.php";
+
+require_once ABSPATH . INC . "Users.php";
+require_once ABSPATH . INC . "Util.php";
+
+
+/* Log statistics of page load */
+$stats = new Statistics();
+$stats->incrementCounterStat("total_page_hits");
+$stats->incrementCounterStat("admin_page_hits");
 
 if (isLoggedIn(true)) {
     redirectToLoggedIn(true);
     die();
 }
 
+
 if (shouldAttemptLogin()) {
+    $stats->incrementCounterStat("total_signins");
+    $stats->incrementCounterStat("admin_signins");
+
+    $stats->stampTimestampStat("last_admin_signin");
+
     if (canLogin(true)) {
         $result = handleLogin($_POST["username"], $_POST["password"], true);
         if ($result[0]) {
@@ -35,8 +49,7 @@ if (shouldAttemptLogin()) {
             // We need to only send proper feedback if it's to
             // show a misc error
             // Otherwise, we are disclosing sensitive info
-            if (!$result[0] && $result[1] == -3)
-            {
+            if (!$result[0] && $result[1] == -3) {
                 redirect("/admin/user/SignIn.php?error=" . $result[1]);
             } else {
                 redirect("/admin/user/SignIn.php?error=-1");
@@ -68,7 +81,7 @@ if (shouldAttemptLogin()) {
                     <strong>Thanks for installing</strong> To sign in, please use the credentials you set up in the install process
                 </p>
             </div>
-        <?php }
+            <?php }
 
         if (isset($_GET["error"])) {
             if ($_GET["error"] == -3) { ?>

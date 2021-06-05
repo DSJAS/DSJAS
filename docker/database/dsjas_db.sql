@@ -173,6 +173,14 @@ ALTER TABLE `users`
   MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+--
+-- Table structure for table `statistics`
+--
+CREATE TABLE `dsjas`.`statistics` ( `stat_name` VARCHAR(255) NOT NULL , `stat_type` INT NOT NULL , `stat_value` INT NOT NULL , `stat_label` TEXT NOT NULL , `stat_category` TEXT NOT NULL , `sys_data` BOOLEAN NOT NULL , `theme_def` BOOLEAN NOT NULL ) ENGINE = InnoDB;/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+--
+-- Indexes for table `statistics`
+ALTER TABLE `statistics`
+  ADD PRIMARY KEY (`stat_name`);
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

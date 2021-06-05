@@ -1,12 +1,13 @@
 <?php
 
-const requiredTables = array("users", "siteusers", "accounts", "transactions");
+const requiredTables = array("users", "siteusers", "accounts", "transactions", "statistics");
 
 const tableColumns = array(
     "`user_id` BIGINT NOT NULL AUTO_INCREMENT , `username` TINYTEXT NOT NULL , `real_name` TEXT NOT NULL , `password_hash` LONGTEXT NOT NULL , `password_hint` TEXT NOT NULL , `email` TEXT NOT NULL , `date_of_registration` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`user_id`)",
     "`user_id` BIGINT NOT NULL AUTO_INCREMENT , `username` TINYTEXT NOT NULL , `real_name` TEXT NOT NULL , `password_hash` LONGTEXT NOT NULL , `password_hint` TEXT NOT NULL , `email` TEXT NOT NULL , `date_of_registration` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, `account_enabled` BOOLEAN NOT NULL DEFAULT TRUE, `new_account` BOOLEAN NOT NULL , PRIMARY KEY (`user_id`)",
     "`account_identifier` INT NOT NULL AUTO_INCREMENT , `account_number` INT(11) NOT NULL, `account_name` TEXT NOT NULL , `account_type` ENUM('current','savings','shared','misc') NOT NULL DEFAULT 'current' , `account_balance` DECIMAL(11,2) NOT NULL DEFAULT '0' , `holder_name` TEXT NOT NULL , `associated_online_account_id` INT NOT NULL , `account_disabled` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`account_identifier`)",
-    "`transaction_id` BIGINT NOT NULL AUTO_INCREMENT , `transaction_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, `origin_account_id` INT NOT NULL , `dest_account_id` INT NOT NULL , `transaction_description` TEXT NOT NULL, `transaction_type` ENUM('transfer','withdrawal','purchase','misc') NOT NULL DEFAULT 'transfer', `transaction_amount` DECIMAL(11,2) NOT NULL , PRIMARY KEY (`transaction_id`)"
+    "`transaction_id` BIGINT NOT NULL AUTO_INCREMENT , `transaction_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, `origin_account_id` INT NOT NULL , `dest_account_id` INT NOT NULL , `transaction_description` TEXT NOT NULL, `transaction_type` ENUM('transfer','withdrawal','purchase','misc') NOT NULL DEFAULT 'transfer', `transaction_amount` DECIMAL(11,2) NOT NULL , PRIMARY KEY (`transaction_id`)",
+    "`stat_name` VARCHAR(255) NOT NULL , `stat_type` INT NOT NULL , `stat_value` INT NOT NULL , `stat_label` TEXT NOT NULL , `stat_category` TEXT NOT NULL , `sys_data` BOOLEAN NOT NULL DEFAULT FALSE , `theme_def` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`stat_name`)"
 );
 
 const defaultSiteAccounts = array();

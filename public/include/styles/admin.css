@@ -159,3 +159,12 @@
 .admin-quick-action-btn {
     margin-top: 5px;
 }
+
+.stats-control-panel {
+    min-height: 92px;
+    padding: 25px;
+}
+
+.stats-glance-counters {
+    text-align: center;
+}

@@ -37,6 +37,8 @@
 require_once THEME_API . "General.php";
 require_once THEME_API . "Appearance.php";
 
+updateStatistic("Visits to support", 0, STATISTICS_TYPE_COUNTER, "Support");
+
 // Theme entry point
 function getTheme()
 {

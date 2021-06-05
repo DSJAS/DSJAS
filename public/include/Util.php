@@ -24,6 +24,13 @@ function redirect($path)
     header("Location: " . $path);
 }
 
+function startDownload($type = "application/html", $filename = "download")
+{
+    header("Content-Description: File Transfer");
+    header("Content-Type: $type");
+    header("Content-Disposition: attachment; filename=\"$filename\"");
+}
+
 function startsWith($string, $prefix)
 {
     $length = strlen($prefix);

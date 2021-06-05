@@ -37,10 +37,12 @@
 require_once THEME_API . "General.php";
 require_once THEME_API . "Appearance.php";
 
+updateStatistic("Support requests sent", 0, STATISTICS_TYPE_COUNTER, "Support");
+
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
@@ -54,12 +56,14 @@ function getTheme()
                         4200 West Fifth Street<br>New Mexico, NM 90071<br>
                     </p>
                     <p><i class="fa fa-phone"></i>
-                        <abbr title="Phone">Phone</abbr>: 1 (800) 420-990</p>
+                        <abbr title="Phone">Phone</abbr>: 1 (800) 420-990
+                    </p>
                     <p><i class="fa fa-envelope-o"></i>
                         <abbr title="Email">E-mail</abbr>: Contact@<?php echo getBankURL() ?>
                     </p>
                     <p><i class="fa fa-clock-o"></i>
-                        <abbr title="Hours">Hours</abbr>: Mon - Fri: 7:00 AM to 5:00 PM</p>
+                        <abbr title="Hours">Hours</abbr>: Mon - Fri: 7:00 AM to 5:00 PM
+                    </p>
                 </div>
 
                 <div class="row bg-success rounded text-light p-3">
