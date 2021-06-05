@@ -34,7 +34,9 @@
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/include/Customization.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/include/vendor/hooks/src/gburtini/Hooks/Hooks.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/include/Stats.php";
 
+static $statisticsManager = null;
 
 function getCurrentThemeName()
 {
@@ -60,4 +62,32 @@ function getBankURL()
 function addModuleDescriptor($descriptorName)
 {
     \gburtini\Hooks\Hooks::run("module_hook_event", [$descriptorName, $GLOBALS["THEME_GLOBALS"]["module_manager"]]);
+}
+
+function updateStatistic($name, $value = 0, $type = STATISTICS_TYPE_NUMBER, $category = "Theme Provided")
+{
+    global $statisticsManager;
+    if ($statisticsManager == null) {
+        $statisticsManager = new Statistics($GLOBALS["THEME_GLOBALS"]["shared_conf"], $GLOBALS["THEME_GLOBALS"]["shared_db"]);
+        if (!$statisticsManager->statisticsAvailable()) {
+            return;
+        }
+    }
+
+    $scrubbedName = str_replace(" ", "_", (getCurrentThemeName() . "_" . $name));
+
+    if (!$statisticsManager->statisticExists($name)) {
+        $statisticsManager->registerStatistic($scrubbedName, $type, $name, $category, 0, true);
+    }
+
+    switch ($type) {
+        case STATISTICS_TYPE_NUMBER:
+            $statisticsManager->setNumberStat($scrubbedName, $value);
+            break;
+        case STATISTICS_TYPE_COUNTER:
+            $statisticsManager->incrementCounterStat($scrubbedName);
+            break;
+        case STATISTICS_TYPE_TIMESTAMP:
+            $statisticsManager->stampTimestampStat($scrubbedName);
+    }
 }
