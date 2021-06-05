@@ -34,12 +34,15 @@
     API documentation for themes and plugins.
 */
 
+require_once THEME_API . "General.php";
 require THEME_API . "Accounts.php";
+
+updateStatistic("Applications rejected", 0, STATISTICS_TYPE_COUNTER, "Accounts and logins");
 
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <?php

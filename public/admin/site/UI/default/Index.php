@@ -40,10 +40,12 @@ require_once THEME_API . "Appearance.php";
 
 setTitle("Welcome to " . getBankName());
 
+updateStatistic("Homepage hits", 0, STATISTICS_TYPE_COUNTER, "Page hits");
+
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
 
@@ -192,7 +194,7 @@ function getTheme()
             </div>
         </div>
 
-       <?php require ABSPATH . getRawThemeContent("Footer.php", "components/"); ?>
+        <?php require ABSPATH . getRawThemeContent("Footer.php", "components/"); ?>
 
     </body>
 
