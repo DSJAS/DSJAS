@@ -387,7 +387,7 @@ function closeAccount($accountID)
     );
 
     $query = new PreparedStatement(
-        "DELETE FROM `accounts` WHERE `account_identifier` = $accountID",
+        "DELETE FROM `accounts` WHERE `account_identifier` = ?",
         [$accountID],
         "i"
     );
