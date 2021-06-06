@@ -67,6 +67,19 @@ function getRecentTransactionsArray($loadAmount)
         };
     }
 
+    $whereText .= " OR ";
+
+    $iteration = 0;
+    foreach ($accountsQuery->result as $account) {
+        $whereText .= "`dest_account_id` = ";
+        $whereText .= $account["account_identifier"];
+
+        $iteration++;
+        if ($iteration < count($accountsQuery->result)) {
+            $whereText .= " OR ";
+        };
+    }
+
     $query = new SimpleStatement("SELECT * FROM `transactions` WHERE $whereText ORDER BY `transaction_id` DESC LIMIT $loadAmount");
     $GLOBALS["THEME_GLOBALS"]["shared_db"]->unsafeQuery($query);
 
