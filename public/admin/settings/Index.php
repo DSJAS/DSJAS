@@ -175,9 +175,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
                     </label>
                     <small class="form-text text-muted">
                         Prevent any and all access to the admin panel and any further logins. Currently logged in users will not be affected.
-                        <strong>Warning:</strong> Your current login session will be preserved, but you will not be able to sign in again.
-                        If you wish to disable this setting again (and use the admin dashboard from this session), <strong>do not</strong>
-                        sign out from your current session.
+                        <strong>Warning:</strong> If the current login session ends, you will not be able to regain access to the admin panel.
                     </small>
                 </div>
                 <div class="form-check">
@@ -187,7 +185,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
                     </label>
                     <small class="form-text text-muted">
                         When not logged in, pages in the admin panel will not redirect to the login and will instead simulate a 404 (page missing) error by
-                        redirecting to the 404 error page. This <strong>will not</strong> prevent admin logins, and so can be disabled in the admin panel.
+                        redirecting to the 404 error page. This <strong>will not</strong> prevent admin logins.
                     </small>
                 </div>
             </form>
