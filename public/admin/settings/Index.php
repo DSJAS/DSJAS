@@ -183,7 +183,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
                 <div class="form-check">
 		<input class="form-check-input" type="checkbox" id="admin404" <?php if ($adminMissing) { echo ("checked"); } ?>>
                     <label class="form-check-label" for="admin404">
-                        Simulate a 404 error on unauthorised admin pages
+                        Conceal admin panel when not logged in
                     </label>
                     <small class="form-text text-muted">
                         When not logged in, pages in the admin panel will not redirect to the login and will instead simulate a 404 (page missing) error by
