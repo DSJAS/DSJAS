@@ -18,6 +18,8 @@ DSJAS is released from a number of locations, but the recommended download locat
 
 [Downloads page](https://github.com/OverEngineeredCode/DSJAS/releases/latest)
 
+> **Important!** *Do not* download from the big green button on the GitHub homescreen looks like a download button. This will download the DSJAS developer source tree, which will be missing configuration files and will break the site. *Do* use the above download page.
+
 From this download page, you will find a download location for a file which is named along the lines of the following:
 
     DSJAS-stable.zip
