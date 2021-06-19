@@ -1,0 +1,5 @@
+# .htaccess file for module remote API
+# Copyright 2021 - Ethan Marshall
+
+# Deny all requests
+Allow from all
