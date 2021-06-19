@@ -71,25 +71,7 @@ class ModuleManager
                 continue;
             }
 
-            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadCSS"]) {
-                echo ("<style>\n");
-
-                echo ($this->loadedModuleText[$moduleName][$route]["style"]);
-
-                echo ("\n</style>");
-            }
-
-            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadJS"]) {
-                echo ("<script>\n");
-
-                echo ($this->loadedModuleText[$moduleName][$route]["JS"]);
-
-                echo ("\n</script>");
-            }
-
-            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadHTML"]) {
-                echo ($this->loadedModuleText[$moduleName][$route]["HTML"]);
-            }
+            $this->getModuleRoute($moduleName, $route);
         }
     }
 
