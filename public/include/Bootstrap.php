@@ -55,7 +55,9 @@ if (!defined("NOLOAD_BOOTSTRAP_HEAD")) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="/include/js/site.js"></script>
 
-
+    <!-- DSJAS Module API -->
+    <script src="/include/api/modules/internal/setup.js"></script>
+    <script src="/include/api/modules/General.js"></script>
 </head>
 
 <?php }
