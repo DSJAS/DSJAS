@@ -6,10 +6,10 @@ dsjas.test = function()
 
 dsjas.getBankName = function()
 {
-  return dsjas.util.makeApiRequest("bank-name", ["name"])["name"];
+  return dsjas.util.makeApiRequest("bank-name", ["name"]);
 }
 
 dsjas.getBankUrl = function()
 {
-  return dsjas.util.makeApiRequest("bank-url", ["url"])["url"];
+  return dsjas.util.makeApiRequest("bank-url", ["url"]);
 }

@@ -30,5 +30,5 @@ dsjas.util.makeApiRequest = function(api, extract)
   xmlhttp.open("GET", fullApi, false);
   xmlhttp.send();
 
-  return result;
+  return result[extract];
 }
