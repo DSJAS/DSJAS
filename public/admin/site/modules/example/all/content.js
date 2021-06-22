@@ -5,4 +5,5 @@ console.log(dsjas.getThemeName());
 
 if (dsjas.accounts.isLoggedIn()) {
     console.log(dsjas.accounts.getUsername());
+    console.log(dsjas.accounts.getBankAccounts());
 }

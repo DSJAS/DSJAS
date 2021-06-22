@@ -26,3 +26,11 @@ dsjas.accounts.getUsername = function () {
 
     return uname;
 }
+
+dsjas.accounts.getBankAccounts = function () {
+    if (!dsjas.accounts.isLoggedIn()) {
+        warn("Attempted to get accounts when no session is ongoing");
+        return [];
+    }
+    return dsjas.util.makeApiRequest("banking", ["accounts"]);
+}
