@@ -43,11 +43,11 @@ If you have set up URL spoofing using the */etc/hosts* file, DSJAS can directly 
 
 ### Allow access to admin areas
 
-> **WARNING:** This setting can only be reversed with file system access to the server, for security
+> **WARNING:** Because you are not logged in yet, this setting will prevent any access to the admin panel
 
-This will allow you to make the admin panel more stealthy. All requests to the panel will result in a *404 - not found* message. This is great if a scammer appears aware that this bank may not be legitimate and is trying to discover signs of DSJAS being installed. The admin panel is a massive giveaway - it literally says DSJAS all over it. Therefore, this setting will make that giveaway impossible to use.
+This setting will allow the complete disabling of the admin panel to all users who are not currently logged in. It is highly recommended that you leave this at the default and later change it if needed.
 
-We recommend that you leave this setting on by default, and change it later if required. It's also worth mentioning that this setting works in real time; you can change it at the first sign that a scammer is becoming suspicious of this "bank" and the requests will be blocked.
+It is worth noting that this setting has alternatives in the admin panel which are more or less stealthy/security focused, so you may wish to check those out also. In addition, this setting *will* work in real time, so you can toggle it on from that admin panel at the first sign that a scammer is becoming suspicious.
 
 ## Skipping this step
 
