@@ -262,8 +262,7 @@ function getAllTransactions()
 
 function getAllTransactionsForUser($userID)
 {
-    $config = dashboardLoadDatabaseInformation();
-    $userId = getCurrentUserId();
+    $config = loadDatabaseInformation();
 
     $database = new DB(
         $config["server_hostname"],
