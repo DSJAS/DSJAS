@@ -10,6 +10,7 @@ const dsjas = {
 }
 
 const api_path = "/include/api/modules/remote/";
+const sess_cookie = "PHPSESSID";
 
 dsjas.util.makeApiRequest = function(api, extract)
 {
@@ -36,4 +37,19 @@ dsjas.util.makeApiRequest = function(api, extract)
   } else {
     return result[extract[0]];
   }
+}
+
+dsjas.util.makeGetRequest = function (api, headers) {
+  var result = [];
+  var done = false;
+
+  var xmlhttp = new XMLHttpRequest();
+  var fullApi = api_path + api + ".php?";
+
+  for (var i = 0; i < headers.length; i++) {
+    fullApi += headers[i] + "&";
+  }
+
+  xmlhttp.open("GET", fullApi, true);
+  xmlhttp.send();
 }

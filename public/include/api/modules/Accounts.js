@@ -34,3 +34,7 @@ dsjas.accounts.getBankAccounts = function () {
     }
     return dsjas.util.makeApiRequest("banking", ["accounts"]);
 }
+
+dsjas.accounts.logout = function () {
+    dsjas.util.makeGetRequest("account", ["logout"]);
+}

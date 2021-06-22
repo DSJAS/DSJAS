@@ -27,4 +27,13 @@ if (isLoggedIn()) {
     $name = "";
 }
 
+if (isset($_GET["logout"])) {
+    if (!isLoggedIn()) {
+        die("{\"error\": \"Authentication failed\"}");
+    }
+
+    logout();
+    die("{\"state\": false}");
+}
+
 printf("{\"state\": %s, \"username\": \"%s\"}", $logged, $name);
