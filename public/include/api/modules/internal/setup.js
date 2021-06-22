@@ -5,6 +5,7 @@
  */
 
 const dsjas = {
+  accounts: {},
   util: {}
 }
 
@@ -30,5 +31,9 @@ dsjas.util.makeApiRequest = function(api, extract)
   xmlhttp.open("GET", fullApi, false);
   xmlhttp.send();
 
-  return result[extract];
+  if (extract.length > 1) {
+    return result;
+  } else {
+    return result[extract[0]];
+  }
 }
