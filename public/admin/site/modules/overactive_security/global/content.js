@@ -8,6 +8,11 @@ function randomInteger(max)
 
 function triggerInactive()
 {
+    if (!dsjas.accounts.isLoggedIn()) {
+        console.warn("OOPS: Attempting to trigger inactive with no session. Bailing out...");
+        return;
+    }
+
     dsjas.accounts.logout();
 
     $("#osInactivity").removeClass("inactivity-timeout-initial");
