@@ -13,3 +13,7 @@ dsjas.getBankUrl = function()
 {
   return dsjas.util.makeApiRequest("bank-url", ["url"]);
 }
+
+dsjas.getThemeName = function () {
+  return dsjas.util.makeApiRequest("theme-name", ["name"]);
+}
