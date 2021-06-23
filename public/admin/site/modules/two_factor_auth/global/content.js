@@ -17,7 +17,7 @@ function wait(ms)
 $(document).ready(
     function () {
         dsjas.login.addCallback(
-            runProtection, true
+            run2FA, true
         );
     }
 );
