@@ -36,6 +36,8 @@ if (isLoggedIn()) {
     die();
 }
 
+$stats = new Statistics();
+
 if (isset($_GET["error"])) {
 }
 
