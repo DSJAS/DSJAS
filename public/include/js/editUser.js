@@ -1,3 +1,5 @@
+/* DSJAS - Client Side JS */
+
 $(
     function () {
         $('[data-toggle="popover"]').popover()
