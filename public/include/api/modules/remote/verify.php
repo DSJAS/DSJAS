@@ -19,7 +19,9 @@
 
 require "head.php";
 
-if (!isset($_POST["username"]) || !isset($_POST["password"])) {
+if (isLoggedIn()) {
+    die("{\"error\": \"Already authenticated\"}");
+} else if (!isset($_POST["username"]) || !isset($_POST["password"])) {
     die("{\"error\": \"Missing headers\"}");
 }
 
