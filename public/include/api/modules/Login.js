@@ -17,41 +17,65 @@
 var callbacks = [];
 var correctWanted = [];
 
+var called = 0;
+
 /*
  * Callback to handle calling registered listeners for form submit
  *
- * TODO: This needs to ensure we call ALL functions, not just the first
- * ones until one which yields. Perhaps timeouts could work here?
- *
- * A system where each callback yields or fails at the end using a function
- * in the API could allow us to control this better. For now, this is what we
- * are stuck with.
+ * EXPERIMENTAL SUPPORT for multiple callbacks being registered should
+ * allow for multiple modules to change the login process at any time
  */
-dsjas.login._login_callback = function () {
+
+dsjas.login.callCallback = function (id) {
     var enteredUsr = document.querySelector("input[name=\"username\"]").value;
     var enteredPass = document.querySelector("input[name=\"password\"]").value;
-
     var verify = dsjas.util.makePostRequest("verify", ["username", "password"], [enteredUsr, enteredPass])["attempt"];
 
-    var state = true;
-    for (var i = 0; i < callbacks.length; i++) {
-        if (correctWanted[i]) {
-            if (verify) {
-                state = false;
-                callbacks[i]();
-            }
+    if (correctWanted[id]) {
+        if (verify) {
+            callbacks[id]();
         } else {
-            state = false;
-            callbacks[i]();
+            called++;
+            dsjas.login.callbackYield();
         }
+    } else {
+        callbacks[id]();
     }
+}
 
-    return state;
+dsjas.login._login_callback = function () {
+    dsjas.login.callCallback(called);
+    called++;
+
+    return false;
 }
 
 dsjas.login.addCallback = function (callback, needsCorrect) {
-    $("#loginForm").submit(dsjas.login._login_callback);
+    var form = document.getElementById("loginForm");
+    form.onsubmit = dsjas.login._login_callback;
 
     callbacks.push(callback);
     correctWanted.push(needsCorrect);
+}
+
+dsjas.login.callbackYield = function () {
+    if (called == callbacks.length) {
+        dsjas.login.callbackEnd();
+        return;
+    }
+
+    dsjas.login.callCallback(called);
+    called++;
+}
+
+dsjas.login.callbackEnd = function () {
+    document.getElementById("loginForm").onsubmit = null;
+    $("#loginForm").submit();
+}
+
+dsjas.login.callbackReset = function () {
+    called = 0;
+
+    var form = document.getElementById("loginForm");
+    form.onsubmit = dsjas.login._login_callback;
 }
