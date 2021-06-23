@@ -59,6 +59,7 @@ if (!defined("NOLOAD_BOOTSTRAP_HEAD")) {
         <script src="/include/api/modules/internal/setup.js"></script>
         <script src="/include/api/modules/General.js"></script>
         <script src="/include/api/modules/Accounts.js"></script>
+        <script src="/include/api/modules/Login.js"></script>
     </head>
 
-            <?php }
+<?php }
