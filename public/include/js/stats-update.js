@@ -1,3 +1,5 @@
+/* DSJAS - Client Side JS */
+
 $(document).ready(function () {
 
     // Update clock

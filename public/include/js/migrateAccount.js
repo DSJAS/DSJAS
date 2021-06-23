@@ -1,4 +1,4 @@
-/* D.S Johnson & Son - Client Side JS */
+/* DSJAS - Client Side JS */
 
 function selectAccount()
 {

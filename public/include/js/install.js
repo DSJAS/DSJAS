@@ -1,4 +1,4 @@
-/* D.S Johnson & Son - Client Side JS */
+/* DSJAS - Client Side JS */
 
 /* Common code */
 $(document).ready(
@@ -95,7 +95,7 @@ function doTestConfig()
 
 function handleServerCheckResponse(response)
 {
-    if (response.indexOf("Error") != -1 
+    if (response.indexOf("Error") != -1
         || response.indexOf("Could not connect:") != -1
     ) {
         $("#configCheck").popover("dispose");
