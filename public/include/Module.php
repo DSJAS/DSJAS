@@ -200,9 +200,14 @@ class ModuleManager
         if (isset($this->loadedModuleInfo[$moduleName]["fileFilter"])) {
             $wantedFiles = $this->loadedModuleInfo[$moduleName]["fileFilter"];
 
-            if (!in_array($this->currentFile, $wantedFiles)) {
-                return false;
+            for ($i = 0; $i < count($wantedFiles); $i++) {
+                echo ($wantedFiles[$i]);
+                if (preg_match("/" . $wantedFiles[$i] . "/i", $this->currentFile) === 1) {
+                    return true;
+                }
             }
+
+            return false;
         }
 
         return true;
