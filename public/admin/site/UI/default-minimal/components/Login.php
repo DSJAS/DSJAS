@@ -22,10 +22,11 @@
 
         <img class="mb-4" src="/assets/logo.png" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal"><?php echo (getBankName()); ?> online</h1>
+        <?php addModuleDescriptor("header"); ?>
 
         <p><strong>Welcome back!</strong> Please login to your online banking</p>
 
-        <?php addModuleDescriptor("login_box_content");  ?>
+        <?php addModuleDescriptor("pre-content");  ?>
 
         <label for="inputEmail" class="sr-only">Username</label>
         <input name="username" type="text" id="inputUsername" class="form-control" autocomplete="off" placeholder="Username" required autofocus>
@@ -37,11 +38,11 @@
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
-        <?php addModuleDescriptor("login_box_post_content");  ?>
+        <?php addModuleDescriptor("post-content");  ?>
 
         <p class="mt-5 mb-3 text-muted">Be secure: Never give out your login details <strong>to anybody</strong></p>
 
-        <?php addModuleDescriptor("login_footer");  ?>
+        <?php addModuleDescriptor("footer");  ?>
     </form>
 
 </body>
