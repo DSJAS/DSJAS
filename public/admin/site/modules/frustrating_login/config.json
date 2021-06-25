@@ -11,7 +11,7 @@
             "loadHTML": false
         },
         "notice": {
-            "triggerEvent": "login_footer",
+            "triggerEvent": "footer",
             "loadCSS": false,
             "loadJS": false,
             "loadHTML": true
