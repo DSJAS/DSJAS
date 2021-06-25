@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "hooks": {
         "bar": {
-            "triggerEvent": "nav_bar",
+            "triggerEvent": "nav-items",
             "loadCSS": false,
             "loadJS": false,
             "loadHTML": true
