@@ -57,6 +57,8 @@ function getTheme()
         <div class="container">
             <h1>Oh dear!</h1>
 
+            <?php addModuleDescriptor("alert-area"); ?>
+
             <div class="alert alert-info">
                 <p><strong>Offer expired</strong> This offer ended <?php echo (timeString); ?> ago.
                     We're sorry about that, but you might find the next offer just around the corner!</p>

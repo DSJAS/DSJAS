@@ -59,12 +59,12 @@ function getTheme()
                 </div>
             <?php }
 
-            addModuleDescriptor("alert_area");  ?>
+            addModuleDescriptor("alert-area");  ?>
 
             <img class="mb-4" src="/assets/logo.png" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Welcome back!</h1>
 
-            <?php addModuleDescriptor("login_box_content");  ?>
+            <?php addModuleDescriptor("pre-content");  ?>
 
             <label for="inputEmail" class="sr-only">Username</label>
             <input name="username" type="text" autocomplete="off" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
@@ -76,11 +76,11 @@ function getTheme()
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
-            <?php addModuleDescriptor("login_box_post_content");  ?>
+            <?php addModuleDescriptor("post-content");  ?>
 
             <p class="mt-5 mb-3 text-muted">Be secure: Never give out your login details <strong>to anybody</strong></p>
 
-            <?php addModuleDescriptor("login_footer");  ?>
+            <?php addModuleDescriptor("footer");  ?>
         </form>
 
     </body>

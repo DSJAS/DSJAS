@@ -42,7 +42,7 @@ require_once THEME_API . "Security.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/"); ?>
@@ -50,7 +50,8 @@ function getTheme()
         <?php if (isset($_GET["transferError"])) { ?>
             <div class="alert alert-danger">
                 <p><strong>Transfer failed</strong> There was an error while attempting to perform that transaction. Please try again later or contact support.
-                    <i>Your account has not been charged</i></p>
+                    <i>Your account has not been charged</i>
+                </p>
             </div>
         <?php } ?>
 
@@ -61,7 +62,7 @@ function getTheme()
             </div>
         <?php }
 
-        addModuleDescriptor("alert_area"); ?>
+        addModuleDescriptor("alert-area"); ?>
 
         <div class="jumbotron">
 

@@ -46,7 +46,7 @@ function getTheme()
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/");
 
-        addModuleDescriptor("alert_area");  ?>
+        addModuleDescriptor("alert-area");  ?>
 
         <div class="container">
             <br>

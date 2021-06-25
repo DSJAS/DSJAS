@@ -41,7 +41,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body class="body-signin bg-img-login">
 
@@ -53,7 +53,7 @@ function getTheme()
                 </div>
             <?php }
 
-            addModuleDescriptor("alert_area");  ?>
+            addModuleDescriptor("alert-area");  ?>
 
             <img class="mb-4" src="/assets/logo.png" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Welcome to <?php echo (getBankName()); ?> online</h1>
