@@ -43,7 +43,8 @@ function getTheme()
     ?>
 
     <body>
-        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
+        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/");
+        addModuleDescriptor("alert-area"); ?>
 
         <div class="container">
             <div class="header mb-4">
@@ -51,8 +52,12 @@ function getTheme()
                     Online banking support
                 </h1>
 
+                <?php addModuleDescriptor("header"); ?>
+
                 <p class="lead"><?php echo getBankName() ?> has award winning customer service for our award winning online banking from an award winning reviewing organization who has won awards.</p>
             </div>
+
+            <?php addModuleDescriptor("pre-content"); ?>
 
             <ul>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -144,6 +149,8 @@ function getTheme()
                     </div>
                 </li>
             </ul>
+
+            <?php addModuleDescriptor("post-content"); ?>
         </div>
     </body>
 <?php }

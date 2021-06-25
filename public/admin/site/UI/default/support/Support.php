@@ -48,14 +48,20 @@ function getTheme()
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
     </body>
 
+    <?php addModuleDescriptor("alert-area"); ?>
+
     <div class="container-fluid support-page-teaser">
         <div class="support-page-teaser-overlay rounded">
             <h1>Help and Support</h1>
             <br>
             <h2>We're here to support you, no matter what</h2>
 
+            <?php addModuleDescriptor("header"); ?>
+
             <small class="text-small">Excludes events such as global pandemics, mass extinctions and meteor strikes</small>
         </div>
+
+        <?php addModuleDescriptor("pre-content"); ?>
 
         <div class="card-deck mt-3 text-dark">
             <div class="card" style="width: 18rem;">
@@ -138,6 +144,8 @@ function getTheme()
             </a>
         </li>
     </ul>
+
+    <?php addModuleDescriptor("post-content"); ?>
 
     <?php require ABSPATH . getRawThemeContent("Footer.php", "components/"); ?>
 <?php }

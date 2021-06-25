@@ -69,9 +69,11 @@ function getTheme()
             <h1 class="display-4">Make a transfer</h1>
             <p class="lead">Fill in the form below to transfer money between your accounts</p>
 
-            <?php addModuleDescriptor("transfer_info");  ?>
+            <?php addModuleDescriptor("header");  ?>
 
             <hr class="my-4">
+
+            <?php addModuleDescriptor("pre-content"); ?>
 
             <form style="margin-top: 15px" action="/user/Transfer.php" method="GET">
                 <?php addModuleDescriptor("transfer_content");  ?>
@@ -129,7 +131,7 @@ function getTheme()
                     <textarea type="text" class="form-control" name="description" id="description"></textarea>
                 </div>
 
-                <?php addModuleDescriptor("transfer_post_content");  ?>
+                <?php addModuleDescriptor("post-content");  ?>
 
 
                 <div class="form-group row">
@@ -139,7 +141,7 @@ function getTheme()
                         <small class="text-danger text-small"><strong>Warning:</strong> Transfers are not reversible and can only be disputed within an hour of processing.
                             Please be sure before you transfer.</small>
 
-                        <?php addModuleDescriptor("transfer_footer");  ?>
+                        <?php addModuleDescriptor("footer");  ?>
                     </div>
                 </div>
             </form>

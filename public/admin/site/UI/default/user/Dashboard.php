@@ -57,6 +57,8 @@ function getTheme()
 
                         <hr>
 
+                        <?php addModuleDescriptor("header"); ?>
+
                         <div class="card-text">
                             <p class="text-center"><strong>We've been expecting you</strong></p>
                             <p>Your account summary is available <a href="/user/Manage.php"></a>.</p>
@@ -109,6 +111,8 @@ function getTheme()
 
             <div class="row">
                 <div class="col">
+
+                    <?php addModuleDescriptor("pre-content"); ?>
 
                     <h3>My Accounts</h3>
 
@@ -192,6 +196,8 @@ function getTheme()
                         <a href="/user/Transfer.php">Make one now</a>
                         <hr>
                     <?php }
+
+                    addModuleDescriptor("post-content"); ?>
                     ?>
 
                     <div class="row card-deck mb-4">
@@ -218,11 +224,11 @@ function getTheme()
                                 <a href="/user/Apply.php">Learn more</a>
                             </div>
                         </div>
-
-                        <?php addModuleDescriptor("dashboard_notices");  ?>
                     </div>
                 </div>
             </div>
+
+            <?php addModuleDescriptor("footer"); ?>
         </div>
     </body>
 <?php }

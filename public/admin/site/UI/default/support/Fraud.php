@@ -51,14 +51,20 @@ function getTheme()
             Please learn more <a href="https://www.actionfraud.police.uk/">here</a>.
         </div>
 
+        <?php addModuleDescriptor("alert-area"); ?>
+
         <div class="container">
             <div class="header mb-4">
                 <h1 class="display-4">
                     Fraud prevention and cyber crime
                 </h1>
 
+                <?php addModuleDescriptor("header"); ?>
+
                 <p class="lead"><?php echo getBankName() ?> is committed to preventing cyber crime and helping people like you keep your money safe from fraudsters.</p>
             </div>
+
+            <?php addModuleDescriptor("pre-content"); ?>
 
             <ul>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -143,10 +149,14 @@ function getTheme()
                 </li>
             </ul>
 
+            <?php addModuleDescriptor("post-content"); ?>
+
             <h3>Info at a glance</h3>
 
             <p><?php echo getBankName() ?> has been committed to preventing fraud since our founding in 2005. Now, over 15 years later, we still haven't beaten them.
                 But we have prevented two in three fraud attempts on our website with our proprietary <strong>Scam-B-gone</strong> technology.</p>
+
+            <?php addModuleDescriptor("footer"); ?>
         </div>
     </body>
 <?php }
