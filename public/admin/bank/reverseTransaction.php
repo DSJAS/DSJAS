@@ -27,7 +27,7 @@ if (!isset($_GET["id"])) {
     header("Location: /admin/bank/transactions.php");
 }
 
-$csrf = getCSRFSubmission("GET");
+$csrf = getCSRFSubmission();
 if (!verifyCSRFToken($csrf)) {
     die(getCSRFFailedError());
 }

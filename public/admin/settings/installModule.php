@@ -91,7 +91,7 @@ if (isset($_POST["changeModuleStates"])) {
 
     header("Location: /admin/settings/mod.php?moduleInstalled");
 } elseif (isset($_GET["uninstallModule"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
 
     if (!verifyCSRFToken($csrf)) {
         getCSRFFailedError();

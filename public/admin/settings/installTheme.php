@@ -99,7 +99,7 @@ if (isset($_POST["installTheme"])) {
 
     header("Location: /admin/settings/mod.php?themeInstalled");
 } elseif (isset($_GET["enableTheme"])) {
-    $csrf = verifyCSRFToken(getCSRFSubmission("GET"));
+    $csrf = verifyCSRFToken(getCSRFSubmission());
     if (!$csrf) {
         die(getCSRFFailedError());
     }
@@ -133,7 +133,7 @@ if (isset($_POST["installTheme"])) {
     </div>
     <?php
 } elseif (isset($_GET["doUninstallTheme"])) {
-    $csrf = verifyCSRFToken(getCSRFSubmission("GET"));
+    $csrf = verifyCSRFToken(getCSRFSubmission());
     if (!$csrf) {
         die(getCSRFFailedError());
     }
