@@ -46,14 +46,20 @@ function getTheme()
 
     <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
 
+    <?php addModuleDescriptor("alert-area"); ?>
+
     <div class="container">
         <h2>Securely transfer anywhere in the world with <?php echo getBankName(); ?> Direct™</h2>
+
+        <?php addModuleDescriptor("header"); ?>
 
         <p><?php echo getBankName() ?> has won over one award for our security. Secure transfer is one of our favorite features. Our service is so secure
             that wire transfers can be processed without any confirmation at all. How secure is that?
 
             If that weren't enough, your online banking dashboard is protected by the most advanced stock security in the industry (read more below).
         </p>
+
+        <?php addModuleDescriptor("pre-content"); ?>
 
         <h3>Why us?</h3>
 
@@ -82,6 +88,10 @@ function getTheme()
             from anybody except us there is no help for you. Nobody can help you (apart from us).
         </p>
 
+        <?php addModuleDescriptor("post-content"); ?>
+
         <a href="/user/Apply.php" class="btn btn-primary mb-2">Apply today</a>
+
+        <?php addModuleDescriptor("footer"); ?>
     </div>
 <?php }

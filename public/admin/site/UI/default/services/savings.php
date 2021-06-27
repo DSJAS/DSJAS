@@ -44,14 +44,20 @@ function getTheme()
     ?>
     <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/");
+
+    addModuleDescriptor("alert-area"); ?>
 
     <div class="container">
         <h2>The award winning savings accounts</h2>
 
+        <?php addModuleDescriptor("header"); ?>
+
         <p><?php echo getBankName() ?> has won over one award for our fantastic online banking services. Nobody (with the exception of HSBC, BOA and JPMC) can beat
             us in the game of customer focused savings accounts.
         </p>
+
+        <?php addModuleDescriptor("pre-content"); ?>
 
         <h3>Why us?</h3>
 
@@ -80,6 +86,10 @@ function getTheme()
             from anybody except us there is no help for you. Nobody can help you (apart from us).
         </p>
 
+        <?php addModuleDescriptor("post-content"); ?>
+
         <a href="/user/Apply.php" class="btn btn-primary mb-2">Apply today</a>
+
+        <?php addModuleDescriptor("footer"); ?>
     </div>
 <?php }

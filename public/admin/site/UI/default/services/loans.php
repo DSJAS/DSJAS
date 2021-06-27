@@ -44,16 +44,21 @@ function getTheme()
     ?>
     <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/");
+
+    addModuleDescriptor("alert-area"); ?>
 
     <div class="container">
         <h2>The award winning loans and lendings</h2>
+        <?php addModuleDescriptor("header"); ?>
 
         <p><?php echo getBankName() ?> lends like we spend: sparsely yet with the spirit of Scrooge himself. Get a loan for up to three hours and $2.00 with our
             new extended credit scheme!
 
             Now doesn't that sound good...
         </p>
+
+        <?php addModuleDescriptor("pre-content"); ?>
 
         <h3>Why us?</h3>
 
@@ -82,6 +87,10 @@ function getTheme()
             from anybody except us there is no help for you. Nobody can help you (apart from us).
         </p>
 
+        <?php addModuleDescriptor("post-content"); ?>
+
         <a href="/user/Apply.php" class="btn btn-primary mb-2">Apply today</a>
+
+        <?php addModuleDescriptor("footer"); ?>
     </div>
 <?php }

@@ -44,10 +44,14 @@ function getTheme()
     ?>
     <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/");
+
+    addModuleDescriptor("alert-area"); ?>
 
     <div class="container">
         <h2>The award winning shared account</h2>
+
+        <?php addModuleDescriptor("header"); ?>
 
         <p>
             Do you have a partner, spouse or other person you share money with? Yeah, me neither - wait what; you do?!?!?! Well, I guess you'll be
@@ -84,6 +88,10 @@ function getTheme()
             from anybody except us there is no help for you. Nobody can help you (apart from us).
         </p>
 
+        <?php addModuleDescriptor("post-content"); ?>
+
         <a href="/user/Apply.php" class="btn btn-primary mb-2">Apply today</a>
+
+        <?php addModuleDescriptor("footer"); ?>
     </div>
 <?php }
