@@ -1,4 +1,8 @@
 {
+    "git.ignoredRepositories": [
+        "public/include/vendor/hooks",
+        "public/include/vendor/requests"
+    ],
     "cSpell.words": [
         "ABSPATH",
         "CSRF",
