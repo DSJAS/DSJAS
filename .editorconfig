@@ -11,12 +11,12 @@ trim_trailing_whitespace = true
 indent_style = space
 
 # All code must me encoded in utf-8
-[*.php,*.py]
+[*.{php,py}]
 indent_size = 4
 charset = utf-8
 
 # Yaml files must be double indented
-[*.yml,*.yaml]
+[*.{yml,yaml}]
 indent_size = 2
 
 # Gitmodules shouldn't be modified directly
