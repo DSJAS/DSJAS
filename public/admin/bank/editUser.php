@@ -44,7 +44,7 @@ require ABSPATH . INC . "csrf.php";
             <a class="btn btn-secondary" href="/admin/bank/users.php">Cancel</a>
         </div>
     <?php } elseif (isset($_GET["doDeleteUser"])) {
-        $csrf = getCSRFSubmission("GET");
+        $csrf = getCSRFSubmission();
         if (!verifyCSRFToken($csrf)) {
             getCSRFFailedError();
             die();

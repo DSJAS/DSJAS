@@ -27,7 +27,7 @@ require_once ABSPATH . INC . "Customization.php";
 require_once ABSPATH . INC . "Util.php";
 
 if (isset($_GET["doCloseAccount"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
     if (!verifyCSRFToken($csrf)) {
         die(getCSRFFailedError());
     }
@@ -37,7 +37,7 @@ if (isset($_GET["doCloseAccount"])) {
     header("Location: /admin/bank/accounts.php?accountDeleted");
     die();
 } else if (isset($_GET["doChangeBalance"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
     if (!verifyCSRFToken($csrf)) {
         die(getCSRFFailedError());
     }
@@ -61,7 +61,7 @@ if (isset($_GET["doCloseAccount"])) {
     header("Location: /admin/bank/accounts.php?changesSaved");
     die();
 } else if (isset($_GET["doDrainAccount"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
     if (!verifyCSRFToken($csrf)) {
         die(getCSRFFailedError());
     }
@@ -85,7 +85,7 @@ if (isset($_GET["doCloseAccount"])) {
     header("Location: /admin/bank/accounts.php?changesSaved");
     die();
 } else if (isset($_GET["doForceTransaction"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
     if (!verifyCSRFToken($csrf)) {
         die(getCSRFFailedError());
     }

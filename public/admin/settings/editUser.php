@@ -27,7 +27,7 @@ require_once ABSPATH . INC . "Util.php";
 
 
 if (isset($_GET["doDeleteUser"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
     if (!verifyCSRFToken($csrf)) {
         getCSRFFailedError();
         die();
@@ -38,7 +38,7 @@ if (isset($_GET["doDeleteUser"])) {
 }
 
 if (isset($_GET["doToggleEnabledUser"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
     if (!verifyCSRFToken($csrf)) {
         getCSRFFailedError();
         die();

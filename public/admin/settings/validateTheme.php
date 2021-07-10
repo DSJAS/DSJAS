@@ -28,7 +28,7 @@ ignore_user_abort(true); // Don't allow the user to cancel this operation by clo
 
 
 if (isset($_GET["validateTheme"])) {
-    $csrf = getCSRFSubmission("GET");
+    $csrf = getCSRFSubmission();
     if (!verifyCSRFToken($csrf)) {
         die(getCSRFFailedError());
     }
