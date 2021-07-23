@@ -9,10 +9,10 @@ end_of_line = lf
 insert_final_newline = false
 trim_trailing_whitespace = true
 indent_style = space
+indent_size = 4
 
 # All code must me encoded in utf-8
 [*.{php,py}]
-indent_size = 4
 charset = utf-8
 
 # Yaml files must be double indented
