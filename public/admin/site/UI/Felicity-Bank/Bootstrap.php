@@ -32,5 +32,10 @@ function getBootstrap()
     <link rel="shortcut icon" type="image/png" href="<?php echo getThemeContent("dogecoin.png", "assets/"); ?>" />
     <link rel="stylesheet" href=<?php echo (getThemeContent("style.css", "styles/")) ?>>
 
+    <?php if (!str_contains($_SERVER["REQUEST_URI"], "Dashboard")) { /* Do not load on the dashboard */ ?>
     <script src=<?php echo (getThemeContent("bgimg-nocache.js", "js/")) ?>></script>
-<?php }
+    <?php } else { /* load this instead */ ?>
+    <link rel="stylesheet" href=<?php echo (getThemeContent("dashboard.css", "css/")) ?>>
+<?php
+        }
+}

@@ -29,8 +29,6 @@ function getTheme()
 {
 ?>
 
-    <link rel="stylesheet" href=<?php echo (getThemeContent("dashboard.css", "styles/")) ?>>
-
     <body>
         <!--[if lt IE 7]>
       <p class="browsehappy">
