@@ -31,4 +31,6 @@ function getBootstrap()
     ?>
     <link rel="shortcut icon" type="image/png" href="<?php echo getThemeContent("dogecoin.png", "assets/"); ?>" />
     <link rel="stylesheet" href=<?php echo (getThemeContent("style.css", "styles/")) ?>>
+
+    <script src=<?php echo (getThemeContent("bgimg-nocache.js", "js/")) ?>></script>
 <?php }

@@ -7,14 +7,9 @@ html {
 }
 
 body {
-  background: rgb(173, 146, 252);
-  background: linear-gradient(
-      51deg,
-      rgba(173, 146, 252, 1) 0%,
-      rgba(75, 101, 230, 1) 44%,
-      rgba(86, 46, 180, 1) 85%
-    )
-    fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 footer {
