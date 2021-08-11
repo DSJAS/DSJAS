@@ -39,13 +39,13 @@ require THEME_API . "Accounts.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body class="body-signin bg-img-login">
 
         <div class="form-signin rounded">
 
-            <?php addModuleDescriptor("alert_area");  ?>
+            <?php addModuleDescriptor("alert-area");  ?>
 
             <h1>Service unavailable</h1>
 

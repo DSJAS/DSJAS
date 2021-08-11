@@ -49,10 +49,7 @@ function getTheme()
 
     <body>
 
-        <?php include "components/Nav.php"; ?>
-
-        <?php
-        addModuleDescriptor("nav_bar");
+        <?php include "components/Nav.php";
 
         if (shouldAppearLoggedIn()) { ?>
             <div class="justify-right form-inline">
@@ -70,12 +67,13 @@ function getTheme()
 
         <div class="container-fluid main-page-teaser">
 
-            <?php addModuleDescriptor("alert_area");  ?>
+            <?php addModuleDescriptor("alert-area");  ?>
 
             <div class="main-page-teaser-overlay rounded">
                 <br>
                 <br>
                 <h3><strong>Your family is as close to us as they are to you</strong></h3>
+                <?php addModuleDescriptor("header"); ?>
 
                 <h5>In celebration of all those happy families out there, we're making you even happier, with discounts and deals for families like you</h5>
                 <br>
@@ -87,6 +85,8 @@ function getTheme()
                 <pre class="lead small" style="margin-top: 10; color: white">Terms and conditions apply. While event lasts</pre>
             </div>
         </div>
+
+        <?php addModuleDescriptor("pre-content"); ?>
 
         <div class="container-fluid mt-2">
             <div class="card-deck services-panels">
@@ -193,6 +193,8 @@ function getTheme()
                 <pre class="lead small" style="margin-top: 40px; color: white">Terms and conditions apply</pre>
             </div>
         </div>
+
+        <?php addModuleDescriptor("post-content"); ?>
 
         <?php require ABSPATH . getRawThemeContent("Footer.php", "components/"); ?>
 

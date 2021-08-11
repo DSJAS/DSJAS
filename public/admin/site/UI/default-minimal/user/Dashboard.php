@@ -46,10 +46,12 @@ function getTheme()
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/");
 
-        addModuleDescriptor("alert_area");  ?>
+        addModuleDescriptor("alert-area");  ?>
 
         <div class="container">
             <br>
+
+            <?php addModuleDescriptor("pre-content"); ?>
 
             <h3>My Accounts</h3>
 
@@ -125,6 +127,8 @@ function getTheme()
                 <a href="/user/Transfer.php">Make one now</a>
                 <hr>
             <?php }
+
+    addModuleDescriptor("post-content");
             ?>
 
             <div class="row card-deck">
@@ -151,12 +155,10 @@ function getTheme()
                         <a href="/user/Apply.php">Learn more</a>
                     </div>
                 </div>
-
-                <?php addModuleDescriptor("dashboard_notices");  ?>
             </div>
 
             <a href="/support/contact" class="btn btn-warning dashboard-footer-buttons">Contact support</a>
-            <?php addModuleDescriptor("dashboard_footer");  ?>
+            <?php addModuleDescriptor("footer");  ?>
             <hr>
         </div>
     </body>

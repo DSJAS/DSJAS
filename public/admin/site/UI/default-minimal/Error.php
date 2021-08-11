@@ -46,17 +46,22 @@ function getTheme()
 
         <div class="form-signin rounded">
 
-            <?php addModuleDescriptor("error");  ?>
+            <?php addModuleDescriptor("alert-area");  ?>
 
             <h1>Code <?php echo (getErrorCode()); ?></h1>
+            <?php addModuleDescriptor("header");
 
 
+            addModuleDescriptor("pre-content"); ?>
             <div class="alert alert-danger">
                 <strong>There was an error navigating to that page</strong>
                 <p>Please check the URL and try again.</p>
             </div>
+            <?php addModuleDescriptor("post-content"); ?>
 
             <a href="/user/Login.php">Return home</a>
+
+            <?php addModuleDescriptor("footer"); ?>
         </div>
 
     </body>

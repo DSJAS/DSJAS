@@ -40,10 +40,11 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
-        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
+        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/");
+        addModuleDescriptor("alert-area"); ?>
 
         <div class="container">
             <div class="header mb-4">
@@ -52,7 +53,11 @@ function getTheme()
                 </h1>
 
                 <p class="lead">Safe and secure. Two things that we wish our money transferral system was</p>
+
+                <?php addModuleDescriptor("header"); ?>
             </div>
+
+            <?php addModuleDescriptor("pre-content"); ?>
 
             <ul>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -143,9 +148,13 @@ function getTheme()
                 </li>
             </ul>
 
+            <?php addModuleDescriptor("post-content"); ?>
+
             <p>Transfers are one of the most powerful tools on our dashboard. But, it can be dangerous.
                 Please <a href="/support/Fraud">report fraud</a> if something seems off.
             </p>
+
+            <?php addModuleDescriptor("footer"); ?>
         </div>
     </body>
 <?php }

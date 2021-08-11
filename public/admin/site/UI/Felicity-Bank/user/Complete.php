@@ -22,6 +22,7 @@ For more information of theming and creating your own themes, please refer to th
 API documentation for themes and plugins.
 */
 
+require_once THEME_API . "General.php";
 require THEME_API . "Accounts.php";
 
 function getTheme()
@@ -35,35 +36,6 @@ function getTheme()
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-        <nav class="navbar navbar-expand-sm navbar-light bg-light border" style="height: 8vh;">
-            <div class="container">
-                <a href="#" class="navbar-brand"><?php echo getBankName() ?></a>
-
-                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarMenu">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-link">
-                            <a href="/">Home</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="about">About <?php echo getBankName() ?></a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="invest">Investing</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="https://en.wikipedia.org/wiki/Technical_support_scam" target="_blank">Report Fraud</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
 
         <div style="height: 8vh;"></div>
 

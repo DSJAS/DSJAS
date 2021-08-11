@@ -45,7 +45,8 @@ function getTheme()
 ?>
 
     <body>
-        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
+        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/");
+        addModuleDescriptor("alert-area"); ?>
 
         <div class="container mt-4">
 
@@ -80,10 +81,14 @@ function getTheme()
                     Contact <?php echo getBankName() ?>
                 </h1>
 
+                <?php addModuleDescriptor("header"); ?>
+
                 <p class="lead">We're always standing by for communications. Please fill in the details below, along with your message, and we'll get back to you as soon as possible</p>
             </div>
 
             <div class="row">
+                <?php addModuleDescriptor("pre-content"); ?>
+
                 <div class="col-md-18">
                     <form name="sentMessage" id="contactForm" novalidate>
                         <div class="control-group form-group">
@@ -114,8 +119,12 @@ function getTheme()
                         <div id="success"></div>
                         <a href="/support/ContactReceived" type="button" class="btn btn-success">Submit message</a>
 
+                        <?php addModuleDescriptor("post-content"); ?>
+
                         <br>
                         <small class="text-muted">Your data is completely safe and secure. We will only share limited data with Facebook, Google, Amazon, Western Union and Twitter as outlined in <a href="/Mission">our policies</a></small>
+
+                        <?php addModuleDescriptor("footer"); ?>
                     </form>
                 </div>
             </div>

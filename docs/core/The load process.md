@@ -43,14 +43,13 @@ From hereon out, we will be stepping through the code in this function exclusive
 
 In order for modules to tell us what page they wish to be loaded on, we use an engine called the *FileFilter* engine. This takes in the path to the current file to be loaded and outputs a regular expression which will be checked against the value the module provides. It allows modules to have granular control over where they are loaded but doesn't have any overhead for the permalinking system.
 
-This parsing is, in reality, quite simple. In these lines:
+This parsing is, in reality, quite simple, and is handled exclusively in this line:
 
 ```php
-$fileFilterName = pathinfo($fileName, PATHINFO_BASENAME);
-$fileFilterName = strtolower(explode(".", $fileFilterName)[0]);
+$fileFilterPath = str_replace(ABSPATH . "/", "", $fileName);
 ```
 
-You can see that we obtain a lowercase version of the filename and directory name. Later on, the module loader will append extra information to allow for the important mechanisms that *FileFilter* relies on.
+As you can see, a string replace operation has been ran on the string provided, intent on removing the contents of the "ABSPATH" constant from the path. This will convert an absolute path to one which is relative to the installation root of DSJAS. This value will then be fed through a case-insensitive regex engine to determine if the module author intends for the module to be loaded here.
 
 ## Step 2: Load and process modules
 
@@ -59,8 +58,8 @@ Modules have to be loaded before the theme so that they can be placed physically
 This happens in these two lines:
 
 ```php
-$moduleManager = new ModuleManager($fileFilterName);
-$moduleManager->processModules($moduleCallBack);
+$moduleManager = new ModuleManager($fileFilterPath);
+$moduleManager->processModules(($fileFilterPath);
 ```
 
 In the first line, we construct a ```ModuleManager``` object. This object loads module configuration and parses important fields for quick use later. After it has done that, it cycles through every entry in the module configuration and loads it into memory. We do this now so that the load code can make quick use of it later.

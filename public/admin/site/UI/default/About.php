@@ -41,7 +41,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
     <?php include "components/Nav.php"; ?> </nav>
 
     <div class="container-fluid about-page-teaser">
@@ -49,10 +49,13 @@ function getTheme()
             <h1>About us</h1>
             <br>
             <h2>Although we're just a bank, we're so much more than a bank</h2>
+            <?php addModuleDescriptor("header"); ?>
         </div>
     </div>
 
     <div class="container">
+        <?php addModuleDescriptor("pre-content"); ?>
+
         <h2>Our origins</h2>
         <p>Back in the ancient era of 2007 AD, money was simpler: more elegant. We know, because we were there.
             Sadly, those days are gone. <?php echo (getBankName()); ?> was created by our three founders to make banking simple again. I guess you could say, make banking great again.
@@ -80,6 +83,8 @@ function getTheme()
 
             To get to our numerous resources, please use the links below.
         </p>
+
+        <? addModuleDescriptor("post-content"); ?>
 
         <hr>
 

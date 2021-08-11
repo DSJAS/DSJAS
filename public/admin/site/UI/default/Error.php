@@ -49,7 +49,9 @@ function getTheme()
         </nav>
 
         <div class="container-fluid text-center">
-            <?php addModuleDescriptor("alert_area");  ?>
+            <?php addModuleDescriptor("alert-area");
+            addModuleDescriptor("pre-content"); ?>
+
 
             <img src="/assets/warning.png" style="height: 170; width: 200">
             <h1>Code <?php echo (getErrorCode()); ?></h1>
@@ -57,13 +59,13 @@ function getTheme()
             <br>
             <p>There was a problem while attempting to navigate to that page. Please try again and make sure you got the URL correct</p>
 
-            <?php addModuleDescriptor("error_content");  ?>
+            <?php addModuleDescriptor("post-content");  ?>
 
             <span>
                 <a class="btn btn-primary" href="/">Go to the Homepage</a>
             </span>
 
-            <?php addModuleDescriptor("error_footer");  ?>
+            <?php addModuleDescriptor("footer");  ?>
         </div>
     </body>
 <?php }

@@ -44,14 +44,19 @@ function getTheme()
     ?>
     <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?> </nav>
 
-    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/"); ?>
+    <?php include ABSPATH . getRawThemeContent("ServicesHeader.html", "components/");
+
+    addModuleDescriptor("alert-area"); ?>
 
     <div class="container">
         <h2>Security deposit boxes, more secure than our CEO's home (don't ask how I know)</h2>
+        <?php addModuleDescriptor("header"); ?>
 
         <p><?php echo getBankName() ?> has won over one award for our security. Secure deposit is just one of the areas we best out opponents in the ring
             of banking.
         </p>
+
+        <?php addModuleDescriptor("pre-content"); ?>
 
         <h3>Why us?</h3>
 
@@ -80,6 +85,10 @@ function getTheme()
             from anybody except us there is no help for you. Nobody can help you (apart from us).
         </p>
 
+        <?php addModuleDescriptor("post-content"); ?>
+
         <a href="/user/Apply.php" class="btn btn-primary mb-2">Apply today</a>
+
+        <?php addModuleDescriptor("footer"); ?>
     </div>
 <?php }

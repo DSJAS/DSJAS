@@ -16,5 +16,8 @@
             "loadJS": true,
             "loadHTML": false
         }
-    }
+    },
+    "fileFilter": [
+        "user\\\/(?!.*Login\\.php).*$"
+    ]
 }

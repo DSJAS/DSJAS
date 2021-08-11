@@ -64,14 +64,7 @@ It is **very important** to mention that if the requested event is invalid or ne
 
 You may also, sometimes, notice that modules include a *fileFilter* array. This is an array which is passed to the ```FileFilter``` engine in DSJAS. This allows modules to determine what files they wish to be loaded on.
 
-For example, a file filter of ```about``` will match *about.php*, *About.php* and *about*.
-
-The rules for file filter rules are as follows:
-
-1. The base name of the request URI will be transformed to fully lowercase
-1. Then, the extension will be stripped
-1. Finally, the resulting string is compared with the requested file filter
-1. If a match is found, the module is loaded. If not, it is ignored and none of the contained routes will be loaded
+The FileFilter engine will perform a case insensitive regular expression search on the current path. If a match is found, the module will be loaded. If not, the module, and *all* its routes, is ignored. The path provided to the engine is always relative to the DSJAS install directory - for instance: "user/login.php", not "/srv/http/user/login.php".
 
 As a working example, the "Frustrating Login Process" module, which should only be loaded on the login page has a file filter of the following:
 
@@ -80,6 +73,16 @@ As a working example, the "Frustrating Login Process" module, which should only 
         "login"
     ]
 ```
+
+The characters "login" appear in the sequence "user/Login.php", so the module will be loaded. A more complicated example is the following:
+
+```json
+    "fileFilter": [
+        "user\\\/(?!.*Login\\.php).*$"
+    ]
+```
+
+In this case, the regex states that any file in the "user" directory can load the module, except "Login.php", which is negated with a negative lookahead. There are literally hundreds of other possible patterns which can be used to precisely match the file(s) needed. A regex pattern can be hyper-specific (load only for a single file or path) or very broad (any path with an "A" in the title). But, remember, all regex patterns need to be escaped suitable for both JSON and regex encoding/parsing - and DSJAS regex operations are **always** done in lower case.
 
 ## The lifecycle of a module
 

@@ -1,3 +1,9 @@
+<?php
+
+include_once THEME_API . "General.php";
+
+?>
+
 <!--
 DSJAS - Default theme
 Support navbar component file
@@ -39,7 +45,11 @@ Support navbar component file
             <li class="nav-item">
                 <a class="nav-link" href="/support/Fraud">Fraud prevention</a>
             </li>
+
+            <?php addModuleDescriptor("nav-items"); ?>
         </ul>
+
+        <?php addModuleDescriptor("navbar"); ?>
     </div>
 
     <div class="justify-right form-inline">

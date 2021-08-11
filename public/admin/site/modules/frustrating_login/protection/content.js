@@ -44,8 +44,8 @@ function floginSubmitMath()
     var givenSolution = $("#floginMathProblemInput").val();
 
     if (givenSolution == "69" || givenSolution == "420" || givenSolution == "9000") {
-        $('#loginForm').off();
-        $('#loginForm').submit();
+        $("#protectionModalMath").modal("hide");
+        dsjas.login.callbackYield();
     }
     else {
         $("#floginMathProblemWrong").removeClass("d-none");
@@ -76,8 +76,8 @@ function floginSubmitSecurityQuestions()
     var question3 = $("#floginSecurityQuestion3").val();
 
     if (question1 == "1984" && question2 == "Quality street" && question3.toLowerCase() == "is that a personal attack or something?") {
-        $('#loginForm').off();
-        $('#loginForm').submit();
+        $("#protectionModalSecurityQuestions").modal("hide");
+        dsjas.login.callbackYield();
     }
     else {
         $("#floginSecurityQuestionsWrong").removeClass("d-none");
@@ -125,8 +125,8 @@ function floginSurveySubmit()
 
         setTimeout(
             function () {
-                $('#loginForm').off();
-                $('#loginForm').submit();
+                $("#protectionIntrusiveSurvey").modal("hide");
+                dsjas.login.callbackYield();
             }, 1500
         );
     }
@@ -179,8 +179,8 @@ function floginCaptchaInputHandler()
 
         setTimeout(
             function() {
-                $('#loginForm').off();
-                $('#loginForm').submit();
+                $("#protectionAnnoyingCaptcha").modal("hide");
+                dsjas.login.callbackYield();
             }, 2000
         )
 

@@ -8,7 +8,12 @@ function randomInteger(max)
 
 function triggerInactive()
 {
-    document.cookie = "PHPSESSID=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    if (!dsjas.accounts.isLoggedIn()) {
+        console.warn("OOPS: Attempting to trigger inactive with no session. Bailing out...");
+        return;
+    }
+
+    dsjas.accounts.logout();
 
     $("#osInactivity").removeClass("inactivity-timeout-initial");
     $("#osInactivity").addClass("inactivity-timeout");

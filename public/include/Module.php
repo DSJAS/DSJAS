@@ -71,25 +71,7 @@ class ModuleManager
                 continue;
             }
 
-            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadCSS"]) {
-                echo ("<style>\n");
-
-                echo ($this->loadedModuleText[$moduleName][$route]["style"]);
-
-                echo ("\n</style>");
-            }
-
-            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadJS"]) {
-                echo ("<script>\n");
-
-                echo ($this->loadedModuleText[$moduleName][$route]["JS"]);
-
-                echo ("\n</script>");
-            }
-
-            if ($this->loadedModuleInfo[$moduleName]["hooks"][$route]["loadHTML"]) {
-                echo ($this->loadedModuleText[$moduleName][$route]["HTML"]);
-            }
+            $this->getModuleRoute($moduleName, $route);
         }
     }
 
@@ -218,9 +200,13 @@ class ModuleManager
         if (isset($this->loadedModuleInfo[$moduleName]["fileFilter"])) {
             $wantedFiles = $this->loadedModuleInfo[$moduleName]["fileFilter"];
 
-            if (!in_array($this->currentFile, $wantedFiles)) {
-                return false;
+            for ($i = 0; $i < count($wantedFiles); $i++) {
+                if (preg_match("/" . $wantedFiles[$i] . "/i", $this->currentFile) === 1) {
+                    return true;
+                }
             }
+
+            return false;
         }
 
         return true;

@@ -1,3 +1,9 @@
+<?php
+
+include_once THEME_API . "General.php";
+
+?>
+
 <!--
 DSJAS - Default theme
 Support navbar component file
@@ -46,10 +52,14 @@ Support navbar component file
             <li class="nav-item">
                 <a class="nav-link" href="/user/Logout.php">Logout</a>
             </li>
+
+            <?php addModuleDescriptor("nav-items"); ?>
         </ul>
     </div>
 
     <div class="justify-right form-inline">
         <a class="btn btn-outline-primary" href="/" style="margin-right: 25px">Return to home</a>
     </div>
+
+    <?php addModuleDescriptor("navbar"); ?>
 </nav>

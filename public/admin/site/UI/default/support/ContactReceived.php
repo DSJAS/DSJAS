@@ -45,7 +45,8 @@ function getTheme()
 ?>
 
     <body>
-        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
+        <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/");
+        addModuleDescriptor("alert-area"); ?>
 
         <div class="container mt-4">
 
@@ -82,12 +83,18 @@ function getTheme()
 
                 <h1 class="display-4">
                     Message submitted
+
+                    <?php addModuleDescriptor("header"); ?>
                 </h1>
 
                 <h3 class="text-success">Thanks for contacting us!</h3>
 
+                <?php addModuleDescriptor("pre-content"); ?>
                 <p class="lead">Our support representatives will be with you shortly. We'll send an email to the provided email with a ticket number. We can then call you or email you again for further messages</p>
+                <?php addModuleDescriptor("post-content"); ?>
             </div>
         </div>
+
+        <?php addModuleDescriptor("footer"); ?>
     </body>
 <?php }

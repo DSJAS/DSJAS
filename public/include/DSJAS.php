@@ -46,10 +46,8 @@ require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
  */
 function dsjas($fileName = "Index.php", $dirName = "/", $moduleCallBack = null, $defaultModuleHook = "all", $additionalModuleHooks = [])
 {
-    $fileFilterName = pathinfo($fileName, PATHINFO_BASENAME);
-    $fileFilterName = strtolower(explode(".", $fileFilterName)[0]);
-
-    $moduleManager = new ModuleManager($fileFilterName);
+    $fileFilterPath = str_replace(ABSPATH . "/", "", $fileName);
+    $moduleManager = new ModuleManager($fileFilterPath);
     $moduleManager->processModules($moduleCallBack);
 
 

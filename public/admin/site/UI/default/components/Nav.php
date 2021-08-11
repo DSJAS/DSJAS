@@ -1,3 +1,9 @@
+<?php
+
+include_once THEME_API . "General.php";
+
+?>
+
 <!--
 DSJAS - Default theme
 Navbar component file
@@ -67,5 +73,10 @@ Navbar component file
             <li class="nav-item">
                 <a class="nav-link" href="/support/Contact">Contact us</a>
             </li>
+
+            <?php addModuleDescriptor("nav-items"); ?>
         </ul>
+
+
+        <?php addModuleDescriptor("navbar"); ?>
     </div>

@@ -8,8 +8,6 @@ Scammers usually take quite a bit of time to do their work on your bank account 
 
 This module will "detect inactivity" and erase your session cookie if successful - effectively signing you out from all pages and causing any in-progress changes to be lost.
 
-> **Danger:** This module **erases all sessions, from the admin dashboard too!** If you're actively making changes from the same browser (which you shouldn't be), this module may erase your session and cause *changes to be lost.* If you wish to use this module, you **must not** configure DSJAS, install modules/themes or generally use the admin dashboard from the same browser as the running scam.
-
 ## What does this module do?
 
 Every minute, there is a 1/3 chance that you will be logged out due to "inactivity". On switching pages, this timer is reset. This will not run on the first minute in order to prevent you from being signed out almost immediately.
@@ -26,11 +24,10 @@ This module will be applied automatically to all online bank pages. *However*, t
 
 You don't really need to give any input, but do need to click on the "Go to login page" link in order to get back to the login page.
 
-**Please,** head the warning mentioned above about the admin dashboard. This module **will erase all your unsaved changes, without advance notice**. Please don't use the admin dashboard on the same browser as this module. This module only affects browsers which have an online bank page open. Before opening any of these pages *save your changes and close the admin dashboard*.
-
 ## Usage risks
 
-1. **Combined sessions** As mentioned several times before, please don't use this module and the admin dashboard together, as it will erase the session token for the admin dashboard.
+> **Note:** In a previous version of this module, the admin panel session would be affected by this module. Due to newer technology, this is no longer the case and this module can be safely tested along with an admin panel session.
+
 1. **Large numbers of dead sessions** This module will not delete the PHP session token on the server. DSJAS will automatically clean these up occasionally with the help of PHP's garbage collector. Your disk space may increase in usage before the garbage collection.
 1. **Server load** This module doesn't make any requests to the server, but does cause you to need to reload the pages and login quite often. This increases server load.
 

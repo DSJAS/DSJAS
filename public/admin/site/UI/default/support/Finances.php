@@ -40,7 +40,7 @@ require_once THEME_API . "Appearance.php";
 // Theme entry point
 function getTheme()
 {
-    ?>
+?>
 
     <body>
         <?php include ABSPATH . getRawThemeContent("SupportNav.php", "components/"); ?>
@@ -50,6 +50,8 @@ function getTheme()
                 <strong>Content unavailable</strong>
                 <p>The content you have requested is unavailable. Please check back soon or <a href="/support/Contact">Contact Support</a></p>
             </div>
+
+            <?php addModuleDescriptor("alert-area"); ?>
         </div>
     </body>
 <?php }
