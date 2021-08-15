@@ -86,6 +86,12 @@ You will need to modify your configuration file using the same steps as in the X
 * Under the *conf* directory of wherever you installed the server
 * /etc/apache2/apache2.conf
 
+### Notes on Apache virtual hosts / HTTPS
+
+Apache has support for "Virtual Hosts", which allow a single server to host on multiple ports/IPs. If you wish to use this capability, you **must** remember to reflect the DSJAS configs (document root, overrides allowed) in **all virtual host configs**, or you will have some vHosts working perfectly and others copletely broken.
+
+If you are planning on using Apache with SSL (HTTPS) support for your site, you **must** remember to reflect changes to your main server configuration file to the one specific to the HTTPS vHost. In XAMPP, this is located in *etc/extra/httpd-ssl.conf*. If you do not, it is likely that you will get HTTP 403 (permission denied) errors on attempting to use your HTTPS-enabled site.
+
 ## Preparing to install
 
 Now, the program is unpacked and pretty much installed. Before you can use the program, however, you will need to run the web installer to configure the site.
