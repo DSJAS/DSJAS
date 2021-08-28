@@ -47,6 +47,14 @@ function setupDefaultAccounts()
     $passHash = password_hash("hunter2", PASSWORD_DEFAULT);
 
     $sql->query("INSERT INTO `users` (`username`, `real_name`, `password_hash`, `password_hint`, `email`) VALUES ('edna', 'Edna Gooseberry', '$passHash', 'Hunter2', 'edna.g@aol.com')");
+
+    $sql->query("INSERT INTO `accounts` (`account_identifier`, `account_number`, `account_name`, `account_type`, `account_balance`, `holder_name`, `associated_online_account_id`, `account_disabled`) VALUES
+        (1, 909111628, 'Checking Account', 'current', '1200.00', 'Edna Gooseberry', 1, 0),
+        (2, 285058645, 'Savings Account', 'savings', '5420.00', 'Edna Gooseberry', 1, 0),
+        (3, 786878148, 'War bond', 'misc', '3600.00', 'Edna Gooseberry', 1, 0),
+        (4, 869033308, 'Money Market', 'misc', '1500250.42', 'Edna Gooseberry', 1, 0);
+    ");
+
 }
 
 function connectToDatabase()
