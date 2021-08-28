@@ -25,10 +25,13 @@ COPY ./docker/server/php.ini /usr/local/etc/php/php.ini
 COPY ./public /var/www/html/
 
 # Configure DSJAS
-COPY ./docker/config/Config.ini /var/www/html/Config.ini
-COPY ./docker/config/theme-config.ini /var/www/html/admin/site/UI/config.ini
-COPY ./docker/config/module-config.ini /var/www/html/admin/site/modules/config.ini
-COPY ./docker/config/extension-config.ini /var/www/html/admin/site/extensions/config.ini
+COPY ./scripts/install/Config.ini /var/www/html/Config.ini
+COPY ./scripts/install/themeConfig.ini /var/www/html/admin/site/UI/config.ini
+COPY ./scripts/install/moduleConfig.ini /var/www/html/admin/site/modules/config.ini
+COPY ./scripts/install/extConfig.ini /var/www/html/admin/site/extensions/config.ini
+
+# Sed magic to skip install process
+RUN sed -i '/\[setup\]/,/database_installed/ s/\(\S\+\)[0-9]\+\("\)/\11\2/g' /var/www/html/Config.ini
 
 # Make sure the server can write and read the directory
 RUN chown -R www-data:www-data /var/www
