@@ -109,7 +109,7 @@ function handleNoDBConfirmation()
 ?>
     <div class="text-center">
         <h1 style="color: red">Warning</h1>
-        <p class="lead">Using DSJ&S without a database can lead to buggy behaviour, reduced features and a broken site</p>
+        <p class="lead">Using DSJAS without a database can lead to buggy behaviour, reduced features and a broken site</p>
         <p><strong>Are you sure you wish to continue?</strong></p>
         <hr>
         <a class="btn btn-danger" href="/admin/install/db_config.php?nodb&confirm=1">Yes, I am sure I don't want to setup a database</a>
