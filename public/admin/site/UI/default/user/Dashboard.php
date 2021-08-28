@@ -198,7 +198,6 @@ function getTheme()
                     <?php }
 
                     addModuleDescriptor("post-content"); ?>
-                    ?>
 
                     <div class="row card-deck mb-4">
                         <div class="card col dashboard-adverts" style="width: 18rem;">
