@@ -94,7 +94,7 @@ if (isset($_POST["submit"])) {
         <a href="#" class="btn btn-primary" onclick="confirmAndSetup()">Confirm and setup
             <span id="saveProgress" class="spinner-border spinner-border-sm text-white d-none"></span>
         </a>
-        <a href="#" class="btn btn-secondary" onclick="testConfiguration()" id="configCheck" data-toggle="popover" title="Checking configuration..." data-content="Sending configuration to server. Please wait...">Test configuration</a>
+        <a href="#" class="btn btn-secondary" onclick="testConfiguration()" id="configCheck" data-toggle="popover">Test configuration</a>
         <a class="btn btn-warning" href="/admin/install/db_config.php?manualSetup">I wish to manually set up my database</a>
         <a class="btn btn-danger" href="/admin/install/db_config.php?nodb&confirm=0">Continue without a database</a>
     </span>

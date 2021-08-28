@@ -71,6 +71,10 @@ function testConfiguration()
 
 function doTestConfig()
 {
+    // Show loading popup
+    cleanupTest();
+    $("#configCheck").popover("show");
+
     var sname = $("#servername").val();
     var dname = $("#dbname").val();
     var uname = $("#username").val();
@@ -89,8 +93,6 @@ function doTestConfig()
     req = new XMLHttpRequest();
     req.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(req.responseText);
-
             handleServerCheckResponse(req.responseText);
         }
     };
@@ -102,6 +104,7 @@ function doTestConfig()
 
 function handleServerCheckResponse(response)
 {
+
     if (response.indexOf("Error") != -1
         || response.indexOf("Could not connect:") != -1
     ) {
@@ -114,9 +117,7 @@ function handleServerCheckResponse(response)
         $("#configCheck").popover("show");
 
         setTimeout(
-            function () {
-                $("#configCheck").popover("dispose");
-            }, 5000
+            cleanupTest, 5000
         );
     } else {
         $("#configCheck").popover("dispose");
@@ -128,11 +129,20 @@ function handleServerCheckResponse(response)
         $("#configCheck").popover("show");
 
         setTimeout(
-            function () {
-                $("#configCheck").popover("dispose");
-            }, 7500
+            cleanupTest, 7500
         );
     }
+}
+
+function cleanupTest()
+{
+    $("#configCheck").popover("dispose");
+
+    $("#configCheck").attr("title", "Checking configuration...");
+    $("#configCheck").attr(
+        "data-content",
+        "Sending configuration to server. Please wait..."
+    );
 }
 
 /* ==================== [FINAL] =================== */
