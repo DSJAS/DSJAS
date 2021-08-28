@@ -8,6 +8,11 @@ $(document).ready(
     }
 );
 
+function showSpinner()
+{
+    $("#saveProgress").removeClass("d-none");
+}
+
 /* Variables */
 var ongoingConfigTest = false;
 
@@ -18,6 +23,8 @@ var ongoingConfigTest = false;
 /* ==================== [DATABASE CONFIGURATION] =================== */
 function confirmAndSetup()
 {
+    showSpinner();
+
     var sname = $("#servername").val();
     var dname = $("#dbname").val();
     var uname = $("#username").val();
@@ -129,10 +136,6 @@ function handleServerCheckResponse(response)
 }
 
 /* ==================== [FINAL] =================== */
-function showFinalSpinner()
-{
-    $("#saveProgress").removeClass("d-none");
-}
 
 function submitFinal()
 {
@@ -140,7 +143,7 @@ function submitFinal()
         "Submitting the information to the server and awaiting a response"
     );
 
-    showFinalSpinner();
+    showSpinner();
 
     req = new XMLHttpRequest();
     req.onreadystatechange = function () {
