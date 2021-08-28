@@ -51,7 +51,7 @@ generateVerificationToken(ABSPATH . "/setuptoken.txt");
 
         <img class="rounded-circle" src="/assets/scammer-logo.jpg" width=300 height=300>
 
-        <h1 class="display-4">Welcome to D.S Johnson & Son</h1>
+        <h1 class="display-4">Welcome to DSJAS!</h1>
         <p class="lead">You're moments away from being all set up to annoy some scammers, but first we need to set some things up</p>
         <hr class="my-4 bg-dark">
         <p>In order to set up the site, you must prove that you are the owner of the server it is running on, or at least have access to it. To do so, please follow the below method:</p>

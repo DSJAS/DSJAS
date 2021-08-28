@@ -63,7 +63,7 @@ if (isset($_POST["submit"])) {
         <img class="rounded-circle" src="/assets/scammer-logo.jpg" width=300 height=300>
 
         <h1 class="display-4">Database setup</h1>
-        <p class="lead">D.S J & Son needs a working SQL database server to store certain information. This will need to be setup before continuing.</p>
+        <p class="lead">DSJAS needs a working SQL database server to store certain information. This will need to be setup before continuing.</p>
         <hr class="my-4 bg-dark">
         <p>You will need to set up a user for the web app with a password. Once you have done this, return to the form and fill in all the information. When you provide the necessary details, we will setup the database for you.</p>
 
