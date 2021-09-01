@@ -168,8 +168,6 @@ on the sidebar. Have fun and happy scambaiting! <i>(This message will only appea
                 <a class="btn btn-secondary admin-quick-action-btn" href="/admin/settings/mod.php">Configure modules</a>
             </div>
 
-            <a href="/admin/settings/mod.php#validatorResults" class="btn btn-success admin-quick-action-btn">Validate theme</a>
-
             <div class="btn-group" role="group">
                 <a href="/admin/user/Logout" class="btn btn-danger admin-quick-action-btn">Logout</a>
                 <a href="/user/Logout" class="btn btn-secondary admin-quick-action-btn">Logout from bank</a>

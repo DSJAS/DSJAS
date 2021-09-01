@@ -61,7 +61,6 @@ if (isset($_POST["installTheme"])) {
 
     if (isset($_POST["enabled"])) {
         enableTheme($newThemeName[1]);
-        resetValidatorState();
 
         header("Location: /admin/settings/mod.php?themeInstalledEnabled");
         die();
@@ -117,7 +116,6 @@ if (isset($_POST["installTheme"])) {
     }
 
     enableTheme($_GET["enableTheme"]);
-    resetValidatorState();
 
     header("Location: /admin/settings/mod.php?activatedTheme");
 } elseif (isset($_GET["uninstallTheme"])) { ?>

@@ -25,9 +25,6 @@ require_once ABSPATH . INC . "Util.php";
 
 $conf = new Configuration(false, true, false, true);
 
-$lastValidation = $conf->getKey(ID_THEME_CONFIG, "validation", "last_validation");
-$lastValidationTimestamp = $conf->getKey(ID_THEME_CONFIG, "validation", "last_validation_timestamp");
-
 $installedThemes = scandir(ABSPATH . "/admin/site/UI/");
 
 if ($conf->getKey(ID_THEME_CONFIG, "config", "use_default")) {
@@ -130,7 +127,7 @@ settings panel", "danger", true);
     </div>
 
     <?php
-        
+
         foreach ($installedModules as $module) {
             if (is_file(ABSPATH . "/admin/site/modules/" . $module) || $module == "." || $module == "..") {
                 continue;
@@ -304,34 +301,6 @@ settings panel", "danger", true);
                 </small>
             </div>
         </div>
-
-        <div class="card bg-light admin-panel" id="validatorResults">
-            <div class="card-header d-flex justify-content-between">
-                <h3>Theme validation</h3>
-            </div>
-
-            <div class="card-body">
-                <div class="card-title d-flex justify-content-between">
-                    <h3>Run a validation</h3>
-                </div>
-
-                <p>If the theme you are using is not working correctly, the theme validator could assist you in fixing it.
-                    DSJAS can automatically fix some issues with themes and re-install themes which are detected to be damaged.
-                </p>
-
-                <div class="d-flex justify-content-between">
-                    <p>Run the validator now:</p>
-                    <a class="btn btn-success" href="/admin/settings/validateTheme.php?validateTheme&csrf=<?php echo (getCSRFToken()); ?>">Run</a>
-                </div>
-
-                <?php if ($lastValidation == "never_run") { ?>
-                    <small class="text-small text-secondary">Last validation ran: <strong class="text-danger">You have never ran the validator for this theme</strong></small>
-                <?php } else { ?>
-                    <small class="text-small text-secondary">Last validation ran: <?php echo date("jS F Y [h:i A]", $lastValidationTimestamp) ?></small>
-                <?php } ?>
-            </div>
-        </div>
-
 
         <div class="card bg-light admin-panel">
             <div class="card-header d-flex justify-content-between">
