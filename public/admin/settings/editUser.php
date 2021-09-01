@@ -68,41 +68,21 @@ if (isset($_POST["doEditUser"])) {
     $config = parse_ini_file(ABSPATH . "/Config.ini");
     $userID = $_POST["doEditUser"];
 
-    if ($_POST["password"] == "xxxxxxxxxxxx") {
-        $database = new DB(
-            $configuration["server_hostname"],
-            $configuration["database_name"],
-            $configuration["username"],
-            $configuration["password"]
-        );
+    $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
 
-        $query = new PreparedStatement(
-            "UPDATE `siteusers` SET `username` = ?, `real_name` = ?, `email` = ?, `password_hint` = ? WHERE `user_id` = $userID",
-            [$_POST["username"], $_POST["realName"], $_POST["email"], $_POST["passwordHint"]],
-            "ssss"
-        );
+    $query = new PreparedStatement(
+        "UPDATE `siteusers` SET `username` = ?, `real_name` = ?, `email` = ?, `password_hint` = ? WHERE `user_id` = $userID",
+        [$_POST["username"], $_POST["realName"], $_POST["email"], $_POST["passwordHint"]],
+        "ssss"
+    );
 
-        $database->prepareQuery($query);
-        $database->query();
-    } else {
-        $database = new DB(
-            $configuration["server_hostname"],
-            $configuration["database_name"],
-            $configuration["username"],
-            $configuration["password"]
-        );
-
-        $newHash = password_hash($_POST["password"], PASSWORD_DEFAULT);
-
-        $query = new PreparedStatement(
-            "UPDATE `siteusers` SET `username` = ?, `real_name` = ?, `email` = ?, `password_hash` = ?, `password_hint` = ? WHERE `user_id` = $userID",
-            [$_POST["username"], $_POST["realName"], $_POST["email"], $newHash, $_POST["passwordHint"]],
-            "sssss"
-        );
-
-        $database->prepareQuery($query);
-        $database->query();
-    }
+    $database->prepareQuery($query);
+    $database->query();
 
     if ($_POST["doEditUser"] == getCurrentUserId(true)) {
         fillSessionDetails(true, $_POST["username"], getUserIDFromName($_POST["username"], true), true); // Update in memory details cache
@@ -124,19 +104,19 @@ if (isset($_POST["doEditUser"])) {
 
     <script src="/include/js/editUser.js"></script>
 
-    <?php require ABSPATH . INC . "components/AdminSettingsNav.php";
+<?php require ABSPATH . INC . "components/AdminSettingsNav.php";
 
-    if (isset($_GET["deleteUser"])) {
-        if (getCurrentUserId(true) == $_GET["deleteUser"]) {
-            dsjas_alert("Cannot delete account", "You appear to be attempting to delete your own account. This action is not allowed and the operation has been cancelled",
-                        "danger", false);
+if (isset($_GET["deleteUser"])) {
+    if (getCurrentUserId(true) == $_GET["deleteUser"]) {
+        dsjas_alert("Cannot delete account", "You appear to be attempting to delete your own account. This action is not allowed and the operation has been cancelled",
+            "danger", false);
 
-    ?>
+?>
 
                     <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
                 </p>
             </div>
-    <?php
+<?php
         die();
     } ?>
 
@@ -149,22 +129,22 @@ if (isset($_POST["doEditUser"])) {
             <a class="btn btn-secondary" href="/admin/settings/accounts.php">Cancel</a>
         </div>
 
-    <?php }
+<?php }
 
-    if (isset($_GET["toggleEnabledUser"])) {
-        if (getCurrentUserId(true) == $_GET["toggleEnabledUser"]) {
-            dsjas_alert("Cannot disable account", "You appear to be attempting to disable your own account. You cannot disable the currently signed in account.
-To disable this account, create of login to another account and order the disable from there", "danger", false);
+if (isset($_GET["toggleEnabledUser"])) {
+    if (getCurrentUserId(true) == $_GET["toggleEnabledUser"]) {
+        dsjas_alert("Cannot disable account", "You appear to be attempting to disable your own account. You cannot disable the currently signed in account.
+            To disable this account, create of login to another account and order the disable from there", "danger", false);
 
-            ?>
+?>
                     <a href="/admin/settings/accounts.php">Go back to the accounts page</a>
                 </p>
             </div>
-            <?php
-            die();
-        }
+<?php
+        die();
+    }
 
-        if (getInfoFromUserID($_GET["toggleEnabledUser"], "account_enabled", true)) { ?>
+    if (getInfoFromUserID($_GET["toggleEnabledUser"], "account_enabled", true)) { ?>
             <div class="text-center">
                 <h1 style="color: red">Warning</h1>
                 <p class="lead">Disabling a user account will immediately cause this user to loose access the site.
@@ -185,23 +165,23 @@ To disable this account, create of login to another account and order the disabl
                 <a class="btn btn-danger" href="/admin/settings/editUser.php?doToggleEnabledUser=<?php echo ($_GET["toggleEnabledUser"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
                 <a class="btn btn-secondary" href="/admin/settings/accounts.php">Cancel</a>
             </div>
-        <?php }
+<?php }
+}
+
+if (isset($_GET["editUser"])) {
+    if (!getInfoFromUserID($_GET["editUser"], "account_enabled", true)) {
+        $enableLink = "/admin/settings/editUser.php?toggleEnabledUser=" . htmlentities($_GET["editUser"]) . "&csrf=" . getCSRFToken();
+
+        dsjas_alert("<p>This account is disabled", "You are editing an account which is currently disabled. Regardless of changes, this user will still not be able to access their account.</p>" .
+            "<a href=\"$enableLink\">Enable this account</a>", "warning", false);
     }
 
-    if (isset($_GET["editUser"])) {
-        if (!getInfoFromUserID($_GET["editUser"], "account_enabled", true)) {
-            $enableLink = "/admin/settings/editUser.php?toggleEnabledUser=" . htmlentities($_GET["editUser"]) . "&csrf=" . getCSRFToken();
-
-            dsjas_alert("<p>This account is disabled", "You are editing an account which is currently disabled. Regardless of changes, this user will still not be able to access their account.</p>" .
-                        "<a href=\"$enableLink\">Enable this account</a>", "warning", false);
-        }
-
-        if ($_GET["editUser"] == getCurrentUserId(true)) {
-            dsjas_alert("This is you!", "You're editing your own account information. Any changes will be reflected on your profile", "info", false);
-        } else {
-            dsjas_alert("Take care: This isn't your account!", "You're editing another person's account information. Please take care and avoid making unwanted changes", "warning", false);
-        }
-        ?>
+    if ($_GET["editUser"] == getCurrentUserId(true)) {
+        dsjas_alert("This is you!", "You're editing your own account information. Any changes will be reflected on your profile", "info", false);
+    } else {
+        dsjas_alert("Take care: This isn't your account!", "You're editing another person's account information. Please take care and avoid making unwanted changes", "warning", false);
+    }
+?>
 
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -218,23 +198,24 @@ To disable this account, create of login to another account and order the disabl
                     <input type="text" class="form-control" id="username" name="username" value="<?php echo (stripslashes(getInfoFromUserID($_GET["editUser"], "username", true))); ?>">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">Real name</label>
+                    <label for="realName">Real name</label>
                     <input type="text" class="form-control" id="realName" name="realName" value="<?php echo (stripslashes(getInfoFromUserID($_GET["editUser"], "real_name", true))); ?>">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="inputAddress">Email</label>
+                <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?php echo (stripslashes(getInfoFromUserID($_GET["editUser"], "email", true))); ?>">
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="username">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" onmouseover="onPasswordHover()" onmouseout="onPasswordHoverEnd()" value="xxxxxxxxxxxx" data-toggle="popover" title="Attention! Dummy data" data-content="For security reasons, your password (once stored) is not retrievable. This password box contains dummy data - not your password. If you forgot your password, please reset it on the accounts menu.">
+                    <label for="password">Password</label>
+                    <a href="#passwordWarn" id="passwordWarn" onclick="onPasswordHover()" data-toggle"popover" class="badge badge-primary" title="Password read only" data-content="Password resets can be performed on the main account page">?</a>
+                    <input type="password" class="form-control disabled" value="xxxxxxxxxxxx" disabled>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password hint</label>
+                    <label for="passwordHint">Password hint</label>
                     <input type="text" class="form-control" id="passwordHint" name="passwordHint" value="<?php echo (stripslashes(getInfoFromUserID($_GET["editUser"], "password_hint", true))); ?>">
                 </div>
             </div>

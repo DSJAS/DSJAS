@@ -1,5 +1,7 @@
 /* DSJAS - Client Side JS */
 
+var popupShown = false;
+
 $(
     function () {
         $('[data-toggle="popover"]').popover()
@@ -8,10 +10,13 @@ $(
 
 function onPasswordHover()
 {
-    $("#password").popover("show");
-}
+    if (!popupShown) {
+        popupShown = true;
+        $("#passwordWarn").popover("show");
 
-function onPasswordHoverEnd()
-{
-    $("#password").popover("hide");
+        setTimeout(function() {
+            popupShown = false;
+            $("#passwordWarn").popover("hide");
+        }, 5000);
+    }
 }
