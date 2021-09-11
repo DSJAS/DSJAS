@@ -32,9 +32,9 @@
 
 */
 
-require_once $_SERVER["DOCUMENT_ROOT"] . "/include/Customization.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/include/vendor/hooks/src/gburtini/Hooks/Hooks.php";
-require_once $_SERVER["DOCUMENT_ROOT"] . "/include/Stats.php";
+require_once ABSPATH. INC . "Customization.php";
+require_once ABSPATH . INC . "vendor/hooks/src/gburtini/Hooks/Hooks.php";
+require_once ABSPATH . INC . "Stats.php";
 
 static $statisticsManager = null;
 
