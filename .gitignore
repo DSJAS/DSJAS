@@ -13,6 +13,9 @@ public/admin/data/AdminNotices.json
 public/uploads/*
 !public/uploads/.htaccess
 
+# Ignrore custom favicon
+public/favicon.ico
+
 # Ignore verification token, if present
 setuptoken.txt
 
