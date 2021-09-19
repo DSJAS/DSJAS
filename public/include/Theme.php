@@ -150,12 +150,12 @@ class Theme
 
     function __get($property)
     {
-        return $this->property;
+        return $this->$property;
     }
 
     function __set($property, $val)
     {
-        $this->property = $val;
+        $this->$property = $val;
     }
 
     function isThemeLoaded()
