@@ -31,15 +31,8 @@ define("ID_MODULE_CONFIG", 3);
 
 class Configuration
 {
-
-    private $globalConfiguration;
-    private $themeConfiguration;
-    private $pluginConfiguration;
-    private $moduleConfiguration;
-
     private $fileNames;
-
-    private $parsedIniData = array();
+    private $data = array();
 
     function __construct($parseGlobal = true, $parseTheme = true, $parsePlugin = true, $parseModule = true)
     {
@@ -49,16 +42,16 @@ class Configuration
         $this->fileNames[ID_MODULE_CONFIG] = MODULE_CONFIG_FILE;
 
         if ($parseGlobal) {
-            $this->parsedIniData[ID_GLOBAL_CONFIG] = $this->parseFile(ID_GLOBAL_CONFIG);
+            $this->data[ID_GLOBAL_CONFIG] = $this->parseFile(ID_GLOBAL_CONFIG);
         }
         if ($parseTheme) {
-            $this->parsedIniData[ID_THEME_CONFIG] = $this->parseFile(ID_THEME_CONFIG);
+            $this->data[ID_THEME_CONFIG] = $this->parseFile(ID_THEME_CONFIG);
         }
         if ($parsePlugin) {
-            $this->parsedIniData[ID_PLUGIN_CONFIG] = $this->parseFile(ID_PLUGIN_CONFIG);
+            $this->data[ID_PLUGIN_CONFIG] = $this->parseFile(ID_PLUGIN_CONFIG);
         }
         if ($parseModule) {
-            $this->parsedIniData[ID_MODULE_CONFIG] = $this->parseFile(ID_MODULE_CONFIG);
+            $this->data[ID_MODULE_CONFIG] = $this->parseFile(ID_MODULE_CONFIG);
         }
     }
 
@@ -68,17 +61,17 @@ class Configuration
 
     function __get($property)
     {
-        return $this->property;
+        return $this->$property;
     }
 
     function __set($property, $value)
     {
-        $this->property = $value;
+        $this->$property = $value;
     }
 
     function getKey($configFile, $section, $key)
     {
-        $data = $this->parsedIniData[$configFile];
+        $data = $this->data[$configFile];
 
         $rawData = $data[$section][$key];
 
@@ -102,7 +95,7 @@ class Configuration
             $new_content .= "[$section]\n$section_content\n";
         }
         file_put_contents($this->fileNames[$configFile], $new_content);
-        $this->parsedIniData[$configFile] = $this->parseFile($configFile);
+        $this->data[$configFile] = $this->parseFile($configFile);
     }
 
 
@@ -113,7 +106,7 @@ class Configuration
 
     private function getIniData($file)
     {
-        return $this->parsedIniData[$file];
+        return $this->data[$file];
     }
 }
 
