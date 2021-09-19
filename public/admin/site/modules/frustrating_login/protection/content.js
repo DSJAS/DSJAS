@@ -28,8 +28,6 @@ function runProtection(method)
 function floginMath()
 {
     $("#protectionModalMath").modal("show");
-
-    $("#floginEasyProblemSolution").text(randomInteger(9999));
 }
 
 function floginCancelMath()

@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
 <div class="modal fade text-dark" id="protectionModalMath" data-backdrop="static" data-keyboard="false" tabindex="-1"
     role="dialog">
     <div class="modal-dialog">
@@ -12,96 +14,77 @@
                 <div id="floginEasyProblem" class="d-block">
                     <p><strong>The below problem will allow us to verify that you're not a robot</strong></p>
 
-                    <p>I think of a number...</p>
-                    <ul>
-                        <li>I cube root the number</li>
-                        <li>I pass the number through the Einstein's relativity equations</li>
-                        <li>I then subtract the square root of -2 multiplied by 2000</li>
-                        <li>Finally, I add 1</li>
-                    </ul>
-                    <p><strong>My result was <span id="floginEasyProblemSolution">ERROR</span></strong></p>
+                        <p>Solve the following system of equations for \(x\) and \(y.\)</p>
+                        <p>
+                            $$\left\{ \begin{array}{ll} \log x + \log y = \log 2\\ x^{2}+y^{2}
+                            = 5 \end{array} \right.$$
+                        </p>
+                        <p>Enter your answers below:</p>
 
                     <label for="floginMathProblemInput">What was my number?</label>
                 </div>
 
                 <div id="floginHardProblem" class="d-none">
                     <p><strong>Ok! We've generated a simpler problem for you to solve</strong></p>
-
-                    <p>The navier-stokes equation allows for the prediction of physical fluid dynamics. Please use the
-                        provided homogenous form of the equation to solve the below physical problem.</p>
-
-                    <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e61ca3ba503b1cbee749633b181faeaba727b61c"
-                        alt="navier-stokes">
-
-                    <p>The solution of the equations is a flow velocity. It is a vector field - to every point in a
-                        fluid, at any moment in a
-                        time interval, it gives a vector whose direction and magnitude are those of the velocity of the
-                        fluid at that point in
-                        space and at that moment in time. It is usually studied in three spatial dimensions and one time
-                        dimension, although the
-                        two (spatial) dimensional case is often useful as a model, and higher-dimensional analogues are
-                        of both pure and applied
-                        mathematical interest. Once the velocity field is calculated, other quantities of interest such
-                        as pressure or
-                        temperature may be found using dynamical equations and relations. This is different from what
-                        one normally sees in
-                        classical mechanics, where solutions are typically trajectories of position of a particle or
-                        deflection of a continuum.
-                        Studying velocity instead of position makes more sense for a fluid; however for visualization
-                        purposes one can compute
-                        various trajectories. In particular, the streamlines of a vector field, interpreted as flow
-                        velocity, are the paths
-                        along which a massless fluid particle would travel. These paths are the integral curves whose
-                        derivative at each point
-                        is equal to the vector field, and they can represent visually the behavior of the vector field
-                        at a point in time.</p>
-
-                    <p>The Navier–Stokes equations are nonlinear partial differential equations in the general case and
-                        so remain in almost
-                        every real situation. In some cases, such as one-dimensional flow and Stokes flow (or
-                        creeping flow), the
-                        equations can be simplified to linear equations. The nonlinearity makes most problems difficult
-                        or impossible to solve
-                        and is the main contributor to the turbulence that the equations model.
-
-                        The nonlinearity is due to convective acceleration, which is an acceleration associated with the
-                        change in velocity over
-                        position. Hence, any convective flow, whether turbulent or not, will involve nonlinearity. An
-                        example of convective but
-                        laminar (nonturbulent) flow would be the passage of a viscous fluid (for example, oil) through a
-                        small converging
-                        nozzle. Such flows, whether exactly solvable or not, can often be thoroughly studied and
-                        understood.</p>
-
-                    <p>Turbulence is the time-dependent chaotic behavior seen in many fluid flows. It is generally
-                        believed that it is due to
-                        the inertia of the fluid as a whole: the culmination of time-dependent and convective
-                        acceleration; hence flows where
-                        inertial effects are small tend to be laminar (the Reynolds number quantifies how much the flow
-                        is affected by inertia).
-                        It is believed, though not known with certainty, that the Navier–Stokes equations describe
-                        turbulence properly.
-
-                        The numerical solution of the Navier–Stokes equations for turbulent flow is extremely difficult,
-                        and due to the
-                        significantly different mixing-length scales that are involved in turbulent flow, the stable
-                        solution of this requires
-                        such a fine mesh resolution that the computational time becomes significantly infeasible for
-                        calculation or direct
-                        numerical simulation. Attempts to solve turbulent flow using a laminar solver typically result
-                        in a time-unsteady
-                        solution, which fails to converge appropriately. To counter this, time-averaged equations such
-                        as the Reynolds-averaged
-                        Navier–Stokes equations (RANS), supplemented with turbulence models, are used in practical
-                        computational fluid dynamics
-                        (CFD) applications when modeling turbulent flows. Some models include the Spalart–Allmaras, k–ω,
-                        k–ε, and SST models,
-                        which add a variety of additional equations to bring closure to the RANS equations. Large eddy
-                        simulation (LES) can also
-                        be used to solve these equations numerically. This approach is computationally more expensive—in
-                        time and in computer
-                        memory—than RANS, but produces better results because it explicitly resolves the larger
-                        turbulent scales.</p>
+                        <p>
+                            A hypocycloid is the curve drawn by a point on a small circle
+                            rolling inside a larger circle. The parametric equations of a
+                            hypocycloid centered at the origin, and starting at the right most
+                            point is given by:
+                        </p>
+                        <p>
+                            $$x(t) = (R - r)\cos(t) + r\cos\left( \frac{R-r}{r}t \right)$$
+                        </p>
+                        <p>
+                            $$y(t) = (R - r)\sin(t) - r\sin\left( \frac{R - r}{r}t \right)$$
+                        </p>
+                        <p>
+                            Where \(R\) is the radius of the large circle and \(r\) the radius
+                            of the small circle.
+                        </p>
+                        <p>
+                            Let \(C(R, r)\) be the set of distinct points with integer
+                            coordinates on the hypocycloid with radius \(R\) and \(r\) and for
+                            which there is a corresponding value of \(t\) such that
+                            \(\sin(t)\) and \(\cos(t)\) are rational numbers.
+                        </p>
+                        <p>
+                            Let \(\sum_{(x, y)\in C(R, r)} |x|+|y|\) be the sum of the
+                            absolute values of the \(x\) and \(y\) coordinates of the points
+                            in \(C(R, r)\).
+                        </p>
+                        <p>
+                            Let \(T(N) = \sum_{R=3}^{N}\sum_{r=1}^{\left
+                            \lfloor{\frac{R-1}{2}}\right \rfloor } S(R, r)\) be the sum of
+                            \(S(R, r)\) for \(R\) and \(r\) positive integers, \(R\leq N\) and
+                            \(2r < R.\) </p> <p>You are given:</p>
+                        <p>$$C(3, 1) = \{(3, 0), (-1, 2), (-1,0), (-1,-2)\}$$</p>
+                        <p>
+                            $$C(2500, 1000) = \{(2500, 0), (772, 2376), (772, -2376),$$
+                        </p>
+                        <p>
+                            $$(516, 1792), (516, -1792), (500, 0), (68, 504),$$
+                        </p>
+                        <p>
+                            $$(68, -504), (-1356, 1088), (-1356, -1088),$$
+                        </p>
+                        <p>$$(-1500, 1000), (-1500, -1000)\}$$</p>
+                        <p>
+                            <em>
+                                Note: \((-625, 0)\) is not an element of \(C(2500, 1000)\)
+                                because \(\sin(t)\) is not a rational number for the
+                                corresponding values of \(t\).
+                            </em>
+                        </p>
+                        <p>
+                            $$S(3, 1) = (|3|+|0|) + (|-1| + |2|) + (|-1| + |0|) + $$
+                        </p>
+                        <p>$$(|-1| + |-2|) = 10$$</p>
+                        <p>
+                            $$T(3) = 10; T(10) = 524 ;T(100) = 580442;$$
+                        </p>
+                        <p>$$T\left(10^{3}\right) = 583108600.$$</p>
+                        <p>Find \(T\left(10^{6}\right).\)</p>
 
                     <label for="floginMathProblemInput">What is the solution to two decimal places in standard
                         form?</label>
