@@ -11,7 +11,7 @@ Support navbar component file
 
 <nav class="navbar navbar-fluid navbar-expand-lg navbar-dark bg-dark text-light">
     <div class="navbar-brand">
-        <img src="/assets/logo.png" width="30" height="30" alt="logo">
+        <img src="<?= getLogo(); ?>" width="30" height="30" alt="logo">
         <a class="navbar-brand" href="/user/Dashboard.php"><?php echo (getBankName() . "<i> - Online</i>"); ?></a>
     </div>
 

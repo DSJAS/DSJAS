@@ -1,3 +1,8 @@
+<?php
+    require_once THEME_API . "General.php";
+    require_once THEME_API . "Appearance.php";
+?>
+
 <body class="body-signin bg-img-login">
 
     <form class="form-signin rounded" id="loginForm" method="post" action="/user/Login.php">
@@ -20,7 +25,7 @@
 
         addModuleDescriptor("alert-area");  ?>
 
-        <img class="mb-4" src="/assets/logo.png" alt="" width="72" height="72">
+        <img class="mb-4" src="<?= getLogo(); ?>" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal"><?php echo (getBankName()); ?> online</h1>
         <?php addModuleDescriptor("header"); ?>
 
