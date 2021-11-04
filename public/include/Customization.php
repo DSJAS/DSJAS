@@ -136,3 +136,12 @@ function getCurrentBankURL()
     $conf = new Configuration(true, false, false, false);
     return $conf->getKey(ID_GLOBAL_CONFIG, "customization", "bank_domain");
 }
+
+function getCurrentBankIcon()
+{
+    if (file_exists(FAVICON)) {
+        return "/favicon";
+    } else {
+        return "/assets/logo.png";
+    }
+}

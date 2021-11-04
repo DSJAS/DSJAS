@@ -86,6 +86,10 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
         dsjas_alert("Success", "Settings saved successfully", "success", true);
     } else if (isset($_GET["error"])) {
         dsjas_alert("Error saving settings", "There was an error while attempting to save your settings. The changes have been lost", "danger", true);
+    } else if (isset($_GET["iconError"])) {
+        dsjas_alert("Favicon update failed", "An error occurred updating the favicon. Is it a valid image file?", "danger", true);
+    } else if (isset($_GET["iconSuccess"])) {
+        dsjas_alert("Favicon update succeeded", "Favicon updated successfully. You may need to reload with cache disabled to see the result", "success", true);
     } else if (isset($_GET["factorySuccess"])) {
         dsjas_alert("Factory reset complete", "The site has been reset to factory default settings", "info", true);
     }
@@ -145,7 +149,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
         </div>
 
         <div class="card-body">
-            <form>
+            <form class="border-bottom">
                 <div class="form-group">
                     <label for="bankName"><strong>Bank name:</strong></label>
                     <input class="form-control" type="text" id="bankName" value="<?php echo (getCurrentBankName()); ?>">
@@ -156,6 +160,42 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
                     <label for="bankURL"><strong>Bank URL:</strong></label>
                     <input class="form-control" type="text" id="bankURL" value="<?php echo (getCurrentBankURL()); ?>">
                     <small class="form-text text-muted">This is the URL that you will access the bank through in your web browser</small>
+                </div>
+            </form>
+
+            <form class="container-fluid" action="/admin/settings/icon-update.php" method="POST" enctype="multipart/form-data">
+                <div class="row border-bottom mb-3">
+                    <label><strong>Bank icon:</strong></label>
+                </div>
+
+                <div class="row">
+                    <div class="col col-2 border-right">
+
+                        <p>Current icon:</p>
+                        <img src="<?= getCurrentBankIcon() ?>" width="150" height="100" />
+                    </div>
+
+                    <div class="col">
+                        <div class="custom-file">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="44040192">
+                            <input type="file" class="custom-file-input" id="iconFileInput" name="icon" accept="image/*" required>
+                            <label class="custom-file-label" for="iconFile">Choose file</label>
+                        </div>
+
+
+                        <small class="form-text text-muted">
+                            This icon will be displayed on tabs in the browser and in bookmark bars.
+                        </small>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary mt-2">
+                                Save favicon
+                            </button>
+                            <a href="/admin/settings/icon-delete.php" type="button" class="btn btn-danger mt-2">
+                                Clear favicon
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
