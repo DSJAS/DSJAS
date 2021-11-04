@@ -172,7 +172,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
                     <div class="col col-2 border-right">
 
                         <p>Current icon:</p>
-                        <img src="<?= getCurrentBankIcon() ?>" width="200" height="200" />
+                        <img src="<?= getCurrentBankIcon() ?>" style="width: 100%;" />
                     </div>
 
                     <div class="col">
