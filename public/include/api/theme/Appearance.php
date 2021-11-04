@@ -32,6 +32,8 @@
 
 */
 
+include_once ABSPATH . INC . "Customization.php";
+
 function setTitle($title)
 {
     echo ("<title>" . $title . "</title>");
@@ -80,4 +82,9 @@ function getRawThemeContent($scriptName, $themeRelativeLocation = "/")
     $path .= $scriptName;
 
     return $path;
+}
+
+function getLogo()
+{
+    return getCurrentBankIcon();
 }
