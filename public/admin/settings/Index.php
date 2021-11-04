@@ -172,7 +172,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
                     <div class="col col-2 border-right">
 
                         <p>Current icon:</p>
-                        <img src="<?= getCurrentBankIcon() ?>" width="150" height="100" />
+                        <img src="<?= getCurrentBankIcon() ?>" width="200" height="200" />
                     </div>
 
                     <div class="col">
@@ -185,6 +185,7 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
 
                         <small class="form-text text-muted">
                             This icon will be displayed on tabs in the browser and in bookmark bars.
+                            It should be a square aspect ratio and scale well to low sizes.
                         </small>
 
                         <div class="btn-group">
