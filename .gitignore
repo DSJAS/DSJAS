@@ -14,7 +14,7 @@ public/uploads/*
 !public/uploads/.htaccess
 
 # Ignrore custom favicon
-public/favicon.ico
+public/favicon
 
 # Ignore verification token, if present
 setuptoken.txt
