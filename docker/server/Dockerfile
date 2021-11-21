@@ -15,6 +15,7 @@ RUN docker-php-ext-install zip
 # Copy config files
 COPY ./docker/server/httpd.conf /etc/apache2/httpd.conf
 COPY ./docker/server/mod_rewrite.load /etc/apache2/mods-enabled/mod_rewrite.load
+COPY ./docker/server/mod_headers.load /etc/apache2/mods-enabled/mod_headers.load
 COPY ./docker/server/vhost-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./docker/server/dir-index.conf /etc/apache2/mods/enabled/dir.conf
 
