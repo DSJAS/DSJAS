@@ -19,7 +19,7 @@ Footer component file
         <div class="footer-links">
             <a href="/" class="btn btn-primary">Home</a>
             <a href="/support/Support" class="btn btn-secondary">Help</a>
-            <a href="/support/Contact" class="btn btn-warning">Contact support</a>
+            <a href="/support/Contact" class="btn btn-warning text-white">Contact support</a>
         </div>
     </div>
 </div>
