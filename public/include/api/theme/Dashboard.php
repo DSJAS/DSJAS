@@ -121,6 +121,14 @@ function isPricePositive($priceString, $regionalCurrencySymbol = "$")
     }
 }
 
+function formatCurrency($balance)
+{
+    $fmt = new NumberFormatter("EN_US", NumberFormatter::CURRENCY);
+    $friendly = $fmt->formatCurrency((float)$balance, "USD");
+
+    return $friendly;
+}
+
 function getDisplayBalance($accountID)
 {
     $query = new PreparedStatement("SELECT `account_balance` FROM `accounts` WHERE `account_identifier` = ?", [$accountID], "i");
@@ -128,8 +136,9 @@ function getDisplayBalance($accountID)
     $GLOBALS["THEME_GLOBALS"]["shared_db"]->query();
 
     $balanceValue = $query->result[0]["account_balance"];
+    $friendly = formatCurrency((float)$balanceValue);
 
-    return "$" . $balanceValue;
+    return $friendly;
 }
 
 function getDisplayAccountNumber($accountID)
