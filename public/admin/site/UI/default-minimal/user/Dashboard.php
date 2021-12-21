@@ -71,9 +71,9 @@ function getTheme()
                             <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
                             <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
                             <?php if (isPricePositive($account["account_balance"])) { ?>
-                                <td class="text-success">$<?php echo ($account["account_balance"]); ?></td>
+                                <td class="text-success"><?php echo (formatCurrency($account["account_balance"])); ?></td>
                             <?php } else { ?>
-                                <td class="text-danger">$<?php echo ($account["account_balance"]); ?></td>
+                                <td class="text-danger"><?php echo (formatCurrency($account["account_balance"])); ?></td>
                             <?php } ?>
                             <td><a href="/user/Transfer.php">Transfer</a></td>
                         </tr>
@@ -113,9 +113,9 @@ function getTheme()
                             <td><?php echo ($info["transaction_description"]); ?></th>
                             <td><?php echo ($info["transaction_type"]); ?></th>
                                 <?php if (isPricePositive($info["transaction_amount"])) { ?>
-                            <td class="text-success">$<?php echo ($info["transaction_amount"]); ?></td>
+                            <td class="text-success"><?php echo (formatCurrency($info["transaction_amount"])); ?></td>
                         <?php } else { ?>
-                            <td class="text-danger">$<?php echo ($info["transaction_amount"]); ?></td>
+                            <td class="text-danger"><?php echo (formatCurrency($info["transaction_amount"])); ?></td>
                         <?php } ?>
                         </tr>
                     <?php } ?>

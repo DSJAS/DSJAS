@@ -49,9 +49,9 @@ function getTheme()
     foreach ($accounts as $account) {
         $balance = $account["account_balance"];
         if (isPricePositive($balance)) {
-            $overallBalance += $account["account_balance"];
+            $overallBalance += formatCurrency($account["account_balance"]);
         } else {
-            $overallDebt += abs($account["account_balance"]);
+            $overallDebt += formatCurrency(abs($account["account_balance"]));
         }
     }
 
@@ -114,9 +114,9 @@ function getTheme()
                             <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
                             <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
                             <?php if (isPricePositive($account["account_balance"])) { ?>
-                                <td class="text-success">$<?php echo ($account["account_balance"]); ?></td>
+                                <td class="text-success">$<?php echo (formatCurrency($account["account_balance"])); ?></td>
                             <?php } else { ?>
-                                <td class="text-danger">$<?php echo ($account["account_balance"]); ?></td>
+                                <td class="text-danger">$<?php echo (formatCurrency($account["account_balance"])); ?></td>
                             <?php } ?>
                         </tr>
                     <?php }

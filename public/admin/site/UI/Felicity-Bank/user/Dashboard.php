@@ -76,8 +76,8 @@ function getTheme()
                                     <tr>
                                         <td><?php echo $account["account_name"] ?></td>
                                         <td><?php echo censorAccountNumber($account["account_number"]); ?></td>
-                                        <td>$<?php echo $account["account_balance"] ?></td>
-                                        <td>$<?php echo $account["account_balance"] ?></td>
+                                        <td><?php echo formatCurrency($account["account_balance"]) ?></td>
+                                        <td><?php echo formatCurrency($account["account_balance"]) ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -144,9 +144,9 @@ function getTheme()
                                         <td><?php echo $transaction["transaction_description"] ?></td>
                                         <td>
                                             <?php if (isPricePositive($transaction["transaction_amount"])) { ?>
-                                                <span id="greenhighlight">$<?php echo $transaction["transaction_amount"] ?></span>
+                                                <span id="greenhighlight"><?php echo (formatCurrency($transaction["transaction_amount"])) ?></span>
                                             <?php } else { ?>
-                                                <span id="redhighlight">$<?php echo $transaction["transaction_amount"] ?></span>
+                                                <span id="redhighlight"><?php echo (formatCurrency($transaction["transaction_amount"])) ?></span>
                                             <?php } ?>
                                         </td>
                                     </tr>
