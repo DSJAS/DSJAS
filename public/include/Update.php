@@ -20,6 +20,7 @@ require ABSPATH . INC . "vendor/requests/library/Requests.php";
 
 
 define("LATEST_UPDATE_ENDPOINT", "https://dsjas.github.io/update/DSJAS/latest-");
+define("ARCHIVE_ENDPOINT", "https://github.com/DSJAS/DSJAS/archive");
 
 
 static $__version_information;
@@ -157,6 +158,10 @@ function isInsiderBand()
     return true;
 }
 
+function getArchiveLocation($major, $minor, $patch, $band)
+{
+    return sprintf("%s/%d.%d.%d-%s.tar.gz", ARCHIVE_ENDPOINT, $major, $minor, $patch, $band);
+}
 
 function loadVersionInfo()
 {
