@@ -142,6 +142,29 @@ function enableAccount($accountID)
     return $query->result;
 }
 
+function accountEnabled($accountID)
+{
+    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
+
+    $database = $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "SELECT `account_disabled` FROM `accounts` WHERE `account_identifier` = ?",
+        [$accountID],
+        "i"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    return $query->result[0]["account_disabled"];
+}
+
 function userOwnsAccount($accountID, $userID)
 {
     $configuration = parse_ini_file(ABSPATH . "/Config.ini");
