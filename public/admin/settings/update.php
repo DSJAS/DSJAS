@@ -90,7 +90,7 @@ if (isInsiderBand()) {
                     <hr>
 
                     <div class="btn-group">
-                        <a class="btn btn-primary" href="https://github.com/DSJAS/DSJAS/releases">Download update</a>
+                        <a class="btn btn-primary" href="/admin/settings/do-update.php">Update now</a>
                         <a class="btn btn-secondary" href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">More information</a>
                     </div>
             <?php } else { ?>
