@@ -59,13 +59,6 @@ if (isInsiderBand()) {
         </div>
     </div>
 
-    <div class="alert alert-warning">
-        <p><strong>Attention:</strong> DSJAS does not yet contain an automatic updater. This means that you will need
-            to download and install updates yourself. For more information and specific instructions, please see the
-            <a href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">upgrade guide</a>.
-        </p>
-    </div>
-
     <div class="card bg-light admin-panel">
         <div class="card-header d-flex justify-content-between">
             <h3>Update status</h3>
