@@ -41,16 +41,19 @@ if (isset($_GET["performTransfer"])) {
         die(getCSRFFailedError());
     }
 
+    // Data sent
     if (!isset($_GET["amount"]) || !isset($_GET["originAccount"]) || !isset($_GET["destinationAccount"])) {
         header("Location: /user/Transfer.php?transferError=1");
         die();
     }
 
+    // Data provided
     if ($_GET["amount"] == null || $_GET["originAccount"] == null || $_GET["destinationAccount"] == null) {
         header("Location: /user/Transfer.php?transferError=1");
         die();
     }
 
+    // No doig this on foreign accounts
     if (!userOwnsAccount($_GET["originAccount"], getCurrentUserId())) {
         header("Location: /user/Transfer.php?transferError=1");
         die();
