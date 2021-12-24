@@ -64,11 +64,11 @@ regenerateCSRF();
                     <?php foreach (getAllTransactions() as $transaction) { ?>
                         <tr>
                             <td><strong><?php echo $transaction["transaction_id"] ?></strong></td>
-                            <td><?php echo $transaction["transaction_date"] ?></td>
-                            <td><?php echo $transaction["transaction_description"] ?></td>
-                            <td><?php echo $transaction["origin_account_id"] ?></td>
-                            <td><?php echo $transaction["dest_account_id"] ?></td>
-                            <td><?php echo $transaction["transaction_amount"] ?></td>
+                            <td><?= $transaction["transaction_date"] ?></td>
+                            <td><?= $transaction["transaction_description"] ?></td>
+                            <td><?= getAccountNumber($transaction["origin_account_id"]); ?></td>
+                            <td><?= getAccountNumber($transaction["dest_account_id"]); ?></td>
+                            <td><?= $transaction["transaction_amount"] ?></td>
                             <td>
                                 <a class="text-danger" href="/admin/bank/reverseTransaction.php?id=<?php echo $transaction["transaction_id"] ?>&csrf=<?php echo getCSRFToken(); ?>">
                                     Reverse

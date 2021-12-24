@@ -104,7 +104,7 @@ if ($information->affectedRows < 1) {
                     </svg>
                 </span>
             </label>
-            <input class="form-control" type="text" value="<?php echo $info["origin_account_id"] ?>" id="sender" readonly>
+            <input class="form-control" type="text" value="<?= getAccountNumber($info["origin_account_id"]); ?>" id="sender" readonly>
         </div>
 
         <div class="form-group">
@@ -115,7 +115,7 @@ if ($information->affectedRows < 1) {
                     </svg>
                 </span>
             </label>
-            <input class="form-control" type="text" value="<?php echo $info["dest_account_id"] ?>" id="dest" readonly>
+            <input class="form-control" type="text" value="<?= getAccountNumber($info["dest_account_id"]); ?>" id="dest" readonly>
         </div>
 
         <hr>
