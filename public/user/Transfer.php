@@ -56,6 +56,13 @@ if (isset($_GET["performTransfer"])) {
         die();
     }
 
+    // No outbound transfers
+    if (!accountEnabled($_GET["destinationAccount"], getCurrentUserId())) {
+        header("Location: /user/Transfer.php?transferError=2");
+        die();
+    }
+
+    // No reverse/null transactions
     if ($_GET["amount"] < 0) {
         header("Location: /user/Transfer.php?transferError=1");
         die();
