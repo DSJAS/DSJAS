@@ -94,6 +94,24 @@ function getVersionString()
     return $ver;
 }
 
+function parseVersionString($version)
+{
+    $around = explode("-", $version);
+    $version = explode(".", $around[0]);
+
+    if (count($around) > 1) {
+        $band = $around[1];
+    } else {
+        $band = "";
+    }
+
+    if (count($version) != 3) {
+        $version = ["-1", "-1", "-1"];
+    }
+
+    return [$version[0], $version[1], $version[2], $band];
+}
+
 function getLatestAvailableVersion($band)
 {
     Requests::register_autoloader();
@@ -116,10 +134,16 @@ function isUpdateAvailable()
     $currentVersion = getVersionString();
     $latest = getLatestAvailableVersion(getUpdateBand());
 
-    $numericCurrent = (float) $currentVersion;
-    $numericLatest = (float) $latest;
+    $versions = parseVersionString($latest);
 
-    return $currentVersion < $latest;
+    if ((int)$versions[0] > (int)getMajorVersion()
+        || (int)$versions[1] > (int)getMinorVersion()
+        || (int)$versions[2] > (int)getPatchVersion()) {
+
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function isInsiderBand()
