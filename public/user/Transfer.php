@@ -60,7 +60,7 @@ if (isset($_GET["performTransfer"])) {
     }
 
     // No outbound transfers
-    if (!accountEnabled($_GET["destinationAccount"], getCurrentUserId())) {
+    if (!accountEnabled($_GET["destinationAccount"])) {
         header("Location: /user/Transfer.php?transferError=2");
         die();
     }
@@ -103,7 +103,6 @@ if (!isLoggedIn()) {
 
 
 regenerateCSRF();
-
 
 // Jump to main DSJAS load code
 dsjas(
