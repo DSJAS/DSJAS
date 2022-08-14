@@ -218,7 +218,7 @@ class Statistics
 
     function isStatisticSystemReserved($statisticName)
     {
-        $query = new SimpleStatement("SELECT `sys_data` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = $statisticName");
+        $query = new SimpleStatement("SELECT `sys_data` FROM `" . STATISTICS_TABLE . "` WHERE `stat_name` = '$statisticName'");
         $this->database->unsafeQuery($query);
 
         if (!$this->database->validateAction())
