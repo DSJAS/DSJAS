@@ -226,7 +226,12 @@ class DB
 
         $statement = $queryObject->getStatement();
 
-        $result = $this->sql->query($statement);
+        try {
+            $result = $this->sql->query($statement);
+        } catch (mysqli_sql_exception) {
+            $result = null;
+            return;
+        }
 
         if (!is_bool($result)) {
             while ($row = $result->fetch_assoc()) {
