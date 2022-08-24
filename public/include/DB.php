@@ -228,7 +228,7 @@ class DB
 
         try {
             $result = $this->sql->query($statement);
-        } catch (mysqli_sql_exception) {
+        } catch (mysqli_sql_exception $e) {
             $result = null;
             error_log("[DSJAS ERROR] Database statement failed to execute: $statement", 0);
             return;
