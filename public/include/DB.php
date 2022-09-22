@@ -122,6 +122,8 @@ class DB
         $this->username = $username;
         $this->password = $password;
 
+        /* NOTE: This should be a temporary measure until proper databse log handling has been fixed up */
+        mysqli_report(MYSQLI_REPORT_OFF);
         $this->sql = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
 
         $this->config = parse_ini_file(ABSPATH . "/Config.ini", true);
