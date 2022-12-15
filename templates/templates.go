@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // Store is a store for html.Templates.
@@ -26,13 +27,15 @@ func (s *Store) loadDir(dir string, root *template.Template) error {
 		return LoadError{fmt.Errorf("dir %s: %w", dir, err)}
 	}
 
-	newroot := root.New(dir)
+	end := filepath.Base(dir)
+	newroot := root.New(end)
 	for _, f := range d {
 		if f.IsDir() {
-			lerr := s.loadDir(f.Name(), newroot)
+			lerr := s.loadDir(filepath.Join(dir, f.Name()), newroot)
 			if lerr != nil {
 				errors = append(errors, lerr.(LoadError)...)
 			}
+
 			continue
 		}
 
