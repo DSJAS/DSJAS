@@ -81,8 +81,27 @@ func testRunFail(t *testing.T) {
 	}
 }
 
+func testRunNested(t *testing.T) {
+	s := Store{}
+	build := &strings.Builder{}
+	s.Load("testdata")
+
+	err := s.Run("1nest.gohtml", build, nil)
+	if err != nil {
+		t.Fatal("unexpected error from `1nest.gohtml`:", err)
+	}
+
+	if !strings.Contains(build.String(), "1.gohtml") {
+		t.Fatalf("`1nest.gohtml` did not contain sentinel value\nfile text:\n%s", build.String())
+	}
+	if !strings.Contains(build.String(), "1nest.gohtml") {
+		t.Fatalf("`1nest.gohtml` did not contain second sentinel value\nfile text:\n%s", build.String())
+	}
+}
+
 func TestRun(t *testing.T) {
 	t.Run("Run", testRun)
 	t.Run("RunDir", testRunDir)
 	t.Run("RunFail", testRunFail)
+	t.Run("RunNest", testRunNested)
 }
