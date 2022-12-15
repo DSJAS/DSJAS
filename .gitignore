@@ -1,36 +1,11 @@
+# Ignore the actual binary
+DSJAS
+
 # Ignore user configuration
-public/Config.ini
-public/Version.json
-
-public/admin/site/UI/config.ini
-public/admin/site/modules/config.ini
-public/admin/site/extensions/config.ini
-
-# Ignore admin data
-public/admin/data/AdminNotices.json
-
-# Ignore upload data
-public/uploads/*
-!public/uploads/.htaccess
-
-# Ignrore custom favicon
-public/favicon
+dsjas.json
 
 # Ignore verification token, if present
 setuptoken.txt
 
 # Ignore the private directory
 private/*
-
-# Ignore developer use, test files
-public/Debug.php
-
-# Ignore the dist directory
-dist/*
-
-# Composer
-composer.phar
-/vendor/
-
-# Just in case
-composer-setup.php
