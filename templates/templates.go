@@ -2,11 +2,19 @@
 package templates
 
 import (
+	"errors"
 	"fmt"
 	"html/template"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
+)
+
+// Store retrieval and execution errors.
+var (
+	ErrNotFound       = errors.New("no such template or subtemplate")
+	ErrTemplateFailed = errors.New("template failed to execute")
 )
 
 // Store is a store for html.Templates.
@@ -60,6 +68,31 @@ func (s *Store) Load(dir string) error {
 	s.base = dir
 
 	return s.loadDir("/", s.root)
+}
+
+// Store runs the template at path, which must be rooted at the loaded
+// directory. Path may or may not begin with a forward slash.
+func (s *Store) Run(path string, w io.Writer, data interface{}) error {
+	segments := strings.Split(path, "/")
+	walk := s.root
+	for _, p := range segments {
+		// Ignore any possible leading slashes
+		if p == "" {
+			continue
+		}
+
+		walk = walk.Lookup(p)
+		if walk == nil {
+			return fmt.Errorf("run %s: %s: %w", path, p, ErrNotFound)
+		}
+	}
+
+	err := walk.Execute(w, data)
+	if err != nil {
+		return fmt.Errorf("run %s: %w: %s", path, ErrTemplateFailed, err.Error())
+	}
+
+	return nil
 }
 
 // LoadError is the collection of errors caused by a call to Store.Load. If the
