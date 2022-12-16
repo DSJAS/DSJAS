@@ -8,7 +8,9 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
+	"os/exec"
 	"os/signal"
 	"strings"
 	"time"
@@ -144,6 +146,24 @@ func main() {
 		}
 	}()
 	defer saveconf(Config)
+
+	Config.Mut.RLock()
+	if *RunInstaller && install.Required(Config) {
+		browser := os.Getenv("BROWSER")
+		if browser == "" {
+			browser = "firefox"
+		}
+
+		url := url.URL{
+			Scheme: "http",
+			Host:   *ListenAddr,
+			Path:   "/admin/install/welcome",
+		}
+		exec.Command(browser, url.String()).Start()
+
+		log.Println("Opening browser", browser, "to installer")
+	}
+	Config.Mut.RUnlock()
 
 	select {
 	case <-sigchan:
