@@ -5,4 +5,4 @@ do
 	cd ..
 done
 
-grep -rl "<?php" public/ && exit 1
+grep -rl "<?php" templates/ && exit 1
