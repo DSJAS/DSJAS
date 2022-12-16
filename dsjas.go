@@ -10,9 +10,11 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"time"
 
 	"github.com/DSJAS/DSJAS/config"
+	"github.com/DSJAS/DSJAS/install"
 	"github.com/DSJAS/DSJAS/templates"
 	"github.com/gorilla/mux"
 )
@@ -39,10 +41,6 @@ var (
 // should instead be used.
 func saveconf(cfg *config.Config) {
 	if !*ConfigNoSave {
-		if cfg == nil {
-			return
-		}
-
 		err := config.Store(cfg, *ConfigPath)
 		if err != nil {
 			log.Println("WARNING: Failed to save configuration:", err)
@@ -75,12 +73,42 @@ func initroutes(m *mux.Router) {
 			s.Handle("/", http.RedirectHandler("/admin/install/welcome", http.StatusFound))
 		}
 	}
+
+	// Global fallback for GET requests, used for permalinking
+	m.Path("/").Methods("GET").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.Error(w, "Not found", http.StatusNotFound)
+	})
+
+	// Fallback for any other request type with an error
+	m.Path("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.Error(w, "Wrong request method", http.StatusMethodNotAllowed)
+	})
 }
 
 // logger is middleware which logs incoming requests.
 func logger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("[%s] %s '%s'", r.RemoteAddr, r.Method, r.RequestURI)
+		next.ServeHTTP(w, r)
+	})
+}
+
+// installRedirector is middleware which redirects an uninstalled site to the
+// installer. This must always be *last* in the middleware chain.
+func installRedirector(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasPrefix(r.URL.Path, "/admin/install/") {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		Config.Mut.RLock()
+		defer Config.Mut.RUnlock()
+
+		if install.Required(Config) {
+			http.Redirect(w, r, "/admin/install/", http.StatusFound)
+			return
+		}
 		next.ServeHTTP(w, r)
 	})
 }
@@ -101,7 +129,7 @@ func main() {
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
-	m.Use(logger)
+	m.Use(logger, installRedirector)
 	if err = inittemplates(); err != nil {
 		log.Panic(err)
 	}
