@@ -4,16 +4,17 @@ import (
 	"encoding/json"
 	"io"
 	"os"
+	"sync"
 )
 
 // Load unmarshals the DSJAS config from the path provided. If the config is
-// not found at path, no error is returned, but the pointer to the config
-// struct is nil. This is later used to detect and set up the installer.
+// not found at path, no error is returned and the config is returned as the
+// blank default.
 func Load(path string) (*Config, error) {
 	f, err := os.Open(path)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return nil, nil
+			return &Config{Mut: new(sync.RWMutex)}, nil
 		}
 		return nil, err
 	}
@@ -21,7 +22,9 @@ func Load(path string) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	cfg := new(Config)
+	cfg := &Config{
+		Mut: new(sync.RWMutex),
+	}
 	err = json.Unmarshal(buf, cfg)
 	if err != nil {
 		return cfg, err
