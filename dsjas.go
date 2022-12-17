@@ -22,7 +22,6 @@ import (
 )
 
 // Command line flags.
-
 var (
 	ListenAddr     = flag.String("listen", ":80", "The listen address for the server")
 	ExtensionsPath = flag.String("plugins", "plugins", "The relative or absolute path to the plugins directory")
