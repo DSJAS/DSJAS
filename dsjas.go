@@ -115,8 +115,9 @@ func installRedirector(next http.Handler) http.Handler {
 }
 
 func main() {
-	var err error
+	log.Printf("DSJAS v%d.%d.%d starting...", VersionMajor, VersionMinor, VersionPatch)
 
+	var err error
 	flag.Parse()
 	Config, err = config.Load(*ConfigPath)
 	if err != nil {
