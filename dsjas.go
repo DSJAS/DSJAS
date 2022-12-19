@@ -25,7 +25,7 @@ import (
 
 // Command line flags.
 var (
-	ListenAddr     = flag.String("listen", ":80", "The listen address for the server")
+	ListenAddr     = flag.String("listen", "0.0.0.0:80", "The listen address for the server")
 	ExtensionsPath = flag.String("plugins", "plugins", "The relative or absolute path to the plugins directory")
 	ConfigPath     = flag.String("config", "dsjas.json", "The relative or absolute path to the DSJAS configuration file")
 	ConfigNoSave   = flag.Bool("nosave", false, "If true, DSJAS will not save your configuration on server shutdown")
@@ -35,6 +35,7 @@ var (
 // DSJAS Global State.
 var (
 	Config       *config.Config
+	InstallState install.State
 	Database     *sql.DB
 	// Templates for frontend use.
 	AdminTemplates *templates.Store
@@ -107,7 +108,8 @@ func logger(next http.Handler) http.Handler {
 // installer. This must always be *last* in the middleware chain.
 func installRedirector(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if strings.HasPrefix(r.URL.Path, "/admin/install/") {
+		if strings.HasPrefix(r.URL.Path, "/admin/install") ||
+			strings.HasPrefix(r.URL.Path, "/assets/") {
 			next.ServeHTTP(w, r)
 			return
 		}
@@ -115,8 +117,9 @@ func installRedirector(next http.Handler) http.Handler {
 		Config.Mut.RLock()
 		defer Config.Mut.RUnlock()
 
-		if install.Required(Config) {
-			http.Redirect(w, r, "/admin/install/", http.StatusFound)
+		expect := InstallState.URL()
+		if install.Required(Config) && expect != r.URL.Path {
+			http.Redirect(w, r, expect, http.StatusFound)
 			return
 		}
 		next.ServeHTTP(w, r)
@@ -199,6 +202,8 @@ func main() {
 		log.Println("Opening browser", browser, "to installer")
 	}
 	Config.Mut.RUnlock()
+
+	log.Println("Server listening on", *ListenAddr)
 
 	select {
 	case <-sigchan:

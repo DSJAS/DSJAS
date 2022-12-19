@@ -4,6 +4,8 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+
+	"github.com/DSJAS/DSJAS/install"
 )
 
 const (
@@ -11,10 +13,13 @@ const (
 	SetupTokenLength = 12
 )
 
-func regenInstallToken() error {
-	f, err := os.Create(SetupTokenFile)
-	if err != nil {
-		return err
+// redirectStage redirects the user to the correct stage for their install
+// state. Returns true if a redirect was ordered. The request should terminate
+// as a result.
+func redirectStage(w http.ResponseWriter, r *http.Request, expect uint8) bool {
+	if InstallState.Done(expect) || !InstallState.Sufficient(expect) {
+		http.Redirect(w, r, InstallState.URL(), http.StatusFound)
+		return true
 	}
 
 	out := [SetupTokenLength]byte{}
@@ -32,6 +37,11 @@ func regenInstallToken() error {
 }
 
 func handleInstallWelcome(w http.ResponseWriter, r *http.Request) {
+	// To use this page, we must be in StateNone
+	if redirectStage(w, r, install.StateNone) {
+		return
+	}
+
 	cwd, err := os.Getwd()
 	if err != nil {
 		http.Error(w, "Installer error: Could not determine server root", 500)
