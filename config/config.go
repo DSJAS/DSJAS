@@ -1,6 +1,9 @@
 package config
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 // Config is the JSON-decodable representation of the user's configuration on
 // disk. It contains the settings for the core, as well as extensions and
@@ -26,7 +29,8 @@ type Config struct {
 // Databse contains the required configuration to connect to and use an SQL
 // database.
 type Database struct {
-	// The hostname of the site, in the format host:port
+	// The hostname of the databse, with no trailing port or leading
+	// connection type.
 	Hostname string `json:"hostname"`
 	// The port on which to connect to the server. If zero, 3306 is used.
 	Port int `json:"port"`
@@ -37,4 +41,19 @@ type Database struct {
 	Username string `json:"username"`
 	// The password for the user with `Username` configured above.
 	Password string `json:"password"`
+}
+
+// Addr correctly formats an address for use in the database dialer.
+func (d Database) Addr() string {
+	port := 3306
+	if d.Port != 0 {
+		port = d.Port
+	}
+
+	host := "127.0.0.1"
+	if d.Hostname != "" {
+		host = d.Hostname
+	}
+
+	return fmt.Sprintf("%s:%d", host, port)
 }
