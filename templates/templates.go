@@ -70,7 +70,7 @@ func (s *Store) Load(dir string) error {
 	return s.loadDir("/", s.root)
 }
 
-// Store runs the template at path, which must be rooted at the loaded
+// Run executes the template at path, which must be rooted at the loaded
 // directory. Path may or may not begin with a forward slash.
 func (s *Store) Run(path string, w io.Writer, data interface{}) error {
 	segments := strings.Split(path, "/")
@@ -93,6 +93,15 @@ func (s *Store) Run(path string, w io.Writer, data interface{}) error {
 	}
 
 	return nil
+}
+
+// MustRun calls (Store*).Run with the provided arguments and panics if an
+// error was returned.
+func (s *Store) MustRun(path string, w io.Writer, data interface{}) {
+	err := s.Run(path, w, data)
+	if err != nil {
+		panic(err)
+	}
 }
 
 // LoadError is the collection of errors caused by a call to Store.Load. If the
