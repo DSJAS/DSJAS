@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"database/sql"
 	"errors"
 	"flag"
 	"log"
@@ -18,6 +19,7 @@ import (
 	"github.com/DSJAS/DSJAS/config"
 	"github.com/DSJAS/DSJAS/install"
 	"github.com/DSJAS/DSJAS/templates"
+	"github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
 
@@ -32,10 +34,17 @@ var (
 
 // DSJAS Global State.
 var (
-	Config *config.Config
+	Config       *config.Config
+	Database     *sql.DB
 	// Templates for frontend use.
 	AdminTemplates *templates.Store
 )
+
+// discardLogger is used to tell mysql to shut up about errors we can handle
+// manually.
+type discardLogger struct{}
+
+func (d *discardLogger) Print(v ...any) {}
 
 // saveconf is the deferred function called to save the configuration. This
 // shouldn't really be called manually outside of this defer; config.Store
@@ -121,7 +130,33 @@ func main() {
 	flag.Parse()
 	Config, err = config.Load(*ConfigPath)
 	if err != nil {
-		log.Fatal("config load failed:", err)
+		log.Fatalln("config load failed:", err)
+	}
+
+	dbcfg := mysql.Config{
+		Net:                  "tcp",
+		Addr:                 Config.Database.Addr(),
+		User:                 Config.Database.Username,
+		Passwd:               Config.Database.Password,
+		ReadTimeout:          15 * time.Second,
+		WriteTimeout:         15 * time.Second,
+		RejectReadOnly:       true,
+		AllowNativePasswords: true,
+		CheckConnLiveness:    true,
+	}
+	mysql.SetLogger(&discardLogger{})
+
+	Database, err = sql.Open("mysql", dbcfg.FormatDSN())
+	if err != nil {
+		log.Fatalln("invalid database configuration:", err)
+	}
+	err = Database.Ping()
+	if err != nil {
+		log.Println("database connection failed:", err, "")
+		log.Println("Database failed; triggering installer")
+		Config.Installed = false
+	} else {
+		defer Database.Close()
 	}
 
 	m := mux.NewRouter()
