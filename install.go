@@ -5,12 +5,13 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/DSJAS/DSJAS/frontend"
 	"github.com/DSJAS/DSJAS/install"
 )
 
 const (
 	SetupTokenFile   = "setuptoken.txt"
-	SetupTokenLength = 12
+	SetupTokenLength = 25
 )
 
 // redirectStage redirects the user to the correct stage for their install
@@ -22,13 +23,43 @@ func redirectStage(w http.ResponseWriter, r *http.Request, expect uint8) bool {
 		return true
 	}
 
+	return false
+}
+
+func GenInstallToken() [SetupTokenLength]byte {
 	out := [SetupTokenLength]byte{}
 	for i := 0; i < SetupTokenLength; i++ {
-		nc := rand.Int31n('z' - 'a')
-		c := byte('a' + nc)
+		class := rand.Intn(3)
+		c := byte(0)
+		switch class {
+		case 0: // number
+			nc := rand.Int31n('9' - '0')
+			c = byte('0' + nc)
+		case 1: // lower case
+			nc := rand.Int31n('z' - 'a')
+			c = byte('a' + nc)
+		case 2: // upper case
+			nc := rand.Int31n('Z' - 'A')
+			c = byte('A' + nc)
+		default:
+			panic("install token: invalid random character class")
+		}
+
 		out[i] = c
 	}
-	_, err = f.Write(out[:])
+
+	return out
+}
+
+func regenInstallToken() error {
+	f, err := os.Create(SetupTokenFile)
+	if err != nil {
+		return err
+	}
+
+	tok := GenInstallToken()
+
+	_, err = f.Write(tok[:])
 	if err != nil {
 		return err
 	}
@@ -56,30 +87,64 @@ func handleInstallWelcome(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Installer error: Could not write setup token: "+err.Error(), 500)
 			return
 		}
-	}
-	// If this is the first time, don't bother
-	if f, err := os.Open(SetupTokenFile); err != nil {
-		err := regenInstallToken()
-		if err != nil {
-			http.Error(w, "Installer error: Could not write setup token: "+err.Error(), 500)
-			return
-		}
 	} else {
-		f.Close()
+		if f, err := os.Open(SetupTokenFile); err != nil {
+			err := regenInstallToken()
+			if err != nil {
+				http.Error(w, "Installer error: Could not write setup token: "+err.Error(), 500)
+				return
+			}
+		} else {
+			f.Close()
+		}
 	}
 
-	err = AdminTemplates.Run("install/welcome.gohtml", w, struct {
+	AdminTemplates.MustRun("install/welcome.gohtml", w, struct {
 		Regenerated bool
 		ServerRoot  string
 	}{
 		Regenerated: regen,
 		ServerRoot:  cwd,
 	})
-	if err != nil {
-		w.Write([]byte(err.Error()))
-	}
 }
 
 func handleInstallVerify(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("verification"))
+	if redirectStage(w, r, install.StateNone) {
+		return
+	}
+
+	var uerr *frontend.Error
+
+	tokf, err := os.Open(SetupTokenFile)
+	if err != nil {
+		http.Error(w, "Installer error: Setup token file could not be accessed: "+err.Error(), 500)
+		return
+	}
+	defer tokf.Close()
+
+	btok := make([]byte, SetupTokenLength)
+	l, err := tokf.Read(btok)
+	if err != nil {
+		http.Error(w, "Installer error: Setup token could not be read", 500)
+		return
+	}
+	btok = btok[:l]
+	tok := string(btok)
+
+	if check := r.URL.Query().Get("verify"); check != "" {
+		if tok == check {
+			InstallState.Next()
+			http.Redirect(w, r, "/admin/install/database", http.StatusFound)
+			return
+		}
+
+		uerr = &frontend.Error{
+			Title: "Invalid token",
+			Body:  "The provided verification token was not valid. Please check it is correct and try again.",
+		}
+	}
+
+	AdminTemplates.MustRun("install/verify.gohtml", w, struct {
+		Err *frontend.Error
+	}{uerr})
 }
