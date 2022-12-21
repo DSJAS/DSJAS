@@ -137,6 +137,8 @@ func handleInstallVerify(w http.ResponseWriter, r *http.Request) {
 
 	if check := r.URL.Query().Get("verify"); check != "" {
 		if tok == check {
+			os.Remove(SetupTokenFile)
+
 			InstallState.Next()
 			http.Redirect(w, r, "/admin/install/database", http.StatusFound)
 			return
@@ -182,6 +184,13 @@ func handleDatabaseConfig(w http.ResponseWriter, r *http.Request) {
 	err := json.Unmarshal([]byte(postdat), &Config.Database)
 	if err != nil {
 		http.Error(w, "Expected `config` header to be correctly JSON encoded", 400)
+		return
+	}
+
+	err = install.Tables(Config.Database)
+	if err != nil {
+		http.Error(w, "Error during table setups: "+err.Error(), 400)
+		return
 	}
 
 	InstallState.Next()
@@ -222,6 +231,8 @@ func handleDatabaseTest(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, "Invalid config (error: "+err.Error()+")", 400)
 	}
+	defer db.Close()
+
 	err = db.Ping()
 	if err != nil {
 		http.Error(w, "Database did not respond correctly to PING (error: "+err.Error()+")", 400)

@@ -36,6 +36,14 @@ function confirmAndSetup() {
 	req = new XMLHttpRequest();
 	req.onreadystatechange = function() {
 		if (this.readyState == 4) {
+			// API returns non-200 on setup error
+			if (this.status != 200) {
+				console.log("Setup failed! Please provide the following in technical support requests:");
+				console.log(this.responseText);
+				$("#failure-msg").removeClass("d-none");
+				return;
+			}
+
 			console.log(
 				"Sent required information, redirecting to next stage. If everything worked out, we should get to final setup."
 			);
