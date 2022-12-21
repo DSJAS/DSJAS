@@ -8,6 +8,7 @@ import (
 	"errors"
 	"flag"
 	"log"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"os"
@@ -131,6 +132,7 @@ func installRedirector(next http.Handler) http.Handler {
 
 func main() {
 	log.Printf("DSJAS v%d.%d.%d starting...", VersionMajor, VersionMinor, VersionPatch)
+	rand.Seed(time.Now().UnixNano())
 
 	var err error
 	flag.Parse()
