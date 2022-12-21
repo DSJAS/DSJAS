@@ -79,6 +79,9 @@ func initroutes(m *mux.Router) {
 		{
 			s := s.PathPrefix("/install/").Subrouter()
 
+			s.HandleFunc("/dbtest", handleDatabaseTest).Methods("POST")
+			s.HandleFunc("/database", handleDatabaseSetup).Methods("GET")
+			s.HandleFunc("/database", handleDatabaseConfig).Methods("POST")
 			s.HandleFunc("/verify", handleInstallVerify)
 			s.HandleFunc("/welcome", handleInstallWelcome)
 			s.Handle("/", http.RedirectHandler("/admin/install/welcome", http.StatusFound))

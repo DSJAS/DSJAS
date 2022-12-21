@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		{{template "head.gohtml"}}
+
+		<script src="/assets/js/install.js"></script>
+	</head>
+
+	<body class="container-fluid">
+		<div class="jumbotron-fluid text-center">
+			<img class="rounded-circle" src="/assets/scammer-logo.jpg" width=300 height=300>
+
+			<h1 class="display-4">Database setup</h1>
+			<p class="lead">DSJAS needs a working SQL database server to store certain information. This will need to be setup before continuing.</p>
+			<hr class="my-4 bg-dark">
+			<p>DSJAS requires a user with permissions to access its configured database from the localhost. Once you have set this up, return to the form and provide these details. DSJAS will then install itself to the given database.</p>
+		</div>
+
+		<form id="main-form" class="container text-right">
+			<div class="form-group row">
+				<label for="servername" class="col col-2">Server hostname:</label>
+				<input class="col col-8" type="text" placeholder="E.g: localhost" id="servername" style="margin-left: 30px">
+			</div>
+			<div class="form-group row">
+				<label for="dbname" class="col col-2">Database name:</label>
+				<input class="col col-8" type="text" placeholder="E.g DSJAS" id="dbname" style="margin-left: 30px">
+			</div>
+			<div class="form-group row">
+				<label for="username" class="col col-2">Username:</label>
+				<input class="col col-8" type="text" placeholder="Username" id="username" style="margin-left: 30px">
+			</div>
+			<div class="form-group row">
+				<label for="password" class="col col-2">Password:</label>
+				<input class="col col-8" type="password" placeholder="Password" id="password" style="margin-left: 30px">
+			</div>
+		</form>
+
+		<hr>
+		<span class="btn-group">
+			<a href="#" class="btn btn-primary" onclick="confirmAndSetup()">Confirm and setup
+				<span id="saveProgress" class="spinner-border spinner-border-sm text-white d-none"></span>
+			</a>
+			<a href="#" class="btn btn-secondary" onclick="testConfiguration()" id="configCheck" data-toggle="popover">Test configuration</a>
+		</span>
+	</body>
+
+</html>

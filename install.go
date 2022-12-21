@@ -1,12 +1,16 @@
 package main
 
 import (
+	"database/sql"
+	"encoding/json"
 	"math/rand"
 	"net/http"
 	"os"
 
+	"github.com/DSJAS/DSJAS/config"
 	"github.com/DSJAS/DSJAS/frontend"
 	"github.com/DSJAS/DSJAS/install"
+	"github.com/go-sql-driver/mysql"
 )
 
 const (
@@ -147,4 +151,79 @@ func handleInstallVerify(w http.ResponseWriter, r *http.Request) {
 	AdminTemplates.MustRun("install/verify.gohtml", w, struct {
 		Err *frontend.Error
 	}{uerr})
+}
+
+func handleDatabaseSetup(w http.ResponseWriter, r *http.Request) {
+	if redirectStage(w, r, install.StateVerified) {
+		return
+	}
+
+	AdminTemplates.MustRun("install/database.gohtml", w, struct {
+		Err *frontend.Error
+	}{})
+}
+
+func handleDatabaseConfig(w http.ResponseWriter, r *http.Request) {
+	if !InstallState.Sufficient(install.StateVerified) {
+		http.Error(w, "Database cannot be configured outside of installer mode", 403)
+		return
+	}
+
+	r.ParseForm()
+	if !r.PostForm.Has("config") {
+		http.Error(w, "Expected JSON encoded `config` header", 400)
+		return
+	}
+
+	Config.Mut.Lock()
+	defer Config.Mut.Unlock()
+
+	postdat := r.PostForm.Get("config")
+	err := json.Unmarshal([]byte(postdat), &Config.Database)
+	if err != nil {
+		http.Error(w, "Expected `config` header to be correctly JSON encoded", 400)
+	}
+
+	InstallState.Next()
+	w.Write([]byte("database setup complete"))
+}
+
+func handleDatabaseTest(w http.ResponseWriter, r *http.Request) {
+	if !InstallState.Sufficient(install.StateVerified) {
+		http.Error(w, "Database tests are only allowed after verification", 403)
+		return
+	}
+
+	r.ParseForm()
+	if !r.PostForm.Has("test") {
+		http.Error(w, "Expected a JSON-encoded `test` header", 400)
+		return
+	}
+
+	testdat := config.Database{}
+	err := json.Unmarshal([]byte(r.PostForm.Get("test")), &testdat)
+	if err != nil {
+		http.Error(w, "Expected `test` header to be correctly JSON-encoded", 400)
+		return
+	}
+
+	dbc := mysql.Config{
+		Net:    "tcp",
+		Addr:   testdat.Addr(),
+		DBName: testdat.Database,
+		User:   testdat.Username,
+		Passwd: testdat.Password,
+
+		AllowNativePasswords: true,
+		RejectReadOnly:       true,
+	}
+
+	db, err := sql.Open("mysql", dbc.FormatDSN())
+	if err != nil {
+		http.Error(w, "Invalid config (error: "+err.Error()+")", 400)
+	}
+	err = db.Ping()
+	if err != nil {
+		http.Error(w, "Database did not respond correctly to PING (error: "+err.Error()+")", 400)
+	}
 }
