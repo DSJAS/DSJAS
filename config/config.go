@@ -35,7 +35,7 @@ type Database struct {
 	// The port on which to connect to the server. If zero, 3306 is used.
 	Port int `json:"port"`
 	// The name of the SQL databse to select on first connection.
-	Database string `json:"databse"`
+	Database string `json:"database"`
 	// The username of the authorized user with which to connect. Must have
 	// permissions to access the databse configured above.
 	Username string `json:"username"`
