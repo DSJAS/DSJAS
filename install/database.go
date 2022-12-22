@@ -131,13 +131,11 @@ func Tables(db config.Database) error {
 		return err
 	}
 	for _, table := range installTables {
-
 		_, err = tx.Query(table.FormatQuery())
 		if err != nil {
 			tx.Rollback()
 			return err
 		}
-
 	}
 
 	tx.Commit()
