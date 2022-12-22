@@ -80,6 +80,9 @@ func initroutes(m *mux.Router) {
 		{
 			s := s.PathPrefix("/install/").Subrouter()
 
+			s.HandleFunc("/success", handleInstallSuccess)
+			s.HandleFunc("/final", handleInstallFinalize).Methods("POST")
+			s.HandleFunc("/final", handleInstallFinal).Methods("GET")
 			s.HandleFunc("/dbtest", handleDatabaseTest).Methods("POST")
 			s.HandleFunc("/database", handleDatabaseSetup).Methods("GET")
 			s.HandleFunc("/database", handleDatabaseConfig).Methods("POST")

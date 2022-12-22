@@ -238,3 +238,25 @@ func handleDatabaseTest(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Database did not respond correctly to PING (error: "+err.Error()+")", 400)
 	}
 }
+
+func handleInstallFinal(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Query().Has("skip") {
+		Config.Mut.Lock()
+		defer Config.Mut.Unlock()
+
+		InstallState.Next()
+		Config.Installed = true
+
+		http.Redirect(w, r, "/admin/install/success", http.StatusFound)
+		return
+	}
+
+	AdminTemplates.MustRun("install/final.gohtml", w, nil)
+}
+
+func handleInstallFinalize(w http.ResponseWriter, r *http.Request) {
+}
+
+func handleInstallSuccess(w http.ResponseWriter, r *http.Request) {
+	AdminTemplates.MustRun("install/success.gohtml", w, nil)
+}
