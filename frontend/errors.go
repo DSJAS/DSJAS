@@ -11,6 +11,10 @@ type Error struct {
 	Title, Body string
 }
 
+func (e *Error) Error() string {
+	return fmt.Sprintf("%s: %s", e.Title, e.Body)
+}
+
 // HTML formats the error as HTML safe for output to the browser. Title and
 // Body need not be escaped; this is done automatically.
 func (e *Error) HTML() template.HTML {
