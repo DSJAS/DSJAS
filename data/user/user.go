@@ -13,7 +13,8 @@ type User struct {
 	Username string
 	Realname string
 	Email    string
-	// In hashed form
+	// If returned from the database, in hashed form.
+	// If being inserted or modified, in plaintext form.
 	Password string
 	Hint     string
 	// Translated to DATETIME under the hood

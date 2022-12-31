@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/DSJAS/DSJAS/config"
+	"github.com/DSJAS/DSJAS/data/user"
 	"github.com/DSJAS/DSJAS/frontend"
 	"github.com/DSJAS/DSJAS/install"
 	"github.com/go-sql-driver/mysql"
@@ -297,8 +298,20 @@ func handleInstallFinalize(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	admin := user.User{
+		Username: postdat.Username,
+		Email:    postdat.Email,
+		Password: postdat.Password,
+		Hint:     postdat.PasswordHint,
+	}
+	if err := admin.Create(); err != nil {
+		http.Error(w, "Admin user creation failed: "+err.Error(), 500)
+		return
+	}
+
 	Config.Mut.Lock()
 	defer Config.Mut.Unlock()
+
 	Config.Installed = true
 	Config.Name = postdat.BankName
 	Config.Domain = postdat.URL
