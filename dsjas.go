@@ -147,8 +147,10 @@ func main() {
 		Config.Installed = false
 	} else {
 		defer Database.Close()
-		if err := Database.InitPrepare(); err != nil {
-			log.Panic(err)
+		if Config.Installed {
+			if err := Database.InitPrepare(); err != nil {
+				log.Panic(err)
+			}
 		}
 	}
 
