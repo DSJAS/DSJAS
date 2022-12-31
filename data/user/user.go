@@ -4,6 +4,8 @@ package user
 import (
 	"database/sql"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
@@ -25,12 +27,17 @@ func (u *User) Create() error {
 		panic("create user: invalid usage: ID is not zero")
 	}
 
-	var err error
+	// TODO: Add algorithm to discover a good cost for use, rather than the default
+	hash, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+
 	var res sql.Result
 	if u.Hint != "" {
-		res, err = createUser.Exec(u.Username, u.Realname, u.Email)
+		res, err = createUser.Exec(u.Username, u.Realname, u.Email, string(hash))
 	} else {
-		res, err = createUserHint.Exec()
+		res, err = createUserHint.Exec(u.Username, u.Realname, u.Email, string(hash), u.Hint)
 	}
 
 	if err != nil {
