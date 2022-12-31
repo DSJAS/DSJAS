@@ -10,7 +10,6 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
-	"net/url"
 	"os"
 	"os/exec"
 	"os/signal"
@@ -200,12 +199,17 @@ func main() {
 			browser = "firefox"
 		}
 
-		url := url.URL{
-			Scheme: "http",
-			Host:   *ListenAddr,
-			Path:   "/admin/install/welcome",
+		addr := *ListenAddr
+		if *ListenAddr == "" || (*ListenAddr)[0] == ':' {
+			port := *ListenAddr
+			if port == "" {
+				port = ":80"
+			}
+			addr = "localhost" + port
 		}
-		exec.Command(browser, url.String()).Start()
+
+		url := "http://" + addr + "/admin/install/welcome"
+		exec.Command(browser, url).Start()
 
 		log.Println("Opening browser", browser, "to installer")
 	}
