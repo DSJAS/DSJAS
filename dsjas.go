@@ -4,7 +4,6 @@ package main
 
 import (
 	"context"
-	"database/sql"
 	"errors"
 	"flag"
 	"log"
@@ -17,9 +16,9 @@ import (
 	"time"
 
 	"github.com/DSJAS/DSJAS/config"
+	"github.com/DSJAS/DSJAS/data"
 	"github.com/DSJAS/DSJAS/install"
 	"github.com/DSJAS/DSJAS/templates"
-	"github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
 
@@ -36,16 +35,10 @@ var (
 var (
 	Config       *config.Config
 	InstallState install.State
-	Database     *sql.DB
+	Database     *data.Database
 	// Templates for frontend use.
 	AdminTemplates *templates.Store
 )
-
-// discardLogger is used to tell mysql to shut up about errors we can handle
-// manually.
-type discardLogger struct{}
-
-func (d *discardLogger) Print(v ...any) {}
 
 // saveconf is the deferred function called to save the configuration. This
 // shouldn't really be called manually outside of this defer; config.Store
@@ -143,30 +136,20 @@ func main() {
 		log.Fatalln("config load failed:", err)
 	}
 
-	dbcfg := mysql.Config{
-		Net:                  "tcp",
-		Addr:                 Config.Database.Addr(),
-		User:                 Config.Database.Username,
-		Passwd:               Config.Database.Password,
-		ReadTimeout:          15 * time.Second,
-		WriteTimeout:         15 * time.Second,
-		RejectReadOnly:       true,
-		AllowNativePasswords: true,
-		CheckConnLiveness:    true,
-	}
-	mysql.SetLogger(&discardLogger{})
+	Database, err = data.NewDatabase(Config.Database)
+	if err != nil {
+		if errors.Is(err, data.ErrBadConfig) {
+			log.Fatalln("invalid database configuration:", err)
+		}
 
-	Database, err = sql.Open("mysql", dbcfg.FormatDSN())
-	if err != nil {
-		log.Fatalln("invalid database configuration:", err)
-	}
-	err = Database.Ping()
-	if err != nil {
-		log.Println("database connection failed:", err, "")
-		log.Println("Database failed; triggering installer")
+		log.Println("database connection failed:", err)
+		log.Println("database failed; triggering installer")
 		Config.Installed = false
 	} else {
 		defer Database.Close()
+		if err := Database.InitPrepare(); err != nil {
+			log.Panic(err)
+		}
 	}
 
 	m := mux.NewRouter()
@@ -178,7 +161,7 @@ func main() {
 	}
 	m.Use(logger, installRedirector)
 	if err = inittemplates(); err != nil {
-		log.Panic(err)
+		log.Panicln("prepared statement failed to compile:", err)
 	}
 	initroutes(m)
 
