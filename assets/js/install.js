@@ -134,26 +134,26 @@ function cleanupTest() {
 
 /* ==================== [FINAL CONFIGURATION] =================== */
 function finalConfig() {
-	$("#saveProgress").removeClass("d-none");
+	showSpinner();
 	$("#setupError").addClass("d-none");
 
 	let form = {
 		 username: $("#usernameInput").val(),
 		 email: $("#emailInput").val(),
 		 password: $("#passwordInput").val(),
-		 hint: $("#passwordHintInput").val(),
+		 password_hint: $("#passwordHintInput").val(),
 
-		 bankName: $("#banknameInput").val(),
-		 url: $("#urlInput").val(),
-		 admin: $("#administrativeCheck").prop("checked") ? true : false,
+		 bank_name: $("#banknameInput").val(),
+		 bank_url: $("#urlInput").val(),
+		 disable_admin: $("#administrativeCheck").prop("checked") ? true : false,
 	}
 
-	if (form.bankName == "") {
-		form.bankName = "D.S Johnson & Son";
+	if (form.bank_name == "") {
+		form.bank_name = "D.S Johnson & Son";
 	}
 
-	if (form.url == "") {
-		form.url = "djohnson.financial";
+	if (form.bank_url == "") {
+		form.bank_url = "djohnson.financial";
 	}
 
 	const formdata = JSON.stringify(form);

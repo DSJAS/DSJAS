@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/DSJAS/DSJAS/config"
+	"github.com/DSJAS/DSJAS/data"
 	"github.com/DSJAS/DSJAS/data/user"
 	"github.com/DSJAS/DSJAS/frontend"
 	"github.com/DSJAS/DSJAS/install"
@@ -298,6 +299,19 @@ func handleInstallFinalize(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	Config.Mut.Lock()
+	defer Config.Mut.Unlock()
+
+	db, err := data.NewDatabase(Config.Database)
+	if err != nil {
+		http.Error(w, "Database re-connection failed", 500)
+		return
+	}
+	err = db.InitPrepare()
+	if err != nil {
+		panic(err)
+	}
+
 	admin := user.User{
 		Username: postdat.Username,
 		Email:    postdat.Email,
@@ -308,9 +322,6 @@ func handleInstallFinalize(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Admin user creation failed: "+err.Error(), 500)
 		return
 	}
-
-	Config.Mut.Lock()
-	defer Config.Mut.Unlock()
 
 	Config.Installed = true
 	Config.Name = postdat.BankName
