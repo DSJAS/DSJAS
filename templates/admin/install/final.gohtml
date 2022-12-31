@@ -3,6 +3,8 @@
 
 	<head>
 		{{template "head.gohtml"}}
+
+		<script src="/assets/js/install.js"></script>
 	</head>
 
 	<body class="container-fluid text-center">
@@ -23,20 +25,20 @@
 
 					<div class="text-left">
 						<div class="form-group">
-							<label for="usernameInput">Username</label>
+							<label for="username">Username</label>
 							<input type="username" class="form-control" name="username" placeholder="Username - required">
 						</div>
 						<div class="form-group">
-							<label for="emailInput">Email</label>
+							<label for="email">Email</label>
 							<input type="email" class="form-control" name="email" placeholder="Email">
 						</div>
 						<div class="form-group">
-							<label for="passwordInput">Password</label>
+							<label for="password">Password</label>
 							<input type="password" class="form-control" name="password" placeholder="Password - required">
 							<small id="passInfo" class="form-text text-muted">Please choose a strong password, at least 5 characters long and including a number</small>
 						</div>
 						<div class="form-group">
-							<label for="passwordHintInput">Password hint</label>
+							<label for="password_hint">Password hint</label>
 							<input type="text" class="form-control" name="password_hint" placeholder="Password hint">
 							<small id="hintInfo" class="form-text text-muted">If you ever forget your password, this will help you to remember. Don't make it too obvious. Remember, this should only make sense to you</small>
 						</div>
@@ -48,18 +50,18 @@
 
 					<div class="text-left">
 						<div class="form-group">
-							<label for="banknameInput">Bank name</label>
-							<input type="text" class="form-control" name="bankname" placeholder="D.S Johnson & Son">
+							<label for="bank_name">Bank name</label>
+							<input type="text" class="form-control" name="bank_name" placeholder="D.S Johnson & Son">
 							<small id="banknameHelp" class="form-text text-muted">This is the text that will be used in the title bar, the navigation menu etc.</small>
 						</div>
 						<div class="form-group">
 							<label for="urlInput">Bank URL</label>
-							<input type="text" class="form-control" name="bankinput" placeholder="https://djohnson.financial">
+							<input type="text" class="form-control" name="bank_url" placeholder="https://djohnson.financial">
 							<small id="urlHelp" class="form-text text-muted">This is the URL that you have set up the bank to be served on. If you have not done this, leave it blank</small>
 						</div>
 						<div class="form-group form-check">
 							<input type="checkbox" class="form-check-input" name="disable_admin">
-							<label class="form-check-label" for="administrativeCheck">Disable administrator dashboard (not recommended)</label>
+							<label class="form-check-label" for="disable_admin">Disable administrator dashboard (not recommended)</label>
 						</div>
 					</div>
 				</div>
@@ -69,7 +71,7 @@
 
 			<div class="row">
 				<div class="col">
-					<button type="submit" class="btn btn-primary form-button-fill">
+					<button type="button" onclick="finalConfig()" class="btn btn-primary form-button-fill">
 						Confirm and Complete Setup
 						<span id="saveProgress" class="spinner-border spinner-border-sm d-none"></span>
 					</button>
@@ -80,6 +82,8 @@
 					<a href="/admin/install/final?skip">Skip this step</a>
 				</div>
 			</div>
+
+			<p id="setupError" class="d-none text-danger"><strong>Setup failed:</strong> <span id="setupErrorMsg"></span></p>
 		</form>
 	</body>
 

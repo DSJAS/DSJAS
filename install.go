@@ -240,6 +240,10 @@ func handleDatabaseTest(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleInstallFinal(w http.ResponseWriter, r *http.Request) {
+	if redirectStage(w, r, install.StateDatabase) {
+		return
+	}
+
 	if r.URL.Query().Has("skip") {
 		Config.Mut.Lock()
 		defer Config.Mut.Unlock()
@@ -255,6 +259,50 @@ func handleInstallFinal(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleInstallFinalize(w http.ResponseWriter, r *http.Request) {
+	if !InstallState.Sufficient(install.StateDatabase) {
+		http.Error(w, "Install can only be finalized after databse has been setup", 403)
+		return
+	}
+
+	r.ParseForm()
+	if !r.PostForm.Has("finalize") {
+		http.Error(w, "Expected JSON-encoded `finalize` header", 400)
+		return
+	}
+
+	postdat := struct {
+		Username     string `json:"username"`
+		Email        string `json:"email"`
+		Password     string `json:"password"`
+		PasswordHint string `json:"password_hint"`
+		BankName     string `json:"bank_name"`
+		URL          string `json:"bank_url"`
+		DisableAdmin bool   `json:"disable_admin"`
+	}{}
+	err := json.Unmarshal([]byte(r.PostForm.Get("finalize")), &postdat)
+	if err != nil {
+		http.Error(w, "Expected `finalize` header to be correctly JSON encoded", 400)
+		return
+	}
+
+	if !install.PasswordSecure(postdat.Password) {
+		http.Error(w, "Password too weak. Passwords must be five characters long and include a lower case, upper case and number character", 400)
+		return
+	}
+
+	// Little sanity check. Stop users from turning off config saving and
+	// then wondering why the installer didn't work
+	if *ConfigNoSave {
+		http.Error(w, "Cannot complete install with config saving disabled", 400)
+		return
+	}
+
+	Config.Mut.Lock()
+	defer Config.Mut.Unlock()
+	Config.Installed = true
+	Config.Name = postdat.BankName
+	Config.Domain = postdat.URL
+	Config.DisableAdmin = postdat.DisableAdmin
 }
 
 func handleInstallSuccess(w http.ResponseWriter, r *http.Request) {

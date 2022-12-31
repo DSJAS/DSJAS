@@ -1,6 +1,6 @@
 /* DSJAS - Client Side JS */
 
-/* Common code */
+/* Make all popovers and tooltips activate on startup */
 $(document).ready(
 	function() {
 		$('[data-toggle="popover"]').popover();
@@ -14,10 +14,6 @@ function showSpinner() {
 
 /* Variables */
 var ongoingConfigTest = false;
-
-/* ==================== [INITIAL CONFIGURATION] ==================== */
-
-/* ====================     [VERIFICATION]      ==================== */
 
 /* ==================== [DATABASE CONFIGURATION] =================== */
 function confirmAndSetup() {
@@ -48,7 +44,7 @@ function confirmAndSetup() {
 				"Sent required information, redirecting to next stage. If everything worked out, we should get to final setup."
 			);
 			location.reload();
-	}
+		}
 	};
 
 	req.open("POST", "/admin/install/database", true);
@@ -126,10 +122,6 @@ function doTestConfig() {
 	req.send(postdata);
 }
 
-function handleServerCheckResponse(response) {
-
-}
-
 function cleanupTest() {
 	$("#configCheck").popover("dispose");
 
@@ -138,4 +130,50 @@ function cleanupTest() {
 		"data-content",
 		"Sending configuration to server. Please wait..."
 	);
+}
+
+/* ==================== [FINAL CONFIGURATION] =================== */
+function finalConfig() {
+	$("#saveProgress").removeClass("d-none");
+	$("#setupError").addClass("d-none");
+
+	let form = {
+		 username: $("#usernameInput").val(),
+		 email: $("#emailInput").val(),
+		 password: $("#passwordInput").val(),
+		 hint: $("#passwordHintInput").val(),
+
+		 bankName: $("#banknameInput").val(),
+		 url: $("#urlInput").val(),
+		 admin: $("#administrativeCheck").prop("checked") ? true : false,
+	}
+
+	if (form.bankName == "") {
+		form.bankName = "D.S Johnson & Son";
+	}
+
+	if (form.url == "") {
+		form.url = "djohnson.financial";
+	}
+
+	const formdata = JSON.stringify(form);
+	const postdata = "finalize=" + encodeURIComponent(formdata);
+
+	let req = new XMLHttpRequest();
+	req.onreadystatechange = function() {
+		if (this.readyState == 4) {
+			$("#saveProgress").addClass("d-none");
+			if (this.status != 200) {
+				$("#setupError").removeClass("d-none");
+				$("#setupErrorMsg").text(this.responseText);
+			} else {
+				location.assign("/admin/install/success");
+			}
+		}
+	};
+
+	// See note on POST encoding schemes.
+	req.open("POST", "/admin/install/final", true);
+	req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	req.send(postdata);
 }
