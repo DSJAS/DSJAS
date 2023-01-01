@@ -14,6 +14,7 @@ import (
 	"github.com/DSJAS/DSJAS/data/user"
 	"github.com/DSJAS/DSJAS/frontend"
 	"github.com/DSJAS/DSJAS/install"
+	"github.com/DSJAS/DSJAS/session"
 	"github.com/go-sql-driver/mysql"
 )
 
@@ -32,6 +33,15 @@ func redirectStage(w http.ResponseWriter, r *http.Request, expect uint8) bool {
 	}
 
 	return false
+}
+
+func checkInstallToken(r *http.Request) bool {
+	sess, err := Sessions.ExtractCookie(r)
+	if err != nil {
+		return false
+	}
+
+	return sess.InstallAuthorized
 }
 
 func GenInstallToken() [SetupTokenLength]byte {
@@ -142,6 +152,12 @@ func handleInstallVerify(w http.ResponseWriter, r *http.Request) {
 	if check := r.URL.Query().Get("verify"); check != "" {
 		if tok == check {
 			os.Remove(SetupTokenFile)
+			tok, err := Sessions.Insert(&session.Session{InstallAuthorized: true})
+			if err != nil {
+				http.Error(w, "Failure to generate session UUID", 500)
+				return
+			}
+			session.WriteSession(w, tok)
 
 			InstallState.Next()
 			http.Redirect(w, r, "/admin/install/database", http.StatusFound)
@@ -163,15 +179,21 @@ func handleDatabaseSetup(w http.ResponseWriter, r *http.Request) {
 	if redirectStage(w, r, install.StateVerified) {
 		return
 	}
+	if !checkInstallToken(r) {
+		http.Error(w, "Not authorized to run the installer", 403)
+		return
+	}
 
-	AdminTemplates.MustRun("install/database.gohtml", w, struct {
-		Err *frontend.Error
-	}{})
+	AdminTemplates.MustRun("install/database.gohtml", w, nil)
 }
 
 func handleDatabaseConfig(w http.ResponseWriter, r *http.Request) {
 	if !InstallState.Sufficient(install.StateVerified) {
 		http.Error(w, "Database cannot be configured outside of installer mode", 403)
+		return
+	}
+	if !checkInstallToken(r) {
+		http.Error(w, "Not authorized to run the installer", 403)
 		return
 	}
 
@@ -204,6 +226,10 @@ func handleDatabaseConfig(w http.ResponseWriter, r *http.Request) {
 func handleDatabaseTest(w http.ResponseWriter, r *http.Request) {
 	if !InstallState.Sufficient(install.StateVerified) {
 		http.Error(w, "Database tests are only allowed after verification", 403)
+		return
+	}
+	if !checkInstallToken(r) {
+		http.Error(w, "Not authorized to run the installer", 403)
 		return
 	}
 
@@ -247,6 +273,10 @@ func handleInstallFinal(w http.ResponseWriter, r *http.Request) {
 	if redirectStage(w, r, install.StateDatabase) {
 		return
 	}
+	if !checkInstallToken(r) {
+		http.Error(w, "Not authorized to run the installer", 403)
+		return
+	}
 
 	if r.URL.Query().Has("skip") {
 		Config.Mut.Lock()
@@ -265,6 +295,10 @@ func handleInstallFinal(w http.ResponseWriter, r *http.Request) {
 func handleInstallFinalize(w http.ResponseWriter, r *http.Request) {
 	if !InstallState.Sufficient(install.StateDatabase) {
 		http.Error(w, "Install can only be finalized after databse has been setup", 403)
+		return
+	}
+	if !checkInstallToken(r) {
+		http.Error(w, "Not authorized to run the installer", 403)
 		return
 	}
 
@@ -337,12 +371,20 @@ func handleInstallRestart(w http.ResponseWriter, r *http.Request) {
 	if redirectStage(w, r, install.StateComplete) {
 		return
 	}
+	if !checkInstallToken(r) {
+		http.Error(w, "Not authorized to run the installer", 403)
+		return
+	}
 
 	AdminTemplates.MustRun("install/restart.gohtml", w, nil)
 }
 
 func handleInstallShutdown(w http.ResponseWriter, r *http.Request) {
 	if redirectStage(w, r, install.StateComplete) {
+		return
+	}
+	if !checkInstallToken(r) {
+		http.Error(w, "Not authorized to run the installer", 403)
 		return
 	}
 

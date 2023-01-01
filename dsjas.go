@@ -18,6 +18,7 @@ import (
 	"github.com/DSJAS/DSJAS/config"
 	"github.com/DSJAS/DSJAS/data"
 	"github.com/DSJAS/DSJAS/install"
+	"github.com/DSJAS/DSJAS/session"
 	"github.com/DSJAS/DSJAS/templates"
 	"github.com/gorilla/mux"
 )
@@ -37,6 +38,7 @@ var (
 	Config       *config.Config
 	InstallState install.State
 	Database     *data.Database
+	Sessions     *session.Store
 	// Templates for frontend use.
 	AdminTemplates *templates.Store
 )
@@ -139,6 +141,7 @@ func main() {
 	if err != nil {
 		log.Fatalln("config load failed:", err)
 	}
+	Sessions = session.NewStore()
 
 	Database, err = data.NewDatabase(Config.Database)
 	if err != nil {
