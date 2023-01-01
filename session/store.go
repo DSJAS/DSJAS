@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -12,6 +13,9 @@ import (
 const (
 	// Name of the HTTP cookie containing the session ID.
 	SessionTokenCookie = "session_id"
+	// Maximum lifetime of a session token, represented as time.Time (not
+	// in seconds!).
+	SessionTokenLifetime = 30 * time.Minute
 )
 
 // Token usage errors. Any instance of TokenError will unwrap to one of these
