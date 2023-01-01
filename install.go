@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"math/rand"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/DSJAS/DSJAS/config"
 	"github.com/DSJAS/DSJAS/data"
@@ -253,7 +255,7 @@ func handleInstallFinal(w http.ResponseWriter, r *http.Request) {
 		InstallState.Next()
 		Config.Installed = true
 
-		http.Redirect(w, r, "/admin/install/success", http.StatusFound)
+		http.Redirect(w, r, "/admin/install/restart", http.StatusFound)
 		return
 	}
 
@@ -327,6 +329,37 @@ func handleInstallFinalize(w http.ResponseWriter, r *http.Request) {
 	Config.Name = postdat.BankName
 	Config.Domain = postdat.URL
 	Config.DisableAdmin = postdat.DisableAdmin
+
+	InstallState.Next()
+}
+
+func handleInstallRestart(w http.ResponseWriter, r *http.Request) {
+	if redirectStage(w, r, install.StateComplete) {
+		return
+	}
+
+	AdminTemplates.MustRun("install/restart.gohtml", w, nil)
+}
+
+func handleInstallShutdown(w http.ResponseWriter, r *http.Request) {
+	if redirectStage(w, r, install.StateComplete) {
+		return
+	}
+
+	AdminTemplates.MustRun("install/restarted.gohtml", w, nil)
+	go func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+		defer cancel()
+		Srv.Shutdown(ctx)
+	}()
+}
+
+func handleInstallCheck(w http.ResponseWriter, r *http.Request) {
+	Config.Mut.RLock()
+	defer Config.Mut.RUnlock()
+	if Config.Installed {
+		w.Write([]byte("It's alive!"))
+	}
 }
 
 func handleInstallSuccess(w http.ResponseWriter, r *http.Request) {

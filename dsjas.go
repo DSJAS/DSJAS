@@ -33,6 +33,7 @@ var (
 
 // DSJAS Global State.
 var (
+	Srv          http.Server
 	Config       *config.Config
 	InstallState install.State
 	Database     *data.Database
@@ -73,6 +74,9 @@ func initroutes(m *mux.Router) {
 			s := s.PathPrefix("/install/").Subrouter()
 
 			s.HandleFunc("/success", handleInstallSuccess)
+			s.HandleFunc("/shutdown", handleInstallShutdown)
+			s.HandleFunc("/check", handleInstallCheck)
+			s.HandleFunc("/restart", handleInstallRestart)
 			s.HandleFunc("/final", handleInstallFinalize).Methods("POST")
 			s.HandleFunc("/final", handleInstallFinal).Methods("GET")
 			s.HandleFunc("/dbtest", handleDatabaseTest).Methods("POST")
@@ -155,7 +159,7 @@ func main() {
 	}
 
 	m := mux.NewRouter()
-	srv := http.Server{
+	Srv = http.Server{
 		Handler:      m,
 		Addr:         *ListenAddr,
 		WriteTimeout: 15 * time.Second,
@@ -170,10 +174,8 @@ func main() {
 	errchan, sigchan := make(chan error, 1), make(chan os.Signal, 1)
 	signal.Notify(sigchan, os.Interrupt)
 	go func() {
-		err := srv.ListenAndServe()
-		if !errors.Is(err, http.ErrServerClosed) {
-			errchan <- err
-		}
+		err := Srv.ListenAndServe()
+		errchan <- err
 	}()
 	defer saveconf(Config)
 
@@ -207,7 +209,7 @@ func main() {
 		log.Println("Caught interrupt. Terminating gracefully...")
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 		defer cancel()
-		err := srv.Shutdown(ctx)
+		err := Srv.Shutdown(ctx)
 		if err != nil {
 			if err == ctx.Err() {
 				log.Fatal("Timeout exceeded. Terminating forcefully")
@@ -215,6 +217,8 @@ func main() {
 			log.Fatal(err)
 		}
 	case err := <-errchan:
-		log.Fatal(err)
+		if !errors.Is(err, http.ErrServerClosed) {
+			log.Fatal(err)
+		}
 	}
 }

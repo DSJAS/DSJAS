@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		{{template "head.gohtml"}}
+
+		<script>
+			/* DSJAS - Client Side JS */
+
+			/*
+			 * This script periodically pings the server to check if it successfully
+			 * restarted yet.
+			 *
+			 * The user needs to have done this manually, so keep reminding them.
+			 *
+			 * NOTE: This script also needs to be inlined, as
+			 * we can't trust the server to serve further
+			 * requests.
+			 */
+
+			$(document).ready(
+				function() {
+					setInterval(() => {
+						let req = new XMLHttpRequest();
+						req.onreadystatechange = function() {
+							if (this.readyState == 4) {
+								if (this.status == 200) {
+									location.assign("/admin/install/success");
+								}
+							}
+						};
+
+						// See note on POST encoding schemes.
+						req.open("GET", "/admin/install/check", true);
+						req.setRequestHeader("Content-type", "text/plain");
+						req.send("It's alive?");
+					}, 1000);
+				}
+			);
+		</script>
+	</head>
+
+	<body>
+		<p><strong>DSJAS has shut down</strong> Please now restart the server</p>
+		<small>DSJAS will automatically reload on restart</small>
+	</body>
+</html>

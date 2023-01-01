@@ -167,7 +167,7 @@ function finalConfig() {
 				$("#setupError").removeClass("d-none");
 				$("#setupErrorMsg").text(this.responseText);
 			} else {
-				location.assign("/admin/install/success");
+				location.assign("/admin/install/restart");
 			}
 		}
 	};

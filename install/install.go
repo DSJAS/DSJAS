@@ -40,7 +40,7 @@ func (s *State) URL() string {
 	case StateDatabase:
 		return prefix + "/final"
 	case StateComplete:
-		return prefix + "/success"
+		return prefix + "/restart"
 	default:
 		panic("unknown install state")
 	}
