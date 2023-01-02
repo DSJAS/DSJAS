@@ -47,6 +47,10 @@ func (s *Store) loadDir(dir string, root *template.Template) error {
 			continue
 		}
 
+		if !strings.HasSuffix(f.Name(), ".gohtml") {
+			continue
+		}
+
 		tmpl := newroot.New(f.Name())
 		_, err := tmpl.ParseFiles(filepath.Join(s.base, dir, f.Name()))
 		if err != nil {

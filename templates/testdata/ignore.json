@@ -1,0 +1,4 @@
+{
+	"purpose": "Tests if the loader engine will ignore non-gohtml files",
+	"rationale": "Ensures we don't try and parse the theme config file as a template"
+}

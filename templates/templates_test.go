@@ -58,6 +58,11 @@ func testRunDir(t *testing.T) {
 	if !strings.Contains(build.String(), "3.gohtml") {
 		t.Fatalf("`3.gohtml` did not contain sentinel value\nfile text:\n%s", build.String())
 	}
+
+	err = s.Run("ignore.json", io.Discard, nil)
+	if err == nil {
+		t.Fatal("expected `ignore.json` to be ignored; ran instead")
+	}
 }
 
 func testRunFail(t *testing.T) {
