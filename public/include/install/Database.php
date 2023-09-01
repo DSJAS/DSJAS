@@ -163,3 +163,13 @@ function sanitizeUserCredentials($value, $sql)
 
     return $safeValue;
 }
+
+function handleDBVerification()
+{
+    $conn = connectToDatabase();
+    if ($conn === false) {
+        return false;
+    }
+
+    return databaseInstalled();
+}
