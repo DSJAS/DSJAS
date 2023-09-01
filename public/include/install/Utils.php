@@ -19,6 +19,11 @@
 require_once "Database.php";
 require_once ABSPATH . INC . "Customization.php";
 
+function verifySubmodules()
+{
+    return file_exists(ABSPATH . INC . "/vendor/hooks/src/gburtini/Hooks/Hooks.php") &&
+        file_exists(ABSPATH . INC . "/vendor/requests/library/Requests.php");
+}
 
 function installRequired($configuration)
 {

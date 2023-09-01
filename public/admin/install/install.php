@@ -22,6 +22,16 @@ define("STEP_URL", "/admin/install/install.php");
 
 require "install_bootstrap.php";
 
+/* check submodules are present */
+if (!verifySubmodules()) {
+?>
+    <div class="alert alert-danger">
+        <strong>Missing Submodules</strong> DSJAS requires git submodules to be pulled before installation.
+        Please see <a href="https://github.com/DSJAS/DSJAS/blob/master/docs/FAQ.md#the-site-fails-to-load-it-says-something-about-require_once-failed-to-open-stream">
+            the documentation</a>.
+<?php
+    die();
+}
 
 if (isset($_GET["regenToken"])) {
 ?>
