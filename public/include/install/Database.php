@@ -10,13 +10,68 @@ const tableColumns = array(
     "`stat_name` VARCHAR(255) NOT NULL , `stat_type` INT NOT NULL , `stat_value` INT NOT NULL , `stat_label` TEXT NOT NULL , `stat_category` TEXT NOT NULL , `sys_data` BOOLEAN NOT NULL DEFAULT FALSE , `theme_def` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`stat_name`)"
 );
 
-const defaultSiteAccounts = array();
+/* Is databsae fully installed? */
+function databaseInstalled()
+{
+    foreach (requiredTables as $tbl) {
+        if (!tableExists($tbl)) {
+            return false;
+        }
+    }
 
+    return true;
+}
+
+/* Is database partially installed? */
+function someDatabaseInstalled()
+{
+    foreach (requiredTables as $tbl) {
+        if (tableExists($tbl)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/*
+ * WARNING: dangerous function ahead!
+ * Make sure that you have prompted the user before use!
+ */
+function resetDatabase()
+{
+    foreach (requiredTables as $tbl) {
+        if (tableExists($tbl)) {
+            dropTable($tbl);
+        }
+    }
+}
+
+function dropTable($tbl)
+{
+    $sql = "DROP TABLE `" . $tbl . "`;";
+    $conn = connectToDatabase();
+
+    mysqli_query($conn, $sql);
+}
+
+function tableExists($tbl)
+{
+    $sql = "SELECT * FROM `" . $tbl . "` LIMIT 1;";
+    $conn = connectToDatabase();
+
+    $resp = mysqli_query($conn, $sql);
+    mysqli_close($conn);
+
+    return $resp !== false;
+}
 
 function setupDatabaseServer()
 {
     for ($i = 0; $i < count(requiredTables); $i++) {
-        createDatabaseTable(requiredTables[$i], tableColumns[$i]);
+        if (!tableExists(requiredTables[$i])) {
+            createDatabaseTable(requiredTables[$i], tableColumns[$i]);
+        }
     }
 
     setupDefaultAccounts();
