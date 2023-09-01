@@ -35,7 +35,7 @@ function getBootstrap()
     <?php if (strpos($_SERVER["REQUEST_URI"], "Dashboard") === false) { /* Do not load on the dashboard */ ?>
     <script src=<?php echo (getThemeContent("bgimg-nocache.js", "js/")) ?>></script>
     <?php } else { /* load this instead */ ?>
-    <link rel="stylesheet" href=<?php echo (getThemeContent("dashboard.css", "css/")) ?>>
+    <link rel="stylesheet" href=<?php echo (getThemeContent("dashboard.css", "styles/")) ?>>
 <?php
         }
 }
