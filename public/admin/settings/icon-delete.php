@@ -4,7 +4,7 @@ require "../AdminBootstrap.php";
 
 function err()
 {
-    header("Location: /admin/settings?iconError");
+    header("Location: /admin/settings?iconDefault");
     die();
 }
 
