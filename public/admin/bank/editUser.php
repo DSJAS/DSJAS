@@ -22,6 +22,66 @@ require ABSPATH . INC . "Users.php";
 require ABSPATH . INC . "Banking.php";
 require ABSPATH . INC . "csrf.php";
 
+if (isset($_GET["doDeleteUser"])) {
+    $csrf = getCSRFSubmission();
+    if (!verifyCSRFToken($csrf)) {
+        getCSRFFailedError();
+        die();
+    }
+
+    eraseUser($_GET["doDeleteUser"]);
+    header("Location: /admin/bank/users.php?userDeleted");
+    die();
+} elseif (isset($_POST["doEditUser"])) {
+    $csrf = getCSRFSubmission();
+    if (!verifyCSRFToken($csrf)) {
+        getCSRFFailedError();
+        die();
+    }
+
+    $config = parse_ini_file(ABSPATH . "/Config.ini");
+    $userID = $_POST["doEditUser"];
+
+    $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    $query = new PreparedStatement(
+        "UPDATE `users` SET `username` = ?, `real_name` = ?, `email` = ?, `password_hint` = ? WHERE `user_id` = $userID",
+        [$_POST["username"], $_POST["realName"], $_POST["email"], $_POST["passwordHint"]],
+        "ssss"
+    );
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    if ($_POST["doEditUser"] == getCurrentUserId(true)) {
+        fillSessionDetails(true, $_POST["username"], getUserIDFromName($_POST["username"], false), false); // Update in memory details cache
+    }
+
+    header("Location: /admin/bank/users.php?success");
+    die();
+} elseif (isset($_POST["resetPassword"])) {
+    if (!verifyCSRFToken(getCSRFSubmission())) {
+        die(getCSRFFailedError());
+    }
+
+    if (!isset($_POST["username"]) || $_POST["username"] == null || !isset($_POST["password"]) || $_POST["password"] == null) {
+        header("Location: /admin/settings/accounts.php?resetFailed");
+        die();
+    }
+
+    $userId = getUserIDFromName($_POST["username"], false);
+
+    changeUserPassword($userId, $_POST["password"], false);
+
+    header("Location: /admin/bank/users.php?success");
+    die();
+}
+
 ?>
 
 <html>
@@ -43,61 +103,7 @@ require ABSPATH . INC . "csrf.php";
             <a class="btn btn-danger" href="/admin/bank/editUser.php?doDeleteUser=<?php echo ($_GET["deleteUser"]); ?>&csrf=<?php echo ($_GET["csrf"]); ?>">Confirm</a>
             <a class="btn btn-secondary" href="/admin/bank/users.php">Cancel</a>
         </div>
-    <?php } elseif (isset($_GET["doDeleteUser"])) {
-        $csrf = getCSRFSubmission();
-        if (!verifyCSRFToken($csrf)) {
-            getCSRFFailedError();
-            die();
-        }
-
-        eraseUser($_GET["doDeleteUser"]);
-        header("Location: /admin/bank/users.php?userDeleted");
-    } elseif (isset($_POST["doEditUser"])) {
-        $csrf = getCSRFSubmission();
-        if (!verifyCSRFToken($csrf)) {
-            getCSRFFailedError();
-            die();
-        }
-
-        $config = parse_ini_file(ABSPATH . "/Config.ini");
-        $userID = $_POST["doEditUser"];
-
-        $database = new DB(
-            $configuration["server_hostname"],
-            $configuration["database_name"],
-            $configuration["username"],
-            $configuration["password"]
-        );
-
-        $query = new PreparedStatement(
-            "UPDATE `users` SET `username` = ?, `real_name` = ?, `email` = ?, `password_hint` = ? WHERE `user_id` = $userID",
-            [$_POST["username"], $_POST["realName"], $_POST["email"], $_POST["passwordHint"]],
-            "ssss"
-        );
-
-        $database->prepareQuery($query);
-        $database->query();
-
-        if ($_POST["doEditUser"] == getCurrentUserId(true)) {
-            fillSessionDetails(true, $_POST["username"], getUserIDFromName($_POST["username"], false), false); // Update in memory details cache
-        }
-
-        header("Location: /admin/bank/users.php?success");
-    } elseif (isset($_POST["resetPassword"])) {
-        if (!verifyCSRFToken(getCSRFSubmission())) {
-            die(getCSRFFailedError());
-        }
-
-        if (!isset($_POST["username"]) || $_POST["username"] == null || !isset($_POST["password"]) || $_POST["password"] == null) {
-            header("Location: /admin/settings/accounts.php?resetFailed");
-            die();
-        }
-
-        $userId = getUserIDFromName($_POST["username"], false);
-
-        changeUserPassword($userId, $_POST["password"], false);
-
-        header("Location: /admin/bank/users.php?success");
+    <?php
     } else { ?>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
