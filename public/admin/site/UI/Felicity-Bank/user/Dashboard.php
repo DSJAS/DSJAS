@@ -121,7 +121,7 @@ function getTheme()
                             </div>
                         </div>
                         <div style="height: 2vh;"></div>
-                        <a target="_blank" href="/contact" class="btn btn-lg btn-warning">
+                        <a target="_blank" href="/Contact" class="btn btn-lg btn-warning">
                             Contact Support
                         </a>
                     </div>
