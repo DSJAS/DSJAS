@@ -58,9 +58,9 @@ function dropTable($tbl)
 function tableExists($tbl)
 {
     $sql = "SELECT * FROM `" . $tbl . "` LIMIT 1;";
-    $conn = connectToDatabase();
 
     try {
+        $conn = connectToDatabase();
         $resp = mysqli_query($conn, $sql);
     } catch (Exception) {
         return false;
@@ -166,7 +166,12 @@ function sanitizeUserCredentials($value, $sql)
 
 function handleDBVerification()
 {
-    $conn = connectToDatabase();
+    try {
+        $conn = connectToDatabase();
+    } catch (Exception) {
+        return false;
+    }
+
     if ($conn === false) {
         return false;
     }
