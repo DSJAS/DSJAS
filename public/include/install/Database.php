@@ -60,7 +60,12 @@ function tableExists($tbl)
     $sql = "SELECT * FROM `" . $tbl . "` LIMIT 1;";
     $conn = connectToDatabase();
 
-    $resp = mysqli_query($conn, $sql);
+    try {
+        $resp = mysqli_query($conn, $sql);
+    } catch (Exception) {
+        return false;
+    }
+
     mysqli_close($conn);
 
     return $resp !== false;
