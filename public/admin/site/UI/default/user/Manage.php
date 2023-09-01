@@ -49,9 +49,9 @@ function getTheme()
     foreach ($accounts as $account) {
         $balance = $account["account_balance"];
         if (isPricePositive($balance)) {
-            $overallBalance += formatCurrency($account["account_balance"]);
+            $overallBalance += $account["account_balance"];
         } else {
-            $overallDebt += formatCurrency(abs($account["account_balance"]));
+            $overallDebt += abs($account["account_balance"]);
         }
     }
 
