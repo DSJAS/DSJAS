@@ -69,7 +69,7 @@ $stats->incrementCounterStat("admin_page_hits");
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
                 <a href="/admin/settings/" class="btn btn-sm btn-outline-secondary">Settings</a>
-                <a href="https://github.com/OverEngineeredCode/DSJAS/tree/master/docs/administration" class="btn btn-sm btn-outline-secondary">Help</a>
+                <a href="https://github.com/DSJAS/DSJAS/tree/master/docs/administration" class="btn btn-sm btn-outline-secondary">Help</a>
             </div>
         </div>
     </div>

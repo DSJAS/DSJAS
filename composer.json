@@ -1,5 +1,5 @@
 {
-    "name": "overengineeredcode/dsjas",
+    "name": "dsjas/dsjas",
     "description": "A PHP web application designed to bait scammers attempting to infiltrate online banking",
     "type": "project",
     "require-dev": {
