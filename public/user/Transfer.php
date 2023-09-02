@@ -53,7 +53,7 @@ if (isset($_GET["performTransfer"])) {
         die();
     }
 
-    // No doig this on foreign accounts
+    // No doing this on foreign accounts
     if (!userOwnsAccount($_GET["originAccount"], getCurrentUserId())) {
         header("Location: /user/Transfer.php?transferError=1");
         die();
