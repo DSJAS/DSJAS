@@ -62,7 +62,7 @@ function tableExists($tbl)
     try {
         $conn = connectToDatabase();
         $resp = mysqli_query($conn, $sql);
-    } catch (Exception) {
+    } catch (Exception $e) {
         return false;
     }
 
@@ -168,7 +168,7 @@ function handleDBVerification()
 {
     try {
         $conn = connectToDatabase();
-    } catch (Exception) {
+    } catch (Exception $e) {
         return false;
     }
 
