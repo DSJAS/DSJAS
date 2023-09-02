@@ -25,6 +25,46 @@ function verifySubmodules()
         file_exists(ABSPATH . INC . "/vendor/requests/library/Requests.php");
 }
 
+/*
+ * Checks if PHP has the minimum required modules to continue.
+ *
+ * Extensions to verify:
+ *      - mysqli
+ *      - sodium
+ *      - exif
+ *      - curl
+ *      - intl
+ *      - zip
+ */
+function verifyPHP()
+{
+    /* mysqli */
+    if (!function_exists("mysqli_connect"))
+        return false;
+
+    /* sodium */
+    if (!function_exists("sodium_add"))
+        return false;
+
+    /* exif */
+    if (!function_exists("getimagesize") || !function_exists("exif_imagetype"))
+        return false;
+
+    /* curl */
+    if (!function_exists("curl_init"))
+        return false;
+
+    /* intl */
+    if (!class_exists("NumberFormatter"))
+        return false;
+
+    /* zip */
+    if (!class_exists("ZipArchive"))
+        return false;
+
+    return true;
+}
+
 function installRequired($configuration)
 {
     if (!$configuration["installed"] || !$configuration["database_installed"] || !$configuration["owner_verified"] || !$configuration["install_finalized"]) {

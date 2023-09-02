@@ -29,6 +29,32 @@ if (!verifySubmodules()) {
         <strong>Missing Submodules</strong> DSJAS requires git submodules to be pulled before installation.
         Please see <a href="https://github.com/DSJAS/DSJAS/blob/master/docs/FAQ.md#the-site-fails-to-load-it-says-something-about-require_once-failed-to-open-stream">
             the documentation</a>.
+    </div>
+<?php
+    die();
+}
+
+/* check PHP requrements met */
+if (!verifyPHP()) {
+?>
+    <div class="alert alert-danger">
+        <p>
+
+        <strong>Minimum PHP Requirements Not Met</strong> DSJAS requires that PHP has the following optional modules enabled:
+
+        <ul>
+            <li>mysqli - for database connections</li>
+            <li>sodium - for password hashing</li>
+            <li>exif - for upload handling</li>
+            <li>curl - for theme archive downloads</li>
+            <li>intl - for currency formatting</li>
+            <li>zip - for theme archive unpacking</li>
+        </ul>
+
+        Please enable <i>all</i> of these modules and try again. Remember to restart your webserver after editing php.ini.
+
+        </p>
+    </div>
 <?php
     die();
 }
