@@ -43,6 +43,8 @@ function getTheme()
     ?>
 
     <body class="container-fluid" style="text-align: center">
+        <?php include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?>
+        </nav>
 
         <?php
         // If we want the success page, display that now
