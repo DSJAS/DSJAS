@@ -250,7 +250,7 @@ class Theme
             } elseif (!file_exists(ABSPATH . THEME_PATH . $this->themeName . "/" . $this->fileName)) {
                 $this->fileName = "Error.php";
 
-                header("Location: /error/Error.php");
+                header("Location: /Error.php");
                 die();
             }
         }

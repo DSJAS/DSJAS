@@ -16,7 +16,7 @@
  * above mentioned licence for specific details.
  */
 
-require "../include/Bootstrap.php";
+require "./include/Bootstrap.php";
 
 require ABSPATH . INC . "DSJAS.php";
 

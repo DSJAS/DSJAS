@@ -51,7 +51,7 @@ function findRedirectLocation($configuration)
     } elseif (!$configuration["install_finalized"]) {
         return "/admin/install/final.php";
     } else {
-        return "/error/Error.php";
+        return "/Error.php";
     }
 }
 
