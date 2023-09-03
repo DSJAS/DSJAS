@@ -70,7 +70,7 @@ function getTheme()
                         <tr>
                             <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
                             <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
-                            <?php if (isPricePositive($account["account_balance"])) { ?>
+                            <?php if ($account["account_balance"] >= 0) { ?>
                                 <td class="text-success"><?php echo (formatCurrency($account["account_balance"])); ?></td>
                             <?php } else { ?>
                                 <td class="text-danger"><?php echo (formatCurrency($account["account_balance"])); ?></td>
@@ -112,7 +112,7 @@ function getTheme()
                             <td><?php echo (getDisplayAccountNumber($info["origin_account_id"])); ?></td>
                             <td><?php echo ($info["transaction_description"]); ?></th>
                             <td><?php echo ($info["transaction_type"]); ?></th>
-                                <?php if (isPricePositive($info["transaction_amount"])) { ?>
+                                <?php if ($info["transaction_amount"] >= 0) { ?>
                             <td class="text-success"><?php echo (formatCurrency($info["transaction_amount"])); ?></td>
                         <?php } else { ?>
                             <td class="text-danger"><?php echo (formatCurrency($info["transaction_amount"])); ?></td>

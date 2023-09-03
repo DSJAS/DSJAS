@@ -48,7 +48,7 @@ function getTheme()
     $accounts = getAccountsArray();
     foreach ($accounts as $account) {
         $balance = $account["account_balance"];
-        if (isPricePositive($balance)) {
+        if ($balance >= 0) {
             $overallBalance += $account["account_balance"];
         } else {
             $overallDebt += abs($account["account_balance"]);
@@ -113,7 +113,7 @@ function getTheme()
                         <tr>
                             <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
                             <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
-                            <?php if (isPricePositive($account["account_balance"])) { ?>
+                            <?php if ($account["account_balance"] >= 0) { ?>
                                 <td class="text-success">$<?php echo ($account["account_balance"]); ?></td>
                             <?php } else { ?>
                                 <td class="text-danger">$<?php echo ($account["account_balance"]); ?></td>

@@ -143,7 +143,7 @@ function getTheme()
                                         <td><?php echo $transaction["transaction_date"] ?></td>
                                         <td><?php echo $transaction["transaction_description"] ?></td>
                                         <td>
-                                            <?php if (isPricePositive($transaction["transaction_amount"])) { ?>
+                                            <?php if ($transaction["transaction_amount"] >= 0) { ?>
                                                 <span id="greenhighlight"><?php echo (formatCurrency($transaction["transaction_amount"])) ?></span>
                                             <?php } else { ?>
                                                 <span id="redhighlight"><?php echo (formatCurrency($transaction["transaction_amount"])) ?></span>
