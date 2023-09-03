@@ -87,6 +87,13 @@ function getRecentTransactionsArray($loadAmount)
         return [];
     }
 
+    for ($i = 0; $i < count($query->result); $i++) {
+        /* make the transaction negative if outgoing */
+        if (userOwnsAccount($query->result[$i]["origin_account_id"], getCurrentUserId()) &&
+            !userOwnsAccount($query->result[$i]["dest_account_id"], getCurrentUserId()))
+            $query->result[$i]["transaction_amount"] *= -1;
+    }
+
     return $query->result;
 }
 
