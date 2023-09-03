@@ -100,6 +100,10 @@ username is not already in use and <a href=\"/admin/settings/Index.php\">verify 
     if (isset($_GET["createSuccess"])) {
         dsjas_alert("Successfully created new user", "A user has been created with the requested values. If enabled, the account can now be accessed with the specified
 credentials via <a href=\"/admin/user/SignIn.php\">the admin login</a>", "success", true);
+    }
+
+    if (isset($_GET["editSuccess"])) {
+        dsjas_alert("Changes Saved", "Your changes to the specified user's profile have been saved", "success", true);
     } ?>
 
     <div class="card bg-light admin-panel">

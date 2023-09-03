@@ -88,7 +88,7 @@ if (isset($_POST["doEditUser"])) {
         fillSessionDetails(true, $_POST["username"], getUserIDFromName($_POST["username"], true), true); // Update in memory details cache
     }
 
-    header("Location: /admin/settings/accounts.php");
+    header("Location: /admin/settings/accounts.php?editSuccess");
     die();
 }
 
