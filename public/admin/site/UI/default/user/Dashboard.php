@@ -130,12 +130,12 @@ function getTheme()
                             <?php
                             foreach (getAccountsArray() as $account) { ?>
                                 <tr>
-                                    <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
-                                    <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
+                                    <td class="text-primary"><?= $account["account_name"] ?></td>
+                                    <td><?= censorAccountNumber($account["account_number"]) ?></td>
                                     <?php if ($account["account_balance"] >= 0) { ?>
-                                        <td class="text-success"><?php echo (formatCurrency($account["account_balance"])); ?></td>
+                                        <td class="text-success"><?= formatCurrency($account["account_balance"]) ?></td>
                                     <?php } else { ?>
-                                        <td class="text-danger"><?php echo (formatCurrency($account["account_balance"])); ?></td>
+                                        <td class="text-danger"><?= formatCurrency($account["account_balance"]) ?></td>
                                     <?php } ?>
                                     <td><a href="/user/Transfer.php">Transfer</a></td>
                                     <td><a href="/user/Manage.php">Manage</a></td>
@@ -177,14 +177,14 @@ function getTheme()
 
                             ?>
                                 <tr>
-                                    <td><?php echo ($info["transaction_date"]); ?></td>
-                                    <td><?php echo (getDisplayAccountNumber($info["origin_account_id"])); ?></td>
-                                    <td><?php echo ($info["transaction_description"]); ?></th>
-                                    <td><?php echo ($type); ?></th>
+                                    <td><?= $info["transaction_date"] ?></td>
+                                    <td><?= getDisplayAccountNumber($info["origin_account_id"]) ?></td>
+                                    <td><?= $info["transaction_description"] ?></th>
+                                    <td><?= $type ?></th>
                                         <?php if ($info["transaction_amount"] >= 0) { ?>
-                                    <td class="text-success">$<?php echo ($info["transaction_amount"]); ?></td>
+                                    <td class="text-success"><?= formatCurrency($info["transaction_amount"]) ?></td>
                                 <?php } else { ?>
-                                    <td class="text-danger">$<?php echo ($info["transaction_amount"]); ?></td>
+                                    <td class="text-danger"><?= formatCurrency($info["transaction_amount"]) ?></td>
                                 <?php } ?>
                                 </tr>
                             <?php } ?>
