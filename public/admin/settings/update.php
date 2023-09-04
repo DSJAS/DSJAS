@@ -76,7 +76,8 @@ if (isInsiderBand()) {
 
                     <hr>
 
-                    <a class="text-secondary">DSJAS failed to contact the update server. It may be under maintainence or you may have reached your rate limit. Please try again in a few minutes.</a>
+                    <a class="text-secondary">DSJAS failed to contact the update server. It may be under maintainence or you may have reached your rate limit.
+                        Please try again in a few minutes. Rate limits normally take around half an hour to expire.</a>
 
             <?php } else {
 
