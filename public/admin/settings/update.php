@@ -132,7 +132,7 @@ if (isInsiderBand()) {
                 </tr>
             </table>
 
-            <a href="https://github.com/OverEngineeredCode/DSJAS/releases">Patch notes</a>
+            <a href="https://github.com/DSJAS/DSJAS/releases">Patch notes</a>
         </div>
     </div>
 

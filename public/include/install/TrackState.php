@@ -24,6 +24,13 @@ function completeDatabaseStage()
     $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "setup", "database_installed", "1");
 }
 
+function uncompleteDatabaseStage()
+{
+    global $sharedInstallConfig;
+
+    $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "setup", "database_installed", "0");
+}
+
 function finalizeInstall()
 {
     global $sharedInstallConfig;

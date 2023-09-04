@@ -49,7 +49,7 @@ function getTheme()
         <p>This theme doesn't actually contain any content and is just a template for showing that your install is working.
             Have fun contributing, writing a theme, writing a module or just taking a look at the code!
         </p>
-        <a class="btn btn-primary btn-lg" href="https://github.com/OverEngineeredCode/DSJAS" role="button">Developer documentation</a>
+        <a class="btn btn-primary btn-lg" href="https://github.com/DSJAS/DSJAS" role="button">Developer documentation</a>
 
         <br>
         <br>

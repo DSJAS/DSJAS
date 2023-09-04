@@ -29,6 +29,12 @@ if (isset($_GET["feedback_success"])) { ?>
     </div>
 <?php }
 
+if (databaseInstalled()) {
+    completeDatabaseStage();
+    header("Location: /admin/install/db_config.php");
+    die();
+}
+
 if (isset($_GET["nodb"])) {
     if (isset($_GET["confirm"]) && $_GET["confirm"] == 1) {
         $sharedInstallConfig->setKey(ID_GLOBAL_CONFIG, "database", "running_without_database", "1");

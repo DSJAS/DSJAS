@@ -26,9 +26,13 @@ require "install_bootstrap.php";
 
 if (!handleDBVerification()) { ?>
     <div class="alert alert-danger" role="alert">
-        <p><strong>Database error</strong> The database doesn't seem to be working and we were unable to make a connection. Please verify that the details entered perviously were correct and that your database server is online. You may need to manually edit your configuration file on the server.</p>
+        <p><strong>Database error</strong> The database doesn't seem to be working and we were unable to make a connection. Please verify that the details entered perviously were correct and that your database server is online.
+            <a href="/admin/install/db_config.php">Click here</a> to return to database configuration.
+        </p>
     </div>
     <?php
+
+    uncompleteDatabaseStage();
     die();
 }
 

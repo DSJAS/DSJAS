@@ -48,10 +48,10 @@ function getTheme()
     $accounts = getAccountsArray();
     foreach ($accounts as $account) {
         $balance = $account["account_balance"];
-        if (isPricePositive($balance)) {
-            $overallBalance += formatCurrency($account["account_balance"]);
+        if ($balance >= 0) {
+            $overallBalance += $account["account_balance"];
         } else {
-            $overallDebt += formatCurrency(abs($account["account_balance"]));
+            $overallDebt += abs($account["account_balance"]);
         }
     }
 
@@ -84,15 +84,15 @@ function getTheme()
 
             <h4 class="border-bottom">Your summary</h4>
 
-            <p><strong>Hi there, <?php echo (getDisplayName()); ?>!</strong> Below is your account summary, generated on <?php echo (date("d/M/Y")) ?> at <?php echo (date("H:i")); ?></p>
+            <p><strong>Hi there, <?= getDisplayName() ?>!</strong> Below is your account summary, generated on <?= date("d/M/Y") ?> at <?= date("H:i") ?></p>
 
             <br>
 
             <div class="border mb-3">
-                <p><strong>Your overall balance:</strong> $<?php echo ($overallBalance); ?></p>
-                <p><strong>Your overall debt:</strong> $<?php echo ($overallDebt); ?></p>
+                <p><strong>Your overall balance:</strong> $<?= $overallBalance ?></p>
+                <p><strong>Your overall debt:</strong> $<?= $overallDebt ?></p>
 
-                <p><strong>Your account standing:</strong> <?php echo ($accountStanding); ?></p>
+                <p><strong>Your account standing:</strong> <?= $accountStanding ?></p>
                 <small class="text-muted">You should always aim to keep your account in normal or good standing. If your account becomes in a "concerning" state, you may be asked about your finances</small>
             </div>
 
@@ -111,16 +111,15 @@ function getTheme()
                     <?php
                     foreach (getAccountsArray() as $account) { ?>
                         <tr>
-                            <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
-                            <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
-                            <?php if (isPricePositive($account["account_balance"])) { ?>
-                                <td class="text-success">$<?php echo (formatCurrency($account["account_balance"])); ?></td>
+                            <td class="text-primary"><?= $account["account_name"] ?></td>
+                            <td><?= censorAccountNumber($account["account_number"]) ?></td>
+                            <?php if ($account["account_balance"] >= 0) { ?>
+                                <td class="text-success"><?= formatCurrency($account["account_balance"]) ?></td>
                             <?php } else { ?>
-                                <td class="text-danger">$<?php echo (formatCurrency($account["account_balance"])); ?></td>
+                                <td class="text-danger"><?= formatCurrency($account["account_balance"]) ?></td>
                             <?php } ?>
                         </tr>
-                    <?php }
-                    ?>
+                    <?php } ?>
                 </tbody>
             </table>
 

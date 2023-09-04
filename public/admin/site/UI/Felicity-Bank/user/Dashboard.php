@@ -74,10 +74,10 @@ function getTheme()
                             <tbody>
                                 <?php foreach (getAccountsArray() as $account) { ?>
                                     <tr>
-                                        <td><?php echo $account["account_name"] ?></td>
-                                        <td><?php echo censorAccountNumber($account["account_number"]); ?></td>
-                                        <td><?php echo formatCurrency($account["account_balance"]) ?></td>
-                                        <td><?php echo formatCurrency($account["account_balance"]) ?></td>
+                                        <td><?= $account["account_name"] ?></td>
+                                        <td><?= censorAccountNumber($account["account_number"]) ?></td>
+                                        <td class="<?= ($account["account_balance"] < 0) ? "text-danger" : "" ?>"><?= formatCurrency($account["account_balance"]) ?></td>
+                                        <td><?= formatCurrency($account["account_balance"]) ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -121,7 +121,7 @@ function getTheme()
                             </div>
                         </div>
                         <div style="height: 2vh;"></div>
-                        <a target="_blank" href="/contact" class="btn btn-lg btn-warning">
+                        <a target="_blank" href="/Contact" class="btn btn-lg btn-warning">
                             Contact Support
                         </a>
                     </div>
@@ -140,13 +140,13 @@ function getTheme()
                             <tbody>
                                 <?php foreach (getRecentTransactionsArray(12) as $transaction) { ?>
                                     <tr>
-                                        <td><?php echo $transaction["transaction_date"] ?></td>
-                                        <td><?php echo $transaction["transaction_description"] ?></td>
+                                        <td><?= $transaction["transaction_date"] ?></td>
+                                        <td><?= $transaction["transaction_description"] ?></td>
                                         <td>
-                                            <?php if (isPricePositive($transaction["transaction_amount"])) { ?>
-                                                <span id="greenhighlight"><?php echo (formatCurrency($transaction["transaction_amount"])) ?></span>
+                                            <?php if ($transaction["transaction_amount"] >= 0) { ?>
+                                                <span id="greenhighlight"><?= formatCurrency($transaction["transaction_amount"]) ?></span>
                                             <?php } else { ?>
-                                                <span id="redhighlight"><?php echo (formatCurrency($transaction["transaction_amount"])) ?></span>
+                                                <span id="redhighlight"><?= formatCurrency($transaction["transaction_amount"]) ?></span>
                                             <?php } ?>
                                         </td>
                                     </tr>

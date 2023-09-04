@@ -16,7 +16,7 @@ In order to get started, you will need to download and install the program. This
 
 DSJAS is released from a number of locations, but the recommended download location is from GitHub releases. Whenever an update to the program is released, a new release is created there. You can find the releases page here:
 
-[Downloads page](https://github.com/OverEngineeredCode/DSJAS/releases/latest)
+[Downloads page](https://github.com/DSJAS/DSJAS/releases/latest)
 
 > **Important!** *Do not* download from the big green button on the GitHub homescreen looks like a download button. This will download the DSJAS developer source tree, which will be missing configuration files and will break the site. *Do* use the above download page.
 

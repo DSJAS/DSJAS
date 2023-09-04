@@ -23,6 +23,12 @@
             </div>
         <?php }
 
+        if (isset($_GET["signedout"])) { ?>
+            <div class="alert alert-info">
+                You are now signed out
+            </div>
+        <?php }
+
         addModuleDescriptor("alert-area");  ?>
 
         <img class="mb-4" src="<?= getLogo(); ?>" alt="" width="72" height="72">

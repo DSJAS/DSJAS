@@ -88,6 +88,8 @@ $adminMissing = $config->getKey(ID_GLOBAL_CONFIG, "settings", "simulate_missing_
         dsjas_alert("Error saving settings", "There was an error while attempting to save your settings. The changes have been lost", "danger", true);
     } else if (isset($_GET["iconError"])) {
         dsjas_alert("Favicon update failed", "An error occurred updating the favicon. Is it a valid image file?", "danger", true);
+    } else if (isset($_GET["iconDefault"])) {
+        dsjas_alert("Favicon Already Default", "The favicon was already the default. The default favicon cannot be removed.", "warning", true);
     } else if (isset($_GET["iconSuccess"])) {
         dsjas_alert("Favicon update succeeded", "Favicon updated successfully. You may need to reload with cache disabled to see the result", "success", true);
     } else if (isset($_GET["factorySuccess"])) {

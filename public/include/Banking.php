@@ -162,7 +162,7 @@ function accountEnabled($accountID)
     $database->prepareQuery($query);
     $database->query();
 
-    return $query->result[0]["account_disabled"];
+    return $query->result[0]["account_disabled"] == 0;
 }
 
 function userOwnsAccount($accountID, $userID)

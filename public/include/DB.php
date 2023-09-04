@@ -122,6 +122,8 @@ class DB
         $this->username = $username;
         $this->password = $password;
 
+        /* NOTE: This should be a temporary measure until proper databse log handling has been fixed up */
+        mysqli_report(MYSQLI_REPORT_OFF);
         $this->sql = new mysqli($this->host, $this->username, $this->password, $this->database, $this->port);
 
         $this->config = parse_ini_file(ABSPATH . "/Config.ini", true);
@@ -226,7 +228,13 @@ class DB
 
         $statement = $queryObject->getStatement();
 
-        $result = $this->sql->query($statement);
+        try {
+            $result = $this->sql->query($statement);
+        } catch (mysqli_sql_exception $e) {
+            $result = null;
+            error_log("[DSJAS ERROR] Database statement failed to execute: $statement", 0);
+            return;
+        }
 
         if (!is_bool($result)) {
             while ($row = $result->fetch_assoc()) {

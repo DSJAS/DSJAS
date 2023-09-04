@@ -46,7 +46,10 @@ function getTheme()
 
         <?php
         // If we want the success page, display that now
-        if (shouldProvideLogoutFeedback() && getLogoutFeedback() == LOGOUT_API_SUCCESS) { ?>
+        if (shouldProvideLogoutFeedback() && getLogoutFeedback() == LOGOUT_API_SUCCESS) {
+            include ABSPATH . getRawThemeContent("Nav.php", "components/"); ?>
+            </nav>
+
             <div class="jumbotron">
                 <h1>You have been logged out</h1>
                 <p>You have been successfully logged out of your account, you can now return home or sign in again.</p>

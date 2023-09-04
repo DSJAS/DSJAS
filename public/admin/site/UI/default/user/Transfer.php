@@ -47,15 +47,28 @@ function getTheme()
     <body>
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/"); ?>
 
-        <?php if (isset($_GET["transferError"])) { ?>
+        <?php if (isset($_GET["transferError"])) {
+
+        /* disabled account */
+        if ($_GET["transferError"] == 2) { ?>
+            <div class="alert alert-danger">
+                <p><strong>Fraud Alert</strong> The selected account has been flagged due to possible fraudulent activity. Please <a href="/support/Contact">contact support</a>.
+                    <i>Your account has not been charged and the fraud team has been notified.</i>
+                </p>
+            </div>
+        <?php
+        /* probably a mysql error */
+        } else { ?>
             <div class="alert alert-danger">
                 <p><strong>Transfer failed</strong> There was an error while attempting to perform that transaction. Please try again later or contact support.
                     <i>Your account has not been charged</i>
                 </p>
             </div>
-        <?php } ?>
+        <?php
+            }
+        }
 
-        <?php if (isset($_GET["transferSuccess"])) { ?>
+        if (isset($_GET["transferSuccess"])) { ?>
             <div class="alert alert-success">
                 <p><strong>Transfer succeeded</strong> The transfer has been processed and has completed successfully, transferring <?php echo ("$" . htmlentities($_GET["amount"])); ?>.
                     Your new account balance is <strong><?php echo (getDisplayBalance($_GET["originAccount"])); ?></strong>

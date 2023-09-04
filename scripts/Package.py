@@ -81,6 +81,8 @@ def cleanSourceTree(distName):
     removeIfExists("setuptoken.txt")
 
     removeIfExists("admin/data/AdminNotices.json")
+    if not os.path.exists("admin/data/"):
+        os.mkdir("admin/data");
 
     removeIfDirExists("uploads")
     # The example modules should not be shipped with a release

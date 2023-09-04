@@ -46,26 +46,8 @@ function getTheme()
 
         <?php
         // If we want the success page, display that now
-        if (shouldProvideLogoutFeedback() && getLogoutFeedback() == LOGOUT_API_SUCCESS) { ?>
-            <div class="jumbotron">
-                <h1>You have been logged out</h1>
-                <p>You have been successfully logged out of your account, you can now return home or sign in again.</p>
-
-                <?php addModuleDescriptor("logged_out_header");  ?>
-            </div>
-
-            <span>
-                <a class="btn btn-primary" href="/">Go to the Homepage</a>
-                <a class="btn btn-secondary" href="/user/Login">Sign in again</a>
-                <?php addModuleDescriptor("logged_out_actions");  ?>
-            </span>
-
-            <p>
-                <p class="text-sm text-secondary">To make absolutely sure you are signed out, you may wish to close all browser windows</p>
-
-                <?php addModuleDescriptor("logged_out_footer");  ?>
-
-            <?php
+        if (shouldProvideLogoutFeedback() && getLogoutFeedback() == LOGOUT_API_SUCCESS) {
+            header("Location: /user/Login.php?signedout");
             die();
         } ?>
 

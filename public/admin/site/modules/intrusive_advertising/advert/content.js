@@ -4,21 +4,24 @@ function triggerAdvertisement()
 
     $("#advertModal").modal("show");
 
-    var ad = randomInteger(3);
+    var ad = randomInteger(4);
 
     switch (ad) {
     case 1:
         raidShadowLegends();
-            break;
+        break;
     case 2:
         squareSpace()
-            break;
+        break;
     case 3:
         mafiaCity();
-            break;
+        break;
+    case 4:
+        grubHub();
+        break;
     default:
         raidShadowLegends();
-            break;
+        break;
     }
 
     $("#loadingAdvert").addClass("d-none");
@@ -39,6 +42,11 @@ function squareSpace()
 function mafiaCity()
 {
     $("#mafiaCity").removeClass("d-none");
+}
+
+function grubHub()
+{
+    $("#grubhub").removeClass("d-none");
 }
 
 function mainloop()

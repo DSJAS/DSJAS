@@ -44,8 +44,8 @@ Deny from All
 php_value output_buffering 4096
 
 # Custom error pages
-ErrorDocument 400 /error/Error.php?code=400
-ErrorDocument 401 /error/Error.php?code=401
-ErrorDocument 403 /error/Error.php?code=403
-ErrorDocument 404 /error/Error.php?code=404
-ErrorDocument 500 /error/Error.php?code=500
+ErrorDocument 400 /Error.php?code=400
+ErrorDocument 401 /Error.php?code=401
+ErrorDocument 403 /Error.php?code=403
+ErrorDocument 404 /Error.php?code=404
+ErrorDocument 500 /Error.php?code=500

@@ -63,7 +63,7 @@ function getTheme()
                         <p class="text-danger"><strong>Due to the sensitive nature of closing an account, you will need to request this in person. Keep in mind, this can be done over the phone.</strong></p>
                         <hr>
                         <p>Due to the fact that closing an account can be devastating if done incorrectly or by a malicious third party, you will need to call support in person or visit a branch in order to perform this action.
-                            There is no way to remotely close your account. However, <?php echo (getBankName()); ?> will never prevent you from closing an account. We just need to be sure that you really want this.
+                            There is no way to remotely close your account. However, <?= getBankName() ?> will never prevent you from closing an account. We just need to be sure that you really want this.
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -92,17 +92,16 @@ function getTheme()
                     <?php
                     foreach (getAccountsArray() as $account) { ?>
                         <tr>
-                            <td class="text-primary"><?php echo ($account["account_name"]); ?></td>
-                            <td><?php echo (censorAccountNumber($account["account_number"])); ?></td>
-                            <?php if (isPricePositive($account["account_balance"])) { ?>
-                                <td class="text-success">$<?php echo (formatCurrency($account["account_balance"])); ?></td>
+                            <td class="text-primary"><?= $account["account_name"] ?></td>
+                            <td><?= censorAccountNumber($account["account_number"]) ?></td>
+                            <?php if ($account["account_balance"] >= 0) { ?>
+                                <td class="text-success"><?= formatCurrency($account["account_balance"]) ?></td>
                             <?php } else { ?>
-                                <td class="text-danger">$<?php echo (formatCurrency($account["account_balance"])); ?></td>
+                                <td class="text-danger"><?= formatCurrency($account["account_balance"]) ?></td>
                             <?php } ?>
                             <td><a href="/user/Transfer.php">Transfer</a></td>
                         </tr>
-                    <?php }
-                    ?>
+                    <?php } ?>
                 </tbody>
             </table>
 

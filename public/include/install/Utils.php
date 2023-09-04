@@ -19,6 +19,51 @@
 require_once "Database.php";
 require_once ABSPATH . INC . "Customization.php";
 
+function verifySubmodules()
+{
+    return file_exists(ABSPATH . INC . "/vendor/hooks/src/gburtini/Hooks/Hooks.php") &&
+        file_exists(ABSPATH . INC . "/vendor/requests/library/Requests.php");
+}
+
+/*
+ * Checks if PHP has the minimum required modules to continue.
+ *
+ * Extensions to verify:
+ *      - mysqli
+ *      - sodium
+ *      - exif
+ *      - curl
+ *      - intl
+ *      - zip
+ */
+function verifyPHP()
+{
+    /* mysqli */
+    if (!function_exists("mysqli_connect"))
+        return false;
+
+    /* sodium */
+    if (!function_exists("sodium_add"))
+        return false;
+
+    /* exif */
+    if (!function_exists("getimagesize") || !function_exists("exif_imagetype"))
+        return false;
+
+    /* curl */
+    if (!function_exists("curl_init"))
+        return false;
+
+    /* intl */
+    if (!class_exists("NumberFormatter"))
+        return false;
+
+    /* zip */
+    if (!class_exists("ZipArchive"))
+        return false;
+
+    return true;
+}
 
 function installRequired($configuration)
 {
@@ -46,7 +91,7 @@ function findRedirectLocation($configuration)
     } elseif (!$configuration["install_finalized"]) {
         return "/admin/install/final.php";
     } else {
-        return "/error/Error.php";
+        return "/Error.php";
     }
 }
 
@@ -138,27 +183,6 @@ function saveDatabaseInformation()
 function verifyFieldsPresent()
 {
     return isset($_POST["servername"]) && isset($_POST["dbname"]) && isset($_POST["username"]) && isset($_POST["password"]);
-}
-
-function handleDBVerification()
-{
-    $config_path = $_SERVER["DOCUMENT_ROOT"] . "/Config.ini";
-
-    $configuration = parse_ini_file($config_path);
-
-    $link = mysqli_connect($configuration["server_hostname"], $configuration["username"], $configuration["password"]);
-    if (!$link) {
-        return false;
-    }
-
-
-    mysqli_select_db($link, $configuration["database_name"]);
-    if (mysqli_error($link) != null) {
-        return false;
-    }
-
-    mysqli_close($link);
-    return true;
 }
 
 function setupPrimaryAdministrator()
