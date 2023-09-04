@@ -292,16 +292,12 @@ function getPatchVersion()
 
 function getVersionName()
 {
-    $info = loadVersionInfo();
-
-    return $info["version-name"];
+    return getCurrentRelease()->getName();
 }
 
 function getVersionDescription()
 {
-    $info = loadVersionInfo();
-
-    return $info["version-description"];
+    return getCurrentRelease()->getPatchNotes();
 }
 
 function getUpdateBand()
