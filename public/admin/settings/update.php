@@ -65,7 +65,7 @@ if (isInsiderBand()) {
         </div>
 
         <div class="card-body">
-            <?php if (getLatestAvailableVersion($band) == "0.0.0") { ?>
+            <?php if (getLatestAvailableVersion($band)->isDummy()) { ?>
 
 
                 <h3 class="text-danger">
@@ -76,7 +76,7 @@ if (isInsiderBand()) {
 
                     <hr>
 
-                    <a class="text-secondary">DSJAS failed to contact the update server. It may be under maintainence, down or your server may have lost internet connection</a>
+                    <a class="text-secondary">DSJAS failed to contact the update server. It may be under maintainence or you may have reached your rate limit. Please try again in a few minutes.</a>
 
             <?php } else {
 
@@ -107,7 +107,7 @@ if (isInsiderBand()) {
             <hr>
 
             <p><strong>Current version:</strong> <?php echo (getVersionString()); ?></p>
-            <p><strong>Latest available version:</strong> <?php echo (getLatestAvailableVersion($band)); ?></p>
+            <p><strong>Latest available version:</strong> <?php echo (getLatestAvailableVersion($band)->toString()); ?></p>
         </div>
     </div>
 
