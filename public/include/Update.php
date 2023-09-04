@@ -22,7 +22,11 @@ require ABSPATH . INC . "vendor/requests/library/Requests.php";
 define("RELEASES_ENDPOINT", "https://api.github.com/repos/DSJAS/DSJAS/releases");
 define("ARCHIVE_ENDPOINT", "https://github.com/DSJAS/DSJAS/archive");
 
-
+/* Used for caching loaded data.
+ * Caching API results reduces likelyhood of ratelimits and increases
+ * performance, as the GitHub API is much slower than this page.
+ */
+static $__current_release = null;
 static $__version_information;
 
 static $dummy_release = [
@@ -236,6 +240,27 @@ function getReleases()
 
 function getCurrentRelease()
 {
+    global $__current_release;
+    if ($__current_release != null)
+        return $__current_release;
+
+    $rel = getReleases();
+    foreach ($rel as $r) {
+        if ($r->getMajor() == getMajorVersion() &&
+            $r->getMinor() == getMinorVersion() &&
+            $r->getPatch() == getPatchVersion() &&
+            $r->getBand() == getUpdateBand()) {
+
+
+            /* cache results */
+            if ($__current_release == null) {
+                $__current_release = $r;
+            }
+            return $r;
+        }
+    }
+
+    /* return blank release with correct versions as fallback */
     return new Release(array(
         getMajorVersion(),
         getMinorVersion(),
