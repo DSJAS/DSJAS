@@ -76,7 +76,7 @@ function getTheme()
                                     <tr>
                                         <td><?= $account["account_name"] ?></td>
                                         <td><?= censorAccountNumber($account["account_number"]) ?></td>
-                                        <td><?= formatCurrency($account["account_balance"]) ?></td>
+                                        <td class="<?= ($account["account_balance"] < 0) ? "text-danger" : "" ?>"><?= formatCurrency($account["account_balance"]) ?></td>
                                         <td><?= formatCurrency($account["account_balance"]) ?></td>
                                     </tr>
                                 <?php } ?>
