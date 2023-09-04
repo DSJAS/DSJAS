@@ -52,8 +52,6 @@ if (isset($_POST["changeModuleStates"])) {
         die(getCSRFFailedError());
     }
 
-    var_dump($_FILES["moduleFile"]);
-
     echo ("Received your file! Validating now...\n");
     ob_flush();
 
