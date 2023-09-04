@@ -74,6 +74,9 @@ class Release
         if (gettype($r) === "string") {
             $this->tag = "0.0.0";
             return;
+        } else if (gettype($r) === "array" && count($r) == 4) {
+            $this->tag = $r[0] . "." . $r[1] . "." . $r[2] . "-" . $r[3];
+            return;
         }
 
 
@@ -160,33 +163,48 @@ class Release
         return $this->tag;
     }
 
+    private function toBandVal($band)
+    {
+        switch ($band)
+        {
+        case "stable":
+            return 2;
+        case "beta":
+            return 1;
+        case "alpha":
+            return 0;
+        default:
+            return -1;
+        }
+    }
+
     public function matchesBand($current)
     {
-        switch ($current) {
-        case "stable":
-            return $this->is_stable;
-        case "beta":
-            return $this->is_beta;
-        case "alpha":
-            return $this->is_alpha;
-        }
+        return $this->toBandVal($this->getBand()) >= $this->toBandVal($current);
+    }
+
+    private function toValue($maj, $min, $pat)
+    {
+        $ver = (double)$maj * 1000;
+        $ver += (double)$min * 10;
+        $ver += (double)$pat;
+
+        return $ver;
     }
 
     public function laterThan($maj, $min, $pat)
     {
-        if ($this->getMajor() > $maj)
-            return true;
-
-        if ($this->getMajor() >= $maj &&
-            $this->getMinor() > $min)
-            return true;
-
-        if ($this->getMajor() >= $maj &&
-            $this->getMinor() >= $min &&
-            $this->getPatch() > $pat)
-            return true;
+        return $this->toValue($this->getMajor(), $this->getMinor(), $this->getPatch())
+            > $this->toValue($maj, $min, $pat);
 
         return false;
+    }
+
+    public function laterThanRelease($rel)
+    {
+        return $this->laterThan($rel->getMajor(),
+                                $rel->getMinor(),
+                                $rel->getPatch());
     }
 
     public function isDummy()
@@ -214,6 +232,16 @@ function getReleases()
     }
 
     return $obj;
+}
+
+function getCurrentRelease()
+{
+    return new Release(array(
+        getMajorVersion(),
+        getMinorVersion(),
+        getPatchVersion(),
+        getUpdateBand(),
+    ));
 }
 
 function getMajorVersion()
@@ -307,17 +335,18 @@ function getLatestAvailableVersion($band)
 {
     $currentBand = getUpdateBand();
     $releases = getReleases();
-
-    global $dummy_release;
-    $latest = new Release($dummy_release);
+    $latest = getCurrentRelease();
 
     foreach ($releases as $r) {
+        /* if any updates failed, return that */
+        if ($r->isDummy())
+            return $r;
+
         if ($r->matchesBand($currentBand) &&
             $r->laterThan(getMajorVersion(),
                             getMinorVersion(),
                             getPatchVersion()) &&
-            $r->laterThan($latest)) {
-
+            $r->laterThanRelease($latest)) {
             $latest = $r;
         }
     }
@@ -328,7 +357,7 @@ function getLatestAvailableVersion($band)
 function isUpdateAvailable()
 {
     $currentVersion = getVersionString();
-    $latest = getLatestAvailableVersion(getUpdateBand())->laterThan(
+    return getLatestAvailableVersion(getUpdateBand())->laterThan(
         getMajorVersion(),
         getMinorVersion(),
         getPatchVersion()
