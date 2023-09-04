@@ -35,6 +35,7 @@ static $dummy_release = [
     "url" => "https://github.com/DSJAS/DSJAS/releases",
 
     "author" => array("login" => "ejv2", "url" => "https://github.com/ejv2"),
+    "assets" => array(["name" => "dummy asset"]),
 ];
 
 /*
