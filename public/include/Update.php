@@ -87,7 +87,7 @@ class Release
         $this->id = $r["id"];
         $this->tag = $r["tag_name"];
         $this->name = $r["name"];
-        $this->notes = str_replace("\r\n", "<br>", $r["body"]);
+        $this->notes = $this->processPatchNotes($r["body"]);
         $this->pre = $r["prerelease"];
 
         $this->url = $r["url"];
@@ -113,6 +113,18 @@ class Release
         $this->is_stable = ($this->stable_zip != "");
         $this->is_beta = ($this->beta_zip != "");
         $this->is_alpha = ($this->alpha_zip != "");
+    }
+
+    private function processPatchNotes($notes)
+    {
+        $work = str_replace("\r\n", "<br>", $notes);
+
+        /* TODO: Header support (will need regex) */
+        /* $work = str_replace("#", "<h4>", $work); */
+        /* $work = str_replace("##", "<h5>", $work); */
+        /* $work = str_replace("###", "<h6>", $work); */
+
+        return $work;
     }
 
     public function getBand()
