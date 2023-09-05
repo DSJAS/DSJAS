@@ -87,7 +87,7 @@ class Release
         $this->id = $r["id"];
         $this->tag = $r["tag_name"];
         $this->name = $r["name"];
-        $this->notes = $r["body"];
+        $this->notes = str_replace("\r\n", "<br>", $r["body"]);
         $this->pre = $r["prerelease"];
 
         $this->url = $r["url"];
@@ -160,6 +160,21 @@ class Release
     public function getPatchNotes()
     {
         return $this->notes;
+    }
+
+    public function getLink()
+    {
+        return $this->url;
+    }
+
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function getAuthorLink()
+    {
+        return $this->author_url;
     }
 
     public function toString()
