@@ -114,7 +114,7 @@ def copyDefaultConfiguration(distName):
                     distName + "/src/Version.json")
 
 
-def updateVersionJSON(distName, majorVersion, minorVersion, patch, name, description, band):
+def updateVersionJSON(distName, majorVersion, minorVersion, patch, band):
     fileRead = open("dist/" + distName + "/src/Version.json", "r")
 
     jsonData = json.load(fileRead, strict=False)
@@ -122,8 +122,6 @@ def updateVersionJSON(distName, majorVersion, minorVersion, patch, name, descrip
     jsonData["version"]["major"] = majorVersion
     jsonData["version"]["minor"] = minorVersion
     jsonData["version"]["patch"] = patch
-    jsonData["version-name"] = name
-    jsonData["version-description"] = description
     jsonData["version-release-band"] = band
 
     fileRead.close()
@@ -134,14 +132,11 @@ def updateVersionJSON(distName, majorVersion, minorVersion, patch, name, descrip
 
 
 def createDummyVersion(distName):
-    jsonData = {"version": {}, "version-name": "",
-                "version-description": "", "version-release-band": ""}
+    jsonData = {"version": {}, "version-release-band": ""}
 
     jsonData["version"]["major"] = "1"
     jsonData["version"]["minor"] = "0"
     jsonData["version"]["patch"] = "0"
-    jsonData["version-name"] = ""
-    jsonData["version-description"] = ""
     jsonData["version-release-band"] = "alpha"
 
     fileWrite = open("dist/" + distName + "/src/Version.json", "w")
@@ -228,9 +223,6 @@ if __name__ == "__main__":
     versionMajor = ""
     versionMinor = ""
     patch = ""
-
-    versionName = ""
-    versionDesc = ""
     versionBand = ""
 
     print("[OK] Your package has been created")
@@ -249,10 +241,6 @@ if __name__ == "__main__":
 
     separator()
 
-    versionName = inputOrDefault(
-        input("Version name:"), initial='', default='Minor update')
-    versionDesc = inputOrDefault(
-        input("Version description:"), initial='', default='Minor improvement update')
     versionBand = inputOrDefault(
         input("Version band [alpha/beta/stable]:"), initial='', default='alpha')
 
@@ -264,7 +252,7 @@ if __name__ == "__main__":
 
     # Update version.json
     updateVersionJSON(distName, versionMajor, versionMinor,
-                      patch, versionName, versionDesc, versionBand)
+                      patch, versionBand)
 
     print("[OK] Finished writing configuration")
     separator()
@@ -274,8 +262,8 @@ if __name__ == "__main__":
 
     print("Version ID: " + versionMajor + "." +
           versionMinor + "." + patch + "-" + versionBand)
-    print("Version name: " + versionName)
-    print("Version description: " + versionDesc)
+
+    print("\n[i] As of v0.1.4, patch notes and version names are automatically fetched from the API")
 
     separator()
 
