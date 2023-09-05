@@ -383,18 +383,14 @@ function getLatestAvailableVersion($band)
 {
     $currentBand = getUpdateBand();
     $releases = getReleases();
-    $latest = getCurrentRelease();
+    $latest = new Release([0, 0, 1, "alpha"]);
 
     foreach ($releases as $r) {
         /* if any updates failed, return that */
         if ($r->isDummy())
             return $r;
 
-        if ($r->matchesBand($currentBand) &&
-            $r->laterThan(getMajorVersion(),
-                            getMinorVersion(),
-                            getPatchVersion()) &&
-            $r->laterThanRelease($latest)) {
+        if ($r->matchesBand($currentBand) && $r->laterThanRelease($latest)) {
             $latest = $r;
         }
     }
