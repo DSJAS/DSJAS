@@ -40,7 +40,8 @@ if (isInsiderBand()) {
 
 function showAheadWarning()
 {
-    if (getCurrentRelease()->laterThanRelease(getLatestAvailableVersion($band)))
+    if (getCurrentRelease()->laterThanRelease(getLatestAvailableVersion($band)) &&
+        !getLatestAvailableVersion($band)->isDummy())
         return "";
     else
         return "d-none";
