@@ -50,6 +50,28 @@ if (isInsiderBand()) {
 
     <?php require ABSPATH . INC . "components/AdminSettingsNav.php"; ?>
 
+
+    <div class="modal fade" id="patchNotes" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Patch Notes for <?= getVersionString() ?></h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <?= getVersionDescription() ?>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="admin-header col col-offset-6">DSJAS Updates</h1>
 
@@ -127,13 +149,9 @@ if (isInsiderBand()) {
                     <td class="admin-info-key">Version name:</td>
                     <td class="admin-info-value"><?php echo (getVersionName()); ?></td>
                 </tr>
-                <tr>
-                    <td class="admin-info-key">Version description:</td>
-                    <td class="admin-info-value"><?php echo (getVersionDescription()); ?></td>
-                </tr>
             </table>
 
-            <a href="https://github.com/DSJAS/DSJAS/releases">Patch notes</a>
+            <a href="#" data-toggle="modal" data-target="#patchNotes">Patch notes</a>
         </div>
     </div>
 
