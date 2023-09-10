@@ -108,6 +108,16 @@ try {
     err("Failed to copy upload archive to live server root: $e");
 }
 
+// Tell the administrator
+addAdministrationNotice("update_success", "DSJAS System Update Succeeded",
+    "A DSJAS system update was completed at " . date("H:i d M Y") . ". DSJAS was upgraded to v" . $u->toString() . " and is now the latest version. "
+    . "Your theme and module configurations have been reset to the default to avoid any incompatabilities with the new version of DSJAS.",
+
+    "/admin/settings/update.php",
+    "View Patch Notes",
+    ADMIN_NOTICE_SUCCESS
+);
+
 ?>
 
 <div class="alert alert-success">
