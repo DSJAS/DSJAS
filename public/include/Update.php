@@ -257,6 +257,31 @@ class Release
     }
 }
 
+/* Returns the UNIX timestamp time of when the API cooldown expires, or false if no cooldown is active */
+function getTimeoutExpire()
+{
+    Requests::register_autoloader();
+
+    $decoded = [];
+    try {
+        $resp = Requests::get(RELEASES_ENDPOINT);
+        if ($resp->status_code == 403 &&
+            isset($resp->headers["x-ratelimit-reset"])) {
+
+            return $resp->headers["x-ratelimit-reset"];
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+function isRateLimited()
+{
+    return getTimeoutExpire() !== false;
+}
+
 /* Returns an array of Release objects parsed from the release API */
 function getReleases()
 {
@@ -397,6 +422,10 @@ function getLatestAvailableVersion($band)
     $currentBand = getUpdateBand();
     $releases = getReleases();
     $latest = new Release([0, 0, 1, "alpha"]);
+
+    if (count($releases) == 0) {
+        return new Release([0, 0, 0, "alpha"]);
+    }
 
     foreach ($releases as $r) {
         /* if any updates failed, return that */

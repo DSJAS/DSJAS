@@ -107,10 +107,21 @@ function showAheadWarning()
 
                     <hr>
 
-                    <a class="text-secondary">DSJAS failed to contact the update server. It may be under maintainence or you may have reached your rate limit.
-                        Please try again in a few minutes. Rate limits normally take around half an hour to expire.</a>
+                    <?php if (isRateLimited()) { ?>
+                        <p class="text-secondary">
+                            <strong>GitHub API Rate Limit Reached</strong>
+                            You have reached the GitHub API rate limit. Please wait until <?= gmdate("g:i a m.d.y", getTimeoutExpire()) ?>
+                            and try again.
+                        </p>
+                    <?php } else { ?>
+                        <p class="text-secondary">
+                            <strong>Failed to Contact Update Server</strong>
+                            The releases API did not respond to the request or DSJAS could not reach the internet.
+                            Please check your server's internet connection and that GitHub is currently up correctly.
+                        </p>
+                    <?php }
 
-            <?php } else {
+            } else {
 
             if (isUpdateAvailable()) { ?>
                 <h3 class="text-warning">
