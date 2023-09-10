@@ -21,6 +21,15 @@ require_once "Util.php";
 
 require_once "vendor/requests/library/Requests.php";
 
+// Admin notice styles
+define("ADMIN_NOTICE_INFO", 0);
+define("ADMIN_NOTICE_PRIMARY", 1);
+define("ADMIN_NOTICE_SECONDARY", 2);
+define("ADMIN_NOTICE_WARNING", 3);
+define("ADMIN_NOTICE_DANGER", 4);
+define("ADMIN_NOTICE_SUCCESS", 5);
+define("ADMIN_NOTICE_DEFAULT", ADMIN_NOTICE_INFO);
+
 
 function getAdministrationNotices()
 {
