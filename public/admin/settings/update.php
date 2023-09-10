@@ -207,11 +207,9 @@ function showAheadWarning()
             <table class="table table-dark table-bordered">
                 <tr>
                     <td class="admin-info-key">Opted in to pre-release</td>
-                    <td class="admin-info-value"><?php if ($insiderBand) {
-                                                        echo ("Yes");
-} else {
-                                                     echo ("No");
-                                                 } ?></td>
+                    <td class="admin-info-value">
+                        <?= ($insiderBand) ? "Yes" : "No" ?>
+                    </td>
                 </tr>
                 <tr>
                     <td class="admin-info-key">Your current release band</td>
