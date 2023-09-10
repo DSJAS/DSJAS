@@ -85,8 +85,8 @@ function showAheadWarning()
         <h1 class="admin-header col col-offset-6">DSJAS Updates</h1>
 
         <div class="btn-toolbar mb-2 mb-md-0">
-            <p><strong>Your current version:</strong> <?php echo (getVersionString()); ?> <span class="badge <?php echo ($bandBadgeStyle); ?>">
-                    <?php echo ($band); ?></span></p>
+            <p><strong>Your current version:</strong> <?= getVersionString() ?> <span class="badge <?= $bandBadgeStyle ?>">
+                    <?= $band ?></span></p>
         </div>
     </div>
 
@@ -159,8 +159,8 @@ function showAheadWarning()
 
             <hr>
 
-            <p><strong>Current version:</strong> <?php echo (getVersionString()); ?></p>
-            <p><strong>Latest available version:</strong> <?php echo (getLatestAvailableVersion($band)->toString()); ?></p>
+            <p><strong>Current version:</strong> <?= getSemanticVersion() ?></p>
+            <p><strong>Latest available version:</strong> <?= getLatestAvailableVersion($band)->toString() ?></p>
         </div>
     </div>
 
@@ -173,11 +173,11 @@ function showAheadWarning()
             <table class="table table-dark table-bordered">
                 <tr>
                     <td class="admin-info-key">Current version:</td>
-                    <td class="admin-info-value"><?php echo (getSemanticVersion()); ?></td>
+                    <td class="admin-info-value"><?= getSemanticVersion() ?></td>
                 </tr>
                 <tr>
                     <td class="admin-info-key">Version name:</td>
-                    <td class="admin-info-value"><?php echo (getVersionName()); ?></td>
+                    <td class="admin-info-value"><?= getVersionName() ?></td>
                 </tr>
             </table>
 
@@ -215,7 +215,7 @@ function showAheadWarning()
                 </tr>
                 <tr>
                     <td class="admin-info-key">Your current release band</td>
-                    <td class="admin-info-value"><?php echo ($band); ?></td>
+                    <td class="admin-info-value"><?= $band ?></td>
                 </tr>
             </table>
         </div>
