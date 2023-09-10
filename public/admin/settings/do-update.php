@@ -86,10 +86,26 @@ if ($zip->open($archive, ZipArchive::RDONLY) !== true)
 }
 $zip->extractTo(ABSPATH . "/uploads/update/");
 
+// Copy out configuration files
+if (copy(ABSPATH . "/Config.ini", ABSPATH . "/uploads/update/Config.ini") === false)
+{
+    err("Failed to copy out current configuration");
+}
+
+// Finally, copy out to source tree
+try {
+    recurseCopy(ABSPATH . "/uploads/update/", ABSPATH);
+} catch (Exception $ex) {
+    err("Failed to copy upload archive to live server root: $e");
+}
+
 ?>
 
 <div class="alert alert-success">
     <p>
         <strong>Update Success</strong> DSJAS has been upgraded to version <?= $u->toString() ?>.
+        Your main configuration has been preserved, but theme and module configurations have been reset in case of incompatibility with the new version.
+
+        <br>
         <a href="/admin/settings/update.php">Return to Update Page</a>
 </div>

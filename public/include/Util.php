@@ -84,6 +84,55 @@ function recursiveDeleteDirectory($dir)
     }
 }
 
+function recurseCopy(
+    string $sourceDirectory,
+    string $destinationDirectory,
+    string $childFolder = ''
+) {
+    $directory = opendir($sourceDirectory);
+
+    if (is_dir($destinationDirectory) === false) {
+        mkdir($destinationDirectory);
+    }
+
+    if ($childFolder !== '') {
+        if (is_dir("$destinationDirectory/$childFolder") === false) {
+            mkdir("$destinationDirectory/$childFolder");
+        }
+
+        while (($file = readdir($directory)) !== false) {
+            if ($file === '.' || $file === '..') {
+                continue;
+            }
+
+            if (is_dir("$sourceDirectory/$file") === true) {
+                recurseCopy("$sourceDirectory/$file", "$destinationDirectory/$childFolder/$file");
+            } else {
+                copy("$sourceDirectory/$file", "$destinationDirectory/$childFolder/$file");
+            }
+        }
+
+        closedir($directory);
+
+        return;
+    }
+
+    while (($file = readdir($directory)) !== false) {
+        if ($file === '.' || $file === '..') {
+            continue;
+        }
+
+        if (is_dir("$sourceDirectory/$file") === true) {
+            recurseCopy("$sourceDirectory/$file", "$destinationDirectory/$file");
+        }
+        else {
+            copy("$sourceDirectory/$file", "$destinationDirectory/$file");
+        }
+    }
+
+    closedir($directory);
+}
+
 function dsjas_alert($title, $body = "", $style = "info", $dismissible = false, $appendCSS = "")
 {
     $alertClass = "alert alert-" . $style . " " . $appendCSS;
