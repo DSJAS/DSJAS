@@ -242,6 +242,19 @@ class Release
     {
         return !$this->laterThan(0, 0, 0);
     }
+
+    public function getDownload($band)
+    {
+        if ($band == "stable" && $this->is_stable) {
+            return $this->stable_zip;
+        } elseif ($band == "beta" && $this->is_beta) {
+            return $this->beta_zip;
+        } elseif ($band == "alpha" && $this->is_alpha) {
+            return $this->alpha_zip;
+        } else {
+            return false;
+        }
+    }
 }
 
 /* Returns an array of Release objects parsed from the release API */

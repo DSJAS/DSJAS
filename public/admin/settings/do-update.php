@@ -27,35 +27,43 @@ ignore_user_abort(true); // Don't allow the user to cancel this install by closi
 set_time_limit(0); // Don't stop the script if it takes too long
 ob_start(); // Enable output buffering
 
+function err($error)
+{ ?>
+    <div class="alert alert-danger">
+        <p>
+            <strong>Update Failure</strong> A fatal error ocurred while downloading the update (detail: <?= $error ?>).
+            <a href="/admin/settings/update.php">Return to Update Page</a>
+        </p>
+    </div>
+<?php
+    die();
+}
+
 if (!isUpdateAvailable()) {
-    die("Already up to date");
+    err("Already up to date");
 }
 
 // Preliminary info
-$major = getMajorVersion();
-$minor = getMinorVersion();
-$patch = getPatchVersion();
-$band = getUpdateBand();
+$rel = getCurrentRelease();
+$u = getLatestAvailableVersion($rel->getBand());
+$url = $u->getDownload($rel->getBand());
 
-$u = getLatestAvailableVersion($band);
-$uMajor = $u[0];
-$uMinor = $u[1];
-$uPatch = $u[2];
-
-// Download update archive
-$archiveURL = getArchiveLocation($uMajor, $uMinor, $uPatch, $band);
+if ($url === false)
+{
+    err("Given release contained no matching download archive");
+}
 
 Requests::register_autoloader();
 try {
-    $downloadRequest = Requests::get($archiveURL);
+    $downloadRequest = Requests::get($url);
     $fileContent = $downloadRequest->body;
 } catch (Requests_Exception $e) {
-    die("Download of update archive failed: $e");
+    err("Download of update archive failed: $e");
 }
 
 if (!$downloadRequest->success || $downloadRequest->status_code != 200)
 {
-    die("Download of update archive failed");
+    err("Download of update archive failed");
 }
 
 // Dump file
@@ -63,16 +71,25 @@ $archive = tempnam("", "dsjasupdate");
 $fh = fopen($archive, "w");
 fputs($fh, $fileContent);
 
-// Make Phar detect it
-$newArchive = "$archive.tar.gz";
-fclose($fh);
-rename($archive, $newArchive);
+// Clean and make update dir
+if (is_dir(ABSPATH . "/uploads/update/"))
+{
+    recursiveDeleteDirectory(ABSPATH . "/uploads/update/");
+}
+mkdir(ABSPATH . "/uploads/update/");
 
-// Extract tar file
-$tarPath = "$archive.tar";
-$tar = new PharData($newArchive);
-$tar->decompress();
+// Open and extract archive
+$zip = new ZipArchive();
+if ($zip->open($archive, ZipArchive::RDONLY) !== true)
+{
+    err("Downloaded zip archive was invalid");
+}
+$zip->extractTo(ABSPATH . "/uploads/update/");
 
-// Finally, get sources
-$src = new PharData($tarPath);
-$src->extractTo(dirname($archive), null, true);
+?>
+
+<div class="alert alert-success">
+    <p>
+        <strong>Update Success</strong> DSJAS has been upgraded to version <?= $u->toString() ?>.
+        <a href="/admin/settings/update.php">Return to Update Page</a>
+</div>
