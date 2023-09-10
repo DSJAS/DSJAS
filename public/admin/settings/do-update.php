@@ -36,6 +36,15 @@ function err($error)
         </p>
     </div>
 <?php
+
+    addAdministrationNotice("update_failure", "DSJAS System Update Failed",
+        "A DSJAS system update was attempted at " . date("H:i d/M/Y") . ". A fatal error ocurred and no upgrade was performed. The current system version was unaffected. "
+        . "Error reason: " . $error,
+
+        "/admin/settings/update.php",
+        "Update Options",
+        ADMIN_NOTICE_WARNING
+    );
     die();
 }
 
