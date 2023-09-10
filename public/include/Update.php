@@ -56,6 +56,7 @@ class Release
     private $pre;
 
     private $url;
+    private $human_url;
 
     private $author;
     private $author_url;
@@ -91,6 +92,7 @@ class Release
         $this->pre = $r["prerelease"];
 
         $this->url = $r["url"];
+        $this->human_url = $r["html_url"];
 
         $this->author = $r["author"]["login"];
         $this->author_url = $r["author"]["url"];
@@ -174,9 +176,14 @@ class Release
         return $this->notes;
     }
 
-    public function getLink()
+    public function getAPILink()
     {
         return $this->url;
+    }
+
+    public function getLink()
+    {
+        return $this->human_url;
     }
 
     public function getAuthor()

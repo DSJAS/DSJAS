@@ -134,7 +134,7 @@ function showAheadWarning()
 
                     <div class="btn-group">
                         <a class="btn btn-primary" href="/admin/settings/do-update.php">Update now</a>
-                        <a class="btn btn-secondary" href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">More information</a>
+                        <a class="btn btn-secondary" href="<?= getLatestAvailableVersion($band)->getLink() ?>">More information</a>
                     </div>
             <?php } else { ?>
                 <h3 class="text-success">
