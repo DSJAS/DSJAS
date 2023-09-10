@@ -1,40 +1,31 @@
-# Performing an update - *user manual*
+# Performing a manual update - *user manual*
 
 At regular intervals throughout development, DSJAS will have updates rolled out to users. When an update occurs, DSJAS will detect it and inform administrators on the site that a new version is available. When this happens, it is very important to upgrade your version as soon as possible - allowing you to get the latest features and important security improvements.
 
-However, DSJAS does not have the capability to automatically update. To perform an update, you will need to download and install an update package manually.
+Most of the time, this can be performed automatically by DSJAS, which will obtain the update archive and extract it into the live server directory, thereby upgrading all files which reside in there. However, should this process fail for whatever reason, your site may be left in an intermediate or unusable state and will require intervention to upgrade. Additionally, some breaking changes may require additional actions, such as resetting the database or configuration files, which must be performed manually.
 
-## Obtaining an update package
+Should any of this occur, your best bet is to back up your data and perform a manual update.
 
-To download an update package for your release band and required version, click the *Download* button in the admin panel's update section. This will take you to the usual download page for DSJAS releases. Download the usual DSJAS package (zip file) from the required band. You can change your update band and opt out of pre-releases by downloading a stable release package. This will automatically opt your DSJAS install out of future pre-releases.
+## Upgrading the site
 
-## Backup your configuration
+Upgrading the site is only supported to be done automatically by the auto update system. Simply click "Update Now" on the update screen and follow any on screen instructions. If the update succeeds, proceed to the following steps.
 
-When installing the update package, your configuration will be overwritten and reset to default. Unless an update package specifically states that you **must** re-install the program, you should backup your configuration before continuing to install.
+If you are recovering from a partial upgrade, manually download the archive and extract the files into the DSJAS install directory. This will reset your site configuration but will recover a broken site from a partial upgrade. Should you wish to preserve your configuration files, simply copy the files you wish to preserve out of the DSJAS install folder before extracting the archive.
 
-You can do this by copying the following files to a separate, temporary location on your filesystem:
+## Upgrading your database
 
-* **In the root of the install:** Config.ini
-* **In the folder *admin/site/UI*:** config.ini
-* **In the folder *admin/site/modules*:** config.ini
-* **In the folder *admin/site/extensions*:** config.ini
+DSJAS will require that you reset your database such that no tables exist under the install database before resetting from an upgrade. This means that, without manual intervention, all data will be lost. This **will never** happen automatically and data is never erased by default. However, failure to upgrade the database of your site after an upgrade may result in malfunctions and loss of operation in hard to debug scenarios.
 
-You may also wish to backup the contents of the admin data directory (which contains non-essential admin data, such as notifications). This is located in the folder *admin/site/data*.
+To backup your database, use a tool such as PHPMyAdmin to backup the data from existing tables and save this as an SQL file on your computer. Then, drop all tables in the database. Save the SQL file from the first step for later reference. Do not yet do anything with this file.
 
-Please note that it is not necessary to back up your database or custom themes/modules/extensions; the update should not affect either of these in any way.
+## Upgrading your configuration
 
-## Installation
+It is unlikely that any configuration need be reset other than the configuration in the root. Simply delete this file and copy the default configuration from [here](https://github.com/DSJAS/DSJAS/blob/master/scripts/install/Config.ini). Any of the other configuration files in that directory on GitHub can also be used to reset the configs to defaults.
 
-Installing the update package should be relatively simple. After the zip file has completed download, you should extract the contained files to a temporary directory. The contained files will be all you need to update.
+When re-navigating to your site through a browser, it will have been reset to the first stage of installation. Simply follow through the installer and your upgrade will be complete.
 
-After these files have extracted, copy them to the existing DSJAS install directory, ensuring that whatever software you are using to copy them is overwriting the existing files.
+## Restoring your database
 
-**Do not yet navigate to DSJAS in a browser!** Your site will now be broken until you restore the configuration you backed up in the previous step.
+Execute the SQL backup scripts you saved in the database upgrade stage for each table you backed up. This should restore any data you had in the tables before the upgrade to the database.
 
-## Restore configuration
-
-Now, you can copy back the configuration files you backed up. This will restore all your personal settings. The files should be copied back to the locations you took them from. They **will overwrite something already there** - this is normal and is just overwriting the default settings shipped with the program.
-
-After you have done this, you can navigate to the site in your browser and everything should work fine. In most cases, your login state will be preserved too, meaning you will not have to sign in again.
-
-To verify that everything is working as expected and that there are no more updates to install, it is a good idea to check for updates using the update menu. It will inform you if there are any more updates required to install (sometimes this will happen and you will need to install multiple).
+If you encounter any issues doing this, the schema may have changed to the point where your data is no longer valid in the database. This is rare but, unfortunately, could occur occasionally. This is most likely to occur across major releases, but by no means always.
