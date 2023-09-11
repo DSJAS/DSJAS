@@ -4,7 +4,5 @@
         "minor": "0",
         "patch": "1"
     },
-    "version-name": "Latest stable",
-    "version-description": "Initial version",
     "version-release-band": "alpha"
 }

@@ -38,6 +38,15 @@ if (isInsiderBand()) {
     $bandBadgeStyle = "badge-success";
 }
 
+function showAheadWarning()
+{
+    if (getCurrentRelease()->laterThanRelease(getLatestAvailableVersion(getUpdateBand())) &&
+        !getLatestAvailableVersion(getUpdateBand())->isDummy())
+        return "";
+    else
+        return "d-none";
+}
+
 ?>
 
 <html>
@@ -50,20 +59,35 @@ if (isInsiderBand()) {
 
     <?php require ABSPATH . INC . "components/AdminSettingsNav.php"; ?>
 
+
+    <div class="modal fade" id="patchNotes" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Patch Notes for <?= getVersionString() ?></h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <?= getVersionDescription() ?>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="admin-header col col-offset-6">DSJAS Updates</h1>
 
         <div class="btn-toolbar mb-2 mb-md-0">
-            <p><strong>Your current version:</strong> <?php echo (getVersionString()); ?> <span class="badge <?php echo ($bandBadgeStyle); ?>">
-                    <?php echo ($band); ?></span></p>
+            <p><strong>Your current version:</strong> <?= getVersionString() ?> <span class="badge <?= $bandBadgeStyle ?>">
+                    <?= $band ?></span></p>
         </div>
-    </div>
-
-    <div class="alert alert-warning">
-        <p><strong>Attention:</strong> DSJAS does not yet contain an automatic updater. This means that you will need
-            to download and install updates yourself. For more information and specific instructions, please see the
-            <a href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">upgrade guide</a>.
-        </p>
     </div>
 
     <div class="card bg-light admin-panel">
@@ -72,7 +96,7 @@ if (isInsiderBand()) {
         </div>
 
         <div class="card-body">
-            <?php if (getLatestAvailableVersion($band) == "0.0.0") { ?>
+            <?php if (getLatestAvailableVersion($band)->isDummy()) { ?>
 
 
                 <h3 class="text-danger">
@@ -83,9 +107,21 @@ if (isInsiderBand()) {
 
                     <hr>
 
-                    <a class="text-secondary">DSJAS failed to contact the update server. It may be under maintainence, down or your server may have lost internet connection</a>
+                    <?php if (isRateLimited()) { ?>
+                        <p class="text-secondary">
+                            <strong>GitHub API Rate Limit Reached</strong>
+                            You have reached the GitHub API rate limit. Please wait until <?= gmdate("g:i a m.d.y", getTimeoutExpire()) ?>
+                            and try again.
+                        </p>
+                    <?php } else { ?>
+                        <p class="text-secondary">
+                            <strong>Failed to Contact Update Server</strong>
+                            The releases API did not respond to the request or DSJAS could not reach the internet.
+                            Please check your server's internet connection and that GitHub is currently up correctly.
+                        </p>
+                    <?php }
 
-            <?php } else {
+            } else {
 
             if (isUpdateAvailable()) { ?>
                 <h3 class="text-warning">
@@ -97,8 +133,8 @@ if (isInsiderBand()) {
                     <hr>
 
                     <div class="btn-group">
-                        <a class="btn btn-primary" href="https://github.com/DSJAS/DSJAS/releases">Download update</a>
-                        <a class="btn btn-secondary" href="https://github.com/DSJAS/DSJAS/blob/master/docs/administration/Performing%20an%20update.md">More information</a>
+                        <a class="btn btn-primary" href="/admin/settings/do-update.php">Update now</a>
+                        <a class="btn btn-secondary" href="<?= getLatestAvailableVersion($band)->getLink() ?>">More information</a>
                     </div>
             <?php } else { ?>
                 <h3 class="text-success">
@@ -111,10 +147,20 @@ if (isInsiderBand()) {
             } ?>
 
 
+            <span class="text-warning <?= showAheadWarning() ?>">
+                <br>
+
+                <svg class="bi bi-exclamation-triangle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8.982 1.566a1.13 1.13 0 00-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5a.905.905 0 00-.9.995l.35 3.507a.552.552 0 001.1 0l.35-3.507A.905.905 0 008 5zm.002 6a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+                </svg>
+
+                Local version is newer than latest available
+            </span>
+
             <hr>
 
-            <p><strong>Current version:</strong> <?php echo (getVersionString()); ?></p>
-            <p><strong>Latest available version:</strong> <?php echo (getLatestAvailableVersion($band)); ?></p>
+            <p><strong>Current version:</strong> <?= getSemanticVersion() ?></p>
+            <p><strong>Latest available version:</strong> <?= getLatestAvailableVersion($band)->toString() ?></p>
         </div>
     </div>
 
@@ -127,19 +173,15 @@ if (isInsiderBand()) {
             <table class="table table-dark table-bordered">
                 <tr>
                     <td class="admin-info-key">Current version:</td>
-                    <td class="admin-info-value"><?php echo (getSemanticVersion()); ?></td>
+                    <td class="admin-info-value"><?= getSemanticVersion() ?></td>
                 </tr>
                 <tr>
                     <td class="admin-info-key">Version name:</td>
-                    <td class="admin-info-value"><?php echo (getVersionName()); ?></td>
-                </tr>
-                <tr>
-                    <td class="admin-info-key">Version description:</td>
-                    <td class="admin-info-value"><?php echo (getVersionDescription()); ?></td>
+                    <td class="admin-info-value"><?= getVersionName() ?></td>
                 </tr>
             </table>
 
-            <a href="https://github.com/DSJAS/DSJAS/releases">Patch notes</a>
+            <a href="#" data-toggle="modal" data-target="#patchNotes">Patch notes</a>
         </div>
     </div>
 
@@ -165,15 +207,13 @@ if (isInsiderBand()) {
             <table class="table table-dark table-bordered">
                 <tr>
                     <td class="admin-info-key">Opted in to pre-release</td>
-                    <td class="admin-info-value"><?php if ($insiderBand) {
-                                                        echo ("Yes");
-} else {
-                                                     echo ("No");
-                                                 } ?></td>
+                    <td class="admin-info-value">
+                        <?= ($insiderBand) ? "Yes" : "No" ?>
+                    </td>
                 </tr>
                 <tr>
                     <td class="admin-info-key">Your current release band</td>
-                    <td class="admin-info-value"><?php echo ($band); ?></td>
+                    <td class="admin-info-value"><?= $band ?></td>
                 </tr>
             </table>
         </div>
