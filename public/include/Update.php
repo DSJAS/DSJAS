@@ -121,12 +121,20 @@ class Release
 
     private function processPatchNotes($notes)
     {
-        $work = str_replace("\r\n", "<br>", $notes);
+        /* proper line endings */
+        $work = str_replace("\r\n", "\n<br>\n", $notes);
 
-        /* TODO: Header support (will need regex) */
-        /* $work = str_replace("#", "<h4>", $work); */
-        /* $work = str_replace("##", "<h5>", $work); */
-        /* $work = str_replace("###", "<h6>", $work); */
+        /* blockquotes */
+        $work = preg_replace("/\n> (.*)\n<br>\n/", '<blockquote>${1}</blockquote>', $work);
+
+        /* headers */
+        $work = preg_replace("/\n###(.*)\n<br>\n/", '<strong>${1}</strong>', $work);
+        $work = preg_replace("/\n##(.*)\n<br>\n/", '<h5>${1}</h5>', $work);
+        $work = preg_replace("/\n?#(.*)\n<br>\n/", '<h5>${1}</h5>', $work);
+
+        /* embedded formatting */
+        $work = preg_replace("/\*\*([^\*]*)\*\*/", '<strong>${1}</strong>', $work);
+        $work = preg_replace("/``([^`]*)``/", '<code>${1}</code>', $work);
 
         return $work;
     }
