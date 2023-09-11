@@ -54,8 +54,8 @@ if (!isUpdateAvailable()) {
 
 // Preliminary info
 $rel = getCurrentRelease();
-$u = getLatestAvailableVersion($rel->getBand());
-$url = $u->getDownload($rel->getBand());
+$u = getLatestAvailableVersion(getUpdateBand());
+$url = $u->getDownload(getUpdateBand());
 
 if ($url === false)
 {
