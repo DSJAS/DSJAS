@@ -331,7 +331,7 @@ function getCurrentRelease()
         if ($r->getMajor() == getMajorVersion() &&
             $r->getMinor() == getMinorVersion() &&
             $r->getPatch() == getPatchVersion() &&
-            $r->getBand() == getUpdateBand()) {
+            $r->matchesBand(getUpdateBand())) {
 
 
             /* cache results */
