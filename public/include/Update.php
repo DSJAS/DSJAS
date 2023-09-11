@@ -27,6 +27,8 @@ define("ARCHIVE_ENDPOINT", "https://github.com/DSJAS/DSJAS/archive");
  * performance, as the GitHub API is much slower than this page.
  */
 static $__current_release = null;
+static $__releases_cache = null;
+
 static $__version_information;
 
 static $dummy_release = [
@@ -292,6 +294,14 @@ function isRateLimited()
 /* Returns an array of Release objects parsed from the release API */
 function getReleases()
 {
+    global $__releases_cache;
+
+    /* return cached copy if available */
+    if ($__releases_cache != null && count($__releases_cache) != 0)
+        return $__releases_cache;
+
+
+    /* else hit API */
     Requests::register_autoloader();
 
     $decoded = [];
@@ -302,12 +312,12 @@ function getReleases()
         return [];
     }
 
-    $obj = [];
+    $__releases_cache = [];
     foreach ($decoded as $d) {
-        $obj[] = new Release($d);
+        $__releases_cache[] = new Release($d);
     }
 
-    return $obj;
+    return $__releases_cache;
 }
 
 function getCurrentRelease()
