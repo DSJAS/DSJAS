@@ -13,7 +13,7 @@ DSJAS is a PHP application designed to mimic a real banking site on your compute
 * Built-in themes which emulate popular existing solutions, such as Felicity Bank
 * Extension support - for adding additional features via extensions by other users like you
 
-And, **it's free** with no charge for downloads or any additional content. It's also free as in freedom, being licensed under a GPL compatable licence.
+And, **it's free** with no charge for downloads or any additional content. It's also free as in freedom, being licensed under the very permissive MIT licence. We welcome and encourage contributions and forks, and we are always grateful for all the support from the community.
 
 **Happy scambaiting!**
 
