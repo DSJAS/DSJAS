@@ -148,8 +148,6 @@ If you still get a white screen after re-installing, re-install again but don't 
 
 If you get a timeout error, make sure your webserver **and database server** are running. If you get connection refused error, make sure Apache (which is the DSJAS webserver) can access the internet and your firewall isn't blocking it. Also, refer to the previous step about servers being on.
 
-Finally, sometimes PHP has an annoying habit of failing to load a script properly if the webserver has been idle for an extended period of time. If you have left the server idle (in other words, without accepting any requests) for a while, refresh the page as second time. If the page refreshes with the content loading correctly, you can take out your frustration on PHP.
-
 ## The site fails to load! It says something about "require\_once, failed to open stream"?
 
 Don't panic! Make sure you cloned the site with the git ``--recursive`` option, or all the submodules will not be cloned along with the site, making some required libraries be absent.
