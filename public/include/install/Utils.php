@@ -19,6 +19,11 @@
 require_once "Database.php";
 require_once ABSPATH . INC . "Customization.php";
 
+function verifyConfig()
+{
+    return file_exists(ABSPATH . "/Config.ini");
+}
+
 function verifySubmodules()
 {
     return file_exists(ABSPATH . INC . "/vendor/hooks/src/gburtini/Hooks/Hooks.php") &&
@@ -77,7 +82,7 @@ function redirectToInstall($configuration)
 
 function findRedirectLocation($configuration)
 {
-    if (!$configuration["installed"]) {
+    if ($configuration === false || !$configuration["installed"]) {
         return "/admin/install/install.php";
     } elseif (!$configuration["owner_verified"]) {
         return "/admin/install/verification.php";

@@ -22,6 +22,22 @@ define("STEP_URL", "/admin/install/install.php");
 
 require "install_bootstrap.php";
 
+/* check that config is present */
+if (!verifyConfig()) {
+?>
+    <div class="alert alert-danger">
+        <strong>Missing Configuration File</strong> You are running a development version of DSJAS and need to generate the default configuration before proceeding.
+        Please see <a href="https://github.com/DSJAS/DSJAS/blob/master/docs/install/For%20developers.md">
+            the documentation</a> for more information.
+    </div>
+    <div class="alert alert-info mt-1">
+        <strong>Not a developer?</strong> You may have downloaded the wrong package. Please re-download DSJAS from the
+            <a href="https://github.com/DSJAS/DSJAS/releases">official release page</a>.
+    </div>
+<?php
+    die();
+}
+
 /* check submodules are present */
 if (!verifySubmodules()) {
 ?>
