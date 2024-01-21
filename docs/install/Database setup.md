@@ -118,3 +118,7 @@ The exact error message will most likely give instructions on what to do. If the
 ### Clicking on submit doesn't do anything!
 
 Don't worry, there is something happening. DSJAS needs to contact the server a few times to perform this section in the install. Sadly, some servers and internet connections are faster than others. Nothing will seem to be happening for the time where DSJAS is contacting the server. Just sit tight and we'll handle it for you.
+
+---
+
+[< Previous](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Verifying%20ownership.md)  |  [Next >](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Final%20steps.md)
