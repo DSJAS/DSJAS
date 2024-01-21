@@ -44,7 +44,6 @@ if (!verifyPHP()) {
 
         <ul>
             <li>mysqli - for database connections</li>
-            <li>sodium - for password hashing</li>
             <li>exif - for upload handling</li>
             <li>curl - for theme archive downloads</li>
             <li>intl - for currency formatting</li>

@@ -30,7 +30,6 @@ function verifySubmodules()
  *
  * Extensions to verify:
  *      - mysqli
- *      - sodium
  *      - exif
  *      - curl
  *      - intl
@@ -40,10 +39,6 @@ function verifyPHP()
 {
     /* mysqli */
     if (!function_exists("mysqli_connect"))
-        return false;
-
-    /* sodium */
-    if (!function_exists("sodium_add"))
         return false;
 
     /* exif */

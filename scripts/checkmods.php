@@ -28,10 +28,6 @@ function verifyPHP()
     if (!function_exists("mysqli_connect"))
         return "myqsli";
 
-    /* sodium */
-    if (!function_exists("sodium_add"))
-        return "sodium";
-
     /* exif */
     if (!function_exists("getimagesize") || !function_exists("exif_imagetype"))
         return "exif";
