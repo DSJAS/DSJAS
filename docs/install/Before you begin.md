@@ -99,3 +99,7 @@ Now, the program is unpacked and pretty much installed. Before you can use the p
 The next chapter in the install documentation will describe how to run the web installer.
 
 **Well done!** You have completed the "Before you begin" preparation.
+
+---
+
+[Next >](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Getting%20started.md)

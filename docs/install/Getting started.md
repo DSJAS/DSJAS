@@ -32,3 +32,7 @@ If you have succeeded in installing the previous steps, you should be redirected
 ---
 
 Congratulations! You are now ready for the web installer.
+
+---
+
+[< Previous](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Before%20you%20begin.md)  |  [Next >](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Verifying%20ownership.md)

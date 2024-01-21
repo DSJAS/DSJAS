@@ -58,3 +58,7 @@ Be warned, however, that you will not be able to access the admin dashboard unti
 ## Finishing
 
 Once you click confirm, DSJAS will create the account and write the settings to disk. **You have now completed installation.**
+
+---
+
+[< Previous](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Database%20setup.md)  |  [Next >](https://github.com/DSJAS/DSJAS/blob/master/docs/install/First%20steps%20in%20the%20program.md)

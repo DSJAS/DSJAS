@@ -67,3 +67,7 @@ Don't delete the token file after you copy it. We still need access to it to ver
 **Don't panic!** The token is actually still there until verification completes. You can just copy it again and continue with the process. The instructions state the following:
 
 ![Retrieval instructions](https://i.imgur.com/dkqehzq.png)
+
+---
+
+[< Previous](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Getting%20started.md)  |  [Next >](https://github.com/DSJAS/DSJAS/blob/master/docs/install/Database%20setup.md)
