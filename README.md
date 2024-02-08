@@ -15,6 +15,8 @@ DSJAS is a PHP application designed to mimic a real banking site on your compute
 
 And, **it's free** with no charge for downloads or any additional content. It's also free as in freedom, being licensed under the very permissive MIT licence. We welcome and encourage contributions and forks, and we are always grateful for all the support from the community.
 
+If you wish to financially support the project, please feel free to make a donation to the developers via their GitHub donation links (or via <https://paypal.me/ejv2m>). Of course, direct support via code contributions are equally appreciated and we thank everybody for their kind support.
+
 **Happy scambaiting!**
 
 ## Requirements
@@ -65,3 +67,7 @@ After you have done this, you will notice that the site still doesn't load and t
 After you have done this and followed any instructions the script gives you, you should be ready for the web installer. Configure your webserver so that the *public* directory is the server root (**not** the root of the repository) and navigate to ```localhost``` in your browser. You should see the installer welcome page.
 
 You're set up and ready to go!
+
+## Support the Project
+
+Of course, support for the project via contributions on GitHub are very welcome. You can also support by developing a th
