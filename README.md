@@ -1,5 +1,7 @@
 # DSJAS - *Dave Smith Johnson & Son*
 
+[![Downloads](https://img.shields.io/github/v/tag/dsjas/dsjas)](https://github.com/dsjas/dsjas/releases) [![Donations](https://img.shields.io/liberapay/receives/ejv2.svg?logo=liberapay)](https://liberapay.com/ejv2/donate) [![Sponsors](https://img.shields.io/github/sponsors/ejv2?logo=github)](https://github.com/sponsors/ejv2)
+
 ![DSJAS logo](https://dsjas.github.io/assets/scammer-logo-sm.jpg)
 
 **DSJAS: A fully featured bait bank with all the customization you could ask for**
