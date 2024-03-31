@@ -48,14 +48,27 @@ function getTheme()
         <?php include ABSPATH . getRawThemeContent("DashboardNav.php", "components/"); ?>
 
         <?php if (isset($_GET["transferError"])) {
-
+        /* Null transfer */
+        if ($_GET["transferError"] == 1) { ?>
+            <div class="alert alert-warning">
+                You must transfer a valid amount between valid accounts. Please try again.
+            </div>
+        <?php
         /* disabled account */
-        if ($_GET["transferError"] == 2) { ?>
+        } elseif ($_GET["transferError"] == 2) { ?>
             <div class="alert alert-danger">
                 <p><strong>Fraud Alert</strong> The selected account has been flagged due to possible fraudulent activity. Please <a href="/support/Contact">contact support</a>.
                     <i>Your account has not been charged and the fraud team has been notified.</i>
                 </p>
             </div>
+        <?php
+        /* Insufficient funds */
+        } elseif ($_GET["transferError"] == 3) { ?>
+        <div class="alert alert-danger">
+            <p><strong>Insufficient Funds</strong> There are not enough funds in the source account to perform the transaction. Please check your balance and try again.
+                <i>Your account has not been charged</i>
+            </p>
+        </div>
         <?php
         /* probably a mysql error */
         } else { ?>
