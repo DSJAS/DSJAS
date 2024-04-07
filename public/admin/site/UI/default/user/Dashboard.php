@@ -82,7 +82,7 @@ function getTheme()
 
                             <div class="text-center">
                                 <a href="https://sourceforge.net/">
-                                    <img src="<?php echo getRawThemeContent("download-app.png", "assets/"); ?>" alt="Get the app today" width="200" height="150">
+                                    <img src="<?php echo getRawThemeContent("download-app.png", "assets/"); ?>" alt="Get the app today" width="200">
                                 </a>
                             </div>
 
