@@ -71,6 +71,19 @@ if (isset($_GET["performTransfer"])) {
         die();
     }
 
+    // Source and destination are the same
+    if ($_GET["originAccount"] == $_GET["destinationAccount"]) {
+        header("Location: /user/Transfer.php?transferError=1");
+        die();
+    }
+
+    // Insufficient funds
+    $sourceAccountBalance = getAccountBalance($_GET["originAccount"]);
+    if ($sourceAccountBalance < $_GET["amount"]) {
+        header("Location: /user/Transfer.php?transferError=3");
+        die();
+    }
+
     if (isset($_GET["description"]) && $_GET["description"] != null) {
         performTransaction($_GET["originAccount"], $_GET["destinationAccount"], $_GET["amount"], $_GET["description"]);
     } else {

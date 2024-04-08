@@ -26,18 +26,24 @@ define("ACCOUNT_TYPES", ["current", "savings", "shared", "misc"]);
 
 define("TRANSACTION_TYPES", ["transfer", "withdrawal", "purchase", "misc"]);
 
+function createDatabaseInstance()
+{
+    $configuration = loadDatabaseInformation();
+
+    $database = new DB(
+        $configuration["server_hostname"],
+        $configuration["database_name"],
+        $configuration["username"],
+        $configuration["password"]
+    );
+
+    return $database;
+}
 
 function performTransaction($sourceAccount, $destAccount, $amount, $description = "Account transfer", $type = "transfer")
 {
     // Insert transaction into the transactions table
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $db_hostname = $configuration["server_hostname"];
-    $db_dbname = $configuration["database_name"];
-    $db_username = $configuration["username"];
-    $db_password = $configuration["password"];
-
-    $database = new DB($db_hostname, $db_dbname, $db_username, $db_password);
+    $database = createDatabaseInstance();
 
     $query = new PreparedStatement(
         "INSERT INTO `transactions` (`origin_account_id`, `dest_account_id`, `transaction_amount`, `transaction_description`, `transaction_type`) VALUES (?, ?, ?, ?, ?)",
@@ -50,7 +56,7 @@ function performTransaction($sourceAccount, $destAccount, $amount, $description 
 
     // Subtract the balance from origin account
     $database->clearQuery();
-
+    
     $query = new PreparedStatement(
         "UPDATE `accounts` SET `account_balance` = (`account_balance` - ?) WHERE `account_identifier` = ?",
         [$amount, $sourceAccount],
@@ -75,14 +81,7 @@ function performTransaction($sourceAccount, $destAccount, $amount, $description 
 
 function drainAccount($accountID)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new PreparedStatement(
         "UPDATE `accounts` SET `account_balance` = 0.00 WHERE `account_identifier` = ?",
@@ -98,14 +97,7 @@ function drainAccount($accountID)
 
 function disableAccount($accountID)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new PreparedStatement(
         "UPDATE `accounts` SET `account_disabled` = 1 WHERE `account_identifier` = ?",
@@ -121,14 +113,7 @@ function disableAccount($accountID)
 
 function enableAccount($accountID)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new PreparedStatement(
         "UPDATE `accounts` SET `account_disabled` = 0 WHERE `account_identifier` = ?",
@@ -144,14 +129,7 @@ function enableAccount($accountID)
 
 function accountEnabled($accountID)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new PreparedStatement(
         "SELECT `account_disabled` FROM `accounts` WHERE `account_identifier` = ?",
@@ -167,14 +145,7 @@ function accountEnabled($accountID)
 
 function userOwnsAccount($accountID, $userID)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $db_hostname = $configuration["server_hostname"];
-    $db_dbname = $configuration["database_name"];
-    $db_username = $configuration["username"];
-    $db_password = $configuration["password"];
-
-    $database = new DB($db_hostname, $db_dbname, $db_username, $db_password);
+    $database = createDatabaseInstance();
 
     $query = new SimpleStatement("SELECT `associated_online_account_id` FROM `accounts` WHERE `account_identifier` = $accountID");
     $database->unsafeQuery($query);
@@ -190,14 +161,7 @@ function userOwnsAccount($accountID, $userID)
 
 function getAccountNumber($id)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new SimpleStatement("SELECT `account_number` FROM `accounts` WHERE `account_identifier` = $id");
 
@@ -206,16 +170,23 @@ function getAccountNumber($id)
     return $query->result[0]["account_number"];
 }
 
+function getAccountBalance($accountID) 
+{
+    $database = createDatabaseInstance();
+
+    $query = new PreparedStatement("SELECT account_balance FROM accounts WHERE account_identifier = ?", array($accountID), "i");
+
+    $database->prepareQuery($query);
+    $database->query();
+
+    $result = $query->result;
+
+    return $result[0]['account_balance'];
+}
+
 function getNumberOfAccounts()
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new SimpleStatement("SELECT * FROM `accounts`");
 
@@ -226,14 +197,7 @@ function getNumberOfAccounts()
 
 function getAllAccounts()
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new SimpleStatement("SELECT * FROM `accounts`");
 
@@ -244,14 +208,7 @@ function getAllAccounts()
 
 function getAllAccountsForUser($userID)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new PreparedStatement(
         "SELECT * FROM `accounts` WHERE `associated_online_account_id` = ?",
@@ -267,14 +224,7 @@ function getAllAccountsForUser($userID)
 
 function getAllTransactions()
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new SimpleStatement("SELECT * FROM `transactions`");
 
@@ -322,14 +272,7 @@ function getAllTransactionsForUser($userID)
 
 function createAccount($accountName, $associatedID, $type, $holderName = "John Doe", $disabled = false, $initialBalance = 125.50)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $accountIdentifier = generateRandomIdentifier(9);
 
@@ -376,14 +319,7 @@ function genRandomBankAccounts($userID, $amount = 3)
 
 function associateAccountWithUser($userID, $accountID)
 {
-    $configuration = parse_ini_file(ABSPATH . "/Config.ini");
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     $query = new PreparedStatement(
         "UPDATE `accounts` SET `associated_online_account_id` = ? WHERE `account_identifier` = ?",
@@ -420,14 +356,7 @@ function closeAccount($accountID)
 
 function reverseTransaction($id, $refund = true)
 {
-    $configuration = loadDatabaseInformation();
-
-    $database = $database = new DB(
-        $configuration["server_hostname"],
-        $configuration["database_name"],
-        $configuration["username"],
-        $configuration["password"]
-    );
+    $database = createDatabaseInstance();
 
     if ($refund) {
         $query = new PreparedStatement(

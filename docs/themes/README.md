@@ -9,3 +9,7 @@ So, when you sign up to making a theme, you are getting a huge amount of control
 I'm going to keep this readme quite minimal. Before you start creating a theme, please read the disclaimer in the documentation and take a look at the built-in themes to see how they work.
 
 **Happy theming!**
+
+## Guides
+### Transfers
+- [Transfer Error Codes](./Transfer%20error%20codes.md) - Relevant parameters for query strings, intended for presenting error messages on a transfer page.
