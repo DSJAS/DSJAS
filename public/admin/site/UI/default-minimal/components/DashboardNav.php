@@ -22,11 +22,11 @@ Support navbar component file
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item" id="navbarHomeListItem">
                 <a class="nav-link" href="/user/Dashboard.php">Home</a>
             </li>
 
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" id="navbarAccountsListItem">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAccounts" role="button" data-toggle="dropdown">
                     Accounts
                 </a>
@@ -38,11 +38,11 @@ Support navbar component file
                 </div>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" id="navbarTransfersListItem">
                 <a class="nav-link" href="/user/Transfer.php">Transfers</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" id="navbarLogoutListItem">
                 <a class="nav-link" href="/user/Logout.php">Logout</a>
             </li>
 
