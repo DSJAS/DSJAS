@@ -69,7 +69,3 @@ After you have done this, you will notice that the site still doesn't load and t
 After you have done this and followed any instructions the script gives you, you should be ready for the web installer. Configure your webserver so that the *public* directory is the server root (**not** the root of the repository) and navigate to ```localhost``` in your browser. You should see the installer welcome page.
 
 You're set up and ready to go!
-
-## Support the Project
-
-Of course, support for the project via contributions on GitHub are very welcome. You can also support by developing a th
