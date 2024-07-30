@@ -216,9 +216,6 @@ class DB
         }
 
 
-        if ($this->statementPrepared) {
-            $this->statement->close();
-        }
         $this->disconnect();
     }
 
