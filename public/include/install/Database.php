@@ -61,6 +61,9 @@ function tableExists($tbl)
 
     try {
         $conn = connectToDatabase();
+        if ($conn === false) {
+            return false;
+        }
         $resp = mysqli_query($conn, $sql);
     } catch (Exception $e) {
         return false;
