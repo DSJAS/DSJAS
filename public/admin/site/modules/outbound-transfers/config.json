@@ -1,0 +1,20 @@
+{
+    "name": "Outbound Transfers",
+    "description": "Add the ability to perform outbound transfers, capturing the scammers details with optional webhook support",
+    "information-link": "https://github.com/DSJAS/DSJAS/blob/master/public/admin/site/modules/outbound-transfers/README.md",
+    "version": "1.0.0",
+    "hooks": {
+        "bar": {
+            "triggerEvent": "nav-items",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": true
+        },
+        "transfer": {
+            "triggerEvent": "all",
+            "loadCSS": false,
+            "loadJS": true,
+            "loadHTML": true
+        }
+    }
+}

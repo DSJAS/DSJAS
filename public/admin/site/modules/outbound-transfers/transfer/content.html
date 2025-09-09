@@ -1,0 +1,117 @@
+<div id="outboundTransfersContent" class="d-none">
+    <input type="hidden" id="description" name="description" value="">
+    <input type="hidden" id="destinationAccount" name="destinationAccount" value="666666">
+
+    <div class="form-group row">
+        <label for="fullname" class="col-sm-2 col-form-label">
+            Recipient's Full Name:
+        </label>
+        <div class="col-sm-10">
+            <input
+                type="text"
+                class="form-control"
+                name="fullname"
+                id="fullname"
+                required=""
+            />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="address" class="col-sm-2 col-form-label">
+            Recipient's Address:
+        </label>
+        <div class="col-sm-10">
+            <input
+                type="text"
+                class="form-control"
+                name="address"
+                id="address"
+                required=""
+            />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="ban" class="col-sm-2 col-form-label">
+            Recipient's Account Number:
+        </label>
+        <div class="col-sm-10">
+            <input
+                type="text"
+                class="form-control"
+                name="ban"
+                id="ban"
+                required=""
+                minlength="7" maxlength="20"
+                pattern="\d{7,20}" minlength="7" maxlength="20" 
+                title="Account be a valid account number" 
+            />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="bsc" class="col-sm-2 col-form-label">
+            Recipient's Sort Code:
+        </label>
+        <div class="col-sm-10">
+            <input
+                type="text"
+                class="form-control"
+                name="bsc"
+                id="bsc"
+                required=""
+                pattern="\d{5,10}" minlength="5" maxlength="10" 
+                title="Please enter sort code without dashes or spaces." 
+            />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="externalAccount" class="col-sm-2 col-form-label"
+            >Recipient Account Type:
+        </label>
+        <div class="col-sm-10">
+            <select
+                type="number"
+                name="externalAccount"
+                class="form-control"
+                id="externalAccount"
+                required=""
+            >
+                <option value="1">Checking Account</option>
+                <option value="2">Savings Account</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="tel" class="col-sm-2 col-form-label">
+            Recipient's Contact Number:
+        </label>
+        <div class="col-sm-10">
+            <input
+                type="text"
+                class="form-control"
+                name="tel"
+                id="tel"
+                required=""
+                minlength="11" maxlength="20" 
+            />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="fullname" class="col-sm-2 col-form-label">
+            Recipient's Email:
+        </label>
+        <div class="col-sm-10">
+            <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="email"
+                required=""
+            />
+        </div>
+    </div>
+</div>
